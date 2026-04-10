@@ -60,7 +60,7 @@
     .section-label{font-size:0.68rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
     .section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3vw,2.8rem);font-weight:300;line-height:1.2;color:var(--navy);margin-bottom:2.5rem}
     .about-section{background:var(--white);display:grid;grid-template-columns:1fr 2fr;gap:5rem;align-items:start}
-    .about-img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:2px;display:block}
+    .about-img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center 15%;border-radius:2px;display:block}
     .about-body p{font-size:0.95rem;font-weight:300;line-height:1.85;color:var(--text-body);margin-bottom:1.25rem}
     .about-quote{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:300;font-style:italic;line-height:1.8;color:var(--navy-light);border-left:2px solid var(--gold);padding-left:1.25rem;margin-top:1.5rem;margin-bottom:1.25rem}
     .about-quote-attr{font-size:0.78rem;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;color:var(--slate);margin-top:0.5rem;padding-left:1.25rem}
@@ -103,56 +103,15 @@
     @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
     .delay-1{animation-delay:0.15s}.delay-2{animation-delay:0.3s}.delay-3{animation-delay:0.45s}.delay-4{animation-delay:0.6s}
     @media(max-width:768px){
-      /* Nav */
-      nav{padding:1rem 1.25rem}
-      .nav-links{display:none}
-      .nav-btn{font-size:0.7rem;padding:0.45rem 0.9rem}
-
-      /* Hero */
-      .hero{grid-template-columns:1fr;min-height:auto}
-      .hero-left{padding:5.5rem 1.5rem 2.5rem;order:1}
+      .hero{grid-template-columns:1fr}
       .hero-left::after{display:none}
-      .hero-name{font-size:clamp(2rem,8vw,2.8rem)}
-      .hero-title{font-size:0.78rem}
-      .hero-tagline{font-size:0.9rem}
-      .hero-cta-row{flex-direction:column;align-items:stretch}
-      .btn-primary,.btn-ghost{text-align:center}
-
-      /* Hero right */
-      .hero-right{padding:2rem 1.5rem 3rem;background:var(--cream);order:2}
-      .hero-stat-grid{grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:2rem}
-      .stat-num{font-size:1.8rem}
-      .areas-list{grid-template-columns:1fr}
-
-      /* Sections */
-      section{padding:3rem 1.25rem}
-      .section-title{font-size:clamp(1.6rem,6vw,2.2rem);margin-bottom:1.75rem}
-
-      /* About */
-      .about-section{grid-template-columns:1fr;gap:2rem;padding:3rem 1.25rem}
-      .about-img{max-height:280px;aspect-ratio:auto}
-
-      /* Services */
-      .services-section{padding:3rem 1.25rem}
+      .about-section{grid-template-columns:1fr}
       .services-grid{grid-template-columns:1fr}
-      .service-card{padding:1.75rem 1.25rem}
-      .service-num{font-size:2.5rem}
-
-      /* Abordagem */
-      .abordagem-section{padding:3rem 1.25rem}
-      .abordagem-grid{grid-template-columns:1fr;gap:1.5rem;margin-top:2rem}
-      .abordagem-card{padding:1.75rem 1.25rem}
-
-      /* Portal */
-      .portal-section{padding:3rem 1.25rem}
-      .portal-cta-row{flex-direction:column;align-items:stretch}
-
-      /* Contact */
-      .contact-section{padding:3rem 1.25rem}
-      .contact-email{font-size:0.85rem;word-break:break-all}
-
-      /* Footer */
-      footer{padding:2rem 1.25rem;flex-direction:column;gap:0.5rem;text-align:center}
+      nav{padding:1rem 1.5rem}
+      .nav-links{display:none}
+      section{padding:3rem 1.5rem}
+      .services-section{padding:3rem 1.5rem}
+      footer{padding:2rem 1.5rem;flex-direction:column;gap:0.75rem;text-align:center}
     }
   </style>
 </head>
@@ -166,7 +125,7 @@
     <li><a href="#especialidades">Especialidades</a></li>
     <li><a href="#contato">Contato</a></li>
   </ul>
-  <a class="nav-btn" href="#">Área do Paciente</a>
+  <a class="nav-btn" href="paciente.html">Área do Paciente</a>
 </nav>
 
 
@@ -174,7 +133,7 @@
   <div class="hero-left">
     <div class="hero-eyebrow fade-in">Psicologia Clínica</div>
     <h1 class="hero-name fade-in delay-1">Terapeuta Cognitivo<br><em>Matheus Camillo</em></h1>
-    <p class="hero-title fade-in delay-2">Psicólogo Clínico e Organizacional · CRP 06/193290</p>
+    <p class="hero-title fade-in delay-2" style="color:var(--slate)">Psicólogo Clínico e Organizacional · CRP 06/193290</p>
     <div class="hero-divider fade-in delay-2"></div>
 
     <p class="hero-tagline fade-in delay-3">
@@ -374,7 +333,7 @@
       personalizados de saúde mental — tudo com total segurança e privacidade.
     </p>
     <div class="portal-cta-row">
-      <button class="btn-primary">Acessar plataforma</button>
+      <a href="paciente.html" class="btn-primary" style="text-decoration:none">Acessar plataforma</a>
     </div>
   </div>
 </section>
