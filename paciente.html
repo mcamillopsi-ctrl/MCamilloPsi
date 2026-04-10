@@ -165,6 +165,28 @@
     .patient-detail{background:var(--white);padding:1.5rem;border-radius:2px;margin-bottom:0.65rem;display:none;border-top:2px solid var(--gold)}
     .patient-detail.open{display:block}
 
+    /* ── FAROL ── */
+    .farol-wrap{display:flex;align-items:center;gap:1.5rem;background:var(--white);border-radius:2px;padding:1.25rem 1.5rem;margin-bottom:2rem}
+    .farol-lights{display:flex;flex-direction:column;gap:6px}
+    .farol-light{width:18px;height:18px;border-radius:50%;opacity:0.15;transition:opacity 0.3s}
+    .farol-light.on{opacity:1}
+    .farol-green{background:#2d7a4f}
+    .farol-yellow{background:#c8960a}
+    .farol-red{background:#a32d2d}
+    .farol-info h3{font-size:0.9rem;font-weight:500;color:var(--navy);margin-bottom:0.25rem}
+    .farol-info p{font-size:0.8rem;font-weight:300;color:var(--text-body);line-height:1.6}
+    .farol-tag{font-size:0.65rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;display:inline-block;margin-bottom:0.4rem;padding:0.2rem 0.65rem;border-radius:20px}
+    .farol-tag.verde{background:#e8f5ee;color:#2d7a4f}
+    .farol-tag.amarelo{background:#fff8e0;color:#c8960a}
+    .farol-tag.vermelho{background:#fce8e8;color:#a32d2d}
+    /* stat-row ampliado */
+    .stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2rem}
+    /* painel psi edição */
+    .psi-edit-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}
+    .psi-edit-row label{font-size:0.68rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--slate);display:block;margin-bottom:0.35rem}
+    .psi-edit-row input{width:100%;padding:0.5rem 0.75rem;border:1px solid var(--slate-light);border-radius:2px;font-family:'DM Sans',sans-serif;font-size:0.85rem;color:var(--navy)}
+    .btn-save-psi{margin-top:0.75rem;font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:0.5rem 1.25rem;background:var(--gold);color:var(--white);border:none;border-radius:2px;cursor:pointer}
+
     /* Responsivo */
     @media(max-width:768px){
       .sidebar{display:none}
@@ -263,6 +285,19 @@
         <p class="page-sub">Acompanhe sua evolução e faça os testes disponíveis.</p>
 
         <div class="stat-row" id="stat-row"></div>
+
+        <div class="farol-wrap" id="farol-wrap" style="display:none">
+          <div class="farol-lights">
+            <div class="farol-light farol-red" id="farol-red"></div>
+            <div class="farol-light farol-yellow" id="farol-yellow"></div>
+            <div class="farol-light farol-green" id="farol-green"></div>
+          </div>
+          <div class="farol-info">
+            <div class="farol-tag" id="farol-tag"></div>
+            <h3 id="farol-titulo"></h3>
+            <p id="farol-desc"></p>
+          </div>
+        </div>
 
         <p class="section-label">Evolução ao longo do tempo</p>
         <div class="card" style="margin-bottom:2rem" id="chart-wrap">
@@ -687,11 +722,78 @@ function renderStats(data){
   const total=data.length
   const ultimo=data[0]
   const testes_feitos=[...new Set(data.map(r=>r.teste.split('—')[0].trim()))].length
+
+  // Tempo de acompanhamento
+  let tempoHtml='—'
+  if(user.data_inicio){
+    const dias=Math.floor((new Date()-new Date(user.data_inicio))/86400000)
+    const meses=Math.floor(dias/30)
+    tempoHtml=meses>0?`${meses}m`:`${dias}d`
+  }
+
   document.getElementById('stat-row').innerHTML=`
     <div class="stat-card"><div class="stat-num">${total}</div><div class="stat-lbl">Testes realizados</div></div>
-    <div class="stat-card"><div class="stat-num">${testes_feitos}</div><div class="stat-lbl">Instrumentos usados</div></div>
+    <div class="stat-card"><div class="stat-num">${user.sessoes||0}</div><div class="stat-lbl">Sessões realizadas</div></div>
+    <div class="stat-card"><div class="stat-num">${tempoHtml}</div><div class="stat-lbl">Tempo de acompanhamento</div></div>
     <div class="stat-card"><div class="stat-num">${ultimo?badgeHtml(ultimo.classificacao):'—'}</div><div class="stat-lbl">Último resultado</div></div>
   `
+
+  // Farol de risco
+  renderFarol(data)
+}
+
+function renderFarol(data){
+  const wrap=document.getElementById('farol-wrap')
+  if(!data.length){wrap.style.display='none';return}
+  wrap.style.display='flex'
+
+  // Pega os últimos resultados de cada teste
+  const ultimos={}
+  data.forEach(r=>{
+    const k=r.teste.split('—')[0].trim()
+    if(!ultimos[k])ultimos[k]=r
+  })
+
+  // Avalia risco: se qualquer resultado for grave → vermelho; moderado → amarelo; senão → verde
+  const classes=Object.values(ultimos).map(r=>r.classificacao)
+  let nivel='verde'
+  classes.forEach(c=>{
+    if(c.includes('Grave')||c.includes('grave'))nivel='vermelho'
+    else if(nivel!=='vermelho'&&(c.includes('Moderada')||c.includes('Moderado')))nivel='amarelo'
+  })
+
+  document.getElementById('farol-red').classList.toggle('on',nivel==='vermelho')
+  document.getElementById('farol-yellow').classList.toggle('on',nivel==='amarelo')
+  document.getElementById('farol-green').classList.toggle('on',nivel==='verde')
+
+  const tag=document.getElementById('farol-tag')
+  const titulo=document.getElementById('farol-titulo')
+  const desc=document.getElementById('farol-desc')
+  tag.className='farol-tag '+nivel
+
+  if(nivel==='verde'){
+    tag.textContent='Indicador favorável'
+    titulo.textContent='Resultados dentro do esperado'
+    desc.textContent='Seus últimos resultados indicam sintomas mínimos ou leves. Continue com o acompanhamento regular e as práticas de autocuidado.'
+  } else if(nivel==='amarelo'){
+    tag.textContent='Atenção recomendada'
+    titulo.textContent='Sintomas moderados identificados'
+    desc.textContent='Seus últimos resultados indicam sintomas moderados. Mantenha o acompanhamento em dia e converse com seu psicólogo sobre como está se sentindo.'
+  } else {
+    tag.textContent='Suporte prioritário'
+    titulo.textContent='Sintomas graves identificados'
+    desc.textContent='Seus últimos resultados indicam sintomas graves. É importante manter contato próximo com seu psicólogo. Se precisar de apoio imediato, ligue 188 (CVV) — disponível 24h.'
+  }
+}
+
+async function salvarDadosPaciente(id){
+  const sessoes=parseInt(document.getElementById('psi-sessoes-'+id).value)||0
+  const data_inicio=document.getElementById('psi-inicio-'+id).value||null
+  const {error}=await sb.from('pacientes').update({sessoes,data_inicio}).eq('id',id)
+  if(!error){
+    const btn=document.querySelector(`#det-${id} .btn-save-psi`)
+    if(btn){btn.textContent='✓ Salvo';setTimeout(()=>{btn.textContent='Salvar'},2000)}
+  }
 }
 
 function renderHistorico(data){
@@ -842,11 +944,41 @@ async function verPaciente(p,row){
   if(det.classList.contains('open')){det.classList.remove('open');return}
   document.querySelectorAll('.patient-detail').forEach(d=>d.classList.remove('open'))
   const {data}=await sb.from('resultados').select('*').eq('paciente_id',p.id).order('criado_em',{ascending:false})
-  if(!data||!data.length){det.innerHTML='<p style="font-size:0.82rem;color:var(--slate)">Nenhum teste realizado.</p>';det.classList.add('open');return}
-  let html=`<p style="font-size:0.72rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem">Histórico — ${p.nome||p.email}</p>`
-  html+='<table class="history-table"><thead><tr><th>Teste</th><th>Pontuação</th><th>Classificação</th><th>Data</th></tr></thead><tbody>'
-  data.forEach(r=>{html+=`<tr><td>${r.teste}</td><td>${r.pontuacao}</td><td>${badgeHtml(r.classificacao)}</td><td>${fmt(r.criado_em)}</td></tr>`})
-  html+='</tbody></table>'
+
+  // Calcula tempo de acompanhamento
+  let tempoHtml='—'
+  if(p.data_inicio){
+    const dias=Math.floor((new Date()-new Date(p.data_inicio))/86400000)
+    const meses=Math.floor(dias/30)
+    tempoHtml=meses>0?`${meses} mês${meses>1?'es':''}`:`${dias} dia${dias!==1?'s':''}`
+  }
+
+  let html=`
+    <p style="font-size:0.72rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem">Acompanhamento — ${p.nome||p.email}</p>
+    <div class="psi-edit-row">
+      <div>
+        <label>Sessões realizadas</label>
+        <input type="number" min="0" id="psi-sessoes-${p.id}" value="${p.sessoes||0}">
+      </div>
+      <div>
+        <label>Data de início</label>
+        <input type="date" id="psi-inicio-${p.id}" value="${p.data_inicio||''}">
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:1rem;margin-top:0.75rem">
+      <button class="btn-save-psi" onclick="salvarDadosPaciente('${p.id}')">Salvar</button>
+      <span style="font-size:0.78rem;color:var(--slate)">Tempo de acompanhamento atual: <strong style="color:var(--navy)">${tempoHtml}</strong></span>
+    </div>
+  `
+
+  if(!data||!data.length){
+    html+='<p style="font-size:0.82rem;color:var(--slate);margin-top:1.5rem">Nenhum teste realizado ainda.</p>'
+  } else {
+    html+=`<p style="font-size:0.68rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin:1.5rem 0 0.75rem">Histórico de testes</p>`
+    html+='<table class="history-table"><thead><tr><th>Teste</th><th>Pontuação</th><th>Classificação</th><th>Data</th></tr></thead><tbody>'
+    data.forEach(r=>{html+=`<tr><td>${r.teste}</td><td>${r.pontuacao}</td><td>${badgeHtml(r.classificacao)}</td><td>${fmt(r.criado_em)}</td></tr>`})
+    html+='</tbody></table>'
+  }
   det.innerHTML=html
   det.classList.add('open')
 }
