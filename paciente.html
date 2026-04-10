@@ -10,198 +10,209 @@
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
     :root{
-      --navy:#0d1f3c;--navy-mid:#1a3358;--navy-light:#2a4a73;
-      --slate:#8a9ab5;--slate-light:#c2cde0;
-      --gold:#b8974a;--gold-light:#d4b472;
-      --cream:#f5f3ee;--white:#ffffff;--text-body:#3d4e66;
-      --green:#2d7a4f;--red:#a32d2d;--orange:#b8610a;
-      --sidebar-w:240px;
+      --navy:#0d1f3c;
+      --navy-mid:#1a3358;
+      --slate:#8a9ab5;
+      --slate-light:#e8ecf2;
+      --gold:#b8974a;
+      --gold-light:#d4b472;
+      --gold-pale:#fdf8ef;
+      --white:#ffffff;
+      --bg:#f7f7f5;
+      --text:#37352f;
+      --text-muted:#9b9a97;
+      --border:#e9e9e7;
+      --sidebar-w:220px;
+      --green:#2d7a4f;
+      --red:#a32d2d;
+      --yellow:#c8960a;
     }
-    body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--navy);min-height:100vh}
+    html{font-size:15px}
+    body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased}
 
-    /* ── LOGIN ── */
-    #screen-login{position:fixed;inset:0;background:var(--navy);display:flex;align-items:center;justify-content:center;z-index:1000}
+    /* ══ LOGIN ══ */
+    #screen-login{position:fixed;inset:0;background:var(--white);display:flex;align-items:center;justify-content:center;z-index:1000}
     #screen-login.hidden{display:none}
-    .login-box{background:var(--cream);padding:3rem;width:100%;max-width:420px;border-radius:2px}
-    .login-logo{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;letter-spacing:0.08em;color:var(--navy);text-transform:uppercase;margin-bottom:0.5rem}
+    .login-box{width:100%;max-width:380px;padding:0 1.5rem}
+    .login-logo{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:600;letter-spacing:0.06em;color:var(--navy);text-transform:uppercase;margin-bottom:0.3rem}
     .login-logo span{color:var(--gold)}
-    .login-sub{font-size:0.8rem;font-weight:300;color:var(--slate);margin-bottom:1.5rem;letter-spacing:0.05em}
-    .login-tabs{display:flex;border-bottom:1px solid var(--slate-light);margin-bottom:1.75rem}
-    .login-tab{font-size:0.75rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:0.6rem 1.25rem;cursor:pointer;color:var(--slate);border-bottom:2px solid transparent;transition:all 0.2s}
+    .login-sub{font-size:0.82rem;font-weight:300;color:var(--text-muted);margin-bottom:2rem}
+    .login-tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:1.75rem}
+    .login-tab{font-size:0.72rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;padding:0.55rem 1rem;cursor:pointer;color:var(--text-muted);border-bottom:1.5px solid transparent;margin-bottom:-1px;transition:all 0.15s}
     .login-tab.active{color:var(--gold);border-bottom-color:var(--gold)}
-    .field{margin-bottom:1.25rem}
-    .field label{display:block;font-size:0.72rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--navy-light);margin-bottom:0.5rem}
-    .field input{width:100%;padding:0.75rem 1rem;border:1px solid var(--slate-light);border-radius:2px;font-family:'DM Sans',sans-serif;font-size:0.9rem;font-weight:300;color:var(--navy);background:var(--white);transition:border-color 0.2s}
-    .field input:focus{outline:none;border-color:var(--gold)}
-    .btn-gold{width:100%;padding:0.85rem;background:var(--gold);color:var(--white);border:none;border-radius:2px;font-family:'DM Sans',sans-serif;font-size:0.78rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;transition:background 0.2s;margin-top:0.5rem}
-    .btn-gold:hover{background:var(--gold-light)}
-    .form-error{font-size:0.82rem;color:var(--red);margin-top:0.75rem;display:none}
+    .field{margin-bottom:1rem}
+    .field label{display:block;font-size:0.7rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:0.4rem}
+    .field input{width:100%;padding:0.6rem 0.85rem;border:1px solid var(--border);border-radius:6px;font-family:'DM Sans',sans-serif;font-size:0.88rem;font-weight:300;color:var(--text);background:var(--white);transition:border-color 0.15s,box-shadow 0.15s;outline:none}
+    .field input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(184,151,74,0.1)}
+    .btn-primary{width:100%;padding:0.7rem;background:var(--navy);color:var(--white);border:none;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:0.78rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;transition:background 0.15s;margin-top:0.75rem}
+    .btn-primary:hover{background:var(--navy-mid)}
+    .form-error{font-size:0.78rem;color:var(--red);margin-top:0.6rem;display:none}
 
-    /* ── APP SHELL ── */
+    /* ══ APP SHELL ══ */
     #app{display:none;min-height:100vh}
     #app.visible{display:flex;flex-direction:column}
 
-    /* ── TOP NAV ── */
-    .topnav{background:var(--navy);padding:0.85rem 1.5rem;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100}
-    .topnav-logo{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;letter-spacing:0.08em;color:var(--white);text-transform:uppercase}
+    /* ══ TOPNAV ══ */
+    .topnav{height:48px;background:var(--white);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 1.25rem;position:sticky;top:0;z-index:100}
+    .topnav-logo{font-family:'Cormorant Garamond',serif;font-size:0.95rem;font-weight:600;letter-spacing:0.08em;color:var(--navy);text-transform:uppercase}
     .topnav-logo span{color:var(--gold)}
-    .topnav-right{display:flex;align-items:center;gap:1rem}
-    .topnav-user{font-size:0.8rem;font-weight:300;color:var(--slate-light)}
-    .btn-logout{font-size:0.72rem;font-weight:400;letter-spacing:0.08em;text-transform:uppercase;padding:0.35rem 0.9rem;border:1px solid rgba(194,205,224,0.3);color:var(--slate-light);background:transparent;border-radius:2px;cursor:pointer;transition:all 0.2s}
-    .btn-logout:hover{border-color:var(--slate-light);color:var(--white)}
+    .topnav-right{display:flex;align-items:center;gap:0.75rem}
+    .topnav-user{font-size:0.78rem;font-weight:300;color:var(--text-muted)}
+    .btn-logout{font-size:0.7rem;font-weight:400;letter-spacing:0.06em;text-transform:uppercase;padding:0.3rem 0.75rem;border:1px solid var(--border);color:var(--text-muted);background:var(--white);border-radius:5px;cursor:pointer;transition:all 0.15s}
+    .btn-logout:hover{border-color:var(--slate);color:var(--text)}
 
-    /* ── LAYOUT ── */
-    .layout{display:flex;flex:1}
+    /* ══ LAYOUT ══ */
+    .layout{display:flex;flex:1;min-height:calc(100vh - 48px)}
 
-    /* ── SIDEBAR ── */
-    .sidebar{width:var(--sidebar-w);background:var(--navy-mid);min-height:calc(100vh - 52px);padding:1.5rem 0;flex-shrink:0}
-    .sidebar-section{font-size:0.62rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--slate);padding:0.5rem 1.5rem;margin-top:1rem}
-    .sidebar-item{display:flex;align-items:center;gap:0.75rem;padding:0.75rem 1.5rem;cursor:pointer;transition:background 0.2s;color:var(--slate-light);font-size:0.82rem;font-weight:300;letter-spacing:0.02em}
-    .sidebar-item:hover{background:rgba(255,255,255,0.06);color:var(--white)}
-    .sidebar-item.active{background:rgba(184,151,74,0.12);color:var(--gold);border-left:2px solid var(--gold)}
-    .sidebar-item svg{flex-shrink:0;opacity:0.7}
-    .sidebar-item.active svg{opacity:1}
+    /* ══ SIDEBAR ══ */
+    .sidebar{width:var(--sidebar-w);background:var(--white);border-right:1px solid var(--border);padding:1rem 0;flex-shrink:0;position:sticky;top:48px;height:calc(100vh - 48px);overflow-y:auto}
+    .sidebar-section{font-size:0.62rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-muted);padding:0.85rem 1rem 0.35rem;margin-top:0.5rem}
+    .sidebar-item{display:flex;align-items:center;gap:0.6rem;padding:0.4rem 0.75rem;margin:0.1rem 0.5rem;cursor:pointer;border-radius:5px;transition:background 0.12s;color:var(--text-muted);font-size:0.83rem;font-weight:400;user-select:none}
+    .sidebar-item:hover{background:var(--bg);color:var(--text)}
+    .sidebar-item.active{background:var(--gold-pale);color:var(--gold);font-weight:500}
+    .sidebar-item svg{flex-shrink:0;width:15px;height:15px}
 
-    /* ── CONTENT ── */
-    .content{flex:1;padding:2rem 2.5rem;overflow-y:auto}
+    /* ══ CONTENT ══ */
+    .content{flex:1;padding:2.5rem 3rem;max-width:960px}
     .page{display:none}
     .page.active{display:block}
-    .page-title{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:300;color:var(--navy);margin-bottom:0.35rem}
-    .page-sub{font-size:0.85rem;font-weight:300;color:var(--slate);margin-bottom:2rem}
-    .section-label{font-size:0.65rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+    .page-title{font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:300;color:var(--navy);margin-bottom:0.25rem;line-height:1.2}
+    .page-sub{font-size:0.82rem;font-weight:300;color:var(--text-muted);margin-bottom:2.25rem}
+    .section-eyebrow{font-size:0.62rem;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--text-muted);margin-bottom:0.85rem;display:flex;align-items:center;gap:0.5rem}
+    .section-eyebrow::after{content:'';flex:1;height:1px;background:var(--border)}
 
-    /* ── DASHBOARD ── */
-    .chart-grid{display:grid;grid-template-columns:2fr 1fr;gap:1.5rem;margin-bottom:2rem}
-    .card{background:var(--white);border-radius:2px;padding:1.5rem}
-    .card-title{font-size:0.78rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--navy-light);margin-bottom:1.25rem}
-    .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem}
-    .stat-card{background:var(--white);border-radius:2px;padding:1.25rem;border-left:2px solid var(--gold)}
-    .stat-num{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;color:var(--navy);line-height:1}
-    .stat-lbl{font-size:0.7rem;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;color:var(--slate);margin-top:0.3rem}
+    /* ══ STAT CARDS ══ */
+    .stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:0.85rem;margin-bottom:2rem}
+    .stat-card{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:1rem 1.1rem}
+    .stat-num{font-family:'Cormorant Garamond',serif;font-size:1.85rem;font-weight:300;color:var(--navy);line-height:1;margin-bottom:0.3rem}
+    .stat-lbl{font-size:0.68rem;font-weight:400;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted)}
 
-    /* Testes */
-    .tests-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-bottom:2rem}
-    .test-card{background:var(--white);padding:1.5rem;border-top:2px solid var(--gold);cursor:pointer;transition:box-shadow 0.2s;border-radius:2px}
-    .test-card:hover{box-shadow:0 4px 16px rgba(13,31,60,0.08)}
-    .test-name{font-size:0.9rem;font-weight:500;color:var(--navy);margin-bottom:0.3rem}
-    .test-desc{font-size:0.78rem;font-weight:300;color:var(--slate);line-height:1.6;margin-bottom:0.75rem}
-    .test-meta{font-size:0.68rem;font-weight:400;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold)}
-    .btn-test{display:inline-block;margin-top:0.85rem;font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:0.5rem 1.1rem;background:var(--navy);color:var(--white);border:none;border-radius:2px;cursor:pointer;transition:background 0.2s}
+    /* ══ FAROL ══ */
+    .farol-wrap{display:flex;align-items:flex-start;gap:1.25rem;background:var(--white);border:1px solid var(--border);border-radius:8px;padding:1.1rem 1.25rem;margin-bottom:2rem}
+    .farol-lights{display:flex;flex-direction:column;gap:5px;padding-top:2px}
+    .farol-light{width:14px;height:14px;border-radius:50%;opacity:0.15;transition:opacity 0.25s}
+    .farol-light.on{opacity:1}
+    .farol-green{background:var(--green)}
+    .farol-yellow{background:var(--yellow)}
+    .farol-red{background:var(--red)}
+    .farol-tag{display:inline-block;font-size:0.62rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:0.18rem 0.6rem;border-radius:20px;margin-bottom:0.3rem}
+    .farol-tag.verde{background:#e8f5ee;color:var(--green)}
+    .farol-tag.amarelo{background:#fff8e0;color:var(--yellow)}
+    .farol-tag.vermelho{background:#fce8e8;color:var(--red)}
+    .farol-info h3{font-size:0.88rem;font-weight:500;color:var(--text);margin-bottom:0.2rem}
+    .farol-info p{font-size:0.78rem;font-weight:300;color:var(--text-muted);line-height:1.65}
+
+    /* ══ CHART ══ */
+    .chart-card{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:1.25rem;margin-bottom:2rem}
+
+    /* ══ TESTES ══ */
+    .tests-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0.85rem;margin-bottom:2rem}
+    .test-card{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:1.1rem;cursor:pointer;transition:border-color 0.15s,box-shadow 0.15s}
+    .test-card:hover{border-color:var(--gold);box-shadow:0 2px 12px rgba(184,151,74,0.1)}
+    .test-name{font-size:0.9rem;font-weight:500;color:var(--navy);margin-bottom:0.2rem}
+    .test-desc{font-size:0.76rem;font-weight:300;color:var(--text-muted);line-height:1.55;margin-bottom:0.65rem}
+    .test-meta{font-size:0.65rem;font-weight:400;letter-spacing:0.07em;text-transform:uppercase;color:var(--text-muted)}
+    .btn-test{display:inline-block;margin-top:0.75rem;font-size:0.7rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;padding:0.4rem 1rem;background:var(--navy);color:var(--white);border:none;border-radius:5px;cursor:pointer;transition:background 0.15s}
     .btn-test:hover{background:var(--navy-mid)}
 
-    /* Histórico */
+    /* ══ TABELA HISTÓRICO ══ */
+    .history-card{background:var(--white);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:2rem}
     .history-table{width:100%;border-collapse:collapse}
-    .history-table th{font-size:0.65rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--slate);padding:0.65rem 1rem;text-align:left;border-bottom:1px solid var(--slate-light)}
-    .history-table td{font-size:0.82rem;font-weight:300;color:var(--text-body);padding:0.8rem 1rem;border-bottom:1px solid rgba(194,205,224,0.3)}
-    .badge{display:inline-block;font-size:0.68rem;font-weight:500;padding:0.2rem 0.6rem;border-radius:20px}
+    .history-table th{font-size:0.65rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);padding:0.65rem 1rem;text-align:left;background:var(--bg);border-bottom:1px solid var(--border)}
+    .history-table td{font-size:0.82rem;font-weight:300;color:var(--text);padding:0.7rem 1rem;border-bottom:1px solid var(--border)}
+    .history-table tr:last-child td{border-bottom:none}
+    .badge{display:inline-block;font-size:0.65rem;font-weight:500;padding:0.18rem 0.55rem;border-radius:20px}
     .badge-min{background:#e8f5ee;color:var(--green)}
-    .badge-leve{background:#fff8e6;color:#7a5c0a}
-    .badge-mod{background:#fff0e0;color:var(--orange)}
+    .badge-leve{background:#fff8e0;color:var(--yellow)}
+    .badge-mod{background:#fff0d6;color:#b8610a}
     .badge-grav{background:#fce8e8;color:var(--red)}
-    .empty-state{font-size:0.85rem;font-weight:300;color:var(--slate);text-align:center;padding:2rem;background:var(--white);border-radius:2px}
+    .empty-state{font-size:0.82rem;font-weight:300;color:var(--text-muted);text-align:center;padding:2rem 1rem}
 
-    /* ── TESTE ── */
-    #page-test{max-width:640px}
-    .test-progress{height:3px;background:var(--slate-light);border-radius:2px;margin-bottom:2rem}
+    /* ══ TELA DE TESTE ══ */
+    #page-test{max-width:580px}
+    .test-header{margin-bottom:1.75rem}
+    .test-progress-track{height:2px;background:var(--border);border-radius:2px;margin-bottom:0.6rem}
     .test-progress-bar{height:100%;background:var(--gold);border-radius:2px;transition:width 0.3s}
-    .test-question{font-size:0.98rem;font-weight:300;line-height:1.75;color:var(--navy);margin-bottom:1.5rem}
-    .test-options{display:flex;flex-direction:column;gap:0.65rem;margin-bottom:2rem}
-    .test-option{padding:0.8rem 1.25rem;background:var(--white);border:1px solid var(--slate-light);border-radius:2px;cursor:pointer;transition:all 0.2s;font-size:0.85rem;font-weight:300;color:var(--text-body)}
-    .test-option:hover,.test-option.selected{border-color:var(--gold);background:#fdf8ef;color:var(--navy)}
-    .test-nav{display:flex;gap:1rem;justify-content:space-between}
-    .btn-outline{font-size:0.75rem;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;padding:0.7rem 1.4rem;background:transparent;color:var(--navy-light);border:1px solid var(--slate-light);border-radius:2px;cursor:pointer;transition:all 0.2s}
-    .btn-outline:hover{border-color:var(--navy-light)}
-    .btn-nav{font-size:0.75rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:0.7rem 1.4rem;background:var(--gold);color:var(--white);border:none;border-radius:2px;cursor:pointer;transition:background 0.2s}
-    .btn-nav:hover{background:var(--gold-light)}
+    .test-counter{font-size:0.72rem;font-weight:300;color:var(--text-muted)}
+    .test-question{font-size:0.95rem;font-weight:300;line-height:1.7;color:var(--text);margin-bottom:1.5rem}
+    .test-options{display:flex;flex-direction:column;gap:0.5rem;margin-bottom:1.75rem}
+    .test-option{padding:0.7rem 1rem;background:var(--white);border:1px solid var(--border);border-radius:6px;cursor:pointer;transition:all 0.12s;font-size:0.83rem;font-weight:300;color:var(--text)}
+    .test-option:hover{border-color:var(--gold);background:var(--gold-pale)}
+    .test-option.selected{border-color:var(--gold);background:var(--gold-pale);color:var(--navy);font-weight:400}
+    .test-nav{display:flex;gap:0.75rem;justify-content:space-between}
+    .btn-ghost{font-size:0.72rem;font-weight:400;letter-spacing:0.08em;text-transform:uppercase;padding:0.6rem 1.25rem;background:var(--white);color:var(--text-muted);border:1px solid var(--border);border-radius:6px;cursor:pointer;transition:all 0.15s}
+    .btn-ghost:hover{border-color:var(--slate);color:var(--text)}
+    .btn-action{font-size:0.72rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;padding:0.6rem 1.25rem;background:var(--navy);color:var(--white);border:none;border-radius:6px;cursor:pointer;transition:background 0.15s}
+    .btn-action:hover{background:var(--navy-mid)}
 
-    /* Resultado */
-    #page-result{max-width:560px;text-align:center}
-    .result-score{font-family:'Cormorant Garamond',serif;font-size:5rem;font-weight:300;color:var(--navy);line-height:1;margin:1rem 0 0.5rem}
-    .result-class{font-size:1rem;font-weight:400;margin-bottom:1.5rem}
-    .result-desc{font-size:0.87rem;font-weight:300;line-height:1.85;color:var(--text-body);text-align:left;background:var(--white);padding:1.25rem 1.5rem;border-radius:2px;border-left:2px solid var(--gold);margin-bottom:2rem}
-    .result-actions{display:flex;gap:1rem;justify-content:center}
+    /* ══ RESULTADO ══ */
+    #page-result{max-width:520px}
+    .result-score{font-family:'Cormorant Garamond',serif;font-size:4.5rem;font-weight:300;color:var(--navy);line-height:1;margin:1.25rem 0 0.35rem}
+    .result-class{font-size:0.9rem;font-weight:400;margin-bottom:1.5rem}
+    .result-desc{font-size:0.82rem;font-weight:300;line-height:1.85;color:var(--text-muted);background:var(--white);border:1px solid var(--border);border-left:2px solid var(--gold);border-radius:0 6px 6px 0;padding:1rem 1.25rem;margin-bottom:1.75rem}
+    .result-actions{display:flex;gap:0.75rem}
 
-    /* ── CADASTRO ── */
-    #page-cadastro{max-width:480px}
-    .form-group{margin-bottom:1.5rem}
-    .form-group label{display:block;font-size:0.72rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--navy-light);margin-bottom:0.5rem}
-    .form-group input{width:100%;padding:0.75rem 1rem;border:1px solid var(--slate-light);border-radius:2px;font-family:'DM Sans',sans-serif;font-size:0.9rem;font-weight:300;color:var(--navy);background:var(--white);transition:border-color 0.2s}
-    .form-group input:focus{outline:none;border-color:var(--gold)}
-    .save-msg{font-size:0.82rem;margin-top:0.75rem;display:none}
-    .save-ok{color:var(--green)}
-    .save-err{color:var(--red)}
+    /* ══ CADASTRO ══ */
+    #page-cadastro{max-width:440px}
+    .form-block{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:1.5rem;margin-bottom:1.25rem}
+    .form-block-title{font-size:0.75rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:1.1rem}
+    .form-row{margin-bottom:1rem}
+    .form-row label{display:block;font-size:0.7rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);margin-bottom:0.4rem}
+    .form-row input{width:100%;padding:0.6rem 0.85rem;border:1px solid var(--border);border-radius:6px;font-family:'DM Sans',sans-serif;font-size:0.88rem;font-weight:300;color:var(--text);background:var(--white);outline:none;transition:border-color 0.15s}
+    .form-row input:focus{border-color:var(--gold)}
+    .save-ok{font-size:0.78rem;color:var(--green);display:none;margin-top:0.6rem}
+    .save-err{font-size:0.78rem;color:var(--red);display:none;margin-top:0.6rem}
 
-    /* ── TÉCNICAS ── */
-    .tecnicas-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
-    .tecnica-card{background:var(--white);border-radius:2px;padding:1.75rem;border-top:2px solid var(--gold)}
-    .tecnica-icon{font-size:1.5rem;margin-bottom:0.75rem}
-    .tecnica-title{font-size:0.95rem;font-weight:500;color:var(--navy);margin-bottom:0.5rem}
-    .tecnica-body{font-size:0.83rem;font-weight:300;line-height:1.8;color:var(--text-body)}
-    .tecnica-body ol,.tecnica-body ul{margin-left:1.25rem;margin-top:0.5rem}
-    .tecnica-body li{margin-bottom:0.35rem}
-    .tecnica-tag{display:inline-block;font-size:0.65rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:0.2rem 0.65rem;border-radius:20px;background:#fdf8ef;color:var(--gold);margin-bottom:0.75rem}
+    /* ══ TÉCNICAS ══ */
+    .tecnicas-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0.85rem}
+    .tecnica-card{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:1.25rem}
+    .tecnica-tag{display:inline-block;font-size:0.62rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:0.15rem 0.55rem;border-radius:20px;background:var(--gold-pale);color:var(--gold);margin-bottom:0.6rem}
+    .tecnica-title{font-size:0.88rem;font-weight:500;color:var(--navy);margin-bottom:0.4rem}
+    .tecnica-body{font-size:0.78rem;font-weight:300;line-height:1.75;color:var(--text-muted)}
+    .tecnica-body ol,.tecnica-body ul{margin-left:1.1rem;margin-top:0.4rem}
+    .tecnica-body li{margin-bottom:0.25rem}
 
-    /* ── REDE DE APOIO ── */
-    .rede-hero{background:var(--navy);border-radius:2px;padding:1.5rem;margin-bottom:1.75rem;display:flex;align-items:center;gap:1.5rem}
-    .rede-hero-num{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:300;color:var(--gold);line-height:1}
-    .rede-hero-info p{font-size:0.85rem;font-weight:300;color:var(--slate-light);line-height:1.6}
-    .rede-hero-info strong{color:var(--white);font-weight:400}
-    .rede-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem}
-    .rede-card{background:var(--white);border-radius:2px;padding:1.5rem;border-left:2px solid var(--gold)}
-    .rede-name{font-size:0.9rem;font-weight:500;color:var(--navy);margin-bottom:0.25rem}
-    .rede-type{font-size:0.65rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem}
-    .rede-info{font-size:0.8rem;font-weight:300;color:var(--text-body);line-height:1.7}
-    .rede-info strong{font-weight:400;color:var(--navy)}
-    .rede-tel{display:inline-block;margin-top:0.5rem;font-size:0.85rem;font-weight:500;color:var(--navy);background:var(--cream);padding:0.3rem 0.75rem;border-radius:2px}
+    /* ══ REDE DE APOIO ══ */
+    .rede-hero{background:var(--navy);border-radius:8px;padding:1.25rem 1.5rem;margin-bottom:1.75rem;display:flex;align-items:center;gap:1.5rem}
+    .rede-hero-num{font-family:'Cormorant Garamond',serif;font-size:2.75rem;font-weight:300;color:var(--gold);line-height:1}
+    .rede-hero-info strong{display:block;font-size:0.85rem;font-weight:500;color:var(--white);margin-bottom:0.2rem}
+    .rede-hero-info p{font-size:0.78rem;font-weight:300;color:var(--slate);line-height:1.6}
+    .rede-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0.85rem}
+    .rede-card{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:1.1rem}
+    .rede-name{font-size:0.85rem;font-weight:500;color:var(--navy);margin-bottom:0.15rem}
+    .rede-type{font-size:0.62rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem}
+    .rede-info{font-size:0.76rem;font-weight:300;color:var(--text-muted);line-height:1.7}
+    .rede-tel{display:inline-block;margin-top:0.5rem;font-size:0.82rem;font-weight:500;color:var(--navy);background:var(--bg);padding:0.25rem 0.65rem;border-radius:5px;border:1px solid var(--border)}
 
-    /* ── PAINEL PSI ── */
-    .psi-tabs{display:flex;border-bottom:1px solid var(--slate-light);margin-bottom:1.75rem}
-    .psi-tab{font-size:0.75rem;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;padding:0.65rem 1.25rem;cursor:pointer;color:var(--slate);border-bottom:2px solid transparent;transition:all 0.2s}
+    /* ══ PAINEL PSI ══ */
+    .psi-tabs{display:flex;border-bottom:1px solid var(--border);margin-bottom:1.5rem}
+    .psi-tab{font-size:0.72rem;font-weight:400;letter-spacing:0.08em;text-transform:uppercase;padding:0.55rem 1rem;cursor:pointer;color:var(--text-muted);border-bottom:1.5px solid transparent;margin-bottom:-1px;transition:all 0.15s}
     .psi-tab.active{color:var(--gold);border-bottom-color:var(--gold)}
-    .patient-row{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:1rem;align-items:center;padding:1rem 1.25rem;background:var(--white);border-radius:2px;margin-bottom:0.65rem;cursor:pointer;transition:box-shadow 0.2s}
-    .patient-row:hover{box-shadow:0 2px 12px rgba(13,31,60,0.06)}
-    .patient-name{font-size:0.88rem;font-weight:400;color:var(--navy)}
-    .patient-email{font-size:0.75rem;font-weight:300;color:var(--slate);margin-top:0.15rem}
-    .patient-detail{background:var(--white);padding:1.5rem;border-radius:2px;margin-bottom:0.65rem;display:none;border-top:2px solid var(--gold)}
+    .patient-row{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:1rem;align-items:center;padding:0.75rem 1rem;background:var(--white);border:1px solid var(--border);border-radius:8px;margin-bottom:0.5rem;cursor:pointer;transition:border-color 0.15s}
+    .patient-row:hover{border-color:var(--gold)}
+    .patient-name{font-size:0.85rem;font-weight:400;color:var(--text)}
+    .patient-email{font-size:0.72rem;font-weight:300;color:var(--text-muted);margin-top:0.1rem}
+    .patient-detail{background:var(--white);border:1px solid var(--border);border-top:none;border-radius:0 0 8px 8px;padding:1.25rem;margin-top:-0.5rem;margin-bottom:0.5rem;display:none}
     .patient-detail.open{display:block}
+    .psi-edit-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:0.75rem}
+    .psi-edit-row label{display:block;font-size:0.65rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:0.35rem}
+    .psi-edit-row input{width:100%;padding:0.5rem 0.75rem;border:1px solid var(--border);border-radius:6px;font-family:'DM Sans',sans-serif;font-size:0.82rem;color:var(--text);outline:none}
+    .psi-edit-row input:focus{border-color:var(--gold)}
+    .btn-save-psi{font-size:0.7rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;padding:0.45rem 1.1rem;background:var(--navy);color:var(--white);border:none;border-radius:5px;cursor:pointer;transition:background 0.15s}
+    .btn-save-psi:hover{background:var(--navy-mid)}
 
-    /* ── FAROL ── */
-    .farol-wrap{display:flex;align-items:center;gap:1.5rem;background:var(--white);border-radius:2px;padding:1.25rem 1.5rem;margin-bottom:2rem}
-    .farol-lights{display:flex;flex-direction:column;gap:6px}
-    .farol-light{width:18px;height:18px;border-radius:50%;opacity:0.15;transition:opacity 0.3s}
-    .farol-light.on{opacity:1}
-    .farol-green{background:#2d7a4f}
-    .farol-yellow{background:#c8960a}
-    .farol-red{background:#a32d2d}
-    .farol-info h3{font-size:0.9rem;font-weight:500;color:var(--navy);margin-bottom:0.25rem}
-    .farol-info p{font-size:0.8rem;font-weight:300;color:var(--text-body);line-height:1.6}
-    .farol-tag{font-size:0.65rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;display:inline-block;margin-bottom:0.4rem;padding:0.2rem 0.65rem;border-radius:20px}
-    .farol-tag.verde{background:#e8f5ee;color:#2d7a4f}
-    .farol-tag.amarelo{background:#fff8e0;color:#c8960a}
-    .farol-tag.vermelho{background:#fce8e8;color:#a32d2d}
-    /* stat-row ampliado */
-    .stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2rem}
-    /* painel psi edição */
-    .psi-edit-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}
-    .psi-edit-row label{font-size:0.68rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--slate);display:block;margin-bottom:0.35rem}
-    .psi-edit-row input{width:100%;padding:0.5rem 0.75rem;border:1px solid var(--slate-light);border-radius:2px;font-family:'DM Sans',sans-serif;font-size:0.85rem;color:var(--navy)}
-    .btn-save-psi{margin-top:0.75rem;font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:0.5rem 1.25rem;background:var(--gold);color:var(--white);border:none;border-radius:2px;cursor:pointer}
-
-    /* Responsivo */
     @media(max-width:768px){
       .sidebar{display:none}
       .content{padding:1.25rem}
-      .chart-grid,.tests-grid,.tecnicas-grid,.rede-grid{grid-template-columns:1fr}
       .stat-row{grid-template-columns:1fr 1fr}
+      .tests-grid,.tecnicas-grid,.rede-grid{grid-template-columns:1fr}
       .patient-row{grid-template-columns:1fr 1fr}
     }
   </style>
 </head>
 <body>
 
-<!-- ══════════════════════════════════════
-     TELA DE LOGIN
-══════════════════════════════════════ -->
+<!-- LOGIN -->
 <div id="screen-login">
   <div class="login-box">
     <div class="login-logo">MCamillo<span>Psi</span></div>
@@ -210,32 +221,25 @@
       <div class="login-tab active" id="tab-entrar" onclick="trocarAba('entrar')">Entrar</div>
       <div class="login-tab" id="tab-primeiro" onclick="trocarAba('primeiro')">Primeiro acesso</div>
     </div>
-
-    <!-- Login -->
     <div id="form-entrar">
       <div class="field"><label>E-mail</label><input type="email" id="login-email" placeholder="seu@email.com"></div>
       <div class="field"><label>Senha</label><input type="password" id="login-senha" placeholder="••••••••" onkeydown="if(event.key==='Enter')fazerLogin()"></div>
-      <button class="btn-gold" onclick="fazerLogin()">Entrar</button>
+      <button class="btn-primary" onclick="fazerLogin()">Entrar</button>
       <div class="form-error" id="login-erro">E-mail ou senha incorretos.</div>
     </div>
-
-    <!-- Primeiro acesso -->
     <div id="form-primeiro" style="display:none">
       <div class="field"><label>E-mail</label><input type="email" id="cad-email" placeholder="seu@email.com"></div>
-      <div class="field"><label>Seu nome completo</label><input type="text" id="cad-nome" placeholder="Como prefere ser chamado(a)"></div>
-      <div class="field"><label>Escolha uma senha</label><input type="password" id="cad-senha" placeholder="Mínimo 6 caracteres"></div>
-      <div class="field"><label>Confirme a senha</label><input type="password" id="cad-senha2" placeholder="Repita a senha" onkeydown="if(event.key==='Enter')fazerCadastro()"></div>
-      <button class="btn-gold" onclick="fazerCadastro()">Criar minha senha</button>
+      <div class="field"><label>Nome completo</label><input type="text" id="cad-nome" placeholder="Como prefere ser chamado(a)"></div>
+      <div class="field"><label>Senha</label><input type="password" id="cad-senha" placeholder="Mínimo 6 caracteres"></div>
+      <div class="field"><label>Confirmar senha</label><input type="password" id="cad-senha2" placeholder="Repita a senha" onkeydown="if(event.key==='Enter')fazerCadastro()"></div>
+      <button class="btn-primary" onclick="fazerCadastro()">Criar minha senha</button>
       <div class="form-error" id="cad-erro"></div>
     </div>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════
-     APP
-══════════════════════════════════════ -->
+<!-- APP -->
 <div id="app">
-  <!-- Top nav -->
   <nav class="topnav">
     <div class="topnav-logo">MCamillo<span>Psi</span></div>
     <div class="topnav-right">
@@ -245,44 +249,40 @@
   </nav>
 
   <div class="layout">
-    <!-- Sidebar -->
-    <aside class="sidebar" id="sidebar">
+    <aside class="sidebar">
       <div class="sidebar-section">Principal</div>
       <div class="sidebar-item active" id="nav-dashboard" onclick="irPara('dashboard')">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
         Início
       </div>
       <div class="sidebar-item" id="nav-cadastro" onclick="irPara('cadastro')">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
         Meu cadastro
       </div>
       <div class="sidebar-section">Recursos</div>
       <div class="sidebar-item" id="nav-tecnicas" onclick="irPara('tecnicas')">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M12 8v4l3 3"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M12 6v6l4 2"/></svg>
         Técnicas e ferramentas
       </div>
       <div class="sidebar-item" id="nav-rede" onclick="irPara('rede')">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
         Rede de apoio pública
       </div>
-
-      <!-- Só visível para o psicólogo -->
       <div id="sidebar-psi" style="display:none">
         <div class="sidebar-section">Psicólogo</div>
         <div class="sidebar-item" id="nav-psi" onclick="irPara('psi')">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           Painel de pacientes
         </div>
       </div>
     </aside>
 
-    <!-- Conteúdo -->
     <main class="content">
 
-      <!-- ── DASHBOARD ── -->
+      <!-- DASHBOARD -->
       <div class="page active" id="page-dashboard">
         <h1 class="page-title">Olá, <span id="dash-nome"></span></h1>
-        <p class="page-sub">Acompanhe sua evolução e faça os testes disponíveis.</p>
+        <p class="page-sub">Acompanhe sua evolução e realize os testes disponíveis.</p>
 
         <div class="stat-row" id="stat-row"></div>
 
@@ -299,13 +299,13 @@
           </div>
         </div>
 
-        <p class="section-label">Evolução ao longo do tempo</p>
-        <div class="card" style="margin-bottom:2rem" id="chart-wrap">
+        <div class="section-eyebrow">Evolução ao longo do tempo</div>
+        <div class="chart-card">
           <div class="empty-state" id="chart-empty">Faça seu primeiro teste para visualizar sua evolução aqui.</div>
           <canvas id="grafico" style="display:none"></canvas>
         </div>
 
-        <p class="section-label">Testes disponíveis</p>
+        <div class="section-eyebrow">Testes disponíveis</div>
         <div class="tests-grid">
           <div class="test-card" onclick="iniciarTeste('phq9')">
             <div class="test-name">PHQ-9</div>
@@ -315,20 +315,20 @@
           </div>
           <div class="test-card" onclick="iniciarTeste('gad7')">
             <div class="test-name">GAD-7</div>
-            <div class="test-desc">Rastreio de transtorno de ansiedade generalizada.</div>
+            <div class="test-desc">Rastreio de ansiedade generalizada.</div>
             <div class="test-meta">7 perguntas · ~2 min</div>
             <button class="btn-test">Fazer teste</button>
           </div>
           <div class="test-card" onclick="iniciarTeste('dass21')">
             <div class="test-name">DASS-21</div>
-            <div class="test-desc">Avaliação combinada de depressão, ansiedade e estresse.</div>
+            <div class="test-desc">Avaliação de depressão, ansiedade e estresse.</div>
             <div class="test-meta">21 perguntas · ~5 min</div>
             <button class="btn-test">Fazer teste</button>
           </div>
         </div>
 
-        <p class="section-label">Histórico de resultados</p>
-        <div class="card" id="historico-wrap">
+        <div class="section-eyebrow" style="margin-top:2rem">Histórico de resultados</div>
+        <div class="history-card">
           <div class="empty-state" id="historico-empty">Nenhum teste realizado ainda.</div>
           <table class="history-table" id="historico-table" style="display:none">
             <thead><tr><th>Teste</th><th>Pontuação</th><th>Classificação</th><th>Data</th></tr></thead>
@@ -337,227 +337,121 @@
         </div>
       </div>
 
-      <!-- ── TESTE ── -->
+      <!-- TESTE -->
       <div class="page" id="page-test">
-        <p class="section-label" id="test-titulo"></p>
-        <div class="test-progress"><div class="test-progress-bar" id="test-barra"></div></div>
-        <p style="font-size:0.75rem;color:var(--slate);margin-bottom:1.5rem" id="test-contador"></p>
+        <div class="test-header">
+          <p style="font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem" id="test-titulo"></p>
+          <div class="test-progress-track"><div class="test-progress-bar" id="test-barra"></div></div>
+          <span class="test-counter" id="test-contador"></span>
+        </div>
         <p class="test-question" id="test-pergunta"></p>
         <div class="test-options" id="test-opcoes"></div>
         <div class="test-nav">
-          <button class="btn-outline" onclick="voltarPergunta()">← Anterior</button>
-          <button class="btn-nav" id="btn-avancar" onclick="avancarPergunta()">Próxima →</button>
+          <button class="btn-ghost" onclick="voltarPergunta()">← Anterior</button>
+          <button class="btn-action" id="btn-avancar" onclick="avancarPergunta()">Próxima →</button>
         </div>
       </div>
 
-      <!-- ── RESULTADO ── -->
+      <!-- RESULTADO -->
       <div class="page" id="page-result">
-        <p class="section-label" id="result-nome"></p>
-        <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;color:var(--navy)">Seu resultado</h2>
+        <p style="font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold)" id="result-nome"></p>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;color:var(--navy);margin-top:0.25rem">Seu resultado</h2>
         <div class="result-score" id="result-pts"></div>
         <div class="result-class" id="result-class"></div>
         <div class="result-desc" id="result-desc"></div>
         <div class="result-actions">
-          <button class="btn-outline" onclick="irPara('dashboard')">Voltar ao início</button>
-          <button class="btn-nav" onclick="iniciarTeste(testeAtual)">Refazer teste</button>
+          <button class="btn-ghost" onclick="irPara('dashboard')">Voltar ao início</button>
+          <button class="btn-action" onclick="iniciarTeste(testeAtual)">Refazer teste</button>
         </div>
       </div>
 
-      <!-- ── CADASTRO ── -->
+      <!-- CADASTRO -->
       <div class="page" id="page-cadastro">
         <h1 class="page-title">Meu cadastro</h1>
         <p class="page-sub">Atualize seus dados de acesso quando precisar.</p>
-        <div class="form-group"><label>Nome completo</label><input type="text" id="edit-nome" placeholder="Seu nome"></div>
-        <div class="form-group"><label>Nova senha (deixe em branco para manter)</label><input type="password" id="edit-senha" placeholder="Nova senha"></div>
-        <div class="form-group"><label>Confirmar nova senha</label><input type="password" id="edit-senha2" placeholder="Repita a nova senha"></div>
-        <button class="btn-gold" style="width:auto;padding:0.75rem 2rem" onclick="salvarCadastro()">Salvar alterações</button>
-        <div class="save-msg save-ok" id="save-ok">✓ Dados atualizados com sucesso.</div>
-        <div class="save-msg save-err" id="save-err"></div>
+        <div class="form-block">
+          <div class="form-block-title">Informações pessoais</div>
+          <div class="form-row"><label>Nome completo</label><input type="text" id="edit-nome" placeholder="Seu nome"></div>
+        </div>
+        <div class="form-block">
+          <div class="form-block-title">Alterar senha</div>
+          <div class="form-row"><label>Nova senha</label><input type="password" id="edit-senha" placeholder="Deixe em branco para manter a atual"></div>
+          <div class="form-row"><label>Confirmar nova senha</label><input type="password" id="edit-senha2" placeholder="Repita a nova senha"></div>
+        </div>
+        <button class="btn-action" onclick="salvarCadastro()">Salvar alterações</button>
+        <div class="save-ok" id="save-ok">✓ Dados atualizados com sucesso.</div>
+        <div class="save-err" id="save-err"></div>
       </div>
 
-      <!-- ── TÉCNICAS ── -->
+      <!-- TÉCNICAS -->
       <div class="page" id="page-tecnicas">
         <h1 class="page-title">Técnicas e ferramentas</h1>
         <p class="page-sub">Recursos psicoterápicos para o seu bem-estar no dia a dia.</p>
         <div class="tecnicas-grid">
-
           <div class="tecnica-card">
             <div class="tecnica-tag">Respiração</div>
             <div class="tecnica-title">Respiração diafragmática</div>
-            <div class="tecnica-body">
-              Uma das técnicas mais simples e eficazes para reduzir a ansiedade imediata. Ativa o sistema nervoso parassimpático, desacelerando a resposta de estresse.
-              <ol>
-                <li>Sente-se ou deite-se confortavelmente.</li>
-                <li>Coloque uma mão no peito e outra no abdômen.</li>
-                <li>Inspire pelo nariz por 4 segundos, enchendo o abdômen.</li>
-                <li>Segure por 2 segundos.</li>
-                <li>Expire pela boca por 6 segundos, esvaziando o abdômen.</li>
-                <li>Repita por 5 a 10 ciclos.</li>
-              </ol>
-            </div>
+            <div class="tecnica-body">Ativa o sistema nervoso parassimpático, reduzindo a ansiedade imediata.<ol><li>Coloque uma mão no peito e outra no abdômen.</li><li>Inspire pelo nariz por 4 segundos, enchendo o abdômen.</li><li>Segure por 2 segundos.</li><li>Expire pela boca por 6 segundos.</li><li>Repita por 5 a 10 ciclos.</li></ol></div>
           </div>
-
           <div class="tecnica-card">
             <div class="tecnica-tag">Respiração</div>
             <div class="tecnica-title">Técnica 4-7-8</div>
-            <div class="tecnica-body">
-              Desenvolvida pelo Dr. Andrew Weil, é especialmente útil para induzir o sono e reduzir a ansiedade aguda.
-              <ol>
-                <li>Expire completamente pela boca.</li>
-                <li>Feche a boca e inspire pelo nariz contando até 4.</li>
-                <li>Segure a respiração contando até 7.</li>
-                <li>Expire completamente pela boca contando até 8.</li>
-                <li>Isso é 1 ciclo. Repita 4 vezes.</li>
-              </ol>
-            </div>
+            <div class="tecnica-body">Útil para induzir o sono e reduzir a ansiedade aguda.<ol><li>Expire completamente pela boca.</li><li>Inspire pelo nariz contando até 4.</li><li>Segure contando até 7.</li><li>Expire pela boca contando até 8.</li><li>Repita 4 vezes.</li></ol></div>
           </div>
-
           <div class="tecnica-card">
             <div class="tecnica-tag">Mindfulness</div>
             <div class="tecnica-title">Atenção plena no presente</div>
-            <div class="tecnica-body">
-              O mindfulness é a prática de focar intencionalmente no momento presente, sem julgamento. Reduz ruminação e ansiedade antecipatória.
-              <ol>
-                <li>Encontre um lugar tranquilo e sente-se confortavelmente.</li>
-                <li>Feche os olhos e concentre-se na sua respiração.</li>
-                <li>Quando a mente divagar, gentilmente volte ao foco sem se criticar.</li>
-                <li>Comece com 5 minutos e vá aumentando gradualmente.</li>
-              </ol>
-              Pratique diariamente, preferencialmente no mesmo horário.
-            </div>
+            <div class="tecnica-body">Foca intencionalmente no momento presente, sem julgamento. Reduz ruminação e ansiedade antecipatória.<ol><li>Sente-se e feche os olhos.</li><li>Foque na sua respiração.</li><li>Quando a mente divagar, gentilmente volte ao foco.</li><li>Comece com 5 minutos e aumente gradualmente.</li></ol></div>
           </div>
-
           <div class="tecnica-card">
             <div class="tecnica-tag">Mindfulness</div>
-            <div class="tecnica-title">Técnica 5-4-3-2-1 (ancoragem)</div>
-            <div class="tecnica-body">
-              Técnica de grounding para momentos de ansiedade intensa ou dissociação. Usa os sentidos para ancorar você no presente.
-              <ol>
-                <li><strong>5</strong> coisas que você consegue <strong>ver</strong>.</li>
-                <li><strong>4</strong> coisas que você consegue <strong>tocar</strong>.</li>
-                <li><strong>3</strong> coisas que você consegue <strong>ouvir</strong>.</li>
-                <li><strong>2</strong> coisas que você consegue <strong>cheirar</strong>.</li>
-                <li><strong>1</strong> coisa que você consegue <strong>saborear</strong>.</li>
-              </ol>
-            </div>
+            <div class="tecnica-title">Técnica 5-4-3-2-1</div>
+            <div class="tecnica-body">Ancoragem para momentos de ansiedade intensa. Usa os sentidos para trazer você ao presente.<ol><li><strong>5</strong> coisas que você vê.</li><li><strong>4</strong> coisas que você toca.</li><li><strong>3</strong> coisas que você ouve.</li><li><strong>2</strong> coisas que você cheira.</li><li><strong>1</strong> coisa que você saboreia.</li></ol></div>
           </div>
-
           <div class="tecnica-card">
             <div class="tecnica-tag">TCC</div>
             <div class="tecnica-title">Registro de pensamentos</div>
-            <div class="tecnica-body">
-              Uma das ferramentas centrais da TCC. Ajuda a identificar e questionar pensamentos automáticos negativos.
-              <ol>
-                <li>Anote a <strong>situação</strong> que gerou desconforto.</li>
-                <li>Identifique o <strong>pensamento automático</strong> (o que passou pela sua cabeça).</li>
-                <li>Registre a <strong>emoção</strong> e sua intensidade (0 a 100%).</li>
-                <li>Busque <strong>evidências a favor e contra</strong> esse pensamento.</li>
-                <li>Formule um <strong>pensamento alternativo</strong> mais equilibrado.</li>
-                <li>Reavalie a intensidade da emoção.</li>
-              </ol>
-            </div>
+            <div class="tecnica-body">Identifica e questiona pensamentos automáticos negativos.<ol><li>Anote a situação que gerou desconforto.</li><li>Identifique o pensamento automático.</li><li>Registre a emoção e sua intensidade (0–100%).</li><li>Busque evidências a favor e contra.</li><li>Formule um pensamento alternativo mais equilibrado.</li></ol></div>
           </div>
-
           <div class="tecnica-card">
             <div class="tecnica-tag">TCC</div>
             <div class="tecnica-title">Ativação comportamental</div>
-            <div class="tecnica-body">
-              Técnica especialmente útil para depressão. Baseia-se no princípio de que o comportamento influencia o humor — agir pode preceder a motivação, não o contrário.
-              <ol>
-                <li>Liste atividades que já trouxeram prazer ou senso de realização.</li>
-                <li>Avalie o nível de prazer esperado para cada uma (0 a 10).</li>
-                <li>Programe pelo menos 1 atividade por dia na sua agenda.</li>
-                <li>Após realizar, registre o prazer real que sentiu.</li>
-                <li>Compare expectativa vs. realidade — geralmente surpreende.</li>
-              </ol>
-            </div>
+            <div class="tecnica-body">Especialmente útil para depressão. Agir pode preceder a motivação.<ol><li>Liste atividades que já trouxeram prazer.</li><li>Avalie o prazer esperado para cada uma (0–10).</li><li>Programe pelo menos 1 atividade por dia.</li><li>Após realizar, registre o prazer real sentido.</li></ol></div>
           </div>
-
         </div>
       </div>
 
-      <!-- ── REDE DE APOIO ── -->
+      <!-- REDE DE APOIO -->
       <div class="page" id="page-rede">
         <h1 class="page-title">Rede de apoio pública</h1>
-        <p class="page-sub">Serviços públicos gratuitos de saúde mental disponíveis no Brasil.</p>
-
+        <p class="page-sub">Serviços públicos e gratuitos de saúde mental no Brasil.</p>
         <div class="rede-hero">
           <div class="rede-hero-num">188</div>
           <div class="rede-hero-info">
             <strong>CVV — Centro de Valorização da Vida</strong>
-            <p>Apoio emocional e prevenção do suicídio. Atendimento gratuito, voluntário e sigiloso por telefone, chat e e-mail. Disponível 24 horas por dia, todos os dias do ano.</p>
-            <p style="margin-top:0.5rem">Também em: <strong>cvv.org.br</strong></p>
+            <p>Apoio emocional e prevenção do suicídio. Gratuito, voluntário e sigiloso por telefone, chat e e-mail. Disponível 24h, todos os dias. Também em cvv.org.br</p>
           </div>
         </div>
-
-        <p class="section-label" style="margin-bottom:1rem">Serviços de urgência</p>
-        <div class="rede-grid" style="margin-bottom:2rem">
-          <div class="rede-card">
-            <div class="rede-name">SAMU</div>
-            <div class="rede-type">Urgência e emergência</div>
-            <div class="rede-info">Serviço de Atendimento Móvel de Urgência. Indicado para crises graves com risco de vida.<br><span class="rede-tel">192</span></div>
-          </div>
-          <div class="rede-card">
-            <div class="rede-name">Bombeiros</div>
-            <div class="rede-type">Emergência geral</div>
-            <div class="rede-info">Atendimento a emergências incluindo situações de risco à vida relacionadas à saúde mental.<br><span class="rede-tel">193</span></div>
-          </div>
+        <div class="section-eyebrow">Urgências</div>
+        <div class="rede-grid" style="margin-bottom:1.75rem">
+          <div class="rede-card"><div class="rede-name">SAMU</div><div class="rede-type">Urgência e emergência</div><div class="rede-info">Para crises graves com risco de vida.<br><span class="rede-tel">192</span></div></div>
+          <div class="rede-card"><div class="rede-name">Bombeiros</div><div class="rede-type">Emergência geral</div><div class="rede-info">Atendimento a situações de risco à vida.<br><span class="rede-tel">193</span></div></div>
         </div>
-
-        <p class="section-label" style="margin-bottom:1rem">Atenção psicossocial</p>
-        <div class="rede-grid" style="margin-bottom:2rem">
-          <div class="rede-card">
-            <div class="rede-name">CAPS — Centro de Atenção Psicossocial</div>
-            <div class="rede-type">Saúde mental pública · SUS</div>
-            <div class="rede-info">
-              Serviço público e gratuito que oferece acompanhamento clínico e psicossocial a pessoas com transtornos mentais. Conta com psicólogos, psiquiatras, assistentes sociais e terapeutas.<br><br>
-              <strong>Como acessar:</strong> dirija-se ao CAPS da sua região ou a uma Unidade Básica de Saúde (UBS). O atendimento é por demanda espontânea — não é preciso encaminhamento para o primeiro acolhimento.<br><br>
-              <strong>Para encontrar o CAPS mais próximo:</strong> acesse <strong>cnes.datasus.gov.br</strong> ou ligue para a Secretaria de Saúde do seu município.
-            </div>
-          </div>
-          <div class="rede-card">
-            <div class="rede-name">UBS — Unidade Básica de Saúde</div>
-            <div class="rede-type">Atenção primária · SUS</div>
-            <div class="rede-info">
-              A UBS é a porta de entrada do SUS e oferece acompanhamento básico de saúde mental, podendo realizar encaminhamentos para o CAPS quando necessário.<br><br>
-              <strong>Como acessar:</strong> procure a UBS mais próxima da sua residência com um documento de identidade e cartão SUS.<br><br>
-              <strong>Para encontrar a UBS mais próxima:</strong> acesse <strong>localizasus.saude.gov.br</strong>
-            </div>
-          </div>
-          <div class="rede-card">
-            <div class="rede-name">CAPS AD — Álcool e Drogas</div>
-            <div class="rede-type">Dependência química · SUS</div>
-            <div class="rede-info">
-              Especializado no tratamento de pessoas com problemas relacionados ao uso de álcool e outras drogas. Oferece acompanhamento intensivo, semi-intensivo e não-intensivo conforme a necessidade.<br><br>
-              <strong>Acesso:</strong> demanda espontânea ou por encaminhamento de outros serviços de saúde.
-            </div>
-          </div>
-          <div class="rede-card">
-            <div class="rede-name">CAPS i — Infância e Adolescência</div>
-            <div class="rede-type">Crianças e adolescentes · SUS</div>
-            <div class="rede-info">
-              Voltado ao atendimento de crianças e adolescentes com transtornos mentais graves. Oferece atendimento individualizado, grupos terapêuticos e apoio às famílias.<br><br>
-              <strong>Acesso:</strong> por demanda espontânea ou encaminhamento de escolas, conselhos tutelares ou UBS.
-            </div>
-          </div>
+        <div class="section-eyebrow">Atenção psicossocial</div>
+        <div class="rede-grid" style="margin-bottom:1.75rem">
+          <div class="rede-card"><div class="rede-name">CAPS</div><div class="rede-type">Saúde mental · SUS</div><div class="rede-info">Acompanhamento clínico e psicossocial gratuito. Atendimento por demanda espontânea — não precisa de encaminhamento.<br><br>Para encontrar o CAPS mais próximo: <strong>cnes.datasus.gov.br</strong></div></div>
+          <div class="rede-card"><div class="rede-name">UBS</div><div class="rede-type">Atenção primária · SUS</div><div class="rede-info">Porta de entrada do SUS. Oferece acompanhamento básico de saúde mental e encaminhamentos.<br><br>Para encontrar a UBS mais próxima: <strong>localizasus.saude.gov.br</strong></div></div>
+          <div class="rede-card"><div class="rede-name">CAPS AD</div><div class="rede-type">Álcool e drogas · SUS</div><div class="rede-info">Especializado no tratamento de pessoas com problemas relacionados ao uso de álcool e outras drogas.</div></div>
+          <div class="rede-card"><div class="rede-name">CAPS i</div><div class="rede-type">Infância e adolescência · SUS</div><div class="rede-info">Atendimento a crianças e adolescentes com transtornos mentais graves. Conta com equipe multiprofissional.</div></div>
         </div>
-
-        <p class="section-label" style="margin-bottom:1rem">Apoio online gratuito</p>
+        <div class="section-eyebrow">Apoio online</div>
         <div class="rede-grid">
-          <div class="rede-card">
-            <div class="rede-name">CVV — Chat online</div>
-            <div class="rede-type">Apoio emocional · gratuito</div>
-            <div class="rede-info">Além do telefone 188, o CVV oferece atendimento por chat e e-mail para quem prefere não falar ao telefone.<br><br><strong>Acesse:</strong> cvv.org.br</div>
-          </div>
-          <div class="rede-card">
-            <div class="rede-name">Saúde Mental Gov</div>
-            <div class="rede-type">Informação oficial · Ministério da Saúde</div>
-            <div class="rede-info">Portal do Ministério da Saúde com informações sobre serviços de saúde mental disponíveis no SUS em todo o Brasil.<br><br><strong>Acesse:</strong> gov.br/saude</div>
-          </div>
+          <div class="rede-card"><div class="rede-name">CVV — Chat</div><div class="rede-type">Apoio emocional · gratuito</div><div class="rede-info">Para quem prefere não falar ao telefone. Acesse <strong>cvv.org.br</strong></div></div>
+          <div class="rede-card"><div class="rede-name">Ministério da Saúde</div><div class="rede-type">Informação oficial</div><div class="rede-info">Portal com informações sobre serviços de saúde mental no SUS. Acesse <strong>gov.br/saude</strong></div></div>
         </div>
       </div>
 
-      <!-- ── PAINEL PSI ── -->
+      <!-- PAINEL PSI -->
       <div class="page" id="page-psi">
         <h1 class="page-title">Painel de pacientes</h1>
         <p class="page-sub">Visão geral dos seus pacientes e resultados.</p>
@@ -566,12 +460,10 @@
           <div class="psi-tab" onclick="psiTab('resultados',this)">Todos os resultados</div>
         </div>
         <div id="psi-pacientes">
-          <p class="section-label">Pacientes cadastrados</p>
           <div id="lista-pacientes"></div>
         </div>
         <div id="psi-resultados" style="display:none">
-          <p class="section-label">Resultados recentes</p>
-          <div class="card">
+          <div class="history-card">
             <table class="history-table">
               <thead><tr><th>Paciente</th><th>Teste</th><th>Pontuação</th><th>Classificação</th><th>Data</th></tr></thead>
               <tbody id="tabela-todos"></tbody>
@@ -591,59 +483,15 @@ const sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY)
 const EMAIL_PSI='mcamillopsi@gmail.com'
 let user=null,testeAtual=null,perguntaAtual=0,respostas=[],grafico=null
 
-// ── TESTES ──────────────────────────────
 const testes={
-  phq9:{
-    nome:'PHQ-9 — Depressão',
-    opcoes:['Nenhuma vez (0)','Vários dias (1)','Mais da metade dos dias (2)','Quase todos os dias (3)'],
-    vals:[0,1,2,3],
-    perguntas:['Pouco interesse ou pouco prazer em fazer as coisas','Sentir-se "para baixo", deprimido(a) ou sem perspectiva','Dificuldade para adormecer, permanecer dormindo ou dormir mais do que de costume','Sentir-se cansado(a) ou com pouca energia','Apetite diminuído ou aumentado','Sentir-se mal consigo mesmo(a) ou achar que é um fracasso','Dificuldade para se concentrar nas coisas','Mover-se ou falar mais lentamente que o habitual, ou estar muito agitado(a)','Pensamentos de se machucar ou de que seria melhor estar morto(a)'],
-    classificar:p=>{
-      if(p<=4)return{label:'Mínima',badge:'badge-min',cor:'var(--green)',desc:'Seus resultados indicam sintomas mínimos de depressão. Continue cuidando do seu bem-estar com hábitos saudáveis e acompanhamento regular.'}
-      if(p<=9)return{label:'Leve',badge:'badge-leve',cor:'#7a5c0a',desc:'Seus resultados indicam sintomas leves de depressão. Acompanhamento clínico e atenção ao bem-estar emocional são recomendados.'}
-      if(p<=14)return{label:'Moderada',badge:'badge-mod',cor:'var(--orange)',desc:'Seus resultados indicam sintomas moderados de depressão. O acompanhamento psicológico regular é indicado.'}
-      if(p<=19)return{label:'Moderadamente grave',badge:'badge-grav',cor:'var(--red)',desc:'Seus resultados indicam sintomas moderadamente graves de depressão. Suporte profissional com regularidade é muito importante.'}
-      return{label:'Grave',badge:'badge-grav',cor:'var(--red)',desc:'Seus resultados indicam sintomas graves de depressão. Busque suporte profissional urgente.'}
-    }
-  },
-  gad7:{
-    nome:'GAD-7 — Ansiedade',
-    opcoes:['Nenhuma vez (0)','Vários dias (1)','Mais da metade dos dias (2)','Quase todos os dias (3)'],
-    vals:[0,1,2,3],
-    perguntas:['Sentir-se nervoso(a), ansioso(a) ou muito tenso(a)','Não conseguir parar ou controlar as preocupações','Preocupar-se muito com diversas coisas','Dificuldade para relaxar','Ficar tão agitado(a) que é difícil permanecer sentado(a)','Ficar facilmente irritado(a) ou irritável','Sentir medo como se algo horrível fosse acontecer'],
-    classificar:p=>{
-      if(p<=4)return{label:'Mínima',badge:'badge-min',cor:'var(--green)',desc:'Seus resultados indicam ansiedade mínima. Mantenha práticas de autocuidado e monitoramento regular.'}
-      if(p<=9)return{label:'Leve',badge:'badge-leve',cor:'#7a5c0a',desc:'Seus resultados indicam ansiedade leve. Técnicas de relaxamento e acompanhamento podem ser benéficos.'}
-      if(p<=14)return{label:'Moderada',badge:'badge-mod',cor:'var(--orange)',desc:'Seus resultados indicam ansiedade moderada. O acompanhamento psicológico é indicado.'}
-      return{label:'Grave',badge:'badge-grav',cor:'var(--red)',desc:'Seus resultados indicam ansiedade grave. O suporte profissional é altamente recomendado.'}
-    }
-  },
-  dass21:{
-    nome:'DASS-21 — Depressão, Ansiedade e Estresse',
-    opcoes:['Não se aplicou (0)','Aplicou-se um pouco (1)','Aplicou-se bastante (2)','Aplicou-se muito (3)'],
-    vals:[0,1,2,3],
-    perguntas:['Achei difícil me acalmar','Percebi que tinha a boca seca','Não consegui vivenciar nenhum sentimento positivo','Tive dificuldade em respirar','Achei difícil ter iniciativa para fazer as coisas','Tive a tendência de reagir de forma exagerada às situações','Senti tremores','Senti que estava muito nervoso(a)','Preocupei-me com situações em que poderia entrar em pânico','Senti que não tinha nada a esperar do futuro','Percebi que ficava agitado(a)','Achei difícil relaxar','Senti-me desanimado(a) e melancólico(a)','Fui intolerante com as coisas que me impediam','Senti que estava quase entrando em pânico','Não consegui me entusiasmar com nada','Senti que não tinha muito valor como pessoa','Senti que estava bastante irritável','Senti os batimentos do meu coração acelerados','Tive medo sem motivo','Senti que a vida não tinha sentido'],
-    classificar:p=>{
-      const dep=[2,4,9,12,15,16,20].reduce((s,i)=>s+(testes.dass21.vals[respostas[i]]||0),0)*2
-      const anx=[1,3,6,8,14,18,19].reduce((s,i)=>s+(testes.dass21.vals[respostas[i]]||0),0)*2
-      const str=[0,5,7,10,11,13,17].reduce((s,i)=>s+(testes.dass21.vals[respostas[i]]||0),0)*2
-      const total=dep+anx+str
-      let label,badge,cor
-      if(total<=28){label='Normal a leve';badge='badge-leve';cor='#7a5c0a'}
-      else if(total<=56){label='Moderado';badge='badge-mod';cor='var(--orange)'}
-      else{label='Grave a extremamente grave';badge='badge-grav';cor='var(--red)'}
-      return{label,badge,cor,pontuacaoDisplay:total,desc:`Subescalas (×2): Depressão: ${dep} | Ansiedade: ${anx} | Estresse: ${str}. Total: ${total}. Interprete esses resultados com seu psicólogo.`}
-    }
-  }
+  phq9:{nome:'PHQ-9 — Depressão',opcoes:['Nenhuma vez (0)','Vários dias (1)','Mais da metade dos dias (2)','Quase todos os dias (3)'],vals:[0,1,2,3],perguntas:['Pouco interesse ou pouco prazer em fazer as coisas','Sentir-se "para baixo", deprimido(a) ou sem perspectiva','Dificuldade para adormecer, permanecer dormindo ou dormir mais do que de costume','Sentir-se cansado(a) ou com pouca energia','Apetite diminuído ou aumentado','Sentir-se mal consigo mesmo(a) ou achar que é um fracasso','Dificuldade para se concentrar nas coisas','Mover-se ou falar mais lentamente que o habitual, ou estar muito agitado(a)','Pensamentos de se machucar ou de que seria melhor estar morto(a)'],classificar:p=>{if(p<=4)return{label:'Mínima',badge:'badge-min',cor:'var(--green)',desc:'Seus resultados indicam sintomas mínimos de depressão. Continue cuidando do seu bem-estar com hábitos saudáveis e acompanhamento regular.'};if(p<=9)return{label:'Leve',badge:'badge-leve',cor:'var(--yellow)',desc:'Seus resultados indicam sintomas leves de depressão. Acompanhamento clínico e atenção ao bem-estar emocional são recomendados.'};if(p<=14)return{label:'Moderada',badge:'badge-mod',cor:'#b8610a',desc:'Seus resultados indicam sintomas moderados de depressão. O acompanhamento psicológico regular é indicado.'};if(p<=19)return{label:'Moderadamente grave',badge:'badge-grav',cor:'var(--red)',desc:'Seus resultados indicam sintomas moderadamente graves. Suporte profissional com regularidade é muito importante.'};return{label:'Grave',badge:'badge-grav',cor:'var(--red)',desc:'Seus resultados indicam sintomas graves de depressão. Busque suporte profissional urgente.'}}},
+  gad7:{nome:'GAD-7 — Ansiedade',opcoes:['Nenhuma vez (0)','Vários dias (1)','Mais da metade dos dias (2)','Quase todos os dias (3)'],vals:[0,1,2,3],perguntas:['Sentir-se nervoso(a), ansioso(a) ou muito tenso(a)','Não conseguir parar ou controlar as preocupações','Preocupar-se muito com diversas coisas','Dificuldade para relaxar','Ficar tão agitado(a) que é difícil permanecer sentado(a)','Ficar facilmente irritado(a) ou irritável','Sentir medo como se algo horrível fosse acontecer'],classificar:p=>{if(p<=4)return{label:'Mínima',badge:'badge-min',cor:'var(--green)',desc:'Seus resultados indicam ansiedade mínima. Mantenha práticas de autocuidado e monitoramento regular.'};if(p<=9)return{label:'Leve',badge:'badge-leve',cor:'var(--yellow)',desc:'Seus resultados indicam ansiedade leve. Técnicas de relaxamento e acompanhamento podem ser benéficos.'};if(p<=14)return{label:'Moderada',badge:'badge-mod',cor:'#b8610a',desc:'Seus resultados indicam ansiedade moderada. O acompanhamento psicológico é indicado.'};return{label:'Grave',badge:'badge-grav',cor:'var(--red)',desc:'Seus resultados indicam ansiedade grave. O suporte profissional é altamente recomendado.'}}},
+  dass21:{nome:'DASS-21 — Depressão, Ansiedade e Estresse',opcoes:['Não se aplicou (0)','Aplicou-se um pouco (1)','Aplicou-se bastante (2)','Aplicou-se muito (3)'],vals:[0,1,2,3],perguntas:['Achei difícil me acalmar','Percebi que tinha a boca seca','Não consegui vivenciar nenhum sentimento positivo','Tive dificuldade em respirar','Achei difícil ter iniciativa para fazer as coisas','Tive a tendência de reagir de forma exagerada às situações','Senti tremores','Senti que estava muito nervoso(a)','Preocupei-me com situações em que poderia entrar em pânico','Senti que não tinha nada a esperar do futuro','Percebi que ficava agitado(a)','Achei difícil relaxar','Senti-me desanimado(a) e melancólico(a)','Fui intolerante com as coisas que me impediam','Senti que estava quase entrando em pânico','Não consegui me entusiasmar com nada','Senti que não tinha muito valor como pessoa','Senti que estava bastante irritável','Senti os batimentos do meu coração acelerados','Tive medo sem motivo','Senti que a vida não tinha sentido'],classificar:p=>{const dep=[2,4,9,12,15,16,20].reduce((s,i)=>s+(testes.dass21.vals[respostas[i]]||0),0)*2;const anx=[1,3,6,8,14,18,19].reduce((s,i)=>s+(testes.dass21.vals[respostas[i]]||0),0)*2;const str=[0,5,7,10,11,13,17].reduce((s,i)=>s+(testes.dass21.vals[respostas[i]]||0),0)*2;const total=dep+anx+str;let label,badge,cor;if(total<=28){label='Normal a leve';badge='badge-leve';cor='var(--yellow)'}else if(total<=56){label='Moderado';badge='badge-mod';cor='#b8610a'}else{label='Grave a extremamente grave';badge='badge-grav';cor='var(--red)'};return{label,badge,cor,pontuacaoDisplay:total,desc:`Subescalas (×2): Depressão: ${dep} | Ansiedade: ${anx} | Estresse: ${str}. Total: ${total}. Interprete com seu psicólogo.`}}}
 }
 
-// ── UTILITÁRIOS ─────────────────────────
 function fmt(iso){return new Date(iso).toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric'})}
-function badgeHtml(c){
-  const m={'Mínima':'badge-min','Leve':'badge-leve','Normal a leve':'badge-leve','Moderada':'badge-mod','Moderado':'badge-mod','Moderadamente grave':'badge-grav','Grave':'badge-grav','Grave a extremamente grave':'badge-grav'}
-  const cls=Object.keys(m).find(k=>c.includes(k))||'badge-leve'
-  return`<span class="badge ${m[cls]}">${c}</span>`
-}
+function badgeHtml(c){const m={'Mínima':'badge-min','Leve':'badge-leve','Normal a leve':'badge-leve','Moderada':'badge-mod','Moderado':'badge-mod','Moderadamente grave':'badge-grav','Grave':'badge-grav','Grave a extremamente grave':'badge-grav'};const cls=Object.keys(m).find(k=>c.includes(k))||'badge-leve';return`<span class="badge ${m[cls]}">${c}</span>`}
+
 function irPara(pg){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'))
   document.querySelectorAll('.sidebar-item').forEach(i=>i.classList.remove('active'))
@@ -651,20 +499,18 @@ function irPara(pg){
   const nav=document.getElementById('nav-'+pg)
   if(nav)nav.classList.add('active')
   if(pg==='dashboard')carregarDashboard()
-  if(pg==='psi'){carregarPainel()}
-  if(pg==='cadastro')preencherCadastro()
+  if(pg==='psi')carregarPainel()
+  if(pg==='cadastro')document.getElementById('edit-nome').value=user.nome||''
 }
 
-// ── ABAS LOGIN ───────────────────────────
 function trocarAba(aba){
-  const isEntrar=aba==='entrar'
-  document.getElementById('form-entrar').style.display=isEntrar?'block':'none'
-  document.getElementById('form-primeiro').style.display=isEntrar?'none':'block'
-  document.getElementById('tab-entrar').classList.toggle('active',isEntrar)
-  document.getElementById('tab-primeiro').classList.toggle('active',!isEntrar)
+  const isE=aba==='entrar'
+  document.getElementById('form-entrar').style.display=isE?'block':'none'
+  document.getElementById('form-primeiro').style.display=isE?'none':'block'
+  document.getElementById('tab-entrar').classList.toggle('active',isE)
+  document.getElementById('tab-primeiro').classList.toggle('active',!isE)
 }
 
-// ── LOGIN ────────────────────────────────
 async function fazerLogin(){
   const email=document.getElementById('login-email').value.trim()
   const senha=document.getElementById('login-senha').value
@@ -685,7 +531,7 @@ async function fazerCadastro(){
   if(senha!==senha2){erro.textContent='As senhas não coincidem.';erro.style.display='block';return}
   const {data,error}=await sb.from('pacientes').select('*').eq('email',email).single()
   if(error||!data){erro.textContent='E-mail não encontrado. Entre em contato com seu psicólogo.';erro.style.display='block';return}
-  if(data.senha){erro.textContent='Este e-mail já possui senha. Use a aba "Entrar".';erro.style.display='block';return}
+  if(data.senha){erro.textContent='Este e-mail já possui senha. Use "Entrar".';erro.style.display='block';return}
   await sb.from('pacientes').update({nome,senha}).eq('email',email)
   entrarNoApp({...data,nome,senha})
 }
@@ -696,9 +542,7 @@ function entrarNoApp(data){
   document.getElementById('app').classList.add('visible')
   document.getElementById('nav-nome').textContent=data.nome||data.email
   document.getElementById('dash-nome').textContent=(data.nome||data.email).split(' ')[0]
-  if(data.email===EMAIL_PSI){
-    document.getElementById('sidebar-psi').style.display='block'
-  }
+  if(data.email===EMAIL_PSI)document.getElementById('sidebar-psi').style.display='block'
   carregarDashboard()
 }
 
@@ -710,7 +554,6 @@ function logout(){
   document.getElementById('login-senha').value=''
 }
 
-// ── DASHBOARD ────────────────────────────
 async function carregarDashboard(){
   const {data}=await sb.from('resultados').select('*').eq('paciente_id',user.id).order('criado_em',{ascending:false})
   renderStats(data||[])
@@ -719,26 +562,18 @@ async function carregarDashboard(){
 }
 
 function renderStats(data){
-  const total=data.length
-  const ultimo=data[0]
-  const testes_feitos=[...new Set(data.map(r=>r.teste.split('—')[0].trim()))].length
-
-  // Tempo de acompanhamento
   let tempoHtml='—'
   if(user.data_inicio){
     const dias=Math.floor((new Date()-new Date(user.data_inicio))/86400000)
     const meses=Math.floor(dias/30)
     tempoHtml=meses>0?`${meses}m`:`${dias}d`
   }
-
   document.getElementById('stat-row').innerHTML=`
-    <div class="stat-card"><div class="stat-num">${total}</div><div class="stat-lbl">Testes realizados</div></div>
+    <div class="stat-card"><div class="stat-num">${data.length}</div><div class="stat-lbl">Testes realizados</div></div>
     <div class="stat-card"><div class="stat-num">${user.sessoes||0}</div><div class="stat-lbl">Sessões realizadas</div></div>
-    <div class="stat-card"><div class="stat-num">${tempoHtml}</div><div class="stat-lbl">Tempo de acompanhamento</div></div>
-    <div class="stat-card"><div class="stat-num">${ultimo?badgeHtml(ultimo.classificacao):'—'}</div><div class="stat-lbl">Último resultado</div></div>
+    <div class="stat-card"><div class="stat-num">${tempoHtml}</div><div class="stat-lbl">Em acompanhamento</div></div>
+    <div class="stat-card"><div class="stat-num" style="font-size:1rem;padding-top:0.4rem">${data[0]?badgeHtml(data[0].classificacao):'—'}</div><div class="stat-lbl">Último resultado</div></div>
   `
-
-  // Farol de risco
   renderFarol(data)
 }
 
@@ -746,63 +581,27 @@ function renderFarol(data){
   const wrap=document.getElementById('farol-wrap')
   if(!data.length){wrap.style.display='none';return}
   wrap.style.display='flex'
-
-  // Pega os últimos resultados de cada teste
   const ultimos={}
-  data.forEach(r=>{
-    const k=r.teste.split('—')[0].trim()
-    if(!ultimos[k])ultimos[k]=r
-  })
-
-  // Avalia risco: se qualquer resultado for grave → vermelho; moderado → amarelo; senão → verde
+  data.forEach(r=>{const k=r.teste.split('—')[0].trim();if(!ultimos[k])ultimos[k]=r})
   const classes=Object.values(ultimos).map(r=>r.classificacao)
   let nivel='verde'
-  classes.forEach(c=>{
-    if(c.includes('Grave')||c.includes('grave'))nivel='vermelho'
-    else if(nivel!=='vermelho'&&(c.includes('Moderada')||c.includes('Moderado')))nivel='amarelo'
-  })
-
+  classes.forEach(c=>{if(c.includes('Grave')||c.includes('grave'))nivel='vermelho';else if(nivel!=='vermelho'&&(c.includes('Moderada')||c.includes('Moderado')))nivel='amarelo'})
   document.getElementById('farol-red').classList.toggle('on',nivel==='vermelho')
   document.getElementById('farol-yellow').classList.toggle('on',nivel==='amarelo')
   document.getElementById('farol-green').classList.toggle('on',nivel==='verde')
-
   const tag=document.getElementById('farol-tag')
-  const titulo=document.getElementById('farol-titulo')
-  const desc=document.getElementById('farol-desc')
   tag.className='farol-tag '+nivel
-
-  if(nivel==='verde'){
-    tag.textContent='Indicador favorável'
-    titulo.textContent='Resultados dentro do esperado'
-    desc.textContent='Seus últimos resultados indicam sintomas mínimos ou leves. Continue com o acompanhamento regular e as práticas de autocuidado.'
-  } else if(nivel==='amarelo'){
-    tag.textContent='Atenção recomendada'
-    titulo.textContent='Sintomas moderados identificados'
-    desc.textContent='Seus últimos resultados indicam sintomas moderados. Mantenha o acompanhamento em dia e converse com seu psicólogo sobre como está se sentindo.'
-  } else {
-    tag.textContent='Suporte prioritário'
-    titulo.textContent='Sintomas graves identificados'
-    desc.textContent='Seus últimos resultados indicam sintomas graves. É importante manter contato próximo com seu psicólogo. Se precisar de apoio imediato, ligue 188 (CVV) — disponível 24h.'
-  }
-}
-
-async function salvarDadosPaciente(id){
-  const sessoes=parseInt(document.getElementById('psi-sessoes-'+id).value)||0
-  const data_inicio=document.getElementById('psi-inicio-'+id).value||null
-  const {error}=await sb.from('pacientes').update({sessoes,data_inicio}).eq('id',id)
-  if(!error){
-    const btn=document.querySelector(`#det-${id} .btn-save-psi`)
-    if(btn){btn.textContent='✓ Salvo';setTimeout(()=>{btn.textContent='Salvar'},2000)}
-  }
+  if(nivel==='verde'){tag.textContent='Indicador favorável';document.getElementById('farol-titulo').textContent='Resultados dentro do esperado';document.getElementById('farol-desc').textContent='Seus últimos resultados indicam sintomas mínimos ou leves. Continue com o acompanhamento regular e as práticas de autocuidado.'}
+  else if(nivel==='amarelo'){tag.textContent='Atenção recomendada';document.getElementById('farol-titulo').textContent='Sintomas moderados identificados';document.getElementById('farol-desc').textContent='Seus últimos resultados indicam sintomas moderados. Mantenha o acompanhamento em dia e converse com seu psicólogo.'}
+  else{tag.textContent='Suporte prioritário';document.getElementById('farol-titulo').textContent='Sintomas graves identificados';document.getElementById('farol-desc').textContent='Seus últimos resultados indicam sintomas graves. Mantenha contato próximo com seu psicólogo. Se precisar de apoio imediato, ligue 188 (CVV) — disponível 24h.'}
 }
 
 function renderHistorico(data){
   const empty=document.getElementById('historico-empty')
   const table=document.getElementById('historico-table')
-  const tbody=document.getElementById('historico-body')
   if(!data.length){empty.style.display='block';table.style.display='none';return}
   empty.style.display='none';table.style.display='table'
-  tbody.innerHTML=data.map(r=>`<tr><td>${r.teste}</td><td>${r.pontuacao}</td><td>${badgeHtml(r.classificacao)}</td><td>${fmt(r.criado_em)}</td></tr>`).join('')
+  document.getElementById('historico-body').innerHTML=data.map(r=>`<tr><td>${r.teste}</td><td>${r.pontuacao}</td><td>${badgeHtml(r.classificacao)}</td><td>${fmt(r.criado_em)}</td></tr>`).join('')
 }
 
 function renderGrafico(data){
@@ -811,73 +610,33 @@ function renderGrafico(data){
   if(!data.length){empty.style.display='block';canvas.style.display='none';return}
   empty.style.display='none';canvas.style.display='block'
   const porTeste={}
-  ;[...data].reverse().forEach(r=>{
-    const k=r.teste.split('—')[0].trim()
-    if(!porTeste[k])porTeste[k]=[]
-    porTeste[k].push({x:fmt(r.criado_em),y:r.pontuacao})
-  })
+  ;[...data].reverse().forEach(r=>{const k=r.teste.split('—')[0].trim();if(!porTeste[k])porTeste[k]=[];porTeste[k].push({x:fmt(r.criado_em),y:r.pontuacao})})
   const cores=['#b8974a','#0d1f3c','#2d7a4f','#a32d2d']
-  const datasets=Object.keys(porTeste).map((t,i)=>({
-    label:t,data:porTeste[t],borderColor:cores[i]||'#888',
-    backgroundColor:'transparent',tension:0.35,pointRadius:5,pointHoverRadius:7
-  }))
   if(grafico)grafico.destroy()
-  grafico=new Chart(canvas,{
-    type:'line',data:{datasets},
-    options:{
-      responsive:true,
-      plugins:{
-        legend:{labels:{font:{family:'DM Sans',size:12},color:'#3d4e66'}},
-        tooltip:{callbacks:{title:items=>items[0].raw.x}}
-      },
-      scales:{
-        x:{ticks:{font:{family:'DM Sans',size:11}},title:{display:true,text:'Data',font:{family:'DM Sans',size:11}}},
-        y:{beginAtZero:true,ticks:{font:{family:'DM Sans',size:11}},title:{display:true,text:'Pontuação',font:{family:'DM Sans',size:11}}}
-      }
-    }
-  })
+  grafico=new Chart(canvas,{type:'line',data:{datasets:Object.keys(porTeste).map((t,i)=>({label:t,data:porTeste[t],borderColor:cores[i]||'#888',backgroundColor:'transparent',tension:0.35,pointRadius:4,pointHoverRadius:6}))},options:{responsive:true,plugins:{legend:{labels:{font:{family:'DM Sans',size:12},color:'#37352f'}}},scales:{x:{ticks:{font:{family:'DM Sans',size:11}}},y:{beginAtZero:true,ticks:{font:{family:'DM Sans',size:11}}}}}})
 }
 
-// ── TESTE ────────────────────────────────
-function iniciarTeste(id){
-  testeAtual=id;perguntaAtual=0;respostas=[]
-  irPara('test');renderPergunta()
-}
+function iniciarTeste(id){testeAtual=id;perguntaAtual=0;respostas=[];irPara('test');renderPergunta()}
 function renderPergunta(){
-  const t=testes[testeAtual]
-  const total=t.perguntas.length
+  const t=testes[testeAtual];const total=t.perguntas.length
   document.getElementById('test-titulo').textContent=t.nome
   document.getElementById('test-barra').style.width=Math.round((perguntaAtual/total)*100)+'%'
   document.getElementById('test-contador').textContent=`Pergunta ${perguntaAtual+1} de ${total}`
   document.getElementById('test-pergunta').textContent=t.perguntas[perguntaAtual]
-  const opc=document.getElementById('test-opcoes')
-  opc.innerHTML=''
-  t.opcoes.forEach((o,i)=>{
-    const d=document.createElement('div')
-    d.className='test-option'+(respostas[perguntaAtual]===i?' selected':'')
-    d.textContent=o
-    d.onclick=()=>{document.querySelectorAll('.test-option').forEach(x=>x.classList.remove('selected'));d.classList.add('selected');respostas[perguntaAtual]=i}
-    opc.appendChild(d)
-  })
+  const opc=document.getElementById('test-opcoes');opc.innerHTML=''
+  t.opcoes.forEach((o,i)=>{const d=document.createElement('div');d.className='test-option'+(respostas[perguntaAtual]===i?' selected':'');d.textContent=o;d.onclick=()=>{document.querySelectorAll('.test-option').forEach(x=>x.classList.remove('selected'));d.classList.add('selected');respostas[perguntaAtual]=i};opc.appendChild(d)})
   document.getElementById('btn-avancar').textContent=perguntaAtual===total-1?'Finalizar ✓':'Próxima →'
 }
 function voltarPergunta(){if(perguntaAtual>0){perguntaAtual--;renderPergunta()}else irPara('dashboard')}
 async function avancarPergunta(){
   if(respostas[perguntaAtual]===undefined){alert('Selecione uma opção para continuar.');return}
   const t=testes[testeAtual]
-  if(perguntaAtual<t.perguntas.length-1){perguntaAtual++;renderPergunta()}
-  else await calcularResultado()
+  if(perguntaAtual<t.perguntas.length-1){perguntaAtual++;renderPergunta()}else await calcularResultado()
 }
 async function calcularResultado(){
-  const t=testes[testeAtual]
-  let pontuacao,resultado
-  if(testeAtual==='dass21'){
-    pontuacao=respostas.reduce((s,r)=>s+(t.vals[r]||0),0)*2
-    resultado=t.classificar(pontuacao)
-  } else {
-    pontuacao=respostas.reduce((s,r)=>s+(t.vals[r]||0),0)
-    resultado=t.classificar(pontuacao)
-  }
+  const t=testes[testeAtual];let pontuacao,resultado
+  if(testeAtual==='dass21'){pontuacao=respostas.reduce((s,r)=>s+(t.vals[r]||0),0)*2;resultado=t.classificar(pontuacao)}
+  else{pontuacao=respostas.reduce((s,r)=>s+(t.vals[r]||0),0);resultado=t.classificar(pontuacao)}
   await sb.from('resultados').insert({paciente_id:user.id,teste:t.nome,respostas,pontuacao,classificacao:resultado.label})
   document.getElementById('result-nome').textContent=t.nome
   document.getElementById('result-pts').textContent=pontuacao
@@ -886,36 +645,29 @@ async function calcularResultado(){
   irPara('result')
 }
 
-// ── CADASTRO ─────────────────────────────
-function preencherCadastro(){document.getElementById('edit-nome').value=user.nome||''}
 async function salvarCadastro(){
   const nome=document.getElementById('edit-nome').value.trim()
   const senha=document.getElementById('edit-senha').value
   const senha2=document.getElementById('edit-senha2').value
-  const ok=document.getElementById('save-ok')
-  const err=document.getElementById('save-err')
+  const ok=document.getElementById('save-ok');const err=document.getElementById('save-err')
   ok.style.display='none';err.style.display='none'
   if(!nome){err.textContent='O nome não pode ficar vazio.';err.style.display='block';return}
-  if(senha&&senha.length<6){err.textContent='A senha deve ter ao menos 6 caracteres.';err.style.display='block';return}
+  if(senha&&senha.length<6){err.textContent='Senha mínima de 6 caracteres.';err.style.display='block';return}
   if(senha&&senha!==senha2){err.textContent='As senhas não coincidem.';err.style.display='block';return}
-  const updates={nome}
-  if(senha)updates.senha=senha
+  const updates={nome};if(senha)updates.senha=senha
   const {error}=await sb.from('pacientes').update(updates).eq('id',user.id)
-  if(error){err.textContent='Erro ao salvar. Tente novamente.';err.style.display='block';return}
-  user={...user,...updates}
-  document.getElementById('nav-nome').textContent=nome
-  document.getElementById('dash-nome').textContent=nome.split(' ')[0]
+  if(error){err.textContent='Erro ao salvar.';err.style.display='block';return}
+  user={...user,...updates};document.getElementById('nav-nome').textContent=nome;document.getElementById('dash-nome').textContent=nome.split(' ')[0]
   ok.style.display='block'
 }
 
-// ── PAINEL PSI ───────────────────────────
 function psiTab(tab,el){
-  document.querySelectorAll('.psi-tab').forEach(t=>t.classList.remove('active'))
-  el.classList.add('active')
+  document.querySelectorAll('.psi-tab').forEach(t=>t.classList.remove('active'));el.classList.add('active')
   document.getElementById('psi-pacientes').style.display=tab==='pacientes'?'block':'none'
   document.getElementById('psi-resultados').style.display=tab==='resultados'?'block':'none'
   if(tab==='resultados')carregarTodosResultados()
 }
+
 async function carregarPainel(){
   const {data:pacs}=await sb.from('pacientes').select('*').neq('email',EMAIL_PSI).order('nome')
   const lista=document.getElementById('lista-pacientes')
@@ -924,68 +676,39 @@ async function carregarPainel(){
   for(const p of pacs){
     const {data:ults}=await sb.from('resultados').select('*').eq('paciente_id',p.id).order('criado_em',{ascending:false}).limit(1)
     const ult=ults&&ults[0]
-    const row=document.createElement('div')
-    row.className='patient-row'
-    row.innerHTML=`
-      <div><div class="patient-name">${p.nome||'—'}</div><div class="patient-email">${p.email}</div></div>
-      <div style="font-size:0.78rem;color:var(--slate)">${ult?ult.teste.split('—')[0]:'—'}</div>
-      <div>${ult?badgeHtml(ult.classificacao):'<span style="font-size:0.78rem;color:var(--slate)">Sem testes</span>'}</div>
-      <div style="font-size:0.75rem;color:var(--slate)">${ult?fmt(ult.criado_em):'—'}</div>`
-    row.onclick=()=>verPaciente(p,row)
-    lista.appendChild(row)
-    const det=document.createElement('div')
-    det.className='patient-detail'
-    det.id='det-'+p.id
-    lista.appendChild(det)
+    const row=document.createElement('div');row.className='patient-row'
+    row.innerHTML=`<div><div class="patient-name">${p.nome||'—'}</div><div class="patient-email">${p.email}</div></div><div style="font-size:0.75rem;color:var(--text-muted)">${ult?ult.teste.split('—')[0]:'—'}</div><div>${ult?badgeHtml(ult.classificacao):'<span style="font-size:0.72rem;color:var(--text-muted)">Sem testes</span>'}</div><div style="font-size:0.72rem;color:var(--text-muted)">${ult?fmt(ult.criado_em):'—'}</div>`
+    row.onclick=()=>verPaciente(p,row);lista.appendChild(row)
+    const det=document.createElement('div');det.className='patient-detail';det.id='det-'+p.id;lista.appendChild(det)
   }
 }
+
 async function verPaciente(p,row){
   const det=document.getElementById('det-'+p.id)
   if(det.classList.contains('open')){det.classList.remove('open');return}
   document.querySelectorAll('.patient-detail').forEach(d=>d.classList.remove('open'))
   const {data}=await sb.from('resultados').select('*').eq('paciente_id',p.id).order('criado_em',{ascending:false})
-
-  // Calcula tempo de acompanhamento
   let tempoHtml='—'
-  if(p.data_inicio){
-    const dias=Math.floor((new Date()-new Date(p.data_inicio))/86400000)
-    const meses=Math.floor(dias/30)
-    tempoHtml=meses>0?`${meses} mês${meses>1?'es':''}`:`${dias} dia${dias!==1?'s':''}`
-  }
-
-  let html=`
-    <p style="font-size:0.72rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem">Acompanhamento — ${p.nome||p.email}</p>
-    <div class="psi-edit-row">
-      <div>
-        <label>Sessões realizadas</label>
-        <input type="number" min="0" id="psi-sessoes-${p.id}" value="${p.sessoes||0}">
-      </div>
-      <div>
-        <label>Data de início</label>
-        <input type="date" id="psi-inicio-${p.id}" value="${p.data_inicio||''}">
-      </div>
-    </div>
-    <div style="display:flex;align-items:center;gap:1rem;margin-top:0.75rem">
-      <button class="btn-save-psi" onclick="salvarDadosPaciente('${p.id}')">Salvar</button>
-      <span style="font-size:0.78rem;color:var(--slate)">Tempo de acompanhamento atual: <strong style="color:var(--navy)">${tempoHtml}</strong></span>
-    </div>
-  `
-
-  if(!data||!data.length){
-    html+='<p style="font-size:0.82rem;color:var(--slate);margin-top:1.5rem">Nenhum teste realizado ainda.</p>'
-  } else {
-    html+=`<p style="font-size:0.68rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin:1.5rem 0 0.75rem">Histórico de testes</p>`
-    html+='<table class="history-table"><thead><tr><th>Teste</th><th>Pontuação</th><th>Classificação</th><th>Data</th></tr></thead><tbody>'
-    data.forEach(r=>{html+=`<tr><td>${r.teste}</td><td>${r.pontuacao}</td><td>${badgeHtml(r.classificacao)}</td><td>${fmt(r.criado_em)}</td></tr>`})
-    html+='</tbody></table>'
-  }
-  det.innerHTML=html
-  det.classList.add('open')
+  if(p.data_inicio){const dias=Math.floor((new Date()-new Date(p.data_inicio))/86400000);const meses=Math.floor(dias/30);tempoHtml=meses>0?`${meses} mês${meses>1?'es':''}`:`${dias} dia${dias!==1?'s':''}`}
+  let html=`<p style="font-size:0.65rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem">${p.nome||p.email}</p>
+  <div class="psi-edit-row"><div><label>Sessões realizadas</label><input type="number" min="0" id="psi-sessoes-${p.id}" value="${p.sessoes||0}"></div><div><label>Data de início</label><input type="date" id="psi-inicio-${p.id}" value="${p.data_inicio||''}"></div></div>
+  <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.25rem"><button class="btn-save-psi" onclick="salvarDadosPaciente('${p.id}')">Salvar</button><span style="font-size:0.75rem;color:var(--text-muted)">Tempo de acompanhamento: <strong style="color:var(--text)">${tempoHtml}</strong></span></div>`
+  if(!data||!data.length){html+='<p style="font-size:0.78rem;color:var(--text-muted)">Nenhum teste realizado ainda.</p>'}
+  else{html+=`<p style="font-size:0.65rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:0.75rem">Histórico de testes</p><table class="history-table"><thead><tr><th>Teste</th><th>Pontuação</th><th>Classificação</th><th>Data</th></tr></thead><tbody>${data.map(r=>`<tr><td>${r.teste}</td><td>${r.pontuacao}</td><td>${badgeHtml(r.classificacao)}</td><td>${fmt(r.criado_em)}</td></tr>`).join('')}</tbody></table>`}
+  det.innerHTML=html;det.classList.add('open')
 }
+
+async function salvarDadosPaciente(id){
+  const sessoes=parseInt(document.getElementById('psi-sessoes-'+id).value)||0
+  const data_inicio=document.getElementById('psi-inicio-'+id).value||null
+  const {error}=await sb.from('pacientes').update({sessoes,data_inicio}).eq('id',id)
+  if(!error){const btn=document.querySelector(`#det-${id} .btn-save-psi`);if(btn){btn.textContent='✓ Salvo';setTimeout(()=>{btn.textContent='Salvar'},2000)}}
+}
+
 async function carregarTodosResultados(){
   const {data}=await sb.from('resultados').select('*, pacientes(nome)').order('criado_em',{ascending:false}).limit(100)
   const tbody=document.getElementById('tabela-todos')
-  if(!data||!data.length){tbody.innerHTML='<tr><td colspan="5" style="text-align:center;padding:2rem;color:var(--slate)">Nenhum resultado ainda.</td></tr>';return}
+  if(!data||!data.length){tbody.innerHTML='<tr><td colspan="5" style="text-align:center;padding:2rem;color:var(--text-muted)">Nenhum resultado ainda.</td></tr>';return}
   tbody.innerHTML=data.map(r=>`<tr><td>${r.pacientes?.nome||'—'}</td><td>${r.teste.split('—')[0]}</td><td>${r.pontuacao}</td><td>${badgeHtml(r.classificacao)}</td><td>${fmt(r.criado_em)}</td></tr>`).join('')
 }
 </script>
