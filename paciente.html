@@ -73,16 +73,20 @@
 
     /* ══ SIDEBAR ══ */
     .sidebar{width:var(--sidebar-w);background:var(--white);border-right:1px solid var(--border);padding:0.75rem 0;flex-shrink:0;position:sticky;top:var(--topnav-h);height:calc(100vh - var(--topnav-h));overflow:hidden;transition:width 0.25s ease}
-    .sidebar.collapsed{width:var(--sidebar-collapsed)}
-    .sidebar-section{font-size:0.58rem;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--text-muted);padding:0.75rem 1rem 0.3rem;white-space:nowrap;overflow:hidden;transition:opacity 0.2s}
-    .sidebar.collapsed .sidebar-section{opacity:0}
+    .sidebar.collapsed{width:var(--sidebar-collapsed);padding:0}
+    .sidebar-section{font-size:0.58rem;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--text-muted);padding:0.75rem 1rem 0.3rem;white-space:nowrap;overflow:hidden;transition:opacity 0.15s}
+    .sidebar.collapsed .sidebar-section{opacity:0;height:0;padding:0;margin:0}
     .sidebar-item{display:flex;align-items:center;gap:0.65rem;padding:0.42rem 0.75rem;margin:0.08rem 0.4rem;cursor:pointer;border-radius:6px;transition:background 0.12s;color:var(--text-muted);font-size:0.8rem;font-weight:400;white-space:nowrap;overflow:hidden;user-select:none}
     .sidebar-item:hover{background:var(--cream);color:var(--text)}
     .sidebar-item.active{background:var(--gold-pale);color:var(--gold);font-weight:500}
     .sidebar-item svg{width:15px;height:15px;flex-shrink:0;stroke:currentColor;fill:none;stroke-width:1.75}
-    .sidebar-item span{transition:opacity 0.2s;white-space:nowrap}
-    .sidebar.collapsed .sidebar-item span{opacity:0;pointer-events:none}
-    .sidebar.collapsed .sidebar-item{justify-content:center;padding:0.42rem}
+    .sidebar-item span{transition:opacity 0.15s;white-space:nowrap}
+    .sidebar.collapsed .sidebar-item{opacity:0;pointer-events:none;height:0;padding:0;margin:0}
+    /* seta de expansão quando recolhido */
+    .sidebar-expand-btn{display:none;width:100%;height:100%;align-items:flex-start;justify-content:center;padding-top:0.75rem;cursor:pointer}
+    .sidebar.collapsed .sidebar-expand-btn{display:flex}
+    .sidebar-expand-btn svg{width:16px;height:16px;stroke:var(--text-muted);fill:none;stroke-width:1.75;transition:stroke 0.15s}
+    .sidebar-expand-btn:hover svg{stroke:var(--gold)}
 
     /* ══ CONTENT ══ */
     .content{flex:1;padding:2rem 2.5rem;min-width:0}
@@ -265,6 +269,10 @@
 
   <div class="layout">
     <aside class="sidebar" id="sidebar">
+      <!-- Botão visível apenas quando recolhido -->
+      <div class="sidebar-expand-btn" onclick="toggleSidebar()" title="Expandir menu">
+        <svg viewBox="0 0 24 24"><polyline points="9,18 15,12 9,6"/></svg>
+      </div>
       <div class="sidebar-section">Principal</div>
       <div class="sidebar-item active" id="nav-dashboard" onclick="irPara('dashboard')" title="Início">
         <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
@@ -325,20 +333,23 @@
           <div class="tests-grid">
             <div class="test-card" onclick="iniciarTeste('phq9')">
               <div class="test-name">PHQ-9</div>
-              <div class="test-desc">Rastreio de sintomas depressivos.</div>
+              <div class="test-desc">Avalia a presença e a gravidade de sintomas depressivos nas últimas 2 semanas. É um dos instrumentos mais utilizados no mundo para rastreio de depressão em contexto clínico.</div>
               <div class="test-meta">9 perguntas · ~3 min</div>
+              <div style="font-size:0.62rem;font-weight:500;letter-spacing:0.06em;color:var(--gold);margin-top:0.4rem">⟳ Recomendado: a cada 2 semanas</div>
               <button class="btn-test">Fazer teste</button>
             </div>
             <div class="test-card" onclick="iniciarTeste('gad7')">
               <div class="test-name">GAD-7</div>
-              <div class="test-desc">Rastreio de ansiedade generalizada.</div>
+              <div class="test-desc">Mede a frequência e a intensidade de sintomas de ansiedade generalizada nas últimas 2 semanas. Amplamente validado para uso clínico e acompanhamento terapêutico.</div>
               <div class="test-meta">7 perguntas · ~2 min</div>
+              <div style="font-size:0.62rem;font-weight:500;letter-spacing:0.06em;color:var(--gold);margin-top:0.4rem">⟳ Recomendado: a cada 2 semanas</div>
               <button class="btn-test">Fazer teste</button>
             </div>
             <div class="test-card" onclick="iniciarTeste('dass21')">
               <div class="test-name">DASS-21</div>
-              <div class="test-desc">Avaliação de depressão, ansiedade e estresse.</div>
+              <div class="test-desc">Avalia três dimensões — depressão, ansiedade e estresse — com base na última semana. Permite uma visão integrada do estado emocional e identificar qual dimensão está mais impactada.</div>
               <div class="test-meta">21 perguntas · ~5 min</div>
+              <div style="font-size:0.62rem;font-weight:500;letter-spacing:0.06em;color:var(--gold);margin-top:0.4rem">⟳ Recomendado: mensalmente</div>
               <button class="btn-test">Fazer teste</button>
             </div>
           </div>
@@ -358,6 +369,7 @@
           <p style="font-size:0.68rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem" id="test-titulo"></p>
           <div class="test-progress-track"><div class="test-progress-bar" id="test-barra"></div></div>
           <span class="test-counter" id="test-contador"></span>
+          <p style="font-size:0.75rem;font-weight:400;color:var(--navy);background:var(--gold-pale);border-left:2px solid var(--gold);padding:0.6rem 0.85rem;border-radius:0 5px 5px 0;margin-bottom:1.25rem" id="test-instrucao"></p>
           <p class="test-question" id="test-pergunta"></p>
           <div class="test-options" id="test-opcoes"></div>
           <div class="test-nav">
@@ -453,9 +465,9 @@ const EMAIL_PSI='mcamillopsi@gmail.com'
 let user=null,testeAtual=null,perguntaAtual=0,respostas=[],grafico=null,sidebarOpen=true
 
 const testes={
-  phq9:{nome:'PHQ-9 — Depressão',opcoes:['Nenhuma vez (0)','Vários dias (1)','Mais da metade dos dias (2)','Quase todos os dias (3)'],vals:[0,1,2,3],perguntas:['Pouco interesse ou pouco prazer em fazer as coisas','Sentir-se "para baixo", deprimido(a) ou sem perspectiva','Dificuldade para adormecer, permanecer dormindo ou dormir mais do que de costume','Sentir-se cansado(a) ou com pouca energia','Apetite diminuído ou aumentado','Sentir-se mal consigo mesmo(a) ou achar que é um fracasso','Dificuldade para se concentrar nas coisas','Mover-se ou falar mais lentamente que o habitual, ou estar muito agitado(a)','Pensamentos de se machucar ou de que seria melhor estar morto(a)'],classificar:p=>{if(p<=4)return{label:'Mínima',cor:'var(--green)',desc:'Seus resultados indicam sintomas mínimos de depressão. Continue cuidando do seu bem-estar com hábitos saudáveis e acompanhamento regular.'};if(p<=9)return{label:'Leve',cor:'var(--yellow)',desc:'Seus resultados indicam sintomas leves de depressão. Acompanhamento clínico e atenção ao bem-estar emocional são recomendados.'};if(p<=14)return{label:'Moderada',cor:'#b8610a',desc:'Seus resultados indicam sintomas moderados de depressão. O acompanhamento psicológico regular é indicado.'};if(p<=19)return{label:'Moderadamente grave',cor:'var(--red)',desc:'Seus resultados indicam sintomas moderadamente graves. Suporte profissional com regularidade é muito importante.'};return{label:'Grave',cor:'var(--red)',desc:'Seus resultados indicam sintomas graves de depressão. Busque suporte profissional urgente.'}}},
-  gad7:{nome:'GAD-7 — Ansiedade',opcoes:['Nenhuma vez (0)','Vários dias (1)','Mais da metade dos dias (2)','Quase todos os dias (3)'],vals:[0,1,2,3],perguntas:['Sentir-se nervoso(a), ansioso(a) ou muito tenso(a)','Não conseguir parar ou controlar as preocupações','Preocupar-se muito com diversas coisas','Dificuldade para relaxar','Ficar tão agitado(a) que é difícil permanecer sentado(a)','Ficar facilmente irritado(a) ou irritável','Sentir medo como se algo horrível fosse acontecer'],classificar:p=>{if(p<=4)return{label:'Mínima',cor:'var(--green)',desc:'Seus resultados indicam ansiedade mínima. Mantenha práticas de autocuidado e monitoramento regular.'};if(p<=9)return{label:'Leve',cor:'var(--yellow)',desc:'Seus resultados indicam ansiedade leve. Técnicas de relaxamento e acompanhamento podem ser benéficos.'};if(p<=14)return{label:'Moderada',cor:'#b8610a',desc:'Seus resultados indicam ansiedade moderada. O acompanhamento psicológico é indicado.'};return{label:'Grave',cor:'var(--red)',desc:'Seus resultados indicam ansiedade grave. O suporte profissional é altamente recomendado.'}}},
-  dass21:{nome:'DASS-21 — Depressão, Ansiedade e Estresse',opcoes:['Não se aplicou (0)','Aplicou-se um pouco (1)','Aplicou-se bastante (2)','Aplicou-se muito (3)'],vals:[0,1,2,3],perguntas:['Achei difícil me acalmar','Percebi que tinha a boca seca','Não consegui vivenciar nenhum sentimento positivo','Tive dificuldade em respirar','Achei difícil ter iniciativa para fazer as coisas','Tive a tendência de reagir de forma exagerada às situações','Senti tremores','Senti que estava muito nervoso(a)','Preocupei-me com situações em que poderia entrar em pânico','Senti que não tinha nada a esperar do futuro','Percebi que ficava agitado(a)','Achei difícil relaxar','Senti-me desanimado(a) e melancólico(a)','Fui intolerante com as coisas que me impediam','Senti que estava quase entrando em pânico','Não consegui me entusiasmar com nada','Senti que não tinha muito valor como pessoa','Senti que estava bastante irritável','Senti os batimentos do meu coração acelerados','Tive medo sem motivo','Senti que a vida não tinha sentido'],classificar:p=>{const dep=[2,4,9,12,15,16,20].reduce((s,i)=>s+(testes.dass21.vals[respostas[i]]||0),0)*2;const anx=[1,3,6,8,14,18,19].reduce((s,i)=>s+(testes.dass21.vals[respostas[i]]||0),0)*2;const str=[0,5,7,10,11,13,17].reduce((s,i)=>s+(testes.dass21.vals[respostas[i]]||0),0)*2;const total=dep+anx+str;let label,cor;if(total<=28){label='Normal a leve';cor='var(--yellow)'}else if(total<=56){label='Moderado';cor='#b8610a'}else{label='Grave a extremamente grave';cor='var(--red)'};return{label,cor,pontuacaoDisplay:total,desc:`Subescalas (×2): Depressão: ${dep} | Ansiedade: ${anx} | Estresse: ${str}. Total: ${total}. Interprete com seu psicólogo.`}}}
+  phq9:{nome:'PHQ-9 — Depressão',instrucao:'Nas últimas 2 semanas, com que frequência você foi incomodado pelos problemas abaixo?',opcoes:['Nenhuma vez (0)','Vários dias (1)','Mais da metade dos dias (2)','Quase todos os dias (3)'],vals:[0,1,2,3],perguntas:['Pouco interesse ou pouco prazer em fazer as coisas','Sentir-se "para baixo", deprimido(a) ou sem perspectiva','Dificuldade para adormecer, permanecer dormindo ou dormir mais do que de costume','Sentir-se cansado(a) ou com pouca energia','Apetite diminuído ou aumentado','Sentir-se mal consigo mesmo(a) ou achar que é um fracasso','Dificuldade para se concentrar nas coisas','Mover-se ou falar mais lentamente que o habitual, ou estar muito agitado(a)','Pensamentos de se machucar ou de que seria melhor estar morto(a)'],classificar:p=>{if(p<=4)return{label:'Mínima',cor:'var(--green)',desc:'Seus resultados indicam sintomas mínimos de depressão. Continue cuidando do seu bem-estar com hábitos saudáveis e acompanhamento regular.'};if(p<=9)return{label:'Leve',cor:'var(--yellow)',desc:'Seus resultados indicam sintomas leves de depressão. Acompanhamento clínico e atenção ao bem-estar emocional são recomendados.'};if(p<=14)return{label:'Moderada',cor:'#b8610a',desc:'Seus resultados indicam sintomas moderados de depressão. O acompanhamento psicológico regular é indicado.'};if(p<=19)return{label:'Moderadamente grave',cor:'var(--red)',desc:'Seus resultados indicam sintomas moderadamente graves. Suporte profissional com regularidade é muito importante.'};return{label:'Grave',cor:'var(--red)',desc:'Seus resultados indicam sintomas graves de depressão. Busque suporte profissional urgente.'}}},
+  gad7:{nome:'GAD-7 — Ansiedade',instrucao:'Nas últimas 2 semanas, com que frequência você foi incomodado pelos problemas abaixo?',opcoes:['Nenhuma vez (0)','Vários dias (1)','Mais da metade dos dias (2)','Quase todos os dias (3)'],vals:[0,1,2,3],perguntas:['Sentir-se nervoso(a), ansioso(a) ou muito tenso(a)','Não conseguir parar ou controlar as preocupações','Preocupar-se muito com diversas coisas','Dificuldade para relaxar','Ficar tão agitado(a) que é difícil permanecer sentado(a)','Ficar facilmente irritado(a) ou irritável','Sentir medo como se algo horrível fosse acontecer'],classificar:p=>{if(p<=4)return{label:'Mínima',cor:'var(--green)',desc:'Seus resultados indicam ansiedade mínima. Mantenha práticas de autocuidado e monitoramento regular.'};if(p<=9)return{label:'Leve',cor:'var(--yellow)',desc:'Seus resultados indicam ansiedade leve. Técnicas de relaxamento e acompanhamento podem ser benéficos.'};if(p<=14)return{label:'Moderada',cor:'#b8610a',desc:'Seus resultados indicam ansiedade moderada. O acompanhamento psicológico é indicado.'};return{label:'Grave',cor:'var(--red)',desc:'Seus resultados indicam ansiedade grave. O suporte profissional é altamente recomendado.'}}},
+  dass21:{nome:'DASS-21 — Depressão, Ansiedade e Estresse',instrucao:'Por favor, leia cada afirmação e indique o quanto ela se aplicou a você durante a última semana.',opcoes:['Não se aplicou (0)','Aplicou-se um pouco (1)','Aplicou-se bastante (2)','Aplicou-se muito (3)'],vals:[0,1,2,3],perguntas:['Achei difícil me acalmar','Percebi que tinha a boca seca','Não consegui vivenciar nenhum sentimento positivo','Tive dificuldade em respirar','Achei difícil ter iniciativa para fazer as coisas','Tive a tendência de reagir de forma exagerada às situações','Senti tremores','Senti que estava muito nervoso(a)','Preocupei-me com situações em que poderia entrar em pânico','Senti que não tinha nada a esperar do futuro','Percebi que ficava agitado(a)','Achei difícil relaxar','Senti-me desanimado(a) e melancólico(a)','Fui intolerante com as coisas que me impediam','Senti que estava quase entrando em pânico','Não consegui me entusiasmar com nada','Senti que não tinha muito valor como pessoa','Senti que estava bastante irritável','Senti os batimentos do meu coração acelerados','Tive medo sem motivo','Senti que a vida não tinha sentido'],classificar:p=>{const dep=[2,4,9,12,15,16,20].reduce((s,i)=>s+(testes.dass21.vals[respostas[i]]||0),0)*2;const anx=[1,3,6,8,14,18,19].reduce((s,i)=>s+(testes.dass21.vals[respostas[i]]||0),0)*2;const str=[0,5,7,10,11,13,17].reduce((s,i)=>s+(testes.dass21.vals[respostas[i]]||0),0)*2;const total=dep+anx+str;let label,cor;if(total<=28){label='Normal a leve';cor='var(--yellow)'}else if(total<=56){label='Moderado';cor='#b8610a'}else{label='Grave a extremamente grave';cor='var(--red)'};return{label,cor,pontuacaoDisplay:total,desc:`Subescalas (×2): Depressão: ${dep} | Ansiedade: ${anx} | Estresse: ${str}. Total: ${total}. Interprete com seu psicólogo.`}}}
 }
 
 function fmt(iso){return new Date(iso).toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric'})}
@@ -581,6 +593,7 @@ function iniciarTeste(id){testeAtual=id;perguntaAtual=0;respostas=[];irPara('tes
 function renderPergunta(){
   const t=testes[testeAtual];const total=t.perguntas.length
   document.getElementById('test-titulo').textContent=t.nome
+  document.getElementById('test-instrucao').textContent=t.instrucao
   document.getElementById('test-barra').style.width=Math.round((perguntaAtual/total)*100)+'%'
   document.getElementById('test-contador').textContent=`Pergunta ${perguntaAtual+1} de ${total}`
   document.getElementById('test-pergunta').textContent=t.perguntas[perguntaAtual]
