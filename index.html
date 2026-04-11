@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="format-detection" content="telephone=no,address=no,email=no">
   <title>Matheus Camillo — Psicólogo Clínico e Organizacional</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -103,46 +104,29 @@
     @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
     .delay-1{animation-delay:0.15s}.delay-2{animation-delay:0.3s}.delay-3{animation-delay:0.45s}.delay-4{animation-delay:0.6s}
     @media(max-width:768px){
-      /* ── Nav ── */
       nav{padding:1rem 1.5rem}
       .nav-links{display:none}
       .nav-btn{font-size:0.7rem;padding:0.4rem 0.9rem}
-
-      /* ── Hero ── */
       .hero{grid-template-columns:1fr;min-height:auto}
       .hero-left{padding:5.5rem 1.5rem 3rem;order:1}
       .hero-left::after{display:none}
-      .hero-right{padding:3rem 1.5rem 3rem;order:2}
+      .hero-right{padding:3rem 1.5rem;order:2}
       .hero-name{font-size:2.2rem}
       .hero-stat-grid{grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:2rem}
       .areas-list{grid-template-columns:1fr}
       .hero-cta-row{flex-direction:column;align-items:stretch;gap:0.75rem}
       .hero-cta-row .btn-primary,.hero-cta-row .btn-ghost{text-align:center;width:100%}
-
-      /* ── Seções genéricas ── */
       section{padding:3rem 1.5rem}
-
-      /* ── About ── */
       .about-section{grid-template-columns:1fr;gap:2rem}
-
-      /* ── Services ── */
       .services-section{padding:3rem 1.5rem}
       .services-grid{grid-template-columns:1fr}
-
-      /* ── Abordagem ── */
       .abordagem-section{padding:3rem 1.5rem}
       .abordagem-grid{grid-template-columns:1fr;gap:1.5rem;margin-top:2rem}
-
-      /* ── Portal ── */
       .portal-section{padding:3rem 1.5rem}
       .portal-cta-row{flex-direction:column;align-items:stretch}
       .portal-cta-row .btn-primary,.portal-cta-row a{width:100%;text-align:center}
-
-      /* ── Contact ── */
       .contact-section{padding:3rem 1.5rem}
       .contact-email{word-break:break-all;font-size:0.85rem}
-
-      /* ── Footer ── */
       footer{padding:2rem 1.5rem;flex-direction:column;gap:0.75rem;text-align:center}
     }
   </style>
