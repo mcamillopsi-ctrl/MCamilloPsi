@@ -113,41 +113,47 @@
     .patient-detail{background:var(--white);padding:2rem;border-radius:2px;margin-top:1rem;display:none}
     .patient-detail.open{display:block}
 
+    /* ── STATS RESUMO ── */
+    .dash-stats{display:none;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-bottom:2.5rem}
+    .stat-s{background:var(--white);padding:1.25rem 1.5rem;border-radius:2px;border-top:2px solid var(--gold)}
+    .stat-s-num{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:300;color:var(--navy);line-height:1.2;margin-bottom:0.25rem}
+    .stat-s-lbl{font-size:0.7rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--slate)}
     /* ── TÉCNICAS ACCORDION ── */
-    .tecnicas-hint{background:rgba(184,151,74,0.08);border:1px solid rgba(184,151,74,0.25);border-radius:2px;padding:0.85rem 1.25rem;margin-bottom:1.75rem;font-size:0.82rem;font-weight:300;color:var(--text-body);display:flex;align-items:flex-start;gap:0.75rem}
-    .tecnicas-cat-label{font-size:0.68rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--navy-mid);padding-bottom:0.6rem;margin-bottom:1rem;border-bottom:1px solid var(--slate-light)}
-    .tecnica-card{background:var(--white);border-radius:2px;margin-bottom:0.5rem;border-left:3px solid transparent;transition:border-color 0.2s,box-shadow 0.2s}
-    .tecnica-card.open{border-left-color:var(--gold);box-shadow:0 2px 12px rgba(13,31,60,0.07)}
-    .tecnica-header{display:flex;justify-content:space-between;align-items:center;padding:1rem 1.25rem;cursor:pointer;user-select:none}
-    .tecnica-header:hover .tecnica-nome{color:var(--gold)}
-    .tecnica-nome{font-size:0.9rem;font-weight:400;color:var(--navy);transition:color 0.2s}
-    .tecnica-arrow{font-size:0.75rem;color:var(--gold);transition:transform 0.25s;font-weight:600}
-    .tecnica-card.open .tecnica-arrow{transform:rotate(180deg)}
-    .tecnica-body{display:none;padding:0 1.25rem 1.5rem}
-    .tecnica-card.open .tecnica-body{display:block}
-    .tecnica-sec{margin-bottom:1rem}
-    .tecnica-sec-label{font-size:0.68rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:0.35rem}
-    .tecnica-sec-text{font-size:0.84rem;font-weight:300;line-height:1.75;color:var(--text-body)}
-    .tecnica-pratica-text{background:var(--cream);padding:0.85rem 1rem;border-radius:2px;font-size:0.82rem;font-weight:300;line-height:1.75;color:var(--text-body);white-space:pre-line}
+    .tec-hint{background:rgba(184,151,74,0.08);border:1px solid rgba(184,151,74,0.25);border-radius:2px;padding:0.8rem 1.1rem;margin-bottom:1.5rem;font-size:0.82rem;font-weight:300;color:var(--text-body);display:flex;align-items:flex-start;gap:0.6rem}
+    .tec-cat-lbl{font-size:0.68rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--navy-mid);padding-bottom:0.5rem;margin-bottom:0.85rem;border-bottom:1px solid var(--slate-light);margin-top:1.75rem}
+    .tec-card{background:var(--white);border-radius:2px;margin-bottom:0.4rem;border-left:3px solid transparent;transition:border-color 0.2s}
+    .tec-card.open{border-left-color:var(--gold)}
+    .tec-hdr{display:flex;justify-content:space-between;align-items:center;padding:0.9rem 1.1rem;cursor:pointer;user-select:none}
+    .tec-hdr:hover .tec-nome{color:var(--gold)}
+    .tec-nome{font-size:0.88rem;font-weight:400;color:var(--navy);transition:color 0.2s}
+    .tec-arr{font-size:0.7rem;color:var(--gold);transition:transform 0.25s;font-weight:600}
+    .tec-card.open .tec-arr{transform:rotate(180deg)}
+    .tec-body{display:none;padding:0 1.1rem 1.25rem}
+    .tec-card.open .tec-body{display:block}
+    .tec-sec{margin-bottom:0.85rem}
+    .tec-sec-lbl{font-size:0.67rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:0.3rem}
+    .tec-sec-txt{font-size:0.83rem;font-weight:300;line-height:1.72;color:var(--text-body)}
+    .tec-pratica{background:var(--cream);padding:0.8rem 1rem;border-radius:2px;font-size:0.81rem;font-weight:300;line-height:1.72;color:var(--text-body);white-space:pre-line}
     /* ── REDE DE APOIO ── */
-    .apoio-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;margin-bottom:3rem}
-    .apoio-card{background:var(--white);padding:1.5rem;border-radius:2px;border-top:2px solid var(--navy-mid)}
-    .apoio-card.urgente{border-top-color:var(--red)}
-    .apoio-nome-row{display:flex;align-items:center;gap:0.5rem;margin-bottom:0.25rem}
-    .apoio-nome{font-size:0.9rem;font-weight:500;color:var(--navy)}
-    .apoio-urgente-badge{font-size:0.62rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;background:#fce8e8;color:var(--red);padding:0.2rem 0.55rem;border-radius:20px}
-    .apoio-missao{font-size:0.72rem;font-weight:400;letter-spacing:0.05em;color:var(--gold);text-transform:uppercase;margin-bottom:0.75rem}
-    .apoio-desc{font-size:0.82rem;font-weight:300;color:var(--text-body);line-height:1.7;margin-bottom:1rem}
-    .apoio-detalhe{display:flex;flex-direction:column;gap:0.45rem;border-top:1px solid var(--slate-light);padding-top:0.85rem}
-    .apoio-linha{display:flex;gap:0.6rem;align-items:flex-start}
-    .apoio-chave{font-weight:500;color:var(--navy-light);min-width:80px;flex-shrink:0;font-size:0.7rem;letter-spacing:0.07em;text-transform:uppercase;padding-top:0.1rem}
-    .apoio-val{font-size:0.8rem;font-weight:300;color:var(--text-body);line-height:1.55}
-    .apoio-val a{color:var(--gold);text-decoration:none}
-    .apoio-val a:hover{text-decoration:underline}
-    .chart-desc{font-size:0.8rem;font-weight:300;color:var(--slate);margin-bottom:1.25rem;line-height:1.65}
+    .apoio-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.1rem;margin-bottom:2.5rem}
+    .apoio-card{background:var(--white);padding:1.35rem;border-radius:2px;border-top:2px solid var(--navy-mid)}
+    .apoio-card.urg{border-top-color:var(--red)}
+    .apoio-nome-row{display:flex;align-items:center;gap:0.45rem;margin-bottom:0.2rem}
+    .apoio-nome{font-size:0.88rem;font-weight:500;color:var(--navy)}
+    .apoio-badge-urg{font-size:0.6rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;background:#fce8e8;color:var(--red);padding:0.15rem 0.5rem;border-radius:20px}
+    .apoio-miss{font-size:0.7rem;font-weight:400;letter-spacing:0.05em;color:var(--gold);text-transform:uppercase;margin-bottom:0.65rem}
+    .apoio-desc{font-size:0.81rem;font-weight:300;color:var(--text-body);line-height:1.68;margin-bottom:0.85rem}
+    .apoio-det{display:flex;flex-direction:column;gap:0.4rem;border-top:1px solid var(--slate-light);padding-top:0.8rem}
+    .apoio-ln{display:flex;gap:0.55rem;align-items:flex-start}
+    .apoio-k{font-weight:500;color:var(--navy-light);min-width:78px;flex-shrink:0;font-size:0.68rem;letter-spacing:0.07em;text-transform:uppercase;padding-top:0.1rem}
+    .apoio-v{font-size:0.79rem;font-weight:300;color:var(--text-body);line-height:1.5}
+    .apoio-v a{color:var(--gold);text-decoration:none}
+    .apoio-v a:hover{text-decoration:underline}
+    .chart-subdesc{font-size:0.79rem;font-weight:300;color:var(--slate);margin-bottom:1rem;line-height:1.6}
 
     /* Responsivo */
     @media(max-width:768px){
+      .dash-stats{grid-template-columns:1fr 1fr}
       .apoio-grid{grid-template-columns:1fr}
       .dashboard,.screen{padding:1.5rem}
       #screen-test,#screen-result,#screen-psi{padding:1.5rem}
@@ -229,6 +235,9 @@
       <p>Escolha um teste abaixo ou acompanhe seu histórico de resultados.</p>
     </div>
 
+    <!-- STATS RESUMO (preenchido via JS) -->
+    <div class="dash-stats" id="dash-stats"></div>
+
     <p class="section-title">Testes disponíveis</p>
     <div class="tests-grid">
       <div class="test-card">
@@ -255,25 +264,24 @@
     <div id="historico-container"></div>
 
     <div class="chart-box" id="chart-container" style="display:none">
-      <p class="section-title" style="margin-bottom:0.4rem">Evolução ao longo do tempo</p>
-      <p class="chart-desc">Cada linha representa um instrumento de avaliação diferente (PHQ-9 = depressão, GAD-7 = ansiedade, DASS-21 = depressão/ansiedade/estresse). Pontuações menores indicam menos sintomas. Compare a evolução de cada teste de forma independente.</p>
-      <canvas id="grafico-evolucao" height="90"></canvas>
+      <p class="section-title" style="margin-bottom:0.35rem">Evolução ao longo do tempo</p>
+      <p class="chart-subdesc">Cada linha representa um teste diferente. PHQ-9 = depressão · GAD-7 = ansiedade · DASS-21 = depressão/ansiedade/estresse combinados. Pontuações menores indicam menos sintomas.</p>
+      <canvas id="grafico-evolucao" height="80"></canvas>
     </div>
 
     <!-- TÉCNICAS E FERRAMENTAS -->
     <p class="section-title" style="margin-top:2.5rem">Técnicas e Ferramentas</p>
-    <div class="tecnicas-hint">
-      <span style="font-size:1rem;flex-shrink:0">☝</span>
-      <span>Clique em qualquer técnica para expandir as informações: o que é, objetivo, embasamento científico e como praticar.</span>
-    </div>
-    <div id="tecnicas-container"></div>
+    <div class="tec-hint"><span>☝</span><span>Clique em qualquer técnica para expandir as informações completas.</span></div>
+    <div id="tec-container"></div>
 
     <!-- REDE DE APOIO -->
     <p class="section-title" style="margin-top:2.5rem">Rede de Apoio Pública</p>
-    <p style="font-size:0.85rem;font-weight:300;color:var(--slate);margin-bottom:1.5rem;line-height:1.7">Serviços gratuitos e oficiais disponíveis no Brasil para suporte em saúde mental. Podem ser acessados de forma complementar ao acompanhamento terapêutico.</p>
-    <div id="rede-apoio-container"></div>
-  </div><!-- /dashboard -->
-</div><!-- /screen-dashboard -->
+    <p style="font-size:0.84rem;font-weight:300;color:var(--slate);margin-bottom:1.35rem;line-height:1.7">Serviços gratuitos e oficiais disponíveis no Brasil. Podem ser usados de forma complementar ao acompanhamento terapêutico.</p>
+    <div id="apoio-container"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
      TELA 3 — FAZENDO O TESTE
 ══════════════════════════════════════ -->
 <div id="screen-test" class="screen">
@@ -572,8 +580,19 @@ async function carregarHistorico(){
   if(!data||data.length===0){
     container.innerHTML='<div class="empty-state">Você ainda não realizou nenhum teste. Escolha um acima para começar!</div>'
     document.getElementById('chart-container').style.display='none'
+    document.getElementById('dash-stats').style.display='none'
     return
   }
+
+  // Preenche stats
+  const stats = document.getElementById('dash-stats')
+  const ultimo = data[0]
+  stats.style.display='grid'
+  stats.innerHTML=`
+    <div class="stat-s"><div class="stat-s-num">${data.length}</div><div class="stat-s-lbl">Testes realizados</div></div>
+    <div class="stat-s"><div class="stat-s-num" style="font-size:1.15rem">${formatarData(ultimo.criado_em)}</div><div class="stat-s-lbl">Último teste</div></div>
+    <div class="stat-s"><div style="margin-bottom:0.35rem">${badgeHtml(ultimo.classificacao)}</div><div class="stat-s-lbl">Status mais recente</div></div>
+  `
 
   let html='<table class="history-table"><thead><tr><th>Teste</th><th>Pontuação</th><th>Classificação</th><th>Data</th></tr></thead><tbody>'
   data.forEach(r=>{
@@ -589,70 +608,31 @@ function renderizarGrafico(data){
   const container = document.getElementById('chart-container')
   container.style.display='block'
   const porTeste = {}
-  // Ordena cronologicamente
   const sorted = [...data].sort((a,b)=>new Date(a.criado_em)-new Date(b.criado_em))
   sorted.forEach(r=>{
-    const label = r.teste.split('—')[0].trim()
-    if(!porTeste[label]) porTeste[label]=[]
-    porTeste[label].push({x:formatarData(r.criado_em),y:r.pontuacao})
+    const lbl = r.teste.split('—')[0].trim()
+    if(!porTeste[lbl]) porTeste[lbl]=[]
+    porTeste[lbl].push({x:formatarData(r.criado_em),y:r.pontuacao})
   })
-  const palette = {
-    'PHQ-9'  : {line:'#b8974a', fill:'rgba(184,151,74,0.08)'},
-    'GAD-7'  : {line:'#0d1f3c', fill:'rgba(13,31,60,0.06)'},
-    'DASS-21': {line:'#2d7a4f', fill:'rgba(45,122,79,0.08)'}
-  }
-  const datasets = Object.keys(porTeste).map(t=>{
-    const cor = Object.keys(palette).find(k=>t.includes(k))
-    const c = cor ? palette[cor] : {line:'#888',fill:'transparent'}
-    return {
-      label: t,
-      data: porTeste[t],
-      borderColor: c.line,
-      backgroundColor: c.fill,
-      fill: false,
-      tension: 0.3,
-      pointRadius: 5,
-      pointHoverRadius: 7,
-      borderWidth: 2.5,
-      pointBackgroundColor: c.line
-    }
+  const pal={'PHQ-9':'#b8974a','GAD-7':'#0d1f3c','DASS-21':'#2d7a4f'}
+  const datasets=Object.keys(porTeste).map(t=>{
+    const cor=Object.keys(pal).find(k=>t.includes(k))
+    const c=cor?pal[cor]:'#888'
+    return{label:t,data:porTeste[t],borderColor:c,backgroundColor:'transparent',tension:0.3,pointRadius:5,pointHoverRadius:7,borderWidth:2.5,pointBackgroundColor:c}
   })
   if(graficoInstancia) graficoInstancia.destroy()
-  graficoInstancia = new Chart(document.getElementById('grafico-evolucao'),{
-    type:'line',
-    data:{datasets},
+  graficoInstancia=new Chart(document.getElementById('grafico-evolucao'),{
+    type:'line',data:{datasets},
     options:{
       responsive:true,
       interaction:{mode:'nearest',intersect:false},
       plugins:{
-        legend:{
-          display:true,
-          position:'top',
-          labels:{
-            font:{family:'DM Sans',size:12},
-            padding:20,
-            usePointStyle:true,
-            pointStyleWidth:10
-          }
-        },
-        tooltip:{
-          callbacks:{
-            title: items => items[0].dataset.label,
-            label: item => ` Pontuação: ${item.parsed.y}   |   Data: ${item.parsed.x}`
-          }
-        }
+        legend:{display:true,position:'top',labels:{font:{family:'DM Sans',size:12},padding:18,usePointStyle:true}},
+        tooltip:{callbacks:{title:i=>i[0].dataset.label,label:i=>` Pontuação: ${i.parsed.y}  |  ${i.parsed.x}`}}
       },
       scales:{
-        x:{
-          ticks:{font:{family:'DM Sans',size:11}},
-          title:{display:true,text:'Data da avaliação',font:{family:'DM Sans',size:11},color:'#8a9ab5'}
-        },
-        y:{
-          beginAtZero:true,
-          ticks:{font:{family:'DM Sans',size:11}},
-          title:{display:true,text:'Pontuação',font:{family:'DM Sans',size:11},color:'#8a9ab5'},
-          grid:{color:'rgba(194,205,224,0.3)'}
-        }
+        x:{ticks:{font:{family:'DM Sans',size:11}},title:{display:true,text:'Data',font:{family:'DM Sans',size:11},color:'#8a9ab5'}},
+        y:{beginAtZero:true,ticks:{font:{family:'DM Sans',size:11}},title:{display:true,text:'Pontuação',font:{family:'DM Sans',size:11},color:'#8a9ab5'},grid:{color:'rgba(194,205,224,0.3)'}}
       }
     }
   })
@@ -829,267 +809,159 @@ async function carregarTodosResultados(){
 // ══════════════════════════════════════
 // TÉCNICAS E FERRAMENTAS
 // ══════════════════════════════════════
-const tecnicas = {
-  tcc:{
-    titulo:'Técnicas de TCC — Terapia Cognitivo-Comportamental',
-    items:[
-      {
-        nome:'Registro de Pensamentos Automáticos',
-        oque:'Consiste em anotar situações do cotidiano, os pensamentos automáticos que surgem espontaneamente e as emoções associadas. É uma das ferramentas mais centrais da TCC.',
-        objetivo:'Aumentar a consciência sobre padrões de pensamento disfuncionais e seu impacto nas emoções e comportamentos.',
-        evidencia:'Validada em centenas de ensaios clínicos randomizados para depressão e ansiedade (Beck, 1979; DeRubeis et al., 2019). Reconhecida pela APA como prática baseada em evidências de primeira linha.',
-        terapeutico:'Ao tornar os pensamentos automáticos visíveis e conscientes, paciente e terapeuta identificam padrões e distorções cognitivas, tornando o trabalho terapêutico mais preciso e eficaz.',
-        pratica:'1. Identifique uma situação que gerou desconforto emocional.\n2. Escreva o pensamento automático exato que surgiu.\n3. Registre a emoção e sua intensidade (0 a 100%).\n4. Busque evidências a favor e contra aquele pensamento.\n5. Formule um pensamento alternativo mais equilibrado e realista.'
-      },
-      {
-        nome:'Reestruturação Cognitiva',
-        oque:'Técnica que identifica e modifica pensamentos distorcidos ou disfuncionais, substituindo-os por percepções mais realistas, equilibradas e adaptativas.',
-        objetivo:'Reduzir o sofrimento emocional ao questionar a validade dos pensamentos negativos automáticos e desenvolver maior flexibilidade cognitiva.',
-        evidencia:'Reconhecida como intervenção de primeira linha pela APA para depressão e ansiedade. Metanálises confirmam sua eficácia expressiva (Hofmann et al., 2012; Butler et al., 2006).',
-        terapeutico:'Pensamentos distorcidos alimentam ciclos de sofrimento. Ao identificá-los e questioná-los com método, o paciente interrompe esses ciclos e desenvolve uma visão mais adaptativa de si, do mundo e do futuro.',
-        pratica:'1. Identifique o pensamento perturbador com precisão.\n2. Pergunte: "Qual a evidência concreta de que isso é verdade?"\n3. Pergunte: "Há outra forma de interpretar essa situação?"\n4. Pergunte: "Qual seria o pior, o melhor e o cenário mais provável?"\n5. Escreva um pensamento alternativo mais adaptativo e reavalie seu humor.'
-      },
-      {
-        nome:'Experimentos Comportamentais',
-        oque:'Consiste em testar, de forma planejada, as crenças e previsões negativas na prática, para verificar se elas se confirmam na realidade.',
-        objetivo:'Desafiar crenças disfuncionais através da experiência direta, gerando mudança mais profunda do que a argumentação cognitiva isolada.',
-        evidencia:'Estudos mostram que experimentos comportamentais podem ser mais eficazes do que a reestruturação verbal isolada na modificação de crenças (Clark, 1999; Bennett-Levy et al., 2004).',
-        terapeutico:'Quando o paciente testa suas previsões catastróficas na prática e constata que o resultado temido não ocorre — ou é manejável — a crença perde força de um modo que o raciocínio sozinho não consegue produzir.',
-        pratica:'1. Identifique a crença a ser testada (ex: "Se pedir ajuda, parecerei fraco").\n2. Formule uma previsão específica e mensurável.\n3. Planeje uma situação controlada para testar essa previsão.\n4. Realize o experimento e observe os resultados com curiosidade.\n5. Compare o que aconteceu com a previsão e revise a crença.'
-      },
-      {
-        nome:'Agenda de Atividades Prazerosas',
-        oque:'Planejamento intencional de atividades que geram prazer, satisfação ou senso de conquista na rotina diária, mesmo quando a motivação ainda não está presente.',
-        objetivo:'Combater a inatividade, a ruminação e o isolamento característicos da depressão, aumentando a exposição a experiências positivas de forma gradual.',
-        evidencia:'Base da Ativação Comportamental — uma das abordagens com maior suporte empírico para depressão, com eficácia comparável a antidepressivos em estudos controlados (Dimidjian et al., 2006; Jacobson et al., 1996).',
-        terapeutico:'A depressão reduz a motivação e o prazer, criando um ciclo de inatividade que aprofunda o sofrimento. Planejar atividades quebra esse ciclo ao criar oportunidades de reforço positivo, mesmo quando o "querer" ainda não está presente.',
-        pratica:'1. Liste atividades que já gostou ou que poderia gostar.\n2. Programe pelo menos 1 a 2 atividades por dia.\n3. Após cada atividade, registre seu humor de 0 a 10.\n4. Inclua atividades sociais e que gerem senso de conquista.\n5. Aumente gradualmente a frequência e variedade.'
-      },
-      {
-        nome:'Resolução de Problemas',
-        oque:'Método estruturado em etapas para enfrentar situações desafiadoras de forma racional e eficaz, reduzindo a ruminação e a paralisia por ansiedade.',
-        objetivo:'Desenvolver habilidades de enfrentamento ativo, substituindo a evitação e a ruminação por ação direcionada e solução efetiva.',
-        evidencia:'A Terapia de Resolução de Problemas (PST) possui eficácia comprovada para depressão, ansiedade e estresse (Nezu et al., 2007; Malouff et al., 2007).',
-        terapeutico:'Problemas não resolvidos alimentam o ciclo de ansiedade. Ao ter um método claro, o paciente recupera o senso de controle e autoeficácia, reduzindo a carga emocional associada ao problema.',
-        pratica:'1. Defina o problema de forma específica e mensurável.\n2. Liste todas as soluções possíveis sem julgamento (brainstorm).\n3. Avalie os prós e contras realistas de cada opção.\n4. Escolha a solução mais viável e planeje os passos concretos.\n5. Implemente, avalie o resultado e ajuste se necessário.'
-      }
-    ]
-  },
-  respiracao:{
-    titulo:'Respiração, Relaxamento e Atenção Plena',
-    items:[
-      {
-        nome:'Respiração Diafragmática',
-        oque:'Técnica de respiração que ativa o diafragma — o principal músculo respiratório — em vez da respiração torácica superficial que ocorre automaticamente em situações de estresse.',
-        objetivo:'Ativar o sistema nervoso parassimpático, reduzindo a resposta fisiológica de estresse e promovendo calma de forma rápida e acessível.',
-        evidencia:'Comprovada para redução de ansiedade, pressão arterial e cortisol. Estudos demonstram ativação direta do nervo vago (Ma et al., 2017; Zaccaro et al., 2018 — Frontiers in Human Neuroscience).',
-        terapeutico:'A respiração superficial sinaliza ao sistema nervoso que há perigo. A respiração diafragmática ativa o "freio vagal", reduz a frequência cardíaca e sinaliza segurança ao cérebro — é uma das técnicas de regulação emocional mais imediatas disponíveis.',
-        pratica:'1. Deite-se ou sente-se confortavelmente.\n2. Coloque uma mão no peito e outra no abdômen.\n3. Inspire lentamente pelo nariz por 4 segundos — o abdômen deve expandir, não o peito.\n4. Expire lentamente pela boca por 6 segundos.\n5. Repita por 5 a 10 minutos, observando o relaxamento progressivo.'
-      },
-      {
-        nome:'Respiração 4-7-8',
-        oque:'Técnica desenvolvida pelo Dr. Andrew Weil, inspirada no pranayama do yoga, com ciclos específicos de inspiração (4s), retenção (7s) e expiração (8s).',
-        objetivo:'Induzir estado de relaxamento profundo rapidamente — especialmente útil antes de dormir, em crises ansiosas ou para interromper escalada emocional.',
-        evidencia:'Estudos sobre controle autonômico e respiração indicam efeitos positivos sobre o sistema nervoso parassimpático e qualidade do sono (Jerath et al., 2015; Brown & Gerbarg, 2005 — Journal of Alternative and Complementary Medicine).',
-        terapeutico:'A expiração prolongada ativa o nervo vago e o sistema parassimpático. A retenção momentânea sinaliza ao cérebro que não há ameaça imediata, interrompendo o ciclo de hiperativação da ansiedade.',
-        pratica:'1. Expire completamente pela boca com um sopro audível.\n2. Feche a boca e inspire silenciosamente pelo nariz contando até 4.\n3. Segure a respiração contando até 7.\n4. Expire completamente pela boca contando até 8 (sopro audível).\n5. Repita o ciclo 4 vezes. Pratique 2 vezes ao dia para melhores resultados.'
-      },
-      {
-        nome:'Relaxamento Muscular Progressivo (Jacobson)',
-        oque:'Técnica desenvolvida pelo médico Edmund Jacobson (1929) que consiste em tensionar e relaxar grupos musculares progressivamente por todo o corpo, desenvolvendo consciência corporal.',
-        objetivo:'Reduzir a tensão muscular crônica associada ao estresse e à ansiedade, promovendo relaxamento físico profundo e maior consciência da conexão corpo-mente.',
-        evidencia:'Uma das técnicas de relaxamento mais estudadas na história da Psicologia. Eficácia comprovada para ansiedade, insônia, dor crônica e hipertensão (Conrad & Roth, 2007 — Journal of Clinical Psychology).',
-        terapeutico:'Ansiedade e estresse se manifestam fisicamente como tensão muscular muitas vezes inconsciente. Ao aprender a identificar e relaxar essa tensão, o paciente interrompe o ciclo mente-corpo do estresse e desenvolve maior autorregulação.',
-        pratica:'1. Deite-se em local confortável e silencioso.\n2. Começando pelos pés, tensione o grupo muscular por 5 a 7 segundos.\n3. Libere a tensão abruptamente e perceba o contraste por 20 a 30 segundos.\n4. Avance progressivamente: pernas, abdômen, mãos, braços, ombros, pescoço e rosto.\n5. Ao final, permaneça em relaxamento por 2 a 3 minutos respirando lentamente.'
-      },
-      {
-        nome:'Grounding 5-4-3-2-1',
-        oque:'Técnica de ancoragem sensorial que redireciona a atenção para o momento presente usando os cinco sentidos, interrompendo o fluxo de pensamentos ansiosos.',
-        objetivo:'Interromper episódios de ansiedade intensa, ataques de pânico ou dissociação, ancorando a consciência no aqui e agora de forma imediata.',
-        evidencia:'Amplamente aplicada no tratamento de transtorno de pânico e TEPT. Suporte empírico como técnica de regulação emocional e ancoragem (Gratz & Roemer, 2004; Bryant et al., 2008).',
-        terapeutico:'Durante crises de ansiedade, a mente projeta ameaças futuras ou revisita o passado. Ancorar a atenção nos sentidos do presente ativa o córtex pré-frontal e reduz a hiperativação da amígdala, quebrando o ciclo de pânico.',
-        pratica:'1. VEJA: Nomeie 5 coisas que você consegue ver ao redor.\n2. TOQUE: Nomeie 4 coisas que você pode tocar e sinta a textura agora.\n3. OUÇA: Nomeie 3 sons que você consegue ouvir neste momento.\n4. CHEIRE: Nomeie 2 cheiros que consegue identificar.\n5. PROVE: Nomeie 1 sabor que você percebe. Respire fundo entre cada etapa.'
-      },
-      {
-        nome:'Mindfulness — Observação Consciente',
-        oque:'Prática de atenção plena que consiste em observar pensamentos, emoções e sensações do momento presente com curiosidade e sem julgamento.',
-        objetivo:'Desenvolver uma relação diferente com os próprios pensamentos — observando-os como eventos mentais passageiros, não como fatos absolutos.',
-        evidencia:'Base da MBSR (Mindfulness-Based Stress Reduction) e da MBCT (Terapia Cognitiva Baseada em Mindfulness). Metanálises demonstram eficácia para depressão, ansiedade e prevenção de recaída (Kabat-Zinn, 1990; Segal et al., 2002; Hofmann et al., 2010).',
-        terapeutico:'Em vez de lutar contra pensamentos negativos — o que os amplifica — o mindfulness treina o cérebro para observá-los com equanimidade. Isso reduz a reatividade emocional e fortalece o córtex pré-frontal, melhorando a regulação emocional a longo prazo.',
-        pratica:'1. Sente-se confortavelmente e feche os olhos.\n2. Foque na sensação da respiração por 1 a 2 minutos.\n3. Quando um pensamento surgir, observe-o sem julgamento: "há um pensamento de preocupação".\n4. Gentilmente, retorne a atenção à respiração — sem autocrítica.\n5. Pratique por 5 a 10 minutos diariamente. A consistência importa mais do que a duração.'
-      }
-    ]
-  }
+const tecnicas={
+  tcc:{titulo:'Técnicas de TCC — Terapia Cognitivo-Comportamental',items:[
+    {nome:'Registro de Pensamentos Automáticos',
+     oque:'Anotar situações do cotidiano, os pensamentos automáticos que surgem espontaneamente e as emoções associadas. Uma das ferramentas mais centrais da TCC.',
+     objetivo:'Aumentar a consciência sobre padrões de pensamento disfuncionais e seu impacto nas emoções e comportamentos.',
+     evidencia:'Validada em centenas de ensaios clínicos randomizados (Beck, 1979; DeRubeis et al., 2019). Reconhecida pela APA como prática de primeira linha.',
+     terapeutico:'Ao tornar os pensamentos visíveis, paciente e terapeuta identificam distorções cognitivas, tornando o trabalho terapêutico mais preciso.',
+     pratica:'1. Identifique uma situação que gerou desconforto.\n2. Escreva o pensamento automático exato.\n3. Registre a emoção e intensidade (0–100%).\n4. Busque evidências a favor e contra o pensamento.\n5. Formule um pensamento alternativo mais equilibrado.'},
+    {nome:'Reestruturação Cognitiva',
+     oque:'Identificar e modificar pensamentos distorcidos, substituindo-os por percepções mais realistas e equilibradas.',
+     objetivo:'Reduzir o sofrimento emocional ao questionar a validade dos pensamentos negativos automáticos.',
+     evidencia:'Intervenção de primeira linha pela APA para depressão e ansiedade. Metanálises confirmam sua eficácia (Hofmann et al., 2012; Butler et al., 2006).',
+     terapeutico:'Pensamentos distorcidos alimentam ciclos de sofrimento. Questioná-los com método interrompe esses ciclos e desenvolve flexibilidade cognitiva.',
+     pratica:'1. Identifique o pensamento perturbador.\n2. Pergunte: "Qual a evidência concreta de que isso é verdade?"\n3. Pergunte: "Há outra forma de interpretar a situação?"\n4. Pergunte: "Qual o pior, melhor e mais provável cenário?"\n5. Escreva um pensamento alternativo e avalie seu humor.'},
+    {nome:'Experimentos Comportamentais',
+     oque:'Testar na prática, de forma planejada, crenças e previsões negativas para verificar se se confirmam na realidade.',
+     objetivo:'Desafiar crenças disfuncionais por experiência direta, gerando mudança mais profunda do que argumentação cognitiva isolada.',
+     evidencia:'Experimentos comportamentais podem ser mais eficazes que reestruturação verbal isolada (Clark, 1999; Bennett-Levy et al., 2004).',
+     terapeutico:'Testar previsões catastróficas na prática e constatar que o resultado temido não ocorre — ou é manejável — enfraquece a crença de forma duradoura.',
+     pratica:'1. Identifique a crença a testar.\n2. Formule uma previsão específica e mensurável.\n3. Planeje uma situação controlada para testá-la.\n4. Realize o experimento e observe os resultados.\n5. Compare com a previsão e revise a crença.'},
+    {nome:'Agenda de Atividades Prazerosas',
+     oque:'Planejamento intencional de atividades que geram prazer, satisfação ou senso de conquista — mesmo sem motivação inicial.',
+     objetivo:'Combater inatividade e isolamento característicos da depressão, aumentando a exposição a experiências positivas.',
+     evidencia:'Base da Ativação Comportamental, com eficácia comparável a antidepressivos em estudos controlados (Dimidjian et al., 2006; Jacobson et al., 1996).',
+     terapeutico:'A depressão reduz motivação e prazer. Planejar atividades quebra esse ciclo ao criar reforços positivos mesmo quando o "querer" não está presente.',
+     pratica:'1. Liste atividades que já gostou ou poderia gostar.\n2. Programe 1–2 atividades por dia.\n3. Após cada atividade, registre o humor (0–10).\n4. Inclua atividades sociais e de conquista.\n5. Aumente gradualmente frequência e variedade.'},
+    {nome:'Resolução de Problemas',
+     oque:'Método estruturado para enfrentar situações desafiadoras de forma racional, reduzindo a ruminação e paralisia por ansiedade.',
+     objetivo:'Desenvolver enfrentamento ativo, substituindo evitação e ruminação por ação direcionada.',
+     evidencia:'Terapia de Resolução de Problemas tem eficácia comprovada para depressão, ansiedade e estresse (Nezu et al., 2007; Malouff et al., 2007).',
+     terapeutico:'Problemas não resolvidos alimentam o ciclo de ansiedade. Um método claro restaura o senso de controle e autoeficácia.',
+     pratica:'1. Defina o problema de forma específica.\n2. Liste todas as soluções possíveis sem julgamento.\n3. Avalie prós e contras de cada opção.\n4. Escolha a solução mais viável e planeje os passos.\n5. Implemente, avalie o resultado e ajuste se necessário.'}
+  ]},
+  resp:{titulo:'Respiração, Relaxamento e Atenção Plena',items:[
+    {nome:'Respiração Diafragmática',
+     oque:'Ativar o diafragma — principal músculo respiratório — em vez da respiração torácica superficial que ocorre automaticamente no estresse.',
+     objetivo:'Ativar o sistema nervoso parassimpático, reduzindo a resposta fisiológica de estresse de forma rápida e acessível.',
+     evidencia:'Comprovada para redução de ansiedade, pressão arterial e cortisol, com ativação direta do nervo vago (Ma et al., 2017; Zaccaro et al., 2018).',
+     terapeutico:'Respiração superficial sinaliza perigo ao sistema nervoso. A diafragmática ativa o "freio vagal" e sinaliza segurança ao cérebro — uma das técnicas de regulação emocional mais imediatas.',
+     pratica:'1. Sente-se ou deite-se confortavelmente.\n2. Coloque uma mão no peito e outra no abdômen.\n3. Inspire pelo nariz por 4s — o abdômen deve expandir, não o peito.\n4. Expire pela boca por 6s.\n5. Repita por 5–10 minutos.'},
+    {nome:'Respiração 4-7-8',
+     oque:'Técnica com ciclos específicos: inspiração (4s), retenção (7s) e expiração (8s), inspirada no pranayama do yoga.',
+     objetivo:'Induzir relaxamento profundo rapidamente — útil antes de dormir, em crises ansiosas ou para interromper escalada emocional.',
+     evidencia:'Efeitos positivos sobre sistema nervoso autônomo e qualidade do sono (Jerath et al., 2015; Brown & Gerbarg, 2005).',
+     terapeutico:'A expiração prolongada ativa o nervo vago. A retenção sinaliza ao cérebro que não há ameaça imediata, interrompendo o ciclo de hiperativação.',
+     pratica:'1. Expire completamente pela boca.\n2. Inspire pelo nariz contando até 4.\n3. Segure a respiração contando até 7.\n4. Expire pela boca contando até 8.\n5. Repita 4 vezes. Pratique 2x ao dia.'},
+    {nome:'Relaxamento Muscular Progressivo (Jacobson)',
+     oque:'Tensionar e relaxar grupos musculares progressivamente pelo corpo, desenvolvendo consciência corporal.',
+     objetivo:'Reduzir tensão muscular crônica do estresse e ansiedade, promovendo relaxamento físico profundo.',
+     evidencia:'Uma das técnicas mais estudadas na história da Psicologia. Eficaz para ansiedade, insônia e dor crônica (Conrad & Roth, 2007).',
+     terapeutico:'Ansiedade se manifesta como tensão muscular inconsciente. Aprender a identificá-la e relaxá-la interrompe o ciclo mente-corpo do estresse.',
+     pratica:'1. Deite-se em local confortável.\n2. Começando pelos pés, tensione o grupo muscular por 5–7s.\n3. Libere a tensão e perceba o contraste por 20–30s.\n4. Avance: pernas, abdômen, mãos, braços, ombros, pescoço, rosto.\n5. Permaneça relaxado por 2–3 minutos ao final.'},
+    {nome:'Grounding 5-4-3-2-1',
+     oque:'Ancoragem sensorial que redireciona a atenção para o momento presente usando os cinco sentidos.',
+     objetivo:'Interromper episódios de ansiedade intensa, pânico ou dissociação — ancorando no aqui e agora.',
+     evidencia:'Aplicada no tratamento de pânico e TEPT, com suporte empírico como técnica de regulação emocional (Gratz & Roemer, 2004).',
+     terapeutico:'Em crises de ansiedade a mente projeta ameaças futuras. Ancorar nos sentidos presentes ativa o córtex pré-frontal e reduz a hiperativação da amígdala.',
+     pratica:'1. VEJA: nomeie 5 coisas ao redor.\n2. TOQUE: nomeie 4 texturas que consegue sentir agora.\n3. OUÇA: nomeie 3 sons presentes.\n4. CHEIRE: nomeie 2 cheiros perceptíveis.\n5. PROVE: nomeie 1 sabor. Respire fundo entre cada etapa.'},
+    {nome:'Mindfulness — Observação Consciente',
+     oque:'Prática de atenção plena — observar pensamentos, emoções e sensações do momento presente com curiosidade e sem julgamento.',
+     objetivo:'Desenvolver uma relação diferente com os próprios pensamentos, vendo-os como eventos mentais passageiros, não fatos absolutos.',
+     evidencia:'Base da MBSR e da MBCT. Metanálises demonstram eficácia para depressão, ansiedade e prevenção de recaída (Kabat-Zinn, 1990; Segal et al., 2002).',
+     terapeutico:'Em vez de lutar contra pensamentos negativos — o que os amplifica — o mindfulness treina o cérebro para observá-los com equanimidade, reduzindo a reatividade emocional.',
+     pratica:'1. Sente-se confortavelmente e feche os olhos.\n2. Foque na sensação da respiração por 1–2 minutos.\n3. Quando um pensamento surgir, observe-o: "há um pensamento de preocupação".\n4. Gentilmente, retorne à respiração — sem autocrítica.\n5. Pratique 5–10 minutos diariamente.'}
+  ]}
 }
 
 function renderizarTecnicas(){
-  const container = document.getElementById('tecnicas-container')
-  if(!container) return
-  let html = ''
+  const c=document.getElementById('tec-container')
+  if(!c)return
+  let h=''
   for(const cat of Object.values(tecnicas)){
-    html += `<div style="margin-bottom:2.5rem">
-      <div class="tecnicas-cat-label">${cat.titulo}</div>`
-    cat.items.forEach((t,i)=>{
-      const id = `tec-${Math.random().toString(36).slice(2)}`
-      html += `<div class="tecnica-card" id="${id}">
-        <div class="tecnica-header" onclick="toggleTecnica('${id}')">
-          <span class="tecnica-nome">${t.nome}</span>
-          <span class="tecnica-arrow">▼</span>
+    h+=`<div><div class="tec-cat-lbl">${cat.titulo}</div>`
+    cat.items.forEach(t=>{
+      const id='t'+Math.random().toString(36).slice(2)
+      h+=`<div class="tec-card" id="${id}">
+        <div class="tec-hdr" onclick="toggleTec('${id}')">
+          <span class="tec-nome">${t.nome}</span><span class="tec-arr">▼</span>
         </div>
-        <div class="tecnica-body">
-          <div class="tecnica-sec">
-            <div class="tecnica-sec-label">O que é</div>
-            <div class="tecnica-sec-text">${t.oque}</div>
-          </div>
-          <div class="tecnica-sec">
-            <div class="tecnica-sec-label">Objetivo</div>
-            <div class="tecnica-sec-text">${t.objetivo}</div>
-          </div>
-          <div class="tecnica-sec">
-            <div class="tecnica-sec-label">Comprovação científica</div>
-            <div class="tecnica-sec-text">${t.evidencia}</div>
-          </div>
-          <div class="tecnica-sec">
-            <div class="tecnica-sec-label">Por que ajuda no processo terapêutico</div>
-            <div class="tecnica-sec-text">${t.terapeutico}</div>
-          </div>
-          <div class="tecnica-sec">
-            <div class="tecnica-sec-label">Como praticar</div>
-            <div class="tecnica-pratica-text">${t.pratica}</div>
-          </div>
+        <div class="tec-body">
+          <div class="tec-sec"><div class="tec-sec-lbl">O que é</div><div class="tec-sec-txt">${t.oque}</div></div>
+          <div class="tec-sec"><div class="tec-sec-lbl">Objetivo</div><div class="tec-sec-txt">${t.objetivo}</div></div>
+          <div class="tec-sec"><div class="tec-sec-lbl">Comprovação científica</div><div class="tec-sec-txt">${t.evidencia}</div></div>
+          <div class="tec-sec"><div class="tec-sec-lbl">Por que ajuda no processo terapêutico</div><div class="tec-sec-txt">${t.terapeutico}</div></div>
+          <div class="tec-sec"><div class="tec-sec-lbl">Como praticar</div><div class="tec-pratica">${t.pratica}</div></div>
         </div>
       </div>`
     })
-    html += '</div>'
+    h+='</div>'
   }
-  container.innerHTML = html
+  c.innerHTML=h
 }
-
-function toggleTecnica(id){
-  const card = document.getElementById(id)
-  if(!card) return
-  card.classList.toggle('open')
-}
+function toggleTec(id){const el=document.getElementById(id);if(el)el.classList.toggle('open')}
 
 // ══════════════════════════════════════
 // REDE DE APOIO PÚBLICA
 // ══════════════════════════════════════
-const redesApoio = [
-  {
-    urgente:true,
-    nome:'CVV — Centro de Valorização da Vida',
-    missao:'Apoio emocional e prevenção do suicídio',
-    desc:'Serviço voluntário, sigiloso e gratuito de apoio emocional. Voluntários treinados para escuta ativa e acolhimento sem julgamento. Atende qualquer pessoa em sofrimento emocional.',
-    tel:'188 (gratuito)',
-    horario:'24 horas, 7 dias por semana',
-    site:'https://www.cvv.org.br',
-    siteLabel:'cvv.org.br',
-    extra:'Chat online disponível no site. E-mail: atendimento@cvv.org.br',
-    como:'Apoio emocional, escuta ativa e orientação em crise. Não é serviço de emergência médica, mas de acolhimento e suporte emocional.'
-  },
-  {
-    urgente:false,
-    nome:'CAPS — Centro de Atenção Psicossocial',
-    missao:'Atendimento público em saúde mental pelo SUS',
-    desc:'Serviço especializado da rede pública com equipe multidisciplinar (psicólogos, psiquiatras, assistentes sociais). Completamente gratuito pelo SUS.',
-    tel:'Varia por município — busque "CAPS + sua cidade"',
-    horario:'Seg a Sex, 8h–17h (CAPS III funciona 24h)',
-    site:'https://www.gov.br/saude/saude-mental',
-    siteLabel:'gov.br/saude/saude-mental',
-    extra:'Tipos: CAPS I e II (saúde mental geral), CAPS III (24h), CAPSad (álcool e drogas), CAPSi (infanto-juvenil).',
-    como:'Atendimento individual e em grupo, medicação, projetos de reabilitação e reinserção social. Acesso por encaminhamento da UBS ou busca espontânea.'
-  },
-  {
-    urgente:false,
-    nome:'UBS — Unidade Básica de Saúde',
-    missao:'Porta de entrada para saúde mental na atenção básica',
-    desc:'As UBS possuem psicólogos via equipes NASF-AB e podem encaminhar para CAPS ou outros serviços especializados da rede SUS.',
-    tel:'Varia por unidade — busque a mais próxima de você',
-    horario:'Geralmente Seg a Sex, 7h–17h',
-    site:'https://www.gov.br/saude',
-    siteLabel:'gov.br/saude',
-    extra:'Acesso gratuito. Leve documento de identidade e cartão SUS.',
-    como:'Acolhimento inicial, escuta qualificada, prescrição e encaminhamento para serviços especializados conforme necessidade.'
-  },
-  {
-    urgente:true,
-    nome:'Telefone Esperança',
-    missao:'Apoio emocional e prevenção do suicídio',
-    desc:'Serviço de apoio emocional mantido por entidades religiosas e voluntárias em parceria com o poder público em diversos estados brasileiros.',
-    tel:'141 (gratuito)',
-    horario:'24 horas (cobertura pode variar por estado)',
-    site:null,
-    siteLabel:null,
-    extra:'Complementar ao CVV. Em crise, ligue para ambos caso um não atenda.',
-    como:'Apoio emocional por telefone, escuta ativa e orientação em momentos de sofrimento intenso ou crise.'
-  },
-  {
-    urgente:false,
-    nome:'Clínicas-Escola e Psicologia a Preço Social',
-    missao:'Psicoterapia gratuita ou de baixo custo',
-    desc:'Universidades com cursos de Psicologia mantêm clínicas-escola com atendimento gratuito ou a preço social, supervisionado por docentes qualificados.',
-    tel:'Consulte o CRP do seu estado',
-    horario:'Varia por instituição',
-    site:'https://site.cfp.org.br',
-    siteLabel:'cfp.org.br',
-    extra:'O CFP e os CRPs estaduais mantêm listas atualizadas de serviços gratuitos e sociais.',
-    como:'Psicoterapia individual e em grupo a preço acessível ou gratuito. Indicado para quem não tem acesso a plano de saúde ou atendimento particular.'
-  },
-  {
-    urgente:false,
-    nome:'SENAD — Dependência Química',
-    missao:'Apoio a pessoas com uso abusivo de álcool e drogas',
-    desc:'Linha nacional de apoio para pessoas com dependência química e seus familiares, com orientação, escuta e encaminhamento para serviços especializados.',
-    tel:'138 (gratuito)',
-    horario:'24 horas, 7 dias por semana',
-    site:'https://www.gov.br/mj/senad',
-    siteLabel:'gov.br/mj/senad',
-    extra:'Encaminha para CAPS-ad (Centro de Atenção Psicossocial Álcool e Drogas) na região do solicitante.',
-    como:'Orientação, apoio emocional e encaminhamento para tratamento especializado em dependência química, gratuito pelo SUS.'
-  }
+const redesApoio=[
+  {urg:true,nome:'CVV — Centro de Valorização da Vida',miss:'Apoio emocional · Prevenção do suicídio',
+   desc:'Serviço voluntário, sigiloso e gratuito. Voluntários treinados para escuta ativa e acolhimento sem julgamento.',
+   tel:'188 (gratuito)',hor:'24 horas, 7 dias por semana',site:'https://www.cvv.org.br',siteLbl:'cvv.org.br',
+   extra:'Chat online disponível no site. E-mail: atendimento@cvv.org.br',
+   como:'Apoio emocional e escuta ativa para qualquer pessoa em sofrimento emocional ou risco de suicídio.'},
+  {urg:false,nome:'CAPS — Centro de Atenção Psicossocial',miss:'Saúde mental pública · SUS · Gratuito',
+   desc:'Serviço especializado da rede pública com equipe multidisciplinar (psicólogos, psiquiatras, assistentes sociais).',
+   tel:'Varia por município — busque "CAPS + sua cidade"',hor:'Seg–Sex, 8h–17h (CAPS III: 24h)',
+   site:'https://www.gov.br/saude/saude-mental',siteLbl:'gov.br/saude/saude-mental',
+   extra:'Tipos: CAPS I e II (geral), CAPS III (24h), CAPSad (álcool e drogas), CAPSi (infanto-juvenil).',
+   como:'Atendimento individual e em grupo, medicação, reabilitação. Acesso por encaminhamento da UBS ou busca espontânea.'},
+  {urg:false,nome:'UBS — Unidade Básica de Saúde',miss:'Atenção básica · Porta de entrada SUS',
+   desc:'Possui psicólogos via equipes NASF-AB e encaminha para serviços especializados como CAPS.',
+   tel:'Varia por unidade',hor:'Geralmente Seg–Sex, 7h–17h',site:'https://www.gov.br/saude',siteLbl:'gov.br/saude',
+   extra:'Leve documento de identidade e cartão SUS. Acesso gratuito.',
+   como:'Acolhimento inicial, escuta qualificada, prescrição e encaminhamento para serviços especializados.'},
+  {urg:true,nome:'Telefone Esperança',miss:'Apoio emocional · Prevenção do suicídio',
+   desc:'Serviço de apoio emocional mantido por entidades voluntárias em parceria com o poder público em vários estados.',
+   tel:'141 (gratuito)',hor:'24 horas (cobertura varia por estado)',site:null,siteLbl:null,
+   extra:'Complementar ao CVV. Em crise, ligue para ambos caso um não atenda.',
+   como:'Apoio emocional por telefone e escuta ativa em momentos de sofrimento intenso ou crise.'},
+  {urg:false,nome:'Clínicas-Escola · Psicologia Social',miss:'Psicoterapia gratuita ou a preço social',
+   desc:'Universidades com cursos de Psicologia mantêm clínicas-escola com atendimento gratuito ou a preço social, supervisionado por docentes.',
+   tel:'Consulte o CRP do seu estado',hor:'Varia por instituição',site:'https://site.cfp.org.br',siteLbl:'cfp.org.br',
+   extra:'O CFP e CRPs estaduais mantêm listas atualizadas.',
+   como:'Psicoterapia individual e em grupo a preço acessível ou gratuito — indicado para quem não tem plano de saúde.'},
+  {urg:false,nome:'SENAD — Dependência Química',miss:'Apoio a uso abusivo de álcool e drogas',
+   desc:'Linha nacional para pessoas com dependência química e seus familiares, com orientação e encaminhamento.',
+   tel:'138 (gratuito)',hor:'24 horas, 7 dias por semana',site:'https://www.gov.br/mj/senad',siteLbl:'gov.br/mj/senad',
+   extra:'Encaminha para CAPS-ad (álcool e drogas) na região.',
+   como:'Orientação, apoio emocional e encaminhamento para tratamento especializado gratuito pelo SUS.'}
 ]
 
 function renderizarRedeApoio(){
-  const container = document.getElementById('rede-apoio-container')
-  if(!container) return
-  let html = '<div class="apoio-grid">'
+  const c=document.getElementById('apoio-container')
+  if(!c)return
+  let h='<div class="apoio-grid">'
   redesApoio.forEach(r=>{
-    html += `<div class="apoio-card${r.urgente?' urgente':''}">
-      <div class="apoio-nome-row">
-        <span class="apoio-nome">${r.nome}</span>
-        ${r.urgente?'<span class="apoio-urgente-badge">Crise</span>':''}
-      </div>
-      <div class="apoio-missao">${r.missao}</div>
+    h+=`<div class="apoio-card${r.urg?' urg':''}">
+      <div class="apoio-nome-row"><span class="apoio-nome">${r.nome}</span>${r.urg?'<span class="apoio-badge-urg">Crise</span>':''}</div>
+      <div class="apoio-miss">${r.miss}</div>
       <div class="apoio-desc">${r.desc}</div>
-      <div class="apoio-detalhe">
-        <div class="apoio-linha">
-          <span class="apoio-chave">Telefone</span>
-          <span class="apoio-val"><strong>${r.tel}</strong></span>
-        </div>
-        <div class="apoio-linha">
-          <span class="apoio-chave">Horário</span>
-          <span class="apoio-val">${r.horario}</span>
-        </div>
-        ${r.site?`<div class="apoio-linha">
-          <span class="apoio-chave">Site</span>
-          <span class="apoio-val"><a href="${r.site}" target="_blank" rel="noopener">${r.siteLabel}</a></span>
-        </div>`:''}
-        <div class="apoio-linha">
-          <span class="apoio-chave">Como ajuda</span>
-          <span class="apoio-val">${r.como}</span>
-        </div>
-        ${r.extra?`<div class="apoio-linha">
-          <span class="apoio-chave">Observação</span>
-          <span class="apoio-val" style="color:var(--slate)">${r.extra}</span>
-        </div>`:''}
+      <div class="apoio-det">
+        <div class="apoio-ln"><span class="apoio-k">Telefone</span><span class="apoio-v"><strong>${r.tel}</strong></span></div>
+        <div class="apoio-ln"><span class="apoio-k">Horário</span><span class="apoio-v">${r.hor}</span></div>
+        ${r.site?`<div class="apoio-ln"><span class="apoio-k">Site</span><span class="apoio-v"><a href="${r.site}" target="_blank" rel="noopener">${r.siteLbl}</a></span></div>`:''}
+        <div class="apoio-ln"><span class="apoio-k">Como ajuda</span><span class="apoio-v">${r.como}</span></div>
+        <div class="apoio-ln"><span class="apoio-k">Obs.</span><span class="apoio-v" style="color:var(--slate)">${r.extra}</span></div>
       </div>
     </div>`
   })
-  html += '</div>'
-  container.innerHTML = html
+  h+='</div>'
+  c.innerHTML=h
 }
 
-// Inicializa conteúdo estático
 document.addEventListener('DOMContentLoaded',()=>{
   renderizarTecnicas()
   renderizarRedeApoio()
