@@ -38,7 +38,7 @@
     .hero-eyebrow::before{content:'';width:2rem;height:1px;background:var(--gold)}
     .hero-name{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,4vw,3.8rem);font-weight:300;line-height:1.1;color:var(--white);margin-bottom:0.5rem}
     .hero-name em{font-style:italic;font-weight:300;color:var(--slate-light)}
-    .hero-title{font-size:0.85rem;font-weight:300;letter-spacing:0.15em;text-transform:uppercase;color:var(--slate);margin-bottom:2.5rem;padding-left:0.15rem}
+    .hero-title{font-size:0.85rem;font-weight:300;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:2.5rem;padding-left:0.15rem;text-decoration:none}
     .hero-divider{width:3rem;height:1px;background:var(--gold);margin-bottom:2rem}
     .hero-tagline{font-size:1rem;font-weight:300;line-height:1.75;color:var(--slate-light);max-width:380px;margin-bottom:1.5rem}
     .hero-tagline + .hero-tagline{margin-bottom:1.5rem}
@@ -103,14 +103,46 @@
     @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
     .delay-1{animation-delay:0.15s}.delay-2{animation-delay:0.3s}.delay-3{animation-delay:0.45s}.delay-4{animation-delay:0.6s}
     @media(max-width:768px){
-      .hero{grid-template-columns:1fr}
-      .hero-left::after{display:none}
-      .about-section{grid-template-columns:1fr}
-      .services-grid{grid-template-columns:1fr}
+      /* ── Nav ── */
       nav{padding:1rem 1.5rem}
       .nav-links{display:none}
+      .nav-btn{font-size:0.7rem;padding:0.4rem 0.9rem}
+
+      /* ── Hero ── */
+      .hero{grid-template-columns:1fr;min-height:auto}
+      .hero-left{padding:5.5rem 1.5rem 3rem;order:1}
+      .hero-left::after{display:none}
+      .hero-right{padding:3rem 1.5rem 3rem;order:2}
+      .hero-name{font-size:2.2rem}
+      .hero-stat-grid{grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:2rem}
+      .areas-list{grid-template-columns:1fr}
+      .hero-cta-row{flex-direction:column;align-items:stretch;gap:0.75rem}
+      .hero-cta-row .btn-primary,.hero-cta-row .btn-ghost{text-align:center;width:100%}
+
+      /* ── Seções genéricas ── */
       section{padding:3rem 1.5rem}
+
+      /* ── About ── */
+      .about-section{grid-template-columns:1fr;gap:2rem}
+
+      /* ── Services ── */
       .services-section{padding:3rem 1.5rem}
+      .services-grid{grid-template-columns:1fr}
+
+      /* ── Abordagem ── */
+      .abordagem-section{padding:3rem 1.5rem}
+      .abordagem-grid{grid-template-columns:1fr;gap:1.5rem;margin-top:2rem}
+
+      /* ── Portal ── */
+      .portal-section{padding:3rem 1.5rem}
+      .portal-cta-row{flex-direction:column;align-items:stretch}
+      .portal-cta-row .btn-primary,.portal-cta-row a{width:100%;text-align:center}
+
+      /* ── Contact ── */
+      .contact-section{padding:3rem 1.5rem}
+      .contact-email{word-break:break-all;font-size:0.85rem}
+
+      /* ── Footer ── */
       footer{padding:2rem 1.5rem;flex-direction:column;gap:0.75rem;text-align:center}
     }
   </style>
@@ -133,7 +165,7 @@
   <div class="hero-left">
     <div class="hero-eyebrow fade-in">Psicologia Clínica</div>
     <h1 class="hero-name fade-in delay-1">Terapeuta Cognitivo<br><em>Matheus Camillo</em></h1>
-    <p class="hero-title fade-in delay-2" style="color:var(--slate)">Psicólogo Clínico e Organizacional · CRP 06/193290</p>
+    <p class="hero-title fade-in delay-2">Psicólogo Clínico e Organizacional · CRP 06/193290</p>
     <div class="hero-divider fade-in delay-2"></div>
 
     <p class="hero-tagline fade-in delay-3">
