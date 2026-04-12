@@ -411,6 +411,9 @@
           <div class="stat-row" id="stat-row"></div>
 
           <div class="section-eyebrow">Evolução ao longo do tempo</div>
+          <div id="farol-desc-bloco" style="display:none;background:var(--white);border:1px solid var(--border);border-radius:8px;padding:1rem 1.25rem;margin-bottom:1rem;border-left:3px solid var(--gold)">
+            <p id="farol-desc-texto" style="font-size:0.78rem;font-weight:300;color:var(--text-muted);line-height:1.75"></p>
+          </div>
           <div class="graficos-grid" id="graficos-grid">
             <div class="chart-card">
               <div class="empty-state" id="chart-empty">Faça seu primeiro teste para visualizar sua evolução aqui.</div>
@@ -883,16 +886,11 @@ function renderStats(data){
 
   // Labels do farol
   const farolLabels={
-    verde:{tag:'Indicador favorável',titulo:'Resultados dentro do esperado'},
-    amarelo:{tag:'Atenção recomendada',titulo:'Sintomas moderados identificados'},
-    vermelho:{tag:'Suporte prioritário',titulo:'Sintomas graves identificados'}
+    verde:{tag:'Sem necessidade de atenção',cor:'verde'},
+    amarelo:{tag:'Atenção recomendada',cor:'amarelo'},
+    vermelho:{tag:'Atenção altamente recomendada',cor:'vermelho'}
   }
   const fl=farolLabels[nivel]
-
-  // Linhas por teste
-  const testesHtml=testesFeitos.length
-    ? testesFeitos.map(([nome,r])=>`<div class="farol-teste-linha"><span class="farol-teste-nome">${nome}:</span>${badgeHtml(r.classificacao)}</div>`).join('')
-    : '<div class="farol-teste-linha">Nenhum teste realizado ainda.</div>'
 
   // Data de início
   let dataInicio='—'
@@ -910,7 +908,7 @@ function renderStats(data){
       <div class="stat-lbl">Sessões realizadas</div>
     </div>
     <div class="stat-card farol-card ${testesFeitos.length?nivel:''}">
-      <div class="stat-lbl" style="margin-bottom:0.6rem">Farol de Cuidado</div>
+      <div class="stat-lbl" style="margin-bottom:0.65rem">Farol de Cuidado</div>
       <div class="farol-inner">
         <div class="farol-lights">
           <div class="farol-light farol-red${nivel==='vermelho'?' on':''}"></div>
@@ -918,11 +916,28 @@ function renderStats(data){
           <div class="farol-light farol-green${nivel==='verde'&&testesFeitos.length?' on':''}"></div>
         </div>
         <div>
-          ${testesFeitos.length?`<div class="farol-tag ${nivel}">${fl.tag}</div><div class="farol-titulo">${fl.titulo}</div>`:'<div class="farol-titulo" style="color:var(--text-muted);font-weight:300">Aguardando primeiro teste</div>'}
-          <div class="farol-testes">${testesHtml}</div>
+          ${testesFeitos.length
+            ?`<div class="farol-tag ${fl.cor}">${fl.tag}</div>`
+            :'<div style="font-size:0.75rem;font-weight:300;color:var(--text-muted)">Aguardando primeiro teste</div>'}
         </div>
       </div>
     </div>`
+
+  // Bloco de descrição interpretativa abaixo dos stats
+  const blocoDesc=document.getElementById('farol-desc-bloco')
+  const textoDesc=document.getElementById('farol-desc-texto')
+  const descricoes={
+    verde:`O seu <strong>Farol de Cuidado</strong> está verde — isso significa que, com base nos testes realizados, os seus indicadores de saúde mental estão dentro de um nível favorável. Isso não quer dizer ausência de desafios, mas sim que os sintomas estão em patamares leves ou mínimos. Continue com o acompanhamento regular e com as práticas de autocuidado: eles fazem diferença a longo prazo.`,
+    amarelo:`O seu <strong>Farol de Cuidado</strong> está amarelo — isso indica que um ou mais dos seus testes identificaram sintomas em nível moderado. É um sinal de atenção: não de alarme, mas de cuidado redobrado. Mantenha o seu acompanhamento terapêutico em dia, utilize as técnicas disponíveis nesta plataforma e converse com o seu psicólogo sobre o que está sentindo.`,
+    vermelho:`O seu <strong>Farol de Cuidado</strong> está vermelho — isso indica que um ou mais dos seus testes identificaram sintomas em nível grave. É importante que você mantenha contato próximo com o seu psicólogo e não enfrente isso sozinho(a). Mantenha o seu acompanhamento terapêutico em dia e converse com o seu psicólogo sobre o que está sentindo.`
+  }
+  if(testesFeitos.length){
+    blocoDesc.style.display='block'
+    blocoDesc.style.borderLeftColor=nivel==='verde'?'var(--green)':nivel==='amarelo'?'var(--yellow)':'var(--red)'
+    textoDesc.innerHTML=descricoes[nivel]
+  } else {
+    blocoDesc.style.display='none'
+  }
 }
 
 function renderHistorico(data){
@@ -989,8 +1004,8 @@ function renderGraficos(data){
     cfg.refs.forEach((r,i)=>{
       annotations['ref'+i]={
         type:'line',yMin:r.y,yMax:r.y,
-        borderColor:r.color.replace('0.4','0.7'),
-        borderWidth:1.5,borderDash:[5,4],
+        borderColor:r.color.replace('0.4','0.3'),
+        borderWidth:1,borderDash:[4,5],
         label:{display:true,content:r.label,position:'end',
           font:{family:'Sora',size:9},
           color:'#8a9ab5',backgroundColor:'transparent',padding:2}
