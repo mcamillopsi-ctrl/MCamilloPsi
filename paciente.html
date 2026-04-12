@@ -7,6 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3"></script>
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
     :root{
@@ -99,29 +100,37 @@
     .section-eyebrow::after{content:'';flex:1;height:1px;background:var(--border)}
 
     /* ══ STAT CARDS ══ */
-    .stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:0.85rem;margin-bottom:1.5rem}
+    .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:0.85rem;margin-bottom:1.5rem}
     .stat-card{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:1rem 1.1rem;border-top:2px solid var(--gold)}
     .stat-num{font-family:'Cormorant Garamond',serif;font-size:1.85rem;font-weight:300;color:var(--navy);line-height:1;margin-bottom:0.25rem}
     .stat-lbl{font-size:0.62rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted)}
 
-    /* ══ FAROL ══ */
-    .farol-wrap{display:flex;align-items:flex-start;gap:1.1rem;background:var(--white);border:1px solid var(--border);border-radius:8px;padding:1rem 1.25rem;margin-bottom:1.5rem}
-    .farol-lights{display:flex;flex-direction:column;gap:5px;padding-top:2px;flex-shrink:0}
-    .farol-light{width:13px;height:13px;border-radius:50%;opacity:0.15;transition:opacity 0.25s}
+    /* ══ FAROL DE CUIDADO (embutido no stat-card) ══ */
+    .farol-card{border-top-color:var(--gold)}
+    .farol-card.verde{border-top-color:var(--green)}
+    .farol-card.amarelo{border-top-color:var(--yellow)}
+    .farol-card.vermelho{border-top-color:var(--red)}
+    .farol-inner{display:flex;align-items:flex-start;gap:0.75rem}
+    .farol-lights{display:flex;flex-direction:column;gap:4px;padding-top:3px;flex-shrink:0}
+    .farol-light{width:11px;height:11px;border-radius:50%;opacity:0.12;transition:opacity 0.25s}
     .farol-light.on{opacity:1}
     .farol-green{background:var(--green)}
     .farol-yellow{background:var(--yellow)}
     .farol-red{background:var(--red)}
-    .farol-tag{display:inline-block;font-size:0.6rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:0.15rem 0.55rem;border-radius:20px;margin-bottom:0.3rem}
+    .farol-tag{display:inline-block;font-size:0.58rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:0.12rem 0.5rem;border-radius:20px;margin-bottom:0.28rem}
     .farol-tag.verde{background:#e8f5ee;color:var(--green)}
     .farol-tag.amarelo{background:#fff8e0;color:var(--yellow)}
     .farol-tag.vermelho{background:#fce8e8;color:var(--red)}
-    .farol-info h3{font-size:0.85rem;font-weight:500;color:var(--navy);margin-bottom:0.18rem}
-    .farol-info p{font-size:0.75rem;font-weight:300;color:var(--text-muted);line-height:1.65}
+    .farol-titulo{font-size:0.78rem;font-weight:500;color:var(--navy);margin-bottom:0.3rem}
+    .farol-testes{display:flex;flex-direction:column;gap:0.18rem;margin-top:0.35rem}
+    .farol-teste-linha{font-size:0.68rem;font-weight:300;color:var(--text-muted);display:flex;align-items:center;gap:0.4rem}
+    .farol-teste-nome{font-weight:500;color:var(--navy)}
 
-    /* ══ DASHBOARD GRID ══ */
-    .dash-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.85rem;margin-bottom:1.5rem}
-    .chart-card{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:1.25rem;grid-column:1/-1}
+    /* ══ MULTI-GRÁFICO ══ */
+    .graficos-grid{display:flex;flex-direction:column;gap:1rem;margin-bottom:1.5rem}
+    .chart-card{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:1.25rem}
+    .chart-card-title{font-size:0.72rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--navy);margin-bottom:0.2rem}
+    .chart-card-sub{font-size:0.68rem;font-weight:300;color:var(--text-muted);margin-bottom:1rem;line-height:1.55}
     .tests-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0.85rem;margin-bottom:1.5rem}
     .test-card{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:1.1rem;cursor:pointer;transition:border-color 0.15s,box-shadow 0.15s}
     .test-card:hover{border-color:var(--gold);box-shadow:0 2px 12px rgba(184,151,74,0.1)}
@@ -180,31 +189,14 @@
 
     /* ══ TÉCNICAS ══ */
     .tecnicas-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0.85rem}
-    .tecnica-card{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:1.15rem;cursor:pointer;transition:border-color 0.15s}
-    .tecnica-card:hover{border-color:var(--gold)}
-    .tecnica-card.open{border-color:var(--gold);box-shadow:0 2px 10px rgba(184,151,74,0.1)}
+    .tecnica-card{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:1.15rem}
     .tecnica-tag{display:inline-block;font-size:0.58rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:0.15rem 0.55rem;border-radius:20px;background:var(--gold-pale);color:var(--gold);margin-bottom:0.55rem}
-    .tecnica-header{display:flex;justify-content:space-between;align-items:flex-start;gap:0.5rem}
-    .tecnica-title{font-size:0.85rem;font-weight:600;color:var(--navy)}
-    .tecnica-arrow{font-size:0.62rem;color:var(--gold);font-weight:700;flex-shrink:0;margin-top:0.1rem;transition:transform 0.2s}
-    .tecnica-card.open .tecnica-arrow{transform:rotate(180deg)}
-    .tecnica-expanded{display:none;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border)}
-    .tecnica-card.open .tecnica-expanded{display:block}
-    .tecnica-sec{margin-bottom:0.75rem}
-    .tecnica-sec:last-child{margin-bottom:0}
-    .tecnica-sec-lbl{font-size:0.58rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:0.28rem}
-    .tecnica-sec-txt{font-size:0.75rem;font-weight:300;line-height:1.72;color:var(--text-muted)}
-    .tecnica-pratica{background:var(--cream);border-radius:5px;padding:0.7rem 0.85rem;font-size:0.73rem;font-weight:300;line-height:1.72;color:var(--text-muted);white-space:pre-line}
-    .tec-hint{font-size:0.72rem;font-weight:300;color:var(--text-muted);background:var(--gold-pale);border:1px solid rgba(184,151,74,0.2);border-radius:6px;padding:0.6rem 0.9rem;margin-bottom:1.25rem;display:flex;align-items:center;gap:0.5rem}
-    .tec-categoria{font-size:0.6rem;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--text-muted);margin:1.5rem 0 0.75rem;display:flex;align-items:center;gap:0.6rem}
-    .tec-categoria::after{content:'';flex:1;height:1px;background:var(--border)}
-    .tec-lista{display:flex;flex-direction:column;gap:0.6rem}
+    .tecnica-title{font-size:0.85rem;font-weight:600;color:var(--navy);margin-bottom:0.4rem}
+    .tecnica-body{font-size:0.75rem;font-weight:300;line-height:1.75;color:var(--text-muted)}
+    .tecnica-body ol,.tecnica-body ul{margin-left:1rem;margin-top:0.4rem}
+    .tecnica-body li{margin-bottom:0.2rem}
 
     /* ══ REDE ══ */
-    .rede-hero{background:var(--navy);border-radius:8px;padding:1.1rem 1.4rem;margin-bottom:1.5rem;display:flex;align-items:center;gap:1.4rem}
-    .rede-hero-num{font-family:'Cormorant Garamond',serif;font-size:2.75rem;font-weight:300;color:var(--gold);line-height:1;flex-shrink:0}
-    .rede-hero-info strong{display:block;font-size:0.82rem;font-weight:600;color:var(--white);margin-bottom:0.2rem}
-    .rede-hero-info p{font-size:0.75rem;font-weight:300;color:var(--slate);line-height:1.6}
     .rede-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0.85rem;margin-bottom:1.5rem}
     .rede-card{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:1rem}
     .rede-name{font-size:0.82rem;font-weight:600;color:var(--navy);margin-bottom:0.12rem}
@@ -213,7 +205,7 @@
     .rede-tel{display:inline-block;margin-top:0.45rem;font-size:0.8rem;font-weight:600;color:var(--navy);background:var(--cream);padding:0.22rem 0.65rem;border-radius:5px;border:1px solid var(--border)}
     .rede-link{display:inline-block;margin-top:0.35rem;font-size:0.72rem;font-weight:400;color:var(--gold);text-decoration:none}
     .rede-link:hover{text-decoration:underline}
-    .rede-hours{font-size:0.7rem;font-weight:500;color:var(--navy);margin-top:0.35rem;display:flex;align-items:center;gap:0.35rem}
+    .rede-hours{font-size:0.7rem;font-weight:500;color:var(--navy);margin-top:0.35rem}
     .rede-how{font-size:0.72rem;font-weight:300;color:var(--text-muted);line-height:1.65;margin-top:0.6rem;padding-top:0.6rem;border-top:1px solid var(--border)}
 
     /* ══ PSI ══ */
@@ -370,9 +362,9 @@
         <svg viewBox="0 0 24 24"><polyline points="9,18 15,12 9,6"/></svg>
       </div>
       <div class="sidebar-section">Principal</div>
-      <div class="sidebar-item active" id="nav-dashboard" onclick="irPara('dashboard')" title="Início">
+      <div class="sidebar-item active" id="nav-dashboard" onclick="irPara('dashboard')" title="Home">
         <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-        <span>Início</span>
+        <span>Home</span>
       </div>
       <div class="sidebar-item" id="nav-cadastro" onclick="irPara('cadastro')" title="Meu cadastro">
         <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
@@ -406,23 +398,11 @@
 
           <div class="stat-row" id="stat-row"></div>
 
-          <div class="farol-wrap" id="farol-wrap" style="display:none">
-            <div class="farol-lights">
-              <div class="farol-light farol-red" id="farol-red"></div>
-              <div class="farol-light farol-yellow" id="farol-yellow"></div>
-              <div class="farol-light farol-green" id="farol-green"></div>
-            </div>
-            <div class="farol-info">
-              <div class="farol-tag" id="farol-tag"></div>
-              <h3 id="farol-titulo"></h3>
-              <p id="farol-desc"></p>
-            </div>
-          </div>
-
           <div class="section-eyebrow">Evolução ao longo do tempo</div>
-          <div class="chart-card">
-            <div class="empty-state" id="chart-empty">Faça seu primeiro teste para visualizar sua evolução aqui.</div>
-            <canvas id="grafico" style="display:none;max-height:220px"></canvas>
+          <div class="graficos-grid" id="graficos-grid">
+            <div class="chart-card">
+              <div class="empty-state" id="chart-empty">Faça seu primeiro teste para visualizar sua evolução aqui.</div>
+            </div>
           </div>
 
           <div class="section-eyebrow" style="margin-top:1.5rem">Testes disponíveis</div>
@@ -509,183 +489,14 @@
         <div class="page" id="page-tecnicas">
           <h1 class="page-title">Técnicas e ferramentas</h1>
           <p class="page-sub">Recursos psicoterápicos para o seu bem-estar no dia a dia.</p>
-
-          <div class="tec-hint">
-            <span>☝</span>
-            <span>Clique em qualquer técnica para expandir as informações completas.</span>
+          <div class="tecnicas-grid">
+            <div class="tecnica-card"><div class="tecnica-tag">Respiração</div><div class="tecnica-title">Respiração diafragmática</div><div class="tecnica-body">Ativa o sistema nervoso parassimpático, reduzindo a ansiedade imediata.<ol><li>Coloque uma mão no peito e outra no abdômen.</li><li>Inspire pelo nariz por 4 segundos.</li><li>Segure por 2 segundos.</li><li>Expire pela boca por 6 segundos.</li><li>Repita 5 a 10 ciclos.</li></ol></div></div>
+            <div class="tecnica-card"><div class="tecnica-tag">Respiração</div><div class="tecnica-title">Técnica 4-7-8</div><div class="tecnica-body">Útil para induzir o sono e reduzir a ansiedade aguda.<ol><li>Expire completamente pela boca.</li><li>Inspire pelo nariz contando até 4.</li><li>Segure contando até 7.</li><li>Expire pela boca contando até 8.</li><li>Repita 4 vezes.</li></ol></div></div>
+            <div class="tecnica-card"><div class="tecnica-tag">Mindfulness</div><div class="tecnica-title">Atenção plena no presente</div><div class="tecnica-body">Foca no momento presente sem julgamento. Reduz ruminação e ansiedade antecipatória.<ol><li>Sente-se e feche os olhos.</li><li>Foque na sua respiração.</li><li>Quando a mente divagar, gentilmente volte ao foco.</li><li>Comece com 5 minutos e aumente gradualmente.</li></ol></div></div>
+            <div class="tecnica-card"><div class="tecnica-tag">Mindfulness</div><div class="tecnica-title">Técnica 5-4-3-2-1</div><div class="tecnica-body">Ancoragem sensorial para momentos de ansiedade intensa.<ol><li><strong>5</strong> coisas que você vê.</li><li><strong>4</strong> coisas que você toca.</li><li><strong>3</strong> coisas que você ouve.</li><li><strong>2</strong> coisas que você cheira.</li><li><strong>1</strong> coisa que você saboreia.</li></ol></div></div>
+            <div class="tecnica-card"><div class="tecnica-tag">TCC</div><div class="tecnica-title">Registro de pensamentos</div><div class="tecnica-body">Identifica e questiona pensamentos automáticos negativos.<ol><li>Anote a situação que gerou desconforto.</li><li>Identifique o pensamento automático.</li><li>Registre a emoção e sua intensidade (0–100%).</li><li>Busque evidências a favor e contra.</li><li>Formule um pensamento mais equilibrado.</li></ol></div></div>
+            <div class="tecnica-card"><div class="tecnica-tag">TCC</div><div class="tecnica-title">Ativação comportamental</div><div class="tecnica-body">Especialmente útil para depressão. Agir pode preceder a motivação.<ol><li>Liste atividades que já trouxeram prazer.</li><li>Avalie o prazer esperado (0–10).</li><li>Programe pelo menos 1 atividade por dia.</li><li>Registre o prazer real sentido após realizar.</li></ol></div></div>
           </div>
-
-          <div class="tec-categoria">TCC — Terapia Cognitivo-Comportamental</div>
-          <div class="tec-lista">
-
-            <div class="tecnica-card" onclick="toggleTec(this)">
-              <div class="tecnica-header">
-                <div><div class="tecnica-tag">TCC</div><div class="tecnica-title">Registro de pensamentos automáticos</div></div>
-                <span class="tecnica-arrow">▼</span>
-              </div>
-              <div class="tecnica-expanded">
-                <div class="tecnica-sec"><div class="tecnica-sec-lbl">O que é</div><div class="tecnica-sec-txt">Técnica central da TCC que consiste em anotar situações do cotidiano, os pensamentos automáticos que surgem espontaneamente e as emoções associadas a eles.</div></div>
-                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Objetivo</div><div class="tecnica-sec-txt">Aumentar a consciência sobre padrões de pensamento disfuncionais e seu impacto direto nas emoções e comportamentos.</div></div>
-                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Comprovação científica</div><div class="tecnica-sec-txt">Validada em centenas de ensaios clínicos randomizados para depressão e ansiedade (Beck, 1979; DeRubeis et al., 2019). Reconhecida pela APA como prática de primeira linha.</div></div>
-                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Por que ajuda no processo terapêutico</div><div class="tecnica-sec-txt">Ao tornar os pensamentos visíveis e conscientes, paciente e terapeuta identificam distorções cognitivas com mais precisão, tornando o trabalho em sessão mais eficaz e direcionado.</div></div>
-                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Como praticar</div><div class="tecnica-pratica">1. Anote a situação que gerou desconforto emocional.
-2. Escreva o pensamento automático exato que surgiu.
-3. Registre a emoção e sua intensidade (0–100%).
-4. Busque evidências a favor e contra aquele pensamento.
-5. Formule um pensamento alternativo mais equilibrado.</div></div>
-              </div>
-            </div>
-
-            <div class="tecnica-card" onclick="toggleTec(this)">
-              <div class="tecnica-header">
-                <div><div class="tecnica-tag">TCC</div><div class="tecnica-title">Reestruturação cognitiva</div></div>
-                <span class="tecnica-arrow">▼</span>
-              </div>
-              <div class="tecnica-expanded">
-                <div class="tecnica-sec"><div class="tecnica-sec-lbl">O que é</div><div class="tecnica-sec-txt">Técnica que identifica e modifica pensamentos distorcidos ou disfuncionais, substituindo-os por percepções mais realistas e equilibradas.</div></div>
-                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Objetivo</div><div class="tecnica-sec-txt">Reduzir o sofrimento emocional ao questionar a validade dos pensamentos negativos automáticos e desenvolver maior flexibilidade cognitiva.</div></div>
-                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Comprovação científica</div><div class="tecnica-sec-txt">Intervenção de primeira linha pela APA para depressão e ansiedade. Metanálises confirmam eficácia expressiva (Hofmann et al., 2012; Butler et al., 2006).</div></div>
-                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Por que ajuda no processo terapêutico</div><div class="tecnica-sec-txt">Pensamentos distorcidos alimentam ciclos de sofrimento. Questioná-los com método interrompe esses ciclos e promove uma visão mais adaptativa de si mesmo e das situações.</div></div>
-                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Como praticar</div><div class="tecnica-pratica">1. Identifique o pensamento perturbador.
-2. Pergunte: "Qual a evidência concreta de que isso é verdade?"
-3. Pergunte: "Há outra forma de interpretar essa situação?"
-4. Pergunte: "Qual seria o pior, o melhor e o mais provável cenário?"
-5. Escreva um pensamento alternativo mais adaptativo.</div></div>
-              </div>
-            </div>
-
-            <div class="tecnica-card" onclick="toggleTec(this)">
-              <div class="tecnica-header">
-                <div><div class="tecnica-tag">TCC</div><div class="tecnica-title">Ativação comportamental</div></div>
-                <span class="tecnica-arrow">▼</span>
-              </div>
-              <div class="tecnica-expanded">
-                <div class="tecnica-sec"><div class="tecnica-sec-lbl">O que é</div><div class="tecnica-sec-txt">Planejamento intencional de atividades que geram prazer, satisfação ou senso de conquista, mesmo quando a motivação ainda não está presente.</div></div>
-                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Objetivo</div><div class="tecnica-sec-txt">Combater a inatividade e o isolamento característicos da depressão, aumentando gradualmente a exposição a experiências positivas.</div></div>
-                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Comprovação científica</div><div class="tecnica-sec-txt">Eficácia comparável a antidepressivos em estudos controlados (Dimidjian et al., 2006; Jacobson et al., 1996). Base da Ativação Comportamental, uma das abordagens mais suportadas empiricamente.</div></div>
-                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Por que ajuda no processo terapêutico</div><div class="tecnica-sec-txt">A depressão reduz motivação e prazer, criando um ciclo de inatividade. Planejar atividades quebra esse ciclo ao gerar reforços positivos, mesmo quando o "querer" ainda não está presente.</div></div>
-                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Como praticar</div><div class="tecnica-pratica">1. Liste atividades que já trouxeram prazer ou satisfação.
-2. Avalie o prazer esperado (0–10) antes de realizar.
-3. Programe pelo menos 1 atividade por dia.
-4. Registre o prazer real após realizar — compare com o esperado.
-5. Aumente gradualmente frequência e variedade.</div></div>
-              </div>
-            </div>
-
-            <div class="tecnica-card" onclick="toggleTec(this)">
-              <div class="tecnica-header">
-                <div><div class="tecnica-tag">TCC</div><div class="tecnica-title">Resolução de problemas</div></div>
-                <span class="tecnica-arrow">▼</span>
-              </div>
-              <div class="tecnica-expanded">
-                <div class="tecnica-sec"><div class="tecnica-sec-lbl">O que é</div><div class="tecnica-sec-txt">Método estruturado para enfrentar situações desafiadoras de forma racional, reduzindo ruminação e paralisia por ansiedade.</div></div>
-                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Objetivo</div><div class="tecnica-sec-txt">Desenvolver enfrentamento ativo, substituindo evitação e ruminação por ação direcionada e efetiva.</div></div>
-                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Comprovação científica</div><div class="tecnica-sec-txt">A Terapia de Resolução de Problemas (PST) tem eficácia comprovada para depressão, ansiedade e estresse em múltiplos estudos controlados (Nezu et al., 2007).</div></div>
-                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Por que ajuda no processo terapêutico</div><div class="tecnica-sec-txt">Problemas não resolvidos alimentam o ciclo de ansiedade. Um método claro restaura o senso de controle e autoeficácia, reduzindo a carga emocional associada.</div></div>
-                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Como praticar</div><div class="tecnica-pratica">1. Defina o problema de forma específica e mensurável.
-2. Liste todas as soluções possíveis sem julgamento (brainstorm).
-3. Avalie os prós e contras reais de cada opção.
-4. Escolha a solução mais viável e planeje os passos.
-5. Implemente, avalie o resultado e ajuste se necessário.</div></div>
-              </div>
-            </div>
-
-          </div><!-- /tec-lista TCC -->
-
-          <div class="tec-categoria">Respiração, Relaxamento e Mindfulness</div>
-          <div class="tec-lista">
-
-            <div class="tecnica-card" onclick="toggleTec(this)">
-              <div class="tecnica-header">
-                <div><div class="tecnica-tag">Respiração</div><div class="tecnica-title">Respiração diafragmática</div></div>
-                <span class="tecnica-arrow">▼</span>
-              </div>
-              <div class="tecnica-expanded">
-                <div class="tecnica-sec"><div class="tecnica-sec-lbl">O que é</div><div class="tecnica-sec-txt">Técnica que ativa o diafragma — principal músculo respiratório — em vez da respiração torácica superficial que ocorre automaticamente no estresse.</div></div>
-                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Objetivo</div><div class="tecnica-sec-txt">Ativar o sistema nervoso parassimpático, reduzindo a resposta fisiológica de estresse de forma imediata e acessível.</div></div>
-                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Comprovação científica</div><div class="tecnica-sec-txt">Comprovada para redução de ansiedade, cortisol e pressão arterial. Estudos demonstram ativação direta do nervo vago (Ma et al., 2017; Zaccaro et al., 2018 — Frontiers in Human Neuroscience).</div></div>
-                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Por que ajuda no processo terapêutico</div><div class="tecnica-sec-txt">A respiração superficial sinaliza perigo ao sistema nervoso. A diafragmática ativa o "freio vagal", sinaliza segurança ao cérebro e promove calma — é uma das ferramentas de regulação emocional mais imediatas disponíveis.</div></div>
-                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Como praticar</div><div class="tecnica-pratica">1. Coloque uma mão no peito e outra no abdômen.
-2. Inspire pelo nariz por 4 segundos — o abdômen deve expandir, não o peito.
-3. Segure por 2 segundos.
-4. Expire pela boca por 6 segundos.
-5. Repita 5 a 10 ciclos, observando o relaxamento progressivo.</div></div>
-              </div>
-            </div>
-
-            <div class="tecnica-card" onclick="toggleTec(this)">
-              <div class="tecnica-header">
-                <div><div class="tecnica-tag">Respiração</div><div class="tecnica-title">Técnica 4-7-8</div></div>
-                <span class="tecnica-arrow">▼</span>
-              </div>
-              <div class="tecnica-expanded">
-                <div class="tecnica-sec"><div class="tecnica-sec-lbl">O que é</div><div class="tecnica-sec-txt">Técnica com ciclos específicos — inspiração (4s), retenção (7s) e expiração (8s) — desenvolvida pelo Dr. Andrew Weil com base no pranayama do yoga.</div></div>
-                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Objetivo</div><div class="tecnica-sec-txt">Induzir relaxamento profundo rapidamente — útil antes de dormir, em crises de ansiedade aguda ou para interromper escalada emocional.</div></div>
-                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Comprovação científica</div><div class="tecnica-sec-txt">Efeitos positivos sobre o sistema nervoso autônomo e qualidade do sono (Jerath et al., 2015; Brown & Gerbarg, 2005 — Journal of Alternative and Complementary Medicine).</div></div>
-                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Por que ajuda no processo terapêutico</div><div class="tecnica-sec-txt">A expiração prolongada ativa o nervo vago e o sistema parassimpático. A retenção sinaliza ao cérebro que não há ameaça imediata, interrompendo o ciclo de hiperativação da ansiedade.</div></div>
-                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Como praticar</div><div class="tecnica-pratica">1. Expire completamente pela boca.
-2. Inspire pelo nariz contando até 4.
-3. Segure a respiração contando até 7.
-4. Expire completamente pela boca contando até 8.
-5. Repita 4 vezes. Pratique 2× ao dia para melhores resultados.</div></div>
-              </div>
-            </div>
-
-            <div class="tecnica-card" onclick="toggleTec(this)">
-              <div class="tecnica-header">
-                <div><div class="tecnica-tag">Mindfulness</div><div class="tecnica-title">Atenção plena no presente</div></div>
-                <span class="tecnica-arrow">▼</span>
-              </div>
-              <div class="tecnica-expanded">
-                <div class="tecnica-sec"><div class="tecnica-sec-lbl">O que é</div><div class="tecnica-sec-txt">Prática de observar pensamentos, emoções e sensações do momento presente com curiosidade e sem julgamento.</div></div>
-                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Objetivo</div><div class="tecnica-sec-txt">Desenvolver uma relação diferente com os próprios pensamentos — observando-os como eventos mentais passageiros, não como fatos absolutos.</div></div>
-                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Comprovação científica</div><div class="tecnica-sec-txt">Base da MBSR e da MBCT. Metanálises demonstram eficácia para depressão, ansiedade e prevenção de recaída (Kabat-Zinn, 1990; Segal et al., 2002; Hofmann et al., 2010).</div></div>
-                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Por que ajuda no processo terapêutico</div><div class="tecnica-sec-txt">Em vez de lutar contra pensamentos negativos — o que os amplifica — o mindfulness treina o cérebro para observá-los com equanimidade, reduzindo a reatividade emocional a longo prazo.</div></div>
-                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Como praticar</div><div class="tecnica-pratica">1. Sente-se e feche os olhos.
-2. Foque na sensação da respiração por 1–2 minutos.
-3. Quando um pensamento surgir, observe-o sem julgamento.
-4. Gentilmente, retorne a atenção à respiração — sem autocrítica.
-5. Comece com 5 minutos e aumente gradualmente.</div></div>
-              </div>
-            </div>
-
-            <div class="tecnica-card" onclick="toggleTec(this)">
-              <div class="tecnica-header">
-                <div><div class="tecnica-tag">Mindfulness</div><div class="tecnica-title">Técnica 5-4-3-2-1</div></div>
-                <span class="tecnica-arrow">▼</span>
-              </div>
-              <div class="tecnica-expanded">
-                <div class="tecnica-sec"><div class="tecnica-sec-lbl">O que é</div><div class="tecnica-sec-txt">Ancoragem sensorial que redireciona a atenção para o momento presente usando os cinco sentidos, interrompendo pensamentos ansiosos.</div></div>
-                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Objetivo</div><div class="tecnica-sec-txt">Interromper episódios de ansiedade intensa ou ataques de pânico, ancorando a consciência no aqui e agora de forma imediata.</div></div>
-                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Comprovação científica</div><div class="tecnica-sec-txt">Amplamente aplicada no tratamento de pânico e TEPT, com suporte empírico como técnica de regulação emocional (Gratz & Roemer, 2004; Bryant et al., 2008).</div></div>
-                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Por que ajuda no processo terapêutico</div><div class="tecnica-sec-txt">Em crises de ansiedade, a mente projeta ameaças futuras. Ancorar nos sentidos do presente ativa o córtex pré-frontal e reduz a hiperativação da amígdala, quebrando o ciclo de pânico.</div></div>
-                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Como praticar</div><div class="tecnica-pratica">1. VEJA: nomeie 5 coisas que você consegue ver.
-2. TOQUE: nomeie 4 texturas que consegue sentir agora.
-3. OUÇA: nomeie 3 sons presentes neste momento.
-4. CHEIRE: nomeie 2 cheiros que consegue identificar.
-5. PROVE: nomeie 1 sabor perceptível. Respire fundo entre cada etapa.</div></div>
-              </div>
-            </div>
-
-            <div class="tecnica-card" onclick="toggleTec(this)">
-              <div class="tecnica-header">
-                <div><div class="tecnica-tag">Relaxamento</div><div class="tecnica-title">Relaxamento muscular progressivo</div></div>
-                <span class="tecnica-arrow">▼</span>
-              </div>
-              <div class="tecnica-expanded">
-                <div class="tecnica-sec"><div class="tecnica-sec-lbl">O que é</div><div class="tecnica-sec-txt">Técnica de Edmund Jacobson (1929) que consiste em tensionar e relaxar grupos musculares progressivamente pelo corpo, desenvolvendo consciência corporal.</div></div>
-                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Objetivo</div><div class="tecnica-sec-txt">Reduzir a tensão muscular crônica associada ao estresse e à ansiedade, promovendo relaxamento físico profundo e maior consciência da conexão corpo-mente.</div></div>
-                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Comprovação científica</div><div class="tecnica-sec-txt">Uma das técnicas de relaxamento mais estudadas. Eficácia comprovada para ansiedade generalizada, insônia e dor crônica (Conrad & Roth, 2007 — Journal of Clinical Psychology).</div></div>
-                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Por que ajuda no processo terapêutico</div><div class="tecnica-sec-txt">Ansiedade se manifesta fisicamente como tensão muscular muitas vezes inconsciente. Identificá-la e relaxá-la interrompe o ciclo mente-corpo do estresse e desenvolve maior autorregulação.</div></div>
-                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Como praticar</div><div class="tecnica-pratica">1. Deite-se em local confortável e silencioso.
-2. Começando pelos pés, tensione o grupo muscular por 5–7 segundos.
-3. Libere a tensão e perceba o contraste por 20–30 segundos.
-4. Avance: pernas, abdômen, mãos, braços, ombros, pescoço, rosto.
-5. Ao final, permaneça relaxado por 2–3 minutos respirando lentamente.</div></div>
-              </div>
-            </div>
-
-          </div><!-- /tec-lista Respiração -->
         </div>
 
         <!-- REDE -->
@@ -693,16 +504,17 @@
           <h1 class="page-title">Rede de apoio pública</h1>
           <p class="page-sub">Serviços públicos e gratuitos de saúde mental no Brasil.</p>
 
-          <div class="rede-hero">
-            <div class="rede-hero-num">188</div>
-            <div class="rede-hero-info">
-              <strong>CVV — Centro de Valorização da Vida</strong>
-              <p>Apoio emocional e prevenção do suicídio. Gratuito, voluntário e sigiloso. 24h por dia, 7 dias por semana. Além do telefone, atende por chat e e-mail em <strong style="color:var(--slate-light)">cvv.org.br</strong></p>
-            </div>
-          </div>
-
           <div class="section-eyebrow">Urgências</div>
           <div class="rede-grid">
+            <div class="rede-card">
+              <div class="rede-name">CVV — Centro de Valorização da Vida</div>
+              <div class="rede-type">Apoio emocional · Prevenção do suicídio</div>
+              <div class="rede-info">Serviço voluntário e sigiloso para apoio emocional a qualquer pessoa em sofrimento. Atende por telefone, chat e e-mail.</div>
+              <span class="rede-tel">188</span>
+              <a class="rede-link" href="https://www.cvv.org.br" target="_blank" rel="noopener">cvv.org.br</a>
+              <div class="rede-hours">⏱ 24 horas · 7 dias por semana · Gratuito</div>
+              <div class="rede-how">Escuta ativa e acolhimento sem julgamento. Chat disponível no site para quem prefere não ligar. E-mail: atendimento@cvv.org.br</div>
+            </div>
             <div class="rede-card">
               <div class="rede-name">SAMU</div>
               <div class="rede-type">Urgência e emergência médica</div>
@@ -710,15 +522,6 @@
               <span class="rede-tel">192</span>
               <div class="rede-hours">⏱ 24 horas · 7 dias por semana</div>
               <div class="rede-how">Ligue em qualquer crise com risco de vida. A equipe pode ser acionada para atendimento presencial.</div>
-            </div>
-            <div class="rede-card">
-              <div class="rede-name">CVV — Telefone Esperança</div>
-              <div class="rede-type">Apoio emocional · Prevenção do suicídio</div>
-              <div class="rede-info">Serviço voluntário e sigiloso para apoio emocional a qualquer pessoa em sofrimento.</div>
-              <span class="rede-tel">188</span>
-              <a class="rede-link" href="https://www.cvv.org.br" target="_blank" rel="noopener">cvv.org.br</a>
-              <div class="rede-hours">⏱ 24 horas · 7 dias por semana · Gratuito</div>
-              <div class="rede-how">Escuta ativa e acolhimento sem julgamento. Chat disponível no site para quem prefere não falar ao telefone. E-mail: atendimento@cvv.org.br</div>
             </div>
           </div>
 
@@ -730,7 +533,7 @@
               <div class="rede-info">Serviço especializado com equipe multiprofissional: psicólogos, psiquiatras e assistentes sociais.</div>
               <a class="rede-link" href="https://cnes.datasus.gov.br" target="_blank" rel="noopener">Localize em cnes.datasus.gov.br</a>
               <div class="rede-hours">⏱ Seg–Sex, 8h–17h (CAPS III: 24h)</div>
-              <div class="rede-how">Atendimento individual e em grupo, medicação e reabilitação psicossocial. Acesso por demanda espontânea — sem encaminhamento necessário. Tipos: CAPS I/II (geral), CAPS III (24h), CAPSad (álcool/drogas), CAPSi (infanto-juvenil).</div>
+              <div class="rede-how">Atendimento individual e em grupo, medicação e reabilitação psicossocial. Acesso por demanda espontânea — sem encaminhamento. Tipos: CAPS I/II (geral), CAPS III (24h), CAPSad (álcool/drogas), CAPSi (infanto-juvenil).</div>
             </div>
             <div class="rede-card">
               <div class="rede-name">UBS — Unidade Básica de Saúde</div>
@@ -746,7 +549,7 @@
               <div class="rede-info">Especializado em transtornos pelo uso de álcool e outras drogas. Atendimento intensivo, semi-intensivo e não-intensivo.</div>
               <span class="rede-tel">138 — SENAD</span>
               <div class="rede-hours">⏱ Seg–Sex, 8h–17h (alguns 24h)</div>
-              <div class="rede-how">Liga 138 (SENAD): apoio e encaminhamento para tratamento de dependência química. Gratuito e disponível 24h.</div>
+              <div class="rede-how">Ligue 138 para orientação e encaminhamento ao CAPS AD da sua região. Gratuito e disponível 24h.</div>
             </div>
             <div class="rede-card">
               <div class="rede-name">CAPS i — Infância e Adolescência</div>
@@ -766,7 +569,7 @@
               <div class="rede-info">Universidades com cursos de Psicologia mantêm atendimento gratuito ou de baixo custo, supervisionado por docentes.</div>
               <a class="rede-link" href="https://site.cfp.org.br" target="_blank" rel="noopener">Lista em cfp.org.br</a>
               <div class="rede-hours">⏱ Varia por instituição</div>
-              <div class="rede-how">O CFP e os CRPs estaduais mantêm listas atualizadas de serviços a preço social. Indicado para quem não tem plano de saúde.</div>
+              <div class="rede-how">O CFP e os CRPs estaduais mantêm listas atualizadas. Indicado para quem não tem plano de saúde.</div>
             </div>
             <div class="rede-card">
               <div class="rede-name">Ministério da Saúde</div>
@@ -774,7 +577,7 @@
               <div class="rede-info">Portal oficial com mapa de serviços de saúde mental do SUS em todo o Brasil.</div>
               <a class="rede-link" href="https://www.gov.br/saude/saude-mental" target="_blank" rel="noopener">gov.br/saude/saude-mental</a>
               <div class="rede-hours">⏱ Disponível online 24h</div>
-              <div class="rede-how">Use para localizar CAPS, UBS e outros serviços próximos à sua residência. Também disponível o aplicativo "Saúde SUS".</div>
+              <div class="rede-how">Use para localizar CAPS, UBS e outros serviços próximos. Disponível também o aplicativo "Saúde SUS".</div>
             </div>
           </div>
         </div>
@@ -827,7 +630,7 @@ const SUPABASE_URL='https://fwmogocixvwuzaseiqvh.supabase.co'
 const SUPABASE_KEY='sb_publishable_yPPdPIvLjc6up3nHrfj5NQ_EucGid_M'
 const sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY)
 const EMAIL_PSI='mcamillopsi@gmail.com'
-let user=null,testeAtual=null,perguntaAtual=0,respostas=[],grafico=null,sidebarOpen=true
+let user=null,testeAtual=null,perguntaAtual=0,respostas=[],graficos={},sidebarOpen=true
 
 const testes={
   phq9:{nome:'PHQ-9 — Depressão',instrucao:'Nas últimas 2 semanas, com que frequência você foi incomodado pelos problemas abaixo?',opcoes:['Nenhuma vez (0)','Vários dias (1)','Mais da metade dos dias (2)','Quase todos os dias (3)'],vals:[0,1,2,3],perguntas:['Pouco interesse ou pouco prazer em fazer as coisas','Sentir-se "para baixo", deprimido(a) ou sem perspectiva','Dificuldade para adormecer, permanecer dormindo ou dormir mais do que de costume','Sentir-se cansado(a) ou com pouca energia','Apetite diminuído ou aumentado','Sentir-se mal consigo mesmo(a) ou achar que é um fracasso','Dificuldade para se concentrar nas coisas','Mover-se ou falar mais lentamente que o habitual, ou estar muito agitado(a)','Pensamentos de se machucar ou de que seria melhor estar morto(a)'],classificar:p=>{if(p<=4)return{label:'Mínima',cor:'var(--green)',desc:'Seus resultados indicam sintomas mínimos de depressão. Continue cuidando do seu bem-estar com hábitos saudáveis e acompanhamento regular.'};if(p<=9)return{label:'Leve',cor:'var(--yellow)',desc:'Seus resultados indicam sintomas leves de depressão. Acompanhamento clínico e atenção ao bem-estar emocional são recomendados.'};if(p<=14)return{label:'Moderada',cor:'#b8610a',desc:'Seus resultados indicam sintomas moderados de depressão. O acompanhamento psicológico regular é indicado.'};if(p<=19)return{label:'Moderadamente grave',cor:'var(--red)',desc:'Seus resultados indicam sintomas moderadamente graves. Suporte profissional com regularidade é muito importante.'};return{label:'Grave',cor:'var(--red)',desc:'Seus resultados indicam sintomas graves de depressão. Busque suporte profissional urgente.'}}},
@@ -912,35 +715,62 @@ function logout(){
 
 async function carregarDashboard(){
   const {data}=await sb.from('resultados').select('*').eq('paciente_id',user.id).order('criado_em',{ascending:false})
-  renderStats(data||[]);renderHistorico(data||[]);renderGrafico(data||[])
+  renderStats(data||[]);renderHistorico(data||[]);renderGraficos(data||[])
 }
 
 function renderStats(data){
-  let tempoHtml='—'
-  if(user.data_inicio){const dias=Math.floor((new Date()-new Date(user.data_inicio))/86400000);const meses=Math.floor(dias/30);tempoHtml=meses>0?`${meses}m`:`${dias}d`}
-  document.getElementById('stat-row').innerHTML=`
-    <div class="stat-card"><div class="stat-num">${data.length}</div><div class="stat-lbl">Testes realizados</div></div>
-    <div class="stat-card"><div class="stat-num">${user.sessoes||0}</div><div class="stat-lbl">Sessões realizadas</div></div>
-    <div class="stat-card"><div class="stat-num">${tempoHtml}</div><div class="stat-lbl">Em acompanhamento</div></div>
-    <div class="stat-card"><div class="stat-num" style="font-size:0.95rem;padding-top:0.55rem">${data[0]?badgeHtml(data[0].classificacao):'—'}</div><div class="stat-lbl">Último resultado</div></div>`
-  renderFarol(data)
-}
-
-function renderFarol(data){
-  const wrap=document.getElementById('farol-wrap')
-  if(!data.length){wrap.style.display='none';return}
-  wrap.style.display='flex'
+  // Calcula farol de cuidado
   const ultimos={};data.forEach(r=>{const k=r.teste.split('—')[0].trim();if(!ultimos[k])ultimos[k]=r})
-  const classes=Object.values(ultimos).map(r=>r.classificacao)
+  const testesFeitos=Object.entries(ultimos)
   let nivel='verde'
-  classes.forEach(c=>{if(c.includes('Grave')||c.includes('grave'))nivel='vermelho';else if(nivel!=='vermelho'&&(c.includes('Moderada')||c.includes('Moderado')))nivel='amarelo'})
-  document.getElementById('farol-red').classList.toggle('on',nivel==='vermelho')
-  document.getElementById('farol-yellow').classList.toggle('on',nivel==='amarelo')
-  document.getElementById('farol-green').classList.toggle('on',nivel==='verde')
-  const tag=document.getElementById('farol-tag');tag.className='farol-tag '+nivel
-  if(nivel==='verde'){tag.textContent='Indicador favorável';document.getElementById('farol-titulo').textContent='Resultados dentro do esperado';document.getElementById('farol-desc').textContent='Seus últimos resultados indicam sintomas mínimos ou leves. Continue com o acompanhamento regular e as práticas de autocuidado.'}
-  else if(nivel==='amarelo'){tag.textContent='Atenção recomendada';document.getElementById('farol-titulo').textContent='Sintomas moderados identificados';document.getElementById('farol-desc').textContent='Seus últimos resultados indicam sintomas moderados. Mantenha o acompanhamento em dia e converse com seu psicólogo.'}
-  else{tag.textContent='Suporte prioritário';document.getElementById('farol-titulo').textContent='Sintomas graves identificados';document.getElementById('farol-desc').textContent='Seus últimos resultados indicam sintomas graves. Mantenha contato próximo com seu psicólogo. Se precisar de apoio imediato, ligue 188 (CVV) — disponível 24h.'}
+  testesFeitos.forEach(([,r])=>{
+    const c=r.classificacao
+    if(c.includes('Grave')||c.includes('grave'))nivel='vermelho'
+    else if(nivel!=='vermelho'&&(c.includes('Moderada')||c.includes('Moderado')))nivel='amarelo'
+  })
+
+  // Labels do farol
+  const farolLabels={
+    verde:{tag:'Indicador favorável',titulo:'Resultados dentro do esperado'},
+    amarelo:{tag:'Atenção recomendada',titulo:'Sintomas moderados identificados'},
+    vermelho:{tag:'Suporte prioritário',titulo:'Sintomas graves identificados'}
+  }
+  const fl=farolLabels[nivel]
+
+  // Linhas por teste
+  const testesHtml=testesFeitos.length
+    ? testesFeitos.map(([nome,r])=>`<div class="farol-teste-linha"><span class="farol-teste-nome">${nome}:</span>${badgeHtml(r.classificacao)}</div>`).join('')
+    : '<div class="farol-teste-linha">Nenhum teste realizado ainda.</div>'
+
+  // Data de início
+  let dataInicio='—'
+  if(user.data_inicio){
+    dataInicio=new Date(user.data_inicio).toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric'})
+  }
+
+  document.getElementById('stat-row').innerHTML=`
+    <div class="stat-card">
+      <div class="stat-num" style="font-size:1.35rem;padding-top:0.3rem">${dataInicio}</div>
+      <div class="stat-lbl">Início do acompanhamento</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">${user.sessoes||0}</div>
+      <div class="stat-lbl">Sessões realizadas</div>
+    </div>
+    <div class="stat-card farol-card ${testesFeitos.length?nivel:''}">
+      <div class="stat-lbl" style="margin-bottom:0.6rem">Farol de Cuidado</div>
+      <div class="farol-inner">
+        <div class="farol-lights">
+          <div class="farol-light farol-red${nivel==='vermelho'?' on':''}"></div>
+          <div class="farol-light farol-yellow${nivel==='amarelo'?' on':''}"></div>
+          <div class="farol-light farol-green${nivel==='verde'&&testesFeitos.length?' on':''}"></div>
+        </div>
+        <div>
+          ${testesFeitos.length?`<div class="farol-tag ${nivel}">${fl.tag}</div><div class="farol-titulo">${fl.titulo}</div>`:'<div class="farol-titulo" style="color:var(--text-muted);font-weight:300">Aguardando primeiro teste</div>'}
+          <div class="farol-testes">${testesHtml}</div>
+        </div>
+      </div>
+    </div>`
 }
 
 function renderHistorico(data){
@@ -950,35 +780,94 @@ function renderHistorico(data){
   document.getElementById('historico-body').innerHTML=data.map(r=>`<tr><td>${r.teste}</td><td>${r.pontuacao}</td><td>${badgeHtml(r.classificacao)}</td><td>${fmt(r.criado_em)}</td></tr>`).join('')
 }
 
-function renderGrafico(data){
-  const empty=document.getElementById('chart-empty');const canvas=document.getElementById('grafico')
-  if(!data.length){empty.style.display='block';canvas.style.display='none';return}
-  empty.style.display='none';canvas.style.display='block'
-  const porTeste={};[...data].reverse().forEach(r=>{const k=r.teste.split('—')[0].trim();if(!porTeste[k])porTeste[k]=[];porTeste[k].push({x:fmt(r.criado_em),y:r.pontuacao})})
-  const pal={'PHQ-9':'#b8974a','GAD-7':'#0d1f3c','DASS-21':'#2d7a4f'}
-  if(grafico)grafico.destroy()
-  grafico=new Chart(canvas,{
-    type:'line',
-    data:{datasets:Object.keys(porTeste).map(t=>{
-      const cor=Object.keys(pal).find(k=>t.includes(k));const c=cor?pal[cor]:'#a32d2d'
-      return{label:t,data:porTeste[t],borderColor:c,backgroundColor:'transparent',tension:0.35,pointRadius:5,pointHoverRadius:7,borderWidth:2.5,pointBackgroundColor:c}
-    })},
-    options:{
-      responsive:true,
-      interaction:{mode:'nearest',intersect:false},
-      plugins:{
-        legend:{labels:{font:{family:'Sora',size:11},color:'#0d1f3c',usePointStyle:true,padding:16}},
-        tooltip:{callbacks:{title:i=>i[0].dataset.label,label:i=>` Pontuação: ${i.parsed.y}  ·  ${i.parsed.x}`}}
-      },
-      scales:{
-        x:{ticks:{font:{family:'Sora',size:10}},title:{display:true,text:'Data da avaliação',font:{family:'Sora',size:10},color:'#8a9ab5'}},
-        y:{beginAtZero:true,ticks:{font:{family:'Sora',size:10}},title:{display:true,text:'Pontuação',font:{family:'Sora',size:10},color:'#8a9ab5'},grid:{color:'rgba(194,205,224,0.35)'}}
+function renderGraficos(data){
+  const grid=document.getElementById('graficos-grid')
+
+  if(!data.length){
+    grid.innerHTML='<div class="chart-card"><div class="empty-state">Faça seu primeiro teste para visualizar sua evolução aqui.</div></div>'
+    return
+  }
+
+  // Agrupa por teste preservando ordem cronológica
+  const porTeste={}
+  ;[...data].reverse().forEach(r=>{
+    const k=r.teste.split('—')[0].trim()
+    if(!porTeste[k])porTeste[k]=[]
+    porTeste[k].push({x:fmt(r.criado_em),y:r.pontuacao})
+  })
+
+  // Configurações clínicas por teste
+  const config={
+    'PHQ-9':{cor:'#b8974a',desc:'Sintomas depressivos — escala 0 a 27',max:27,refs:[
+      {y:5,label:'Leve',color:'rgba(200,150,10,0.4)'},
+      {y:10,label:'Moderado',color:'rgba(184,97,10,0.4)'},
+      {y:20,label:'Grave',color:'rgba(163,45,45,0.4)'}
+    ]},
+    'GAD-7':{cor:'#0d1f3c',desc:'Sintomas de ansiedade generalizada — escala 0 a 21',max:21,refs:[
+      {y:5,label:'Leve',color:'rgba(200,150,10,0.4)'},
+      {y:10,label:'Moderado',color:'rgba(184,97,10,0.4)'},
+      {y:15,label:'Grave',color:'rgba(163,45,45,0.4)'}
+    ]},
+    'DASS-21':{cor:'#2d7a4f',desc:'Depressão, ansiedade e estresse combinados — escala 0 a 126',max:126,refs:[
+      {y:28,label:'Leve',color:'rgba(200,150,10,0.4)'},
+      {y:56,label:'Moderado',color:'rgba(184,97,10,0.4)'},
+      {y:84,label:'Grave',color:'rgba(163,45,45,0.4)'}
+    ]}
+  }
+
+  // Destrói gráficos anteriores
+  Object.values(graficos).forEach(g=>g.destroy())
+  graficos={}
+
+  // Monta um card por teste realizado
+  grid.innerHTML=Object.keys(porTeste).map(nome=>`
+    <div class="chart-card">
+      <div class="chart-card-title">${nome}</div>
+      <div class="chart-card-sub">${config[nome]?config[nome].desc:''} · Linhas tracejadas = cortes clínicos de referência</div>
+      <canvas id="canvas-${nome.replace(/[^a-z0-9]/gi,'_')}" style="max-height:200px"></canvas>
+    </div>`).join('')
+
+  // Renderiza cada gráfico
+  Object.keys(porTeste).forEach(nome=>{
+    const canvasId='canvas-'+nome.replace(/[^a-z0-9]/gi,'_')
+    const canvas=document.getElementById(canvasId)
+    if(!canvas)return
+    const cfg=config[nome]||{cor:'#888',max:30,refs:[]}
+    const annotations={}
+    cfg.refs.forEach((r,i)=>{
+      annotations['ref'+i]={
+        type:'line',yMin:r.y,yMax:r.y,
+        borderColor:r.color.replace('0.4','0.7'),
+        borderWidth:1.5,borderDash:[5,4],
+        label:{display:true,content:r.label,position:'end',
+          font:{family:'Sora',size:9},
+          color:'#8a9ab5',backgroundColor:'transparent',padding:2}
       }
-    }
+    })
+    graficos[nome]=new Chart(canvas,{
+      type:'line',
+      data:{datasets:[{
+        label:nome,data:porTeste[nome],
+        borderColor:cfg.cor,backgroundColor:'transparent',
+        tension:0.35,pointRadius:5,pointHoverRadius:7,
+        borderWidth:2.5,pointBackgroundColor:cfg.cor
+      }]},
+      options:{
+        responsive:true,
+        interaction:{mode:'nearest',intersect:false},
+        plugins:{
+          legend:{display:false},
+          annotation:{annotations},
+          tooltip:{callbacks:{label:i=>` Pontuação: ${i.parsed.y}`}}
+        },
+        scales:{
+          x:{ticks:{font:{family:'Sora',size:10}},title:{display:true,text:'Data',font:{family:'Sora',size:10},color:'#8a9ab5'}},
+          y:{beginAtZero:true,max:cfg.max,ticks:{font:{family:'Sora',size:10}},title:{display:true,text:'Pontuação',font:{family:'Sora',size:10},color:'#8a9ab5'},grid:{color:'rgba(194,205,224,0.3)'}}
+        }
+      }
+    })
   })
 }
-
-function toggleTec(card){card.classList.toggle('open')}
 
 function iniciarTeste(id){testeAtual=id;perguntaAtual=0;respostas=[];irPara('test');renderPergunta()}
 function renderPergunta(){
