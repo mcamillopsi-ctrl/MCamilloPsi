@@ -110,21 +110,15 @@
     .farol-card.verde{border-top-color:var(--green)}
     .farol-card.amarelo{border-top-color:var(--yellow)}
     .farol-card.vermelho{border-top-color:var(--red)}
-    .farol-inner{display:flex;align-items:flex-start;gap:0.75rem}
-    .farol-lights{display:flex;flex-direction:column;gap:4px;padding-top:3px;flex-shrink:0}
-    .farol-light{width:11px;height:11px;border-radius:50%;opacity:0.12;transition:opacity 0.25s}
-    .farol-light.on{opacity:1}
-    .farol-green{background:var(--green)}
-    .farol-yellow{background:var(--yellow)}
-    .farol-red{background:var(--red)}
-    .farol-tag{display:inline-block;font-size:0.58rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:0.12rem 0.5rem;border-radius:20px;margin-bottom:0.28rem}
+    .farol-inner{display:flex;align-items:center;gap:0.6rem}
+    .farol-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+    .farol-dot-verde{background:var(--green)}
+    .farol-dot-amarelo{background:var(--yellow)}
+    .farol-dot-vermelho{background:var(--red)}
+    .farol-tag{display:inline-block;font-size:0.58rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:0.12rem 0.5rem;border-radius:20px}
     .farol-tag.verde{background:#e8f5ee;color:var(--green)}
     .farol-tag.amarelo{background:#fff8e0;color:var(--yellow)}
     .farol-tag.vermelho{background:#fce8e8;color:var(--red)}
-    .farol-titulo{font-size:0.78rem;font-weight:500;color:var(--navy);margin-bottom:0.3rem}
-    .farol-testes{display:flex;flex-direction:column;gap:0.18rem;margin-top:0.35rem}
-    .farol-teste-linha{font-size:0.68rem;font-weight:300;color:var(--text-muted);display:flex;align-items:center;gap:0.4rem}
-    .farol-teste-nome{font-weight:500;color:var(--navy)}
 
     /* ══ MULTI-GRÁFICO ══ */
     .graficos-grid{display:flex;flex-direction:column;gap:1rem;margin-bottom:1.5rem}
@@ -899,22 +893,18 @@ function renderStats(data){
   }
 
   document.getElementById('stat-row').innerHTML=`
-    <div class="stat-card">
-      <div class="stat-num" style="font-size:1.35rem;padding-top:0.3rem">${dataInicio}</div>
-      <div class="stat-lbl">Início do acompanhamento</div>
+    <div class="stat-card" style="display:flex;flex-direction:column;justify-content:center">
+      <div class="stat-lbl" style="margin-bottom:0.5rem">Início do acompanhamento</div>
+      <div class="stat-num" style="font-size:${dataInicio==='—'?'2rem':'1.2rem'}">${dataInicio}</div>
     </div>
-    <div class="stat-card">
+    <div class="stat-card" style="display:flex;flex-direction:column;justify-content:center">
+      <div class="stat-lbl" style="margin-bottom:0.5rem">Sessões realizadas</div>
       <div class="stat-num">${user.sessoes||0}</div>
-      <div class="stat-lbl">Sessões realizadas</div>
     </div>
-    <div class="stat-card farol-card ${testesFeitos.length?nivel:''}">
+    <div class="stat-card farol-card ${testesFeitos.length?nivel:''}" style="display:flex;flex-direction:column;justify-content:center">
       <div class="stat-lbl" style="margin-bottom:0.65rem">Farol de Cuidado</div>
       <div class="farol-inner">
-        <div class="farol-lights">
-          <div class="farol-light farol-red${nivel==='vermelho'?' on':''}"></div>
-          <div class="farol-light farol-yellow${nivel==='amarelo'?' on':''}"></div>
-          <div class="farol-light farol-green${nivel==='verde'&&testesFeitos.length?' on':''}"></div>
-        </div>
+        ${testesFeitos.length?`<div class="farol-dot farol-dot-${nivel}"></div>`:''}
         <div>
           ${testesFeitos.length
             ?`<div class="farol-tag ${fl.cor}">${fl.tag}</div>`
@@ -926,14 +916,17 @@ function renderStats(data){
   // Bloco de descrição interpretativa abaixo dos stats
   const blocoDesc=document.getElementById('farol-desc-bloco')
   const textoDesc=document.getElementById('farol-desc-texto')
+  const bgCores={verde:'rgba(45,122,79,0.06)',amarelo:'rgba(200,150,10,0.07)',vermelho:'rgba(163,45,45,0.06)'}
+  const bdCores={verde:'var(--green)',amarelo:'var(--yellow)',vermelho:'var(--red)'}
   const descricoes={
-    verde:`O seu <strong>Farol de Cuidado</strong> está verde — isso significa que, com base nos testes realizados, os seus indicadores de saúde mental estão dentro de um nível favorável. Isso não quer dizer ausência de desafios, mas sim que os sintomas estão em patamares leves ou mínimos. Continue com o acompanhamento regular e com as práticas de autocuidado: eles fazem diferença a longo prazo.`,
-    amarelo:`O seu <strong>Farol de Cuidado</strong> está amarelo — isso indica que um ou mais dos seus testes identificaram sintomas em nível moderado. É um sinal de atenção: não de alarme, mas de cuidado redobrado. Mantenha o seu acompanhamento terapêutico em dia, utilize as técnicas disponíveis nesta plataforma e converse com o seu psicólogo sobre o que está sentindo.`,
-    vermelho:`O seu <strong>Farol de Cuidado</strong> está vermelho — isso indica que um ou mais dos seus testes identificaram sintomas em nível grave. É importante que você mantenha contato próximo com o seu psicólogo e não enfrente isso sozinho(a). Mantenha o seu acompanhamento terapêutico em dia e converse com o seu psicólogo sobre o que está sentindo.`
+    verde:`<strong>Sem necessidade de atenção</strong> — com base nos testes realizados, os seus indicadores de saúde mental estão dentro de um nível favorável. Isso não quer dizer ausência de desafios, mas sim que os sintomas estão em patamares leves ou mínimos. Continue com o acompanhamento regular e com as práticas de autocuidado: eles fazem diferença a longo prazo.`,
+    amarelo:`<strong>Atenção recomendada</strong> — um ou mais dos seus testes identificaram sintomas em nível moderado. É um sinal de atenção: não de alarme, mas de cuidado redobrado. Mantenha o seu acompanhamento terapêutico em dia, utilize as técnicas disponíveis nesta plataforma e converse com o seu psicólogo sobre o que está sentindo.`,
+    vermelho:`<strong>Atenção altamente recomendada</strong> — um ou mais dos seus testes identificaram sintomas em nível grave. É importante que você mantenha contato próximo com o seu psicólogo e não enfrente isso sozinho(a). Mantenha o seu acompanhamento terapêutico em dia e converse com o seu psicólogo sobre o que está sentindo.`
   }
   if(testesFeitos.length){
     blocoDesc.style.display='block'
-    blocoDesc.style.borderLeftColor=nivel==='verde'?'var(--green)':nivel==='amarelo'?'var(--yellow)':'var(--red)'
+    blocoDesc.style.background=bgCores[nivel]
+    blocoDesc.style.borderLeftColor=bdCores[nivel]
     textoDesc.innerHTML=descricoes[nivel]
   } else {
     blocoDesc.style.display='none'
