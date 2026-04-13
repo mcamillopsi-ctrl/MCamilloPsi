@@ -406,7 +406,7 @@
 
           <div class="section-eyebrow">Evolução ao longo do tempo</div>
           <div id="farol-desc-bloco" style="display:none;background:var(--white);border:1px solid var(--border);border-radius:8px;padding:1rem 1.25rem;margin-bottom:1rem;border-left:3px solid var(--gold)">
-            <p id="farol-desc-texto" style="font-size:0.78rem;font-weight:300;color:var(--text-muted);line-height:1.75"></p>
+            <p id="farol-desc-texto" style="font-size:0.78rem;font-weight:300;color:var(--navy-light);line-height:1.75"></p>
           </div>
           <div class="graficos-grid" id="graficos-grid">
             <div class="chart-card">
@@ -889,7 +889,7 @@ function renderStats(data){
   // Data de início
   let dataInicio='—'
   if(user.data_inicio){
-    dataInicio=new Date(user.data_inicio).toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric'})
+    const [y,m,d]=user.data_inicio.split('-');dataInicio=`${d}/${m}/${y}`
   }
 
   document.getElementById('stat-row').innerHTML=`
