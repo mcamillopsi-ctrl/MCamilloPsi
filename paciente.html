@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MCamilloPsi — Área do Paciente</title>
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3"></script>
@@ -94,7 +94,7 @@
     .content-inner{max-width:900px;margin:0 auto}
     .page{display:none}
     .page.active{display:block}
-    .page-title{font-family:'Cormorant Garamond',serif;font-size:1.85rem;font-weight:300;color:var(--navy);margin-bottom:0.2rem;line-height:1.2}
+    .page-title{font-family:'DM Sans',sans-serif;font-size:1.85rem;font-weight:300;color:var(--navy);margin-bottom:0.2rem;line-height:1.2}
     .page-sub{font-size:0.78rem;font-weight:300;color:var(--text-muted);margin-bottom:2rem}
     .section-eyebrow{font-size:0.6rem;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--text-muted);margin-bottom:0.85rem;display:flex;align-items:center;gap:0.6rem}
     .section-eyebrow::after{content:'';flex:1;height:1px;background:var(--border)}
@@ -102,7 +102,7 @@
     /* ══ STAT CARDS ══ */
     .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:0.85rem;margin-bottom:1.5rem}
     .stat-card{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:1rem 1.1rem;border-top:2px solid var(--gold)}
-    .stat-num{font-family:'Cormorant Garamond',serif;font-size:1.85rem;font-weight:300;color:var(--navy);line-height:1;margin-bottom:0.25rem}
+    .stat-num{font-family:'DM Sans',sans-serif;font-size:1.85rem;font-weight:300;color:var(--navy);line-height:1;margin-bottom:0.25rem}
     .stat-lbl{font-size:0.62rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted)}
 
     /* ══ FAROL DE CUIDADO (embutido no stat-card) ══ */
@@ -662,7 +662,7 @@
               <span class="rede-tel">188</span>
               <a class="rede-link" href="https://www.cvv.org.br" target="_blank" rel="noopener">cvv.org.br</a>
               <div class="rede-hours">⏱ 24 horas · 7 dias por semana · Gratuito</div>
-              <div class="rede-how">Escuta ativa e acolhimento sem julgamento. Chat disponível no site para quem prefere não ligar. E-mail: atendimento@cvv.org.br</div>
+              <div class="rede-how">Escuta ativa e acolhimento sem julgamento. Chat disponível no site para quem prefere não ligar. E-mail: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5e3f2a3b303a37333b302a311e3d282870312c39703c2c">[email&#160;protected]</a></div>
             </div>
             <div class="rede-card">
               <div class="rede-name">SAMU</div>
@@ -774,7 +774,7 @@
   </div>
 </nav>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const SUPABASE_URL='https://fwmogocixvwuzaseiqvh.supabase.co'
 const SUPABASE_KEY='sb_publishable_yPPdPIvLjc6up3nHrfj5NQ_EucGid_M'
 const sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY)
@@ -916,11 +916,11 @@ function renderStats(data){
   // Bloco de descrição interpretativa abaixo dos stats
   const blocoDesc=document.getElementById('farol-desc-bloco')
   const textoDesc=document.getElementById('farol-desc-texto')
-  const bgCores={verde:'rgba(45,122,79,0.06)',amarelo:'rgba(200,150,10,0.07)',vermelho:'rgba(163,45,45,0.06)'}
+  const bgCores={verde:'rgba(45,122,79,0.10)',amarelo:'rgba(200,150,10,0.11)',vermelho:'rgba(163,45,45,0.10)'}
   const bdCores={verde:'var(--green)',amarelo:'var(--yellow)',vermelho:'var(--red)'}
   const descricoes={
     verde:`<strong>Sem necessidade de atenção</strong> — com base nos testes realizados, os seus indicadores de saúde mental estão dentro de um nível favorável. Isso não quer dizer ausência de desafios, mas sim que os sintomas estão em patamares leves ou mínimos. Continue com o acompanhamento regular e com as práticas de autocuidado.`,
-    amarelo:`<strong>Atenção recomendada</strong> — um ou mais dos seus testes identificaram sintomas em nível moderado. É um sinal de atenção:não de alarme, mas de cuidado redobrado. Mantenha o seu acompanhamento terapêutico em dia, utilize as técnicas disponíveis nesta plataforma e converse com o seu psicólogo sobre o que está sentindo.`,
+    amarelo:`<strong>Atenção recomendada</strong> — um ou mais dos seus testes identificaram sintomas em nível moderado. É um sinal de atenção: não de alarme, mas de cuidado redobrado. Mantenha o seu acompanhamento terapêutico em dia, utilize as técnicas disponíveis nesta plataforma e converse com o seu psicólogo sobre o que está sentindo.`,
     vermelho:`<strong>Atenção altamente recomendada</strong> — um ou mais dos seus testes identificaram sintomas em nível grave. É importante que você mantenha contato próximo com o seu psicólogo e não enfrente isso sozinho(a). Mantenha o seu acompanhamento terapêutico em dia, converse com o seu psicólogo sobre o que está sentindo e intensifique suas ações de autocuidado.`
   }
   if(testesFeitos.length){
