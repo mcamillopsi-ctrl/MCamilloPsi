@@ -214,6 +214,32 @@
     .rede-hours{font-size:0.7rem;font-weight:500;color:var(--navy);margin-top:0.35rem}
     .rede-how{font-size:0.72rem;font-weight:300;color:var(--text-muted);line-height:1.65;margin-top:0.6rem;padding-top:0.6rem;border-top:1px solid var(--border)}
 
+    /* ══ CONSULTAS ══ */
+    .consultas-stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:0.85rem;margin-bottom:1.5rem}
+    .consulta-item{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:0.85rem 1rem;display:flex;align-items:center;gap:0.85rem}
+    .consulta-item.proxima{border-left:3px solid var(--gold)}
+    .consulta-item.realizada{border-left:3px solid var(--green);opacity:0.8}
+    .consulta-item.cancelada{border-left:3px solid var(--slate);opacity:0.6}
+    .consulta-data-bloco{text-align:center;min-width:42px;flex-shrink:0}
+    .consulta-dia{font-family:'DM Sans',sans-serif;font-size:1.5rem;font-weight:500;color:var(--navy);line-height:1}
+    .consulta-mes{font-size:0.6rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);margin-top:0.15rem}
+    .consulta-divider{width:1px;height:36px;background:var(--border);flex-shrink:0}
+    .consulta-info{flex:1}
+    .consulta-hora{font-size:0.82rem;font-weight:500;color:var(--navy)}
+    .consulta-status{font-size:0.62rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-top:0.18rem}
+    .consulta-status.proxima{color:var(--gold)}
+    .consulta-status.realizada{color:var(--green)}
+    .consulta-status.cancelada{color:var(--slate)}
+    .consulta-lista{display:flex;flex-direction:column;gap:0.5rem;margin-bottom:1.5rem}
+    .btn-agendar{display:inline-flex;align-items:center;gap:0.6rem;font-size:0.72rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:0.65rem 1.4rem;background:var(--navy);color:var(--white);border:none;border-radius:6px;cursor:pointer;text-decoration:none;transition:background 0.15s}
+    .btn-agendar:hover{background:var(--navy-mid)}
+    .psi-sessao-form{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:0.6rem;align-items:end;margin-top:0.85rem;padding-top:0.85rem;border-top:1px solid var(--border)}
+    .psi-sessao-form label{display:block;font-size:0.6rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);margin-bottom:0.3rem}
+    .psi-sessao-form input,.psi-sessao-form select{width:100%;padding:0.45rem 0.7rem;border:1px solid var(--border);border-radius:6px;font-family:'Sora',sans-serif;font-size:0.78rem;color:var(--text);background:var(--white);outline:none}
+    .psi-sessao-form input:focus,.psi-sessao-form select:focus{border-color:var(--gold)}
+    .btn-add-sessao{font-size:0.65rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:0.45rem 0.9rem;background:var(--gold);color:var(--white);border:none;border-radius:6px;cursor:pointer;white-space:nowrap;transition:background 0.15s}
+    .btn-add-sessao:hover{background:var(--gold-light)}
+
     /* ══ PSI ══ */
     .psi-tabs{display:flex;border-bottom:1px solid var(--border);margin-bottom:1.4rem}
     .psi-tab{font-size:0.68rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;padding:0.5rem 1rem;cursor:pointer;color:var(--text-muted);border-bottom:2px solid transparent;margin-bottom:-1px;transition:all 0.15s}
@@ -371,6 +397,10 @@
       <div class="sidebar-item active" id="nav-dashboard" onclick="irPara('dashboard')" title="Home">
         <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
         <span>Home</span>
+      </div>
+      <div class="sidebar-item" id="nav-consultas" onclick="irPara('consultas')" title="Minhas consultas">
+        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <span>Minhas consultas</span>
       </div>
       <div class="sidebar-item" id="nav-cadastro" onclick="irPara('cadastro')" title="Meu cadastro">
         <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
@@ -731,6 +761,32 @@
           </div>
         </div>
 
+        <!-- MINHAS CONSULTAS -->
+        <div class="page" id="page-consultas">
+          <h1 class="page-title">Minhas consultas</h1>
+          <p class="page-sub">Acompanhe suas sessões agendadas e realizadas.</p>
+
+          <div class="consultas-stat-row" id="consultas-stats"></div>
+
+          <div class="section-eyebrow">Próximas sessões</div>
+          <div class="consulta-lista" id="proximas-lista">
+            <div class="empty-state">Nenhuma sessão agendada.</div>
+          </div>
+
+          <div style="margin-bottom:1.5rem">
+            <a href="https://cal.com/matheus-camillo-m6tgtd/online-psychotherapy?overlayCalendar=true"
+               target="_blank" rel="noopener" class="btn-agendar">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              Agendar nova sessão
+            </a>
+          </div>
+
+          <div class="section-eyebrow">Sessões realizadas</div>
+          <div class="consulta-lista" id="realizadas-lista">
+            <div class="empty-state">Nenhuma sessão registrada ainda.</div>
+          </div>
+        </div>
+
         <!-- PAINEL PSI -->
         <div class="page" id="page-psi">
           <h1 class="page-title">Painel de pacientes</h1>
@@ -808,6 +864,7 @@ function irPara(pg){
   const nav=document.getElementById('nav-'+pg)
   if(nav)nav.classList.add('active')
   if(pg==='dashboard')carregarDashboard()
+  if(pg==='consultas')carregarConsultas()
   if(pg==='psi')carregarPainel()
   if(pg==='cadastro')document.getElementById('edit-nome').value=user.nome||''
 }
@@ -860,6 +917,67 @@ function logout(){
   document.getElementById('app').classList.remove('visible')
   document.getElementById('login-email').value=''
   document.getElementById('login-senha').value=''
+}
+
+async function carregarConsultas(){
+  const {data}=await sb.from('sessoes').select('*').eq('paciente_id',user.id).order('data_sessao',{ascending:true})
+  const sessoes=data||[]
+  const hoje=new Date().toISOString().split('T')[0]
+
+  const proximas=sessoes.filter(s=>s.status==='agendada'&&s.data_sessao>=hoje)
+  const realizadas=sessoes.filter(s=>s.status==='realizada'||s.data_sessao<hoje&&s.status!=='cancelada')
+  const agendadas=sessoes.filter(s=>s.status==='agendada')
+
+  // Stats
+  document.getElementById('consultas-stats').innerHTML=`
+    <div class="stat-card" style="display:flex;flex-direction:column;justify-content:center">
+      <div class="stat-lbl" style="margin-bottom:0.5rem">Próximas sessões</div>
+      <div class="stat-num">${proximas.length}</div>
+    </div>
+    <div class="stat-card" style="display:flex;flex-direction:column;justify-content:center">
+      <div class="stat-lbl" style="margin-bottom:0.5rem">Sessões realizadas</div>
+      <div class="stat-num">${realizadas.length}</div>
+    </div>
+    <div class="stat-card" style="display:flex;flex-direction:column;justify-content:center">
+      <div class="stat-lbl" style="margin-bottom:0.5rem">Total agendado</div>
+      <div class="stat-num">${agendadas.length}</div>
+    </div>`
+
+  // Próximas
+  const proximasEl=document.getElementById('proximas-lista')
+  if(proximas.length){
+    proximasEl.innerHTML=proximas.map(s=>sessaoHtml(s,'proxima')).join('')
+  } else {
+    proximasEl.innerHTML='<div class="empty-state">Nenhuma sessão agendada.</div>'
+  }
+
+  // Realizadas (mais recentes primeiro)
+  const realizadasEl=document.getElementById('realizadas-lista')
+  const realizadasDesc=[...realizadas].sort((a,b)=>b.data_sessao.localeCompare(a.data_sessao))
+  if(realizadasDesc.length){
+    realizadasEl.innerHTML=realizadasDesc.map(s=>sessaoHtml(s,'realizada')).join('')
+  } else {
+    realizadasEl.innerHTML='<div class="empty-state">Nenhuma sessão registrada ainda.</div>'
+  }
+}
+
+function sessaoHtml(s,tipo){
+  const [y,m,d]=s.data_sessao.split('-')
+  const meses=['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez']
+  const mesLabel=meses[parseInt(m)-1]
+  const horaLabel=s.hora_sessao?s.hora_sessao.slice(0,5):'—'
+  const statusLabel={agendada:'Agendada',realizada:'Realizada',cancelada:'Cancelada'}
+  return `<div class="consulta-item ${tipo}">
+    <div class="consulta-data-bloco">
+      <div class="consulta-dia">${d}</div>
+      <div class="consulta-mes">${mesLabel} ${y}</div>
+    </div>
+    <div class="consulta-divider"></div>
+    <div class="consulta-info">
+      <div class="consulta-hora">${horaLabel}</div>
+      <div class="consulta-status ${tipo}">${statusLabel[s.status]||s.status}</div>
+    </div>
+  </div>`
 }
 
 async function carregarDashboard(){
@@ -1105,13 +1223,66 @@ async function verPaciente(p){
   if(det.classList.contains('open')){det.classList.remove('open');return}
   document.querySelectorAll('.patient-detail').forEach(d=>d.classList.remove('open'))
   const {data}=await sb.from('resultados').select('*').eq('paciente_id',p.id).order('criado_em',{ascending:false})
+  const {data:sessoes}=await sb.from('sessoes').select('*').eq('paciente_id',p.id).order('data_sessao',{ascending:false})
   let tempoHtml='—'
-  if(p.data_inicio){const dias=Math.floor((new Date()-new Date(p.data_inicio))/86400000);const meses=Math.floor(dias/30);tempoHtml=meses>0?`${meses} mês${meses>1?'es':''}`:`${dias} dia${dias!==1?'s':''}`}
+  if(p.data_inicio){const [y,m,d]=p.data_inicio.split('-');const dias=Math.floor((new Date()-new Date(p.data_inicio))/86400000);const meses=Math.floor(dias/30);tempoHtml=meses>0?`${meses} mês${meses>1?'es':''}`:`${dias} dia${dias!==1?'s':''}`}
   let html=`<div class="psi-edit-row"><div><label>Sessões realizadas</label><input type="number" min="0" id="psi-sessoes-${p.id}" value="${p.sessoes||0}"></div><div><label>Data de início</label><input type="date" id="psi-inicio-${p.id}" value="${p.data_inicio||''}"></div></div>
   <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.25rem"><button class="btn-save-psi" onclick="salvarDadosPaciente('${p.id}')">Salvar</button><span style="font-size:0.72rem;color:var(--text-muted)">Acompanhamento: <strong style="color:var(--text)">${tempoHtml}</strong></span></div>`
-  if(!data||!data.length){html+='<p style="font-size:0.75rem;color:var(--text-muted)">Nenhum teste realizado ainda.</p>'}
-  else{html+=`<table class="history-table"><thead><tr><th>Teste</th><th>Pontuação</th><th>Classificação</th><th>Data</th></tr></thead><tbody>${data.map(r=>`<tr><td>${r.teste}</td><td>${r.pontuacao}</td><td>${badgeHtml(r.classificacao)}</td><td>${fmt(r.criado_em)}</td></tr>`).join('')}</tbody></table>`}
+
+  // Seção de sessões
+  html+=`<div style="font-size:0.65rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:0.75rem">Sessões cadastradas</div>`
+  if(sessoes&&sessoes.length){
+    html+=`<table class="history-table" style="margin-bottom:0.5rem"><thead><tr><th>Data</th><th>Hora</th><th>Status</th><th></th></tr></thead><tbody>`
+    sessoes.forEach(s=>{
+      const [sy,sm,sd]=s.data_sessao.split('-')
+      const statusLabel={agendada:'Agendada',realizada:'Realizada',cancelada:'Cancelada'}
+      const statusCor={agendada:'var(--gold)',realizada:'var(--green)',cancelada:'var(--slate)'}
+      html+=`<tr>
+        <td>${sd}/${sm}/${sy}</td>
+        <td>${s.hora_sessao||'—'}</td>
+        <td><span style="font-size:0.62rem;font-weight:600;color:${statusCor[s.status]||'var(--text-muted)'}">${statusLabel[s.status]||s.status}</span></td>
+        <td><button onclick="excluirSessao('${s.id}','${p.id}')" style="font-size:0.6rem;background:none;border:none;cursor:pointer;color:var(--text-muted);padding:0.15rem 0.3rem;border-radius:3px" title="Remover">✕</button></td>
+      </tr>`
+    })
+    html+=`</tbody></table>`
+  } else {
+    html+=`<p style="font-size:0.75rem;color:var(--text-muted);margin-bottom:0.75rem">Nenhuma sessão cadastrada ainda.</p>`
+  }
+
+  // Formulário para adicionar sessão
+  html+=`<div class="psi-sessao-form">
+    <div><label>Data</label><input type="date" id="nova-data-${p.id}"></div>
+    <div><label>Hora</label><input type="time" id="nova-hora-${p.id}"></div>
+    <div><label>Status</label><select id="novo-status-${p.id}">
+      <option value="agendada">Agendada</option>
+      <option value="realizada">Realizada</option>
+      <option value="cancelada">Cancelada</option>
+    </select></div>
+    <button class="btn-add-sessao" onclick="adicionarSessao('${p.id}')">+ Adicionar</button>
+  </div>`
+
+  if(!data||!data.length){html+=`<p style="font-size:0.75rem;color:var(--text-muted);margin-top:1.25rem">Nenhum teste realizado ainda.</p>`}
+  else{html+=`<div style="font-size:0.65rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);margin:1.25rem 0 0.75rem">Resultados de testes</div><table class="history-table"><thead><tr><th>Teste</th><th>Pontuação</th><th>Classificação</th><th>Data</th></tr></thead><tbody>${data.map(r=>`<tr><td>${r.teste}</td><td>${r.pontuacao}</td><td>${badgeHtml(r.classificacao)}</td><td>${fmt(r.criado_em)}</td></tr>`).join('')}</tbody></table>`}
   det.innerHTML=html;det.classList.add('open')
+}
+
+async function adicionarSessao(pacienteId){
+  const data=document.getElementById('nova-data-'+pacienteId).value
+  const hora=document.getElementById('nova-hora-'+pacienteId).value
+  const status=document.getElementById('novo-status-'+pacienteId).value
+  if(!data){alert('Informe a data da sessão.');return}
+  const {error}=await sb.from('sessoes').insert({paciente_id:pacienteId,data_sessao:data,hora_sessao:hora||null,status})
+  if(error){alert('Erro ao salvar sessão.');return}
+  // Recarrega o detalhe do paciente
+  const {data:p}=await sb.from('pacientes').select('*').eq('id',pacienteId).single()
+  if(p){document.getElementById('det-'+pacienteId).classList.remove('open');verPaciente(p)}
+}
+
+async function excluirSessao(sessaoId,pacienteId){
+  if(!confirm('Remover esta sessão?'))return
+  await sb.from('sessoes').delete().eq('id',sessaoId)
+  const {data:p}=await sb.from('pacientes').select('*').eq('id',pacienteId).single()
+  if(p){document.getElementById('det-'+pacienteId).classList.remove('open');verPaciente(p)}
 }
 
 async function salvarDadosPaciente(id){
