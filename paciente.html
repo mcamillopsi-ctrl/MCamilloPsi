@@ -333,7 +333,7 @@
       <div class="sidebar-item" id="nav-cadastro" onclick="irPara('cadastro')"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Meu cadastro</span></div>
       <div class="sidebar-section">Recursos</div>
       <div class="sidebar-item" id="nav-tecnicas" onclick="irPara('tecnicas')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg><span>Técnicas e ferramentas</span></div>
-      <div class="sidebar-item" id="nav-rede" onclick="irPara('rede')"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg><span>Rede de apoio pública</span></div>
+      <div class="sidebar-item" id="nav-rede" onclick="irPara('rede')"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg><span>Rede de apoio</span></div>
       <div id="sidebar-psi" style="display:none">
         <div class="sidebar-section">Psicólogo</div>
         <div class="sidebar-item" id="nav-psi" onclick="irPara('psi')"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>Painel de pacientes</span></div>
@@ -391,68 +391,159 @@
 
       <!-- ══ TÉCNICAS ══ -->
       <div class="page" id="page-tecnicas">
-        <h1 class="page-title">Técnicas e ferramentas</h1><p class="page-sub">Recursos psicoterápicos para o seu bem-estar.</p>
-        <div class="tec-hint"><span>☝</span><span>Clique em qualquer técnica para expandir.</span></div>
+        <h1 class="page-title">Técnicas e ferramentas</h1>
+        <p class="page-sub">Recursos psicoterápicos para o seu bem-estar no dia a dia.</p>
+        <div class="tec-hint"><span>☝</span><span>Clique em qualquer técnica para expandir as informações completas.</span></div>
+
         <div class="tec-categoria">TCC — Terapia Cognitivo-Comportamental</div>
         <div class="tec-lista">
-          <div class="tecnica-card" onclick="toggleTec(this)"><div class="tecnica-header"><div><div class="tecnica-tag">TCC</div><div class="tecnica-title">Registro de pensamentos automáticos</div></div><span class="tecnica-arrow">▼</span></div><div class="tecnica-expanded"><div class="tecnica-sec"><div class="tecnica-sec-lbl">O que é</div><div class="tecnica-sec-txt">Técnica central da TCC: anotar situações, pensamentos automáticos e emoções associadas.</div></div><div class="tecnica-sec"><div class="tecnica-sec-lbl">Como praticar</div><div class="tecnica-pratica">1. Anote a situação que gerou desconforto.
-2. Escreva o pensamento automático exato.
-3. Registre a emoção e intensidade (0–100%).
-4. Busque evidências a favor e contra.
-5. Formule pensamento alternativo mais equilibrado.</div></div></div></div>
-          <div class="tecnica-card" onclick="toggleTec(this)"><div class="tecnica-header"><div><div class="tecnica-tag">TCC</div><div class="tecnica-title">Ativação comportamental</div></div><span class="tecnica-arrow">▼</span></div><div class="tecnica-expanded"><div class="tecnica-sec"><div class="tecnica-sec-lbl">Como praticar</div><div class="tecnica-pratica">1. Liste atividades que trazem prazer ou satisfação.
-2. Avalie o prazer esperado (0–10).
-3. Programe ao menos 1 por dia.
-4. Registre o prazer real e compare.
-5. Aumente frequência gradualmente.</div></div></div></div>
-          <div class="tecnica-card" onclick="toggleTec(this)"><div class="tecnica-header"><div><div class="tecnica-tag">TCC</div><div class="tecnica-title">Resolução de problemas</div></div><span class="tecnica-arrow">▼</span></div><div class="tecnica-expanded"><div class="tecnica-sec"><div class="tecnica-sec-lbl">Como praticar</div><div class="tecnica-pratica">1. Defina o problema de forma específica.
-2. Liste todas as soluções possíveis sem julgamento.
-3. Avalie prós e contras de cada opção.
-4. Escolha a mais viável e planeje os passos.
-5. Implemente, avalie e ajuste.</div></div></div></div>
+
+          <div class="tecnica-card" onclick="toggleTec(this)">
+            <div class="tecnica-header"><div><div class="tecnica-tag">TCC</div><div class="tecnica-title">Registro de pensamentos automáticos</div></div><span class="tecnica-arrow">▼</span></div>
+            <div class="tecnica-expanded">
+              <div class="tecnica-sec"><div class="tecnica-sec-lbl">O que é</div><div class="tecnica-sec-txt">Técnica central da TCC que consiste em anotar situações do cotidiano, os pensamentos automáticos que surgem espontaneamente e as emoções associadas.</div></div>
+              <div class="tecnica-sec"><div class="tecnica-sec-lbl">Objetivo</div><div class="tecnica-sec-txt">Aumentar a consciência sobre padrões de pensamento disfuncionais e seu impacto direto nas emoções e comportamentos.</div></div>
+              <div class="tecnica-sec"><div class="tecnica-sec-lbl">Comprovação científica</div><div class="tecnica-sec-txt">Essa é uma das técnicas mais estudadas e testadas da psicologia. Décadas de pesquisas mostram que ela ajuda a reduzir sintomas de depressão e ansiedade — e é recomendada por associações médicas do mundo inteiro como um dos tratamentos mais eficazes disponíveis.</div></div>
+              <div class="tecnica-sec"><div class="tecnica-sec-lbl">Por que ajuda no processo terapêutico</div><div class="tecnica-sec-txt">Ao tornar os pensamentos visíveis e conscientes, paciente e terapeuta identificam distorções cognitivas com mais precisão, tornando o trabalho em sessão mais eficaz e direcionado.</div></div>
+              <div class="tecnica-sec"><div class="tecnica-sec-lbl">Como praticar</div><div class="tecnica-pratica">1. Anote a situação que gerou desconforto emocional.
+2. Escreva o pensamento automático exato que surgiu.
+3. Registre a emoção e sua intensidade (0–100%).
+4. Busque evidências a favor e contra aquele pensamento.
+5. Formule um pensamento alternativo mais equilibrado.</div></div>
+            </div>
+          </div>
+
+          <div class="tecnica-card" onclick="toggleTec(this)">
+            <div class="tecnica-header"><div><div class="tecnica-tag">TCC</div><div class="tecnica-title">Ativação comportamental</div></div><span class="tecnica-arrow">▼</span></div>
+            <div class="tecnica-expanded">
+              <div class="tecnica-sec"><div class="tecnica-sec-lbl">O que é</div><div class="tecnica-sec-txt">Planejamento intencional de atividades que geram prazer, satisfação ou senso de conquista, mesmo quando a motivação ainda não está presente.</div></div>
+              <div class="tecnica-sec"><div class="tecnica-sec-lbl">Como praticar</div><div class="tecnica-pratica">1. Liste atividades que já trouxeram prazer ou satisfação.
+2. Avalie o prazer esperado (0–10) antes de realizar.
+3. Programe pelo menos 1 atividade por dia.
+4. Registre o prazer real após realizar — compare com o esperado.
+5. Aumente gradualmente frequência e variedade.</div></div>
+            </div>
+          </div>
+
+          <div class="tecnica-card" onclick="toggleTec(this)">
+            <div class="tecnica-header"><div><div class="tecnica-tag">TCC</div><div class="tecnica-title">Resolução de problemas</div></div><span class="tecnica-arrow">▼</span></div>
+            <div class="tecnica-expanded">
+              <div class="tecnica-sec"><div class="tecnica-sec-lbl">O que é</div><div class="tecnica-sec-txt">Método estruturado para enfrentar situações desafiadoras de forma racional, reduzindo ruminação e paralisia por ansiedade.</div></div>
+              <div class="tecnica-sec"><div class="tecnica-sec-lbl">Como praticar</div><div class="tecnica-pratica">1. Defina o problema de forma específica e mensurável.
+2. Liste todas as soluções possíveis sem julgamento (brainstorm).
+3. Avalie os prós e contras reais de cada opção.
+4. Escolha a solução mais viável e planeje os passos.
+5. Implemente, avalie o resultado e ajuste se necessário.</div></div>
+            </div>
+          </div>
+
         </div>
+
         <div class="tec-categoria">Respiração, Relaxamento e Mindfulness</div>
         <div class="tec-lista">
-          <div class="tecnica-card" onclick="toggleTec(this)"><div class="tecnica-header"><div><div class="tecnica-tag">Respiração</div><div class="tecnica-title">Respiração diafragmática</div></div><span class="tecnica-arrow">▼</span></div><div class="tecnica-expanded"><div class="tecnica-sec"><div class="tecnica-sec-lbl">Como praticar</div><div class="tecnica-pratica">1. Mão no peito, outra no abdômen.
-2. Inspire pelo nariz por 4s — abdômen expande.
-3. Segure 2s.
-4. Expire pela boca por 6s.
-5. Repita 5–10 ciclos.</div></div></div></div>
-          <div class="tecnica-card" onclick="toggleTec(this)"><div class="tecnica-header"><div><div class="tecnica-tag">Respiração</div><div class="tecnica-title">Técnica 4-7-8</div></div><span class="tecnica-arrow">▼</span></div><div class="tecnica-expanded"><div class="tecnica-sec"><div class="tecnica-sec-lbl">Como praticar</div><div class="tecnica-pratica">1. Expire completamente pela boca.
+
+          <div class="tecnica-card" onclick="toggleTec(this)">
+            <div class="tecnica-header"><div><div class="tecnica-tag">Respiração</div><div class="tecnica-title">Respiração diafragmática</div></div><span class="tecnica-arrow">▼</span></div>
+            <div class="tecnica-expanded">
+              <div class="tecnica-sec"><div class="tecnica-sec-lbl">Como praticar</div><div class="tecnica-pratica">1. Coloque uma mão no peito e outra no abdômen.
+2. Inspire pelo nariz por 4 segundos — o abdômen deve expandir, não o peito.
+3. Segure por 2 segundos.
+4. Expire pela boca por 6 segundos.
+5. Repita 5 a 10 ciclos, observando o relaxamento progressivo.</div></div>
+            </div>
+          </div>
+
+          <div class="tecnica-card" onclick="toggleTec(this)">
+            <div class="tecnica-header"><div><div class="tecnica-tag">Respiração</div><div class="tecnica-title">Técnica 4-7-8</div></div><span class="tecnica-arrow">▼</span></div>
+            <div class="tecnica-expanded">
+              <div class="tecnica-sec"><div class="tecnica-sec-lbl">Como praticar</div><div class="tecnica-pratica">1. Expire completamente pela boca.
 2. Inspire pelo nariz contando até 4.
-3. Segure contando até 7.
-4. Expire pela boca contando até 8.
-5. Repita 4 vezes, 2× ao dia.</div></div></div></div>
-          <div class="tecnica-card" onclick="toggleTec(this)"><div class="tecnica-header"><div><div class="tecnica-tag">Mindfulness</div><div class="tecnica-title">Atenção plena no presente</div></div><span class="tecnica-arrow">▼</span></div><div class="tecnica-expanded"><div class="tecnica-sec"><div class="tecnica-sec-lbl">Como praticar</div><div class="tecnica-pratica">1. Sente-se e feche os olhos.
-2. Foque na respiração por 1–2 min.
-3. Observe pensamentos sem julgamento.
-4. Retorne à respiração gentilmente.
-5. Comece com 5 min e aumente.</div></div></div></div>
-          <div class="tecnica-card" onclick="toggleTec(this)"><div class="tecnica-header"><div><div class="tecnica-tag">Mindfulness</div><div class="tecnica-title">Técnica 5-4-3-2-1</div></div><span class="tecnica-arrow">▼</span></div><div class="tecnica-expanded"><div class="tecnica-sec"><div class="tecnica-sec-lbl">Como praticar</div><div class="tecnica-pratica">1. VEJA: 5 coisas que você consegue ver.
-2. TOQUE: 4 texturas que consegue sentir.
-3. OUÇA: 3 sons presentes.
-4. CHEIRE: 2 cheiros identificáveis.
-5. PROVE: 1 sabor. Respire entre cada etapa.</div></div></div></div>
-          <div class="tecnica-card" onclick="toggleTec(this)"><div class="tecnica-header"><div><div class="tecnica-tag">Relaxamento</div><div class="tecnica-title">Relaxamento muscular progressivo</div></div><span class="tecnica-arrow">▼</span></div><div class="tecnica-expanded"><div class="tecnica-sec"><div class="tecnica-sec-lbl">Como praticar</div><div class="tecnica-pratica">1. Deite-se em local confortável.
-2. Tensione um grupo muscular por 5–7s (comece pelos pés).
-3. Libere e perceba o contraste por 20–30s.
-4. Avance: pernas, abdômen, mãos, braços, ombros, rosto.
-5. Permaneça relaxado 2–3 min ao final.</div></div></div></div>
+3. Segure a respiração contando até 7.
+4. Expire completamente pela boca contando até 8.
+5. Repita 4 vezes. Pratique 2× ao dia para melhores resultados.</div></div>
+            </div>
+          </div>
+
+          <div class="tecnica-card" onclick="toggleTec(this)">
+            <div class="tecnica-header"><div><div class="tecnica-tag">Mindfulness</div><div class="tecnica-title">Atenção plena no presente</div></div><span class="tecnica-arrow">▼</span></div>
+            <div class="tecnica-expanded">
+              <div class="tecnica-sec"><div class="tecnica-sec-lbl">Como praticar</div><div class="tecnica-pratica">1. Sente-se e feche os olhos.
+2. Foque na sensação da respiração por 1–2 minutos.
+3. Quando um pensamento surgir, observe-o sem julgamento.
+4. Gentilmente, retorne a atenção à respiração — sem autocrítica.
+5. Comece com 5 minutos e aumente gradualmente.</div></div>
+            </div>
+          </div>
+
+          <div class="tecnica-card" onclick="toggleTec(this)">
+            <div class="tecnica-header"><div><div class="tecnica-tag">Mindfulness</div><div class="tecnica-title">Técnica 5-4-3-2-1</div></div><span class="tecnica-arrow">▼</span></div>
+            <div class="tecnica-expanded">
+              <div class="tecnica-sec"><div class="tecnica-sec-lbl">Como praticar</div><div class="tecnica-pratica">1. VEJA: nomeie 5 coisas que você consegue ver.
+2. TOQUE: nomeie 4 texturas que consegue sentir agora.
+3. OUÇA: nomeie 3 sons presentes neste momento.
+4. CHEIRE: nomeie 2 cheiros que consegue identificar.
+5. PROVE: nomeie 1 sabor perceptível. Respire fundo entre cada etapa.</div></div>
+            </div>
+          </div>
+
+          <div class="tecnica-card" onclick="toggleTec(this)">
+            <div class="tecnica-header"><div><div class="tecnica-tag">Relaxamento</div><div class="tecnica-title">Relaxamento muscular progressivo</div></div><span class="tecnica-arrow">▼</span></div>
+            <div class="tecnica-expanded">
+              <div class="tecnica-sec"><div class="tecnica-sec-lbl">Comprovação científica</div><div class="tecnica-sec-txt">Essa é uma das técnicas de relaxamento mais antigas e estudadas da psicologia. Pesquisas mostram que ela reduz a tensão física associada ao estresse, melhora o sono e diminui sintomas de ansiedade.</div></div>
+              <div class="tecnica-sec"><div class="tecnica-sec-lbl">Como praticar</div><div class="tecnica-pratica">1. Deite-se em local confortável e silencioso.
+2. Começando pelos pés, tensione o grupo muscular por 5–7 segundos.
+3. Libere a tensão e perceba o contraste por 20–30 segundos.
+4. Avance: pernas, abdômen, mãos, braços, ombros, pescoço, rosto.
+5. Ao final, permaneça relaxado por 2–3 minutos respirando lentamente.</div></div>
+            </div>
+          </div>
+
         </div>
       </div>
 
       <!-- ══ REDE DE APOIO ══ -->
       <div class="page" id="page-rede">
-        <h1 class="page-title">Rede de apoio pública</h1><p class="page-sub">Serviços públicos e gratuitos de saúde mental no Brasil.</p>
+        <h1 class="page-title">Rede de apoio</h1>
+        <p class="page-sub">Serviços públicos e gratuitos de saúde mental no Brasil.</p>
+
         <div class="section-eyebrow">Urgências</div>
         <div class="rede-grid">
-          <div class="rede-card"><div class="rede-name">CVV — Centro de Valorização da Vida</div><div class="rede-type">Apoio emocional · Prevenção do suicídio</div><div class="rede-info">Serviço voluntário e sigiloso de apoio emocional.</div><span class="rede-tel">188</span><a class="rede-link" href="https://www.cvv.org.br" target="_blank" rel="noopener">cvv.org.br</a><div class="rede-hours">⏱ 24h · 7 dias · Gratuito</div></div>
-          <div class="rede-card"><div class="rede-name">SAMU</div><div class="rede-type">Urgência e emergência</div><div class="rede-info">Crises graves com risco imediato, incluindo crises psiquiátricas agudas.</div><span class="rede-tel">192</span><div class="rede-hours">⏱ 24h · 7 dias</div></div>
+          <div class="rede-card">
+            <div class="rede-name">CVV — Centro de Valorização da Vida</div>
+            <div class="rede-type">Apoio emocional · Prevenção do suicídio</div>
+            <div class="rede-info">Serviço voluntário e sigiloso para apoio emocional a qualquer pessoa em sofrimento.</div>
+            <span class="rede-tel">188</span>
+            <a class="rede-link" href="https://www.cvv.org.br" target="_blank" rel="noopener">cvv.org.br</a>
+            <div class="rede-hours">⏱ 24 horas · 7 dias por semana · Gratuito</div>
+            <div class="rede-how" style="font-size:0.72rem;font-weight:300;color:var(--text-muted);line-height:1.65;margin-top:0.6rem;padding-top:0.6rem;border-top:1px solid var(--border)">Ligue 188, acesse o chat em cvv.org.br ou envie um e-mail para atendimento@cvv.org.br. Não é necessário se identificar.</div>
+          </div>
+          <div class="rede-card">
+            <div class="rede-name">SAMU</div>
+            <div class="rede-type">Urgência e emergência médica</div>
+            <div class="rede-info">Atendimento a crises graves com risco imediato de vida, incluindo crises psiquiátricas agudas.</div>
+            <span class="rede-tel">192</span>
+            <div class="rede-hours">⏱ 24 horas · 7 dias por semana</div>
+          </div>
         </div>
+
         <div class="section-eyebrow">Atenção psicossocial (SUS · Gratuito)</div>
         <div class="rede-grid">
-          <div class="rede-card"><div class="rede-name">CAPS</div><div class="rede-type">Saúde mental · SUS</div><div class="rede-info">Equipe multiprofissional: psicólogos, psiquiatras, assistentes sociais.</div><a class="rede-link" href="https://cnes.datasus.gov.br" target="_blank" rel="noopener">Localize em cnes.datasus.gov.br</a><div class="rede-hours">⏱ Seg–Sex 8h–17h (CAPS III: 24h)</div></div>
-          <div class="rede-card"><div class="rede-name">UBS</div><div class="rede-type">Atenção primária · SUS</div><div class="rede-info">Porta de entrada do SUS. Psicólogos via NASF-AB e encaminhamentos.</div><a class="rede-link" href="https://localizasus.saude.gov.br" target="_blank" rel="noopener">Localize em localizasus.saude.gov.br</a><div class="rede-hours">⏱ Seg–Sex 7h–17h</div></div>
+          <div class="rede-card">
+            <div class="rede-name">CAPS — Centro de Atenção Psicossocial</div>
+            <div class="rede-type">Saúde mental · SUS · Gratuito</div>
+            <div class="rede-info">Serviço especializado com equipe multiprofissional: psicólogos, psiquiatras e assistentes sociais.</div>
+            <a class="rede-link" href="https://cnes.datasus.gov.br" target="_blank" rel="noopener">Localize em cnes.datasus.gov.br</a>
+            <div class="rede-hours">⏱ Seg–Sex, 8h–17h (CAPS III: 24h)</div>
+            <div class="rede-how" style="font-size:0.72rem;font-weight:300;color:var(--text-muted);line-height:1.65;margin-top:0.6rem;padding-top:0.6rem;border-top:1px solid var(--border)">Procure a unidade mais próxima pelo CNES ou vá diretamente ao CAPS do seu município. Não é necessário encaminhamento.</div>
+          </div>
+          <div class="rede-card">
+            <div class="rede-name">UBS — Unidade Básica de Saúde</div>
+            <div class="rede-type">Atenção primária · SUS · Gratuito</div>
+            <div class="rede-info">Porta de entrada do SUS. Possui psicólogos via equipes NASF-AB e realiza encaminhamentos.</div>
+            <a class="rede-link" href="https://localizasus.saude.gov.br" target="_blank" rel="noopener">Localize em localizasus.saude.gov.br</a>
+            <div class="rede-hours">⏱ Geralmente Seg–Sex, 7h–17h</div>
+            <div class="rede-how" style="font-size:0.72rem;font-weight:300;color:var(--text-muted);line-height:1.65;margin-top:0.6rem;padding-top:0.6rem;border-top:1px solid var(--border)">Leve documento com foto e comprovante de residência. O acolhimento é feito por ordem de chegada, sem necessidade de agendamento prévio.</div>
+          </div>
         </div>
       </div>
 
@@ -589,6 +680,8 @@ async function fazerCadastro(){
 
 function entrarNoApp(data){
   user=data
+  // Salva sessão para persistir no reload
+  try{localStorage.setItem('mcpsi_session',JSON.stringify({id:data.id,email:data.email}))}catch(e){}
   document.getElementById('screen-login').classList.add('hidden')
   document.getElementById('app').classList.add('visible')
   document.getElementById('nav-nome').textContent=data.nome||data.email
@@ -599,6 +692,7 @@ function entrarNoApp(data){
 
 function logout(){
   user=null
+  try{localStorage.removeItem('mcpsi_session')}catch(e){}
   document.getElementById('screen-login').classList.remove('hidden')
   document.getElementById('app').classList.remove('visible')
   document.getElementById('login-email').value='';document.getElementById('login-senha').value=''
@@ -769,6 +863,21 @@ async function addSessao(pid){const d=document.getElementById('nd-'+pid).value,h
 async function excSessao(sid,pid){if(!confirm('Remover sessão?'))return;await sb.from('sessoes').delete().eq('id',sid);const{data:p}=await sb.from('pacientes').select('*').eq('id',pid).single();if(p){document.getElementById('det-'+pid).classList.remove('open');verPaciente(p)}}
 async function salvarPsi(id){const sa=parseInt(document.getElementById('psi-s-'+id).value)||0,di=document.getElementById('psi-d-'+id).value||null;const{error}=await sb.from('pacientes').update({sessoes_anteriores:sa,data_inicio:di}).eq('id',id);if(!error){const btn=document.querySelector(`#det-${id} .btn-save-psi`);if(btn){btn.textContent='✓ Salvo';setTimeout(()=>btn.textContent='Salvar',2000)}}}
 async function carregarTodosResultados(){const{data}=await sb.from('resultados').select('*, pacientes(nome)').order('criado_em',{ascending:false}).limit(100);const tb=document.getElementById('tabela-todos');if(!data||!data.length){tb.innerHTML='<tr><td colspan="5" style="text-align:center;padding:2rem;color:var(--text-muted)">Nenhum resultado.</td></tr>';return};tb.innerHTML=data.map(r=>`<tr><td>${r.pacientes?.nome||'—'}</td><td>${r.teste.split('—')[0]}</td><td>${r.pontuacao}</td><td>${badgeHtml(r.classificacao)}</td><td>${fmt(r.criado_em)}</td></tr>`).join('')}
+
+// ══════════════════════════════════════
+// AUTO-LOGIN: restaura sessão no reload
+// ══════════════════════════════════════
+;(async function(){
+  try{
+    const s=localStorage.getItem('mcpsi_session')
+    if(!s)return
+    const{id,email}=JSON.parse(s)
+    if(!id||!email)return
+    const{data,error}=await sb.from('pacientes').select('*').eq('id',id).eq('email',email).single()
+    if(error||!data){localStorage.removeItem('mcpsi_session');return}
+    entrarNoApp(data)
+  }catch(e){localStorage.removeItem('mcpsi_session')}
+})()
 </script>
 </body>
 </html>
