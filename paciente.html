@@ -981,11 +981,15 @@ function sessaoHtml(s,tipo){
 }
 
 async function carregarDashboard(){
-  const {data}=await sb.from('resultados').select('*').eq('paciente_id',user.id).order('criado_em',{ascending:false})
-  renderStats(data||[]);renderHistorico(data||[]);renderGraficos(data||[])
+  const [{data},{data:sessoesData}]=await Promise.all([
+    sb.from('resultados').select('*').eq('paciente_id',user.id).order('criado_em',{ascending:false}),
+    sb.from('sessoes').select('*').eq('paciente_id',user.id).eq('status','realizada')
+  ])
+  const sessoesRealizadas=(sessoesData||[]).length+(user.sessoes_anteriores||0)
+  renderStats(data||[],sessoesRealizadas);renderHistorico(data||[]);renderGraficos(data||[])
 }
 
-function renderStats(data){
+function renderStats(data,sessoesRealizadas){
   // Calcula farol de cuidado
   const ultimos={};data.forEach(r=>{const k=r.teste.split('—')[0].trim();if(!ultimos[k])ultimos[k]=r})
   const testesFeitos=Object.entries(ultimos)
@@ -1017,7 +1021,7 @@ function renderStats(data){
     </div>
     <div class="stat-card" style="display:flex;flex-direction:column;justify-content:center">
       <div class="stat-lbl" style="margin-bottom:0.5rem">Sessões realizadas</div>
-      <div class="stat-num">${user.sessoes||0}</div>
+      <div class="stat-num">${sessoesRealizadas}</div>
     </div>
     <div class="stat-card farol-card ${testesFeitos.length?nivel:''}" style="display:flex;flex-direction:column;justify-content:center">
       <div class="stat-lbl" style="margin-bottom:0.65rem">Farol de Cuidado</div>
@@ -1226,7 +1230,7 @@ async function verPaciente(p){
   const {data:sessoes}=await sb.from('sessoes').select('*').eq('paciente_id',p.id).order('data_sessao',{ascending:false})
   let tempoHtml='—'
   if(p.data_inicio){const [y,m,d]=p.data_inicio.split('-');const dias=Math.floor((new Date()-new Date(p.data_inicio))/86400000);const meses=Math.floor(dias/30);tempoHtml=meses>0?`${meses} mês${meses>1?'es':''}`:`${dias} dia${dias!==1?'s':''}`}
-  let html=`<div class="psi-edit-row"><div><label>Sessões realizadas</label><input type="number" min="0" id="psi-sessoes-${p.id}" value="${p.sessoes||0}"></div><div><label>Data de início</label><input type="date" id="psi-inicio-${p.id}" value="${p.data_inicio||''}"></div></div>
+  let html=`<div class="psi-edit-row"><div><label>Sessões anteriores à plataforma</label><input type="number" min="0" id="psi-sessoes-${p.id}" value="${p.sessoes_anteriores||0}" title="Sessões realizadas antes de entrar na plataforma"></div><div><label>Data de início</label><input type="date" id="psi-inicio-${p.id}" value="${p.data_inicio||''}"></div></div>
   <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.25rem"><button class="btn-save-psi" onclick="salvarDadosPaciente('${p.id}')">Salvar</button><span style="font-size:0.72rem;color:var(--text-muted)">Acompanhamento: <strong style="color:var(--text)">${tempoHtml}</strong></span></div>`
 
   // Seção de sessões
@@ -1286,9 +1290,9 @@ async function excluirSessao(sessaoId,pacienteId){
 }
 
 async function salvarDadosPaciente(id){
-  const sessoes=parseInt(document.getElementById('psi-sessoes-'+id).value)||0
+  const sessoes_anteriores=parseInt(document.getElementById('psi-sessoes-'+id).value)||0
   const data_inicio=document.getElementById('psi-inicio-'+id).value||null
-  const {error}=await sb.from('pacientes').update({sessoes,data_inicio}).eq('id',id)
+  const {error}=await sb.from('pacientes').update({sessoes_anteriores,data_inicio}).eq('id',id)
   if(!error){const btn=document.querySelector(`#det-${id} .btn-save-psi`);if(btn){btn.textContent='✓ Salvo';setTimeout(()=>{btn.textContent='Salvar'},2000)}}
 }
 
