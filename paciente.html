@@ -220,9 +220,9 @@
     /* ══ CONSULTAS ══ */
     .consultas-stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:0.85rem;margin-bottom:1.5rem}
     .consulta-item{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:0.85rem 1rem;display:flex;align-items:center;gap:0.85rem}
-    .consulta-item.proxima{border-left:3px solid var(--gold)}
+    .consulta-item.agendada{border-left:3px solid var(--yellow)}
     .consulta-item.realizada{border-left:3px solid var(--green);opacity:0.8}
-    .consulta-item.cancelada{border-left:3px solid var(--slate);opacity:0.6}
+    .consulta-item.cancelada{border-left:3px solid var(--red);opacity:0.7}
     .consulta-data-bloco{text-align:center;min-width:42px;flex-shrink:0}
     .consulta-dia{font-family:'DM Sans',sans-serif;font-size:1.5rem;font-weight:500;color:var(--navy);line-height:1}
     .consulta-mes{font-size:0.6rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);margin-top:0.15rem}
@@ -230,9 +230,9 @@
     .consulta-info{flex:1}
     .consulta-hora{font-size:0.82rem;font-weight:500;color:var(--navy)}
     .consulta-status{font-size:0.62rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-top:0.18rem}
-    .consulta-status.proxima{color:var(--gold)}
+    .consulta-status.agendada{color:var(--yellow)}
     .consulta-status.realizada{color:var(--green)}
-    .consulta-status.cancelada{color:var(--slate)}
+    .consulta-status.cancelada{color:var(--red)}
     .consulta-lista{display:flex;flex-direction:column;gap:0.5rem;margin-bottom:1.5rem}
     .btn-agendar{display:inline-flex;align-items:center;gap:0.6rem;font-size:0.72rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:0.65rem 1.4rem;background:var(--navy);color:var(--white);border:none;border-radius:6px;cursor:pointer;text-decoration:none;transition:background 0.15s}
     .btn-agendar:hover{background:var(--navy-mid)}
@@ -379,7 +379,7 @@
       </div>
       <div class="sidebar-item" id="nav-rede" onclick="irPara('rede')" title="Rede de apoio">
         <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
-        <span>Rede de apoio pública</span>
+        <span>Rede de apoio</span>
       </div>
       <div id="sidebar-psi" style="display:none">
         <div class="sidebar-section">Psicólogo</div>
@@ -633,8 +633,8 @@
 
         <!-- REDE -->
         <div class="page" id="page-rede">
-          <h1 class="page-title">Rede de apoio pública</h1>
-          <p class="page-sub">Serviços públicos e gratuitos de saúde mental no Brasil.</p>
+          <h1 class="page-title">Rede de apoio</h1>
+          <p class="page-sub">Serviços públicos e gratuitos de saúde mental em todo o Brasil.</p>
 
           <div class="section-eyebrow">Urgências</div>
           <div class="rede-grid">
@@ -896,12 +896,27 @@ function logout(){
 }
 
 async function carregarConsultas(){
-  const {data}=await sb.from('sessoes').select('*').eq('paciente_id',user.id).order('data_sessao',{ascending:true})
-  const sessoes=data||[]
+  const {data:raw}=await sb.from('sessoes').select('*').eq('paciente_id',user.id).order('data_sessao',{ascending:true})
+  let sessoes=raw||[]
+
+  // Auto-atualização: sessões agendadas cuja data+hora já passaram → realizada
+  const agora=new Date()
+  const vencidas=sessoes.filter(s=>{
+    if(s.status!=='agendada')return false
+    // Monta datetime completo; se não houver hora, considera 23:59 do dia
+    const hora=s.hora_sessao?s.hora_sessao.slice(0,5):'23:59'
+    return new Date(`${s.data_sessao}T${hora}:00`)<agora
+  })
+  if(vencidas.length){
+    await Promise.all(vencidas.map(s=>sb.from('sessoes').update({status:'realizada'}).eq('id',s.id)))
+    // Atualiza localmente para não precisar de re-fetch
+    sessoes=sessoes.map(s=>vencidas.find(v=>v.id===s.id)?{...s,status:'realizada'}:s)
+  }
+
   const hoje=new Date().toISOString().split('T')[0]
-  const proximas=sessoes.filter(s=>s.status==='agendada'&&s.data_sessao>=hoje)
-  const realizadas=sessoes.filter(s=>s.status==='realizada'||s.data_sessao<hoje&&s.status!=='cancelada')
-  const agendadas=sessoes.filter(s=>s.status==='agendada')
+  const proximas=sessoes.filter(s=>s.status==='agendada')
+  const realizadas=sessoes.filter(s=>s.status==='realizada')
+
   document.getElementById('consultas-stats').innerHTML=`
     <div class="stat-card" style="display:flex;flex-direction:column;justify-content:center">
       <div class="stat-lbl" style="margin-bottom:0.5rem">Próximas sessões</div>
@@ -912,24 +927,27 @@ async function carregarConsultas(){
       <div class="stat-num">${realizadas.length}</div>
     </div>
     <div class="stat-card" style="display:flex;flex-direction:column;justify-content:center">
-      <div class="stat-lbl" style="margin-bottom:0.5rem">Total agendado</div>
-      <div class="stat-num">${agendadas.length}</div>
+      <div class="stat-lbl" style="margin-bottom:0.5rem">Total registrado</div>
+      <div class="stat-num">${sessoes.length}</div>
     </div>`
+
   const proximasEl=document.getElementById('proximas-lista')
-  if(proximas.length){proximasEl.innerHTML=proximas.map(s=>sessaoHtml(s,'proxima')).join('')}
+  if(proximas.length){proximasEl.innerHTML=proximas.map(s=>sessaoHtml(s)).join('')}
   else{proximasEl.innerHTML='<div class="empty-state">Nenhuma sessão agendada.</div>'}
+
   const realizadasEl=document.getElementById('realizadas-lista')
   const realizadasDesc=[...realizadas].sort((a,b)=>b.data_sessao.localeCompare(a.data_sessao))
-  if(realizadasDesc.length){realizadasEl.innerHTML=realizadasDesc.map(s=>sessaoHtml(s,'realizada')).join('')}
+  if(realizadasDesc.length){realizadasEl.innerHTML=realizadasDesc.map(s=>sessaoHtml(s)).join('')}
   else{realizadasEl.innerHTML='<div class="empty-state">Nenhuma sessão registrada ainda.</div>'}
 }
 
-function sessaoHtml(s,tipo){
+function sessaoHtml(s){
   const [y,m,d]=s.data_sessao.split('-')
   const meses=['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez']
   const mesLabel=meses[parseInt(m)-1]
   const horaLabel=s.hora_sessao?s.hora_sessao.slice(0,5):'—'
   const statusLabel={agendada:'Agendada',realizada:'Realizada',cancelada:'Cancelada'}
+  const tipo=s.status||'agendada'
   return `<div class="consulta-item ${tipo}">
     <div class="consulta-data-bloco">
       <div class="consulta-dia">${d}</div>
@@ -938,7 +956,7 @@ function sessaoHtml(s,tipo){
     <div class="consulta-divider"></div>
     <div class="consulta-info">
       <div class="consulta-hora">${horaLabel}</div>
-      <div class="consulta-status ${tipo}">${statusLabel[s.status]||s.status}</div>
+      <div class="consulta-status ${tipo}">${statusLabel[tipo]||tipo}</div>
     </div>
   </div>`
 }
