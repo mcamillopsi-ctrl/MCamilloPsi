@@ -436,12 +436,12 @@
               <div class="test-lembrete" id="lembrete-dass21"></div>
               <button class="btn-test">Fazer teste</button>
             </div>
-            <div class="test-card" onclick="iniciarTeste('psqi')">
-              <div class="test-name">PSQI-BR</div>
-              <div class="test-desc">Avalia a qualidade e os distúrbios do sono no último mês através de 9 dimensões. Sono de baixa qualidade está diretamente associado ao bem-estar emocional e à eficácia do processo terapêutico.</div>
-              <div class="test-meta">9 perguntas · ~3 min</div>
+            <div class="test-card" onclick="iniciarTeste('msq')">
+              <div class="test-name">MSQ-BR</div>
+              <div class="test-desc">Mini Sleep Questionnaire, versão brasileira validada por Falavigna et al. (2011). Avalia a frequência de dificuldades de sono e sonêlencia diurna — indicadores diretamente ligados ao bem-estar emocional e à eficácia do processo terapêutico.</div>
+              <div class="test-meta">10 perguntas · ~2 min</div>
               <div style="font-size:0.62rem;font-weight:500;letter-spacing:0.06em;color:var(--gold);margin-top:0.4rem">⟳ Recomendado: mensalmente</div>
-              <div class="test-lembrete" id="lembrete-psqi"></div>
+              <div class="test-lembrete" id="lembrete-msq"></div>
               <button class="btn-test">Fazer teste</button>
             </div>
           </div>
@@ -891,15 +891,15 @@ async function hashSenha(senha){
 }
 
 const testes={
-  phq9:{nome:'PHQ-9 — Depressão',instrucao:'Nas últimas 2 semanas, com que frequência você foi incomodado pelos problemas abaixo?',opcoes:['Nenhuma vez (0)','Vários dias (1)','Mais da metade dos dias (2)','Quase todos os dias (3)'],vals:[0,1,2,3],perguntas:['Pouco interesse ou pouco prazer em fazer as coisas','Sentir-se "para baixo", deprimido(a) ou sem perspectiva','Dificuldade para adormecer, permanecer dormindo ou dormir mais do que de costume','Sentir-se cansado(a) ou com pouca energia','Apetite diminuído ou aumentado','Sentir-se mal consigo mesmo(a) ou achar que é um fracasso','Dificuldade para se concentrar nas coisas','Mover-se ou falar mais lentamente que o habitual, ou estar muito agitado(a)','Pensamentos de se machucar ou de que seria melhor estar morto(a)'],classificar:p=>{if(p<=4)return{label:'Mínima',cor:'var(--green)',desc:'Seus resultados indicam sintomas mínimos de depressão. Continue cuidando do seu bem-estar com hábitos saudáveis e acompanhamento regular.'};if(p<=9)return{label:'Leve',cor:'var(--yellow)',desc:'Seus resultados indicam sintomas leves de depressão. Acompanhamento clínico e atenção ao bem-estar emocional são recomendados.'};if(p<=14)return{label:'Moderada',cor:'#b8610a',desc:'Seus resultados indicam sintomas moderados de depressão. O acompanhamento psicológico regular é indicado.'};if(p<=19)return{label:'Moderadamente grave',cor:'var(--red)',desc:'Seus resultados indicam sintomas moderadamente graves. Suporte profissional com regularidade é muito importante.'};return{label:'Grave',cor:'var(--red)',desc:'Seus resultados indicam sintomas graves de depressão. Busque suporte profissional urgente.'}}},
-  gad7:{nome:'GAD-7 — Ansiedade',instrucao:'Nas últimas 2 semanas, com que frequência você foi incomodado pelos problemas abaixo?',opcoes:['Nenhuma vez (0)','Vários dias (1)','Mais da metade dos dias (2)','Quase todos os dias (3)'],vals:[0,1,2,3],perguntas:['Sentir-se nervoso(a), ansioso(a) ou muito tenso(a)','Não conseguir parar ou controlar as preocupações','Preocupar-se muito com diversas coisas','Dificuldade para relaxar','Ficar tão agitado(a) que é difícil permanecer sentado(a)','Ficar facilmente irritado(a) ou irritável','Sentir medo como se algo horrível fosse acontecer'],classificar:p=>{if(p<=4)return{label:'Mínima',cor:'var(--green)',desc:'Seus resultados indicam ansiedade mínima. Mantenha práticas de autocuidado e monitoramento regular.'};if(p<=9)return{label:'Leve',cor:'var(--yellow)',desc:'Seus resultados indicam ansiedade leve. Técnicas de relaxamento e acompanhamento podem ser benéficos.'};if(p<=14)return{label:'Moderada',cor:'#b8610a',desc:'Seus resultados indicam ansiedade moderada. O acompanhamento psicológico é indicado.'};return{label:'Grave',cor:'var(--red)',desc:'Seus resultados indicam ansiedade grave. O suporte profissional é altamente recomendado.'}}},
-  dass21:{nome:'DASS-21 — Depressão, Ansiedade e Estresse',instrucao:'Por favor, leia cada afirmação e indique o quanto ela se aplicou a você durante a última semana.',opcoes:['Não se aplicou (0)','Aplicou-se um pouco (1)','Aplicou-se bastante (2)','Aplicou-se muito (3)'],vals:[0,1,2,3],perguntas:['Achei difícil me acalmar','Percebi que tinha a boca seca','Não consegui vivenciar nenhum sentimento positivo','Tive dificuldade em respirar','Achei difícil ter iniciativa para fazer as coisas','Tive a tendência de reagir de forma exagerada às situações','Senti tremores','Senti que estava muito nervoso(a)','Preocupei-me com situações em que poderia entrar em pânico','Senti que não tinha nada a esperar do futuro','Percebi que ficava agitado(a)','Achei difícil relaxar','Senti-me desanimado(a) e melancólico(a)','Fui intolerante com as coisas que me impediam','Senti que estava quase entrando em pânico','Não consegui me entusiasmar com nada','Senti que não tinha muito valor como pessoa','Senti que estava bastante irritável','Senti os batimentos do meu coração acelerados','Tive medo sem motivo','Senti que a vida não tinha sentido'],classificar:p=>{const dep=[2,4,9,12,15,16,20].reduce((s,i)=>s+(testes.dass21.vals[respostas[i]]||0),0)*2;const anx=[1,3,6,8,14,18,19].reduce((s,i)=>s+(testes.dass21.vals[respostas[i]]||0),0)*2;const str=[0,5,7,10,11,13,17].reduce((s,i)=>s+(testes.dass21.vals[respostas[i]]||0),0)*2;const total=dep+anx+str;let label,cor;if(total<=28){label='Normal a leve';cor='var(--yellow)'}else if(total<=56){label='Moderado';cor='#b8610a'}else{label='Grave a extremamente grave';cor='var(--red)'};return{label,cor,pontuacaoDisplay:total,desc:`Subescalas (×2): Depressão: ${dep} | Ansiedade: ${anx} | Estresse: ${str}. Total: ${total}. Interprete com seu psicólogo.`}}},
-  psqi:{nome:'PSQI-BR — Qualidade do Sono',instrucao:'Considerando o último mês, responda sobre os seus hábitos de sono habituais.',opcoes:['Nenhuma vez / Muito boa (0)','Menos de 1× por semana / Boa (1)','1 a 2× por semana / Ruim (2)','3× ou mais / Muito ruim (3)'],opcoesPorPergunta:[['Muito boa (0)','Boa (1)','Ruim (2)','Muito ruim (3)'],null,['Mais de 7 horas (0)','6 a 7 horas (1)','5 a 6 horas (2)','Menos de 5 horas (3)'],null,null,null,null,['Nenhuma dificuldade (0)','Problema leve (1)','Problema moderado (2)','Grande problema (3)'],null],vals:[0,1,2,3],perguntas:['Como você avaliaria a qualidade geral do seu sono no último mês?','Com que frequência você demorou mais de 30 minutos para adormecer?','Quantas horas de sono você dormiu de fato por noite (independente do tempo na cama)?','Com que frequência você acordou no meio da noite ou muito cedo e não conseguiu dormir novamente?','Com que frequência você teve dificuldades para dormir por causa de calor, frio, dor, precisar ir ao banheiro ou outro desconforto físico?','Com que frequência você tomou remédio (prescrito ou por conta própria) para ajudar a dormir?','Com que frequência você teve dificuldade para se manter acordado(a) durante atividades diárias (trabalho, estudo, refeições)?','Quanta dificuldade você teve para manter o entusiasmo e a disposição nas suas atividades habituais?','Com que frequência pensamentos, preocupações ou emoções difíceis perturbaram o seu sono?'],classificar:p=>{if(p<=5)return{label:'Boa qualidade',cor:'var(--green)',desc:'Seus resultados indicam boa qualidade de sono. Continue com seus hábitos saudáveis e acompanhamento regular.'};if(p<=9)return{label:'Comprometimento leve',cor:'var(--yellow)',desc:'Seus resultados indicam leve comprometimento do sono. Práticas de higiene do sono podem ajudar.'};if(p<=18)return{label:'Comprometimento moderado',cor:'#b8610a',desc:'Seus resultados indicam comprometimento moderado do sono. Estratégias de higiene do sono e acompanhamento terapêutico são recomendados.'};return{label:'Comprometimento grave',cor:'var(--red)',desc:'Seus resultados indicam comprometimento grave do sono. Avaliação profissional especializada é altamente recomendada.'}}
+  phq9:{nome:'PHQ-9 — Depressão',instrucao:'Durante as últimas 2 semanas, com que frequência você foi incomodado(a) pelos seguintes problemas?',opcoes:['Nenhuma vez (0)','Vários dias (1)','Mais da metade dos dias (2)','Quase todo dia (3)'],vals:[0,1,2,3],perguntas:['Ter pouco interesse ou pouco prazer em fazer as coisas','Se sentir "para baixo", deprimido(a) ou sem perspectiva','Ter dificuldade para adormecer ou permanecer dormindo, ou dormir mais do que de costume','Se sentir cansado(a) ou com pouca energia','Ter apetite diminuído ou aumentado','Se sentir mal consigo mesmo(a) — ou achar que é um fracasso ou que decepcionou sua família ou a você mesmo(a)','Ter dificuldade para se concentrar nas coisas, como ler o jornal ou ver televisão','Mover-se ou falar tão devagar que outras pessoas poderiam notar — ou ao contrário, estar tão agitado(a) ou inquieto(a) que você ficava andando de um lado para o outro mais do que de costume','Ter pensamentos de que seria melhor estar morto(a) ou de se machucar de alguma forma'],classificar:p=>{if(p<=4)return{label:'Mínima',cor:'var(--green)',desc:'Seus resultados indicam sintomas mínimos de depressão. Continue cuidando do seu bem-estar com hábitos saudáveis e acompanhamento regular.'};if(p<=9)return{label:'Leve',cor:'var(--yellow)',desc:'Seus resultados indicam sintomas leves de depressão. Acompanhamento clínico e atenção ao bem-estar emocional são recomendados.'};if(p<=14)return{label:'Moderada',cor:'#b8610a',desc:'Seus resultados indicam sintomas moderados de depressão. O acompanhamento psicológico regular é indicado.'};if(p<=19)return{label:'Moderadamente grave',cor:'var(--red)',desc:'Seus resultados indicam sintomas moderadamente graves. Suporte profissional com regularidade é muito importante.'};return{label:'Grave',cor:'var(--red)',desc:'Seus resultados indicam sintomas graves de depressão. Busque suporte profissional urgente.'}}},
+  gad7:{nome:'GAD-7 — Ansiedade',instrucao:'Durante as últimas 2 semanas, com que frequência você foi incomodado(a) pelos seguintes problemas?',opcoes:['Nenhuma vez (0)','Vários dias (1)','Mais da metade dos dias (2)','Quase todo dia (3)'],vals:[0,1,2,3],perguntas:['Sentir-se nervoso(a), ansioso(a) ou muito tenso(a)','Não ser capaz de parar ou controlar as preocupações','Preocupar-se muito com diversas coisas','Ter dificuldade para relaxar','Ficar tão agitado(a) que se torna difícil ficar parado(a)','Ficar facilmente irritado(a) ou irritável','Sentir medo como se algo horrível fosse acontecer'],classificar:p=>{if(p<=4)return{label:'Mínima',cor:'var(--green)',desc:'Seus resultados indicam ansiedade mínima. Mantenha práticas de autocuidado e monitoramento regular.'};if(p<=9)return{label:'Leve',cor:'var(--yellow)',desc:'Seus resultados indicam ansiedade leve. Técnicas de relaxamento e acompanhamento podem ser benéficos.'};if(p<=14)return{label:'Moderada',cor:'#b8610a',desc:'Seus resultados indicam ansiedade moderada. O acompanhamento psicológico é indicado.'};return{label:'Grave',cor:'var(--red)',desc:'Seus resultados indicam ansiedade grave. O suporte profissional é altamente recomendado.'}}},
+  dass21:{nome:'DASS-21 — Depressão, Ansiedade e Estresse',instrucao:'Por favor, leia cada afirmação abaixo e indique o quanto ela se aplicou a você durante a última semana. Não há respostas certas ou erradas.',opcoes:['Não se aplicou de forma alguma (0)','Aplicou-se a mim um pouco, ou durante parte do tempo (1)','Aplicou-se a mim de forma considerável, ou por uma boa parte do tempo (2)','Aplicou-se muito a mim, ou a maior parte do tempo (3)'],vals:[0,1,2,3],perguntas:['Achei difícil me acalmar','Percebi que tinha a boca seca','Não consegui vivenciar nenhum sentimento positivo','Tive dificuldade em respirar (p. ex., respiração excessivamente rápida, falta de ar, sem ter feito nenhum esforço físico)','Achei difícil ter iniciativa para fazer as coisas','Tive a tendência de reagir de forma exagerada às situações','Senti tremores (p. ex.: nas mãos)','Senti que estava usando muita energia nervosa','Preocupei-me com situações em que eu poderia entrar em pânico e parecer ridículo(a)','Senti que não havia nada pelo que anseiar','Percebi que ficava agitado(a)','Achei difícil relaxar','Senti-me abatido(a) e triste','Fui intolerante com as coisas que me impediam de continuar a fazer o que estava fazendo','Senti que estava quase entrando em pânico','Não consegui me entusiasmar com coisa alguma','Senti que não tinha muito valor como pessoa','Senti que estava bastante irritável','Percebi os batimentos do meu coração mesmo sem ter feito nenhum esforço físico (p. ex., sensação de aumento da frequência cardíaca, coração batendo forte)','Senti medo sem motivo aparente','Senti que a vida não tinha sentido'],classificar:p=>{const dep=[2,4,9,12,15,16,20].reduce((s,i)=>s+(testes.dass21.vals[respostas[i]]||0),0)*2;const anx=[1,3,6,8,14,18,19].reduce((s,i)=>s+(testes.dass21.vals[respostas[i]]||0),0)*2;const str=[0,5,7,10,11,13,17].reduce((s,i)=>s+(testes.dass21.vals[respostas[i]]||0),0)*2;const total=dep+anx+str;let label,cor;if(total<=28){label='Normal a leve';cor='var(--yellow)'}else if(total<=56){label='Moderado';cor='#b8610a'}else{label='Grave a extremamente grave';cor='var(--red)'};return{label,cor,pontuacaoDisplay:total,desc:`Subescalas (×2): Depressão: ${dep} | Ansiedade: ${anx} | Estresse: ${str}. Total: ${total}. Interprete com seu psicólogo.`}}},
+  msq:{nome:'MSQ-BR — Mini Sleep Questionnaire',instrucao:'Para cada questão abaixo, marque o número que melhor descreve a frequência com que você apresentou esses problemas durante a última semana.',opcoes:['Nunca (1)','Raramente (2)','Às vezes (3)','Com frequência (4)','Frequentemente (5)','Quase sempre (6)','Sempre (7)'],vals:[1,2,3,4,5,6,7],perguntas:['Você tem dificuldade para adormecer?','Você acorda no meio da noite?','Você usa medicamentos para dormir?','Você sente sonêlencia excessiva durante o dia?','Você se sente cansado(a) ao acordar pela manhã?','Você ronca?','Você acorda muito cedo, antes do horário desejado?','Você sente dor de cabeça ao acordar?','Você adormece durante o dia, em momentos inapropriados?','Você apresenta movimentos excessivos enquanto dorme?'],classificar:p=>{if(p<=24)return{label:'Boa qualidade de sono',cor:'var(--green)',desc:'Seus resultados indicam boa qualidade de sono. Continue mantendo seus hábitos saudáveis e acompanhamento regular.'};if(p<=27)return{label:'Dificuldades leves de sono',cor:'var(--yellow)',desc:'Seus resultados indicam leves dificuldades de sono. Práticas de higiene do sono podem ser benéficas.'};if(p<=30)return{label:'Dificuldades moderadas de sono',cor:'#b8610a',desc:'Seus resultados indicam dificuldades moderadas de sono. Estratégias de higiene do sono e acompanhamento terapêutico são recomendados.'};return{label:'Dificuldades graves de sono',cor:'var(--red)',desc:'Seus resultados indicam dificuldades graves de sono. Avaliação profissional especializada é altamente recomendada.'}}
   }
 }
 
 function fmt(iso){return new Date(iso).toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric'})}
-function badgeHtml(c){const m={'Mínima':'badge-min','Leve':'badge-leve','Normal a leve':'badge-leve','Moderada':'badge-mod','Moderado':'badge-mod','Moderadamente grave':'badge-grav','Grave':'badge-grav','Grave a extremamente grave':'badge-grav','Boa qualidade':'badge-min','Comprometimento leve':'badge-leve','Comprometimento moderado':'badge-mod','Comprometimento grave':'badge-grav'};const cls=Object.keys(m).find(k=>c.includes(k))||'badge-leve';return`<span class="badge ${m[cls]}">${c}</span>`}
+function badgeHtml(c){const m={'Mínima':'badge-min','Leve':'badge-leve','Normal a leve':'badge-leve','Moderada':'badge-mod','Moderado':'badge-mod','Moderadamente grave':'badge-grav','Grave':'badge-grav','Grave a extremamente grave':'badge-grav','Boa qualidade de sono':'badge-min','Dificuldades leves de sono':'badge-leve','Dificuldades moderadas de sono':'badge-mod','Dificuldades graves de sono':'badge-grav'};const cls=Object.keys(m).find(k=>c.includes(k))||'badge-leve';return`<span class="badge ${m[cls]}">${c}</span>`}
 
 function atualizarMobileNav(pg){
   document.querySelectorAll('.mobile-nav-item').forEach(i=>i.classList.remove('active'))
@@ -1073,8 +1073,8 @@ async function carregarDashboard(){
 
 function renderLembretes(data){
   // Prazos recomendados em dias
-  const prazos={phq9:14,gad7:14,dass21:30,psqi:30}
-  const nomeMap={'PHQ-9':'phq9','GAD-7':'gad7','DASS-21':'dass21','PSQI-BR':'psqi'}
+  const prazos={phq9:14,gad7:14,dass21:30,msq:30}
+  const nomeMap={'PHQ-9':'phq9','GAD-7':'gad7','DASS-21':'dass21','MSQ-BR':'msq'}
   const ultimos={}
   data.forEach(r=>{
     const k=r.teste.split('—')[0].trim()
@@ -1099,7 +1099,7 @@ function renderStats(data,sessoesRealizadas){
   testesFeitos.forEach(([,r])=>{
     const c=r.classificacao
     if(c.includes('Grave')||c.includes('grave'))nivel='vermelho'
-    else if(nivel!=='vermelho'&&(c.includes('Moderada')||c.includes('Moderado')||c.includes('comprometimento')||c.includes('Comprometimento')||c.includes('ruim')))nivel='amarelo'
+    else if(nivel!=='vermelho'&&(c.includes('Moderada')||c.includes('Moderado')||c.includes('Dificuldades moderadas')||c.includes('Dificuldades graves')||c.includes('ruim')))nivel='amarelo'
   })
   const farolLabels={
     verde:{tag:'Sem necessidade de atenção',cor:'verde'},
@@ -1183,10 +1183,10 @@ function renderGraficos(data){
       {y:56,label:'Moderado',color:'rgba(184,97,10,0.4)'},
       {y:84,label:'Grave',color:'rgba(163,45,45,0.4)'}
     ]},
-    'PSQI-BR':{cor:'#5b8fc9',desc:'Qualidade do sono — escala 0 a 27 · Acima de 5 = sono comprometido',max:27,refs:[
-      {y:5,label:'Limiar',color:'rgba(163,45,45,0.4)'},
-      {y:10,label:'Moderado',color:'rgba(184,97,10,0.4)'},
-      {y:19,label:'Grave',color:'rgba(163,45,45,0.4)'}
+    'MSQ-BR':{cor:'#5b8fc9',desc:'Mini Sleep Questionnaire — escala 10 a 70 · Acima de 24 = sono comprometido',max:70,refs:[
+      {y:25,label:'Dif. leve',color:'rgba(200,150,10,0.4)'},
+      {y:28,label:'Dif. moderada',color:'rgba(184,97,10,0.4)'},
+      {y:31,label:'Dif. grave',color:'rgba(163,45,45,0.4)'}
     ]}
   }
   Object.values(graficos).forEach(g=>g.destroy())
@@ -1423,7 +1423,7 @@ async function carregarDashboardPsi(){
     let nivel='verde'
     ults.forEach(({c})=>{
       if(c.includes('Grave')||c.includes('grave')){nivel='vermelho'}
-      else if(nivel!=='vermelho'&&(c.includes('Moderada')||c.includes('Moderado')||c.includes('Leve')||c.includes('leve')||c.includes('comprometimento')||c.includes('Comprometimento'))){nivel='amarelo'}
+      else if(nivel!=='vermelho'&&(c.includes('Moderada')||c.includes('Moderado')||c.includes('Leve')||c.includes('leve')||c.includes('Dificuldades moderadas')||c.includes('Dificuldades graves'))){nivel='amarelo'}
     })
     if(nivel==='vermelho')risco++
     else if(nivel==='amarelo')atencao++
@@ -1473,9 +1473,9 @@ async function carregarDashboardPsi(){
       <canvas id="canvas-psi-psico" style="max-height:240px"></canvas>
     </div>
 
-    <div class="section-eyebrow">Qualidade do sono (PSQI-BR)</div>
+    <div class="section-eyebrow">Qualidade do sono (MSQ-BR)</div>
     <div class="chart-card" style="margin-bottom:1.5rem">
-      <div class="chart-card-sub" id="psi-sono-sub" style="font-size:0.68rem;font-weight:300;color:var(--text-muted);margin-bottom:1rem">Escala 0–27 · Linha tracejada = limiar clínico (5)</div>
+      <div class="chart-card-sub" id="psi-sono-sub" style="font-size:0.68rem;font-weight:300;color:var(--text-muted);margin-bottom:1rem">Escala 10–70 · Linha tracejada = limiar clínico (25)</div>
       <canvas id="canvas-psi-sono" style="max-height:200px"></canvas>
     </div>
 
@@ -1513,7 +1513,7 @@ function renderPsiGraficos(pacList,resultados,filtroId){
   const TESTS=['PHQ-9','GAD-7','DASS-21']
   const MAX={'PHQ-9':27,'GAD-7':21,'DASS-21':126}
   const CORES=['#b8974a','#0d1f3c','#2d7a4f','#7a4ab8','#4ab8a8','#b84a7a','#4a74b8','#b8714a']
-  const annoLimiarSono={ref0:{type:'line',yMin:5,yMax:5,borderColor:'rgba(163,45,45,0.45)',borderWidth:1.5,borderDash:[4,5],label:{display:true,content:'Limiar (5)',position:'end',font:{family:'Sora',size:9},color:'#8a9ab5',backgroundColor:'transparent'}}}
+  const annoLimiarSono={ref0:{type:'line',yMin:25,yMax:25,borderColor:'rgba(163,45,45,0.45)',borderWidth:1.5,borderDash:[4,5],label:{display:true,content:'Limiar (25)',position:'end',font:{family:'Sora',size:9},color:'#8a9ab5',backgroundColor:'transparent'}}}
 
   if(filtroId){
     // Paciente específico: linha por teste
@@ -1536,11 +1536,11 @@ function renderPsiGraficos(pacList,resultados,filtroId){
       cPsico.parentElement.insertAdjacentHTML('beforeend','<div class="empty-state" style="padding:1.5rem 0 0.5rem">Nenhum teste psicométrico realizado.</div>')
     }
 
-    const psqiPts=resultados.filter(r=>r.teste.includes('PSQI')).map(r=>({x:fmt(r.criado_em),y:r.pontuacao}))
-    if(psqiPts.length){
-      psiGraficos['sono']=new Chart(cSono,{type:'line',data:{datasets:[{label:'PSQI-BR',data:psqiPts,borderColor:'#5b8fc9',backgroundColor:'transparent',tension:0.3,pointRadius:4,borderWidth:2,pointBackgroundColor:'#5b8fc9'}]},options:{responsive:true,interaction:{mode:'nearest',intersect:false},plugins:{legend:{display:false},annotation:{annotations:annoLimiarSono}},scales:{x:{ticks:{font:{family:'Sora',size:10}}},y:{beginAtZero:true,max:27,ticks:{font:{family:'Sora',size:10}},grid:{color:'rgba(194,205,224,0.3)'}}}}})
+    const msqPts=resultados.filter(r=>r.teste.includes('MSQ')).map(r=>({x:fmt(r.criado_em),y:r.pontuacao}))
+    if(msqPts.length){
+      psiGraficos['sono']=new Chart(cSono,{type:'line',data:{datasets:[{label:'MSQ-BR',data:msqPts,borderColor:'#5b8fc9',backgroundColor:'transparent',tension:0.3,pointRadius:4,borderWidth:2,pointBackgroundColor:'#5b8fc9'}]},options:{responsive:true,interaction:{mode:'nearest',intersect:false},plugins:{legend:{display:false},annotation:{annotations:annoLimiarSono}},scales:{x:{ticks:{font:{family:'Sora',size:10}}},y:{beginAtZero:true,max:70,ticks:{font:{family:'Sora',size:10}},grid:{color:'rgba(194,205,224,0.3)'}}}}})
     }else{
-      cSono.parentElement.insertAdjacentHTML('beforeend','<div class="empty-state" style="padding:1.5rem 0 0.5rem">Nenhum PSQI realizado.</div>')
+      cSono.parentElement.insertAdjacentHTML('beforeend','<div class="empty-state" style="padding:1.5rem 0 0.5rem">Nenhum MSQ realizado.</div>')
     }
 
   }else{
@@ -1560,12 +1560,12 @@ function renderPsiGraficos(pacList,resultados,filtroId){
     }))
     psiGraficos['psico']=new Chart(cPsico,{type:'bar',data:{labels:pacList.map(nomeCurto),datasets:datasetsBar},options:{responsive:true,plugins:{legend:{labels:{font:{family:'Sora',size:10}}},tooltip:{callbacks:{label:i=>`${i.dataset.label}: ${i.parsed.y}%`}}},scales:{x:{ticks:{font:{family:'Sora',size:10}}},y:{beginAtZero:true,max:100,ticks:{font:{family:'Sora',size:10},callback:v=>v+'%'},grid:{color:'rgba(194,205,224,0.3)'}}}}})
 
-    // PSQI barra simples
-    const ultPsqi={}
-    ;[...resultados].reverse().forEach(r=>{if(r.teste.includes('PSQI')&&!(r.paciente_id in ultPsqi))ultPsqi[r.paciente_id]=r.pontuacao})
-    const psqiVals=pacList.map(p=>ultPsqi[p.id]!==undefined?ultPsqi[p.id]:null)
-    const psqiColors=psqiVals.map(v=>v===null?'rgba(194,205,224,0.5)':v>5?'rgba(163,45,45,0.7)':'rgba(45,122,79,0.7)')
-    psiGraficos['sono']=new Chart(cSono,{type:'bar',data:{labels:pacList.map(nomeCurto),datasets:[{label:'PSQI-BR',data:psqiVals,backgroundColor:psqiColors,borderWidth:0,borderRadius:4}]},options:{responsive:true,plugins:{legend:{display:false},annotation:{annotations:annoLimiarSono},tooltip:{callbacks:{label:i=>i.parsed.y===null?'Sem dados':`PSQI: ${i.parsed.y} — ${i.parsed.y>5?'Sono comprometido':'Boa qualidade'}`}}},scales:{x:{ticks:{font:{family:'Sora',size:10}}},y:{beginAtZero:true,max:27,ticks:{font:{family:'Sora',size:10}},grid:{color:'rgba(194,205,224,0.3)'}}}}})
+    // MSQ barra simples
+    const ultMsq={}
+    ;[...resultados].reverse().forEach(r=>{if(r.teste.includes('MSQ')&&!(r.paciente_id in ultMsq))ultMsq[r.paciente_id]=r.pontuacao})
+    const msqVals=pacList.map(p=>ultMsq[p.id]!==undefined?ultMsq[p.id]:null)
+    const msqColors=msqVals.map(v=>v===null?'rgba(194,205,224,0.5)':v>24?'rgba(163,45,45,0.7)':'rgba(45,122,79,0.7)')
+    psiGraficos['sono']=new Chart(cSono,{type:'bar',data:{labels:pacList.map(nomeCurto),datasets:[{label:'MSQ-BR',data:msqVals,backgroundColor:msqColors,borderWidth:0,borderRadius:4}]},options:{responsive:true,plugins:{legend:{display:false},annotation:{annotations:annoLimiarSono},tooltip:{callbacks:{label:i=>i.parsed.y===null?'Sem dados':`MSQ: ${i.parsed.y} — ${i.parsed.y>24?'Sono comprometido':'Boa qualidade'}`}}},scales:{x:{ticks:{font:{family:'Sora',size:10}}},y:{beginAtZero:true,max:27,ticks:{font:{family:'Sora',size:10}},grid:{color:'rgba(194,205,224,0.3)'}}}}})
   }
 }
 
