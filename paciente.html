@@ -302,7 +302,7 @@
     }
     .mobile-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--white);border-top:1px solid var(--border);z-index:200;padding:0.5rem 0 calc(0.5rem + env(safe-area-inset-bottom))}
     .mobile-nav-items{display:flex;justify-content:space-around;align-items:center}
-    .mobile-nav-item{display:flex;flex-direction:column;align-items:center;gap:0.2rem;cursor:pointer;padding:0.3rem 0.75rem;border-radius:6px;transition:all 0.15s;color:var(--text-muted);font-size:0.55rem;font-weight:500;letter-spacing:0.06em;text-transform:uppercase}
+    .mobile-nav-item{display:flex;flex-direction:column;align-items:center;gap:0.2rem;cursor:pointer;padding:0.3rem 0.45rem;border-radius:6px;transition:all 0.15s;color:var(--text-muted);font-size:0.5rem;font-weight:500;letter-spacing:0.04em;text-transform:uppercase}
     .mobile-nav-item svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.75}
     .mobile-nav-item.active{color:var(--gold)}
     @media(max-width:768px){
@@ -434,6 +434,14 @@
               <div class="test-meta">21 perguntas · ~5 min</div>
               <div style="font-size:0.62rem;font-weight:500;letter-spacing:0.06em;color:var(--gold);margin-top:0.4rem">⟳ Recomendado: mensalmente</div>
               <div class="test-lembrete" id="lembrete-dass21"></div>
+              <button class="btn-test">Fazer teste</button>
+            </div>
+            <div class="test-card" onclick="iniciarTeste('psqi')">
+              <div class="test-name">PSQI-BR</div>
+              <div class="test-desc">Avalia a qualidade e os distúrbios do sono no último mês através de 9 dimensões. Sono de baixa qualidade está diretamente associado ao bem-estar emocional e à eficácia do processo terapêutico.</div>
+              <div class="test-meta">9 perguntas · ~3 min</div>
+              <div style="font-size:0.62rem;font-weight:500;letter-spacing:0.06em;color:var(--gold);margin-top:0.4rem">⟳ Recomendado: mensalmente</div>
+              <div class="test-lembrete" id="lembrete-psqi"></div>
               <button class="btn-test">Fazer teste</button>
             </div>
           </div>
@@ -628,7 +636,87 @@
               </div>
             </div>
 
+
+          <div class="tec-categoria">Higiene do Sono</div>
+          <div class="tec-lista">
+
+            <div class="tecnica-card" onclick="toggleTec(this)">
+              <div class="tecnica-header"><div><div class="tecnica-tag">Sono</div><div class="tecnica-title">Horário regular de sono</div></div><span class="tecnica-arrow">▼</span></div>
+              <div class="tecnica-expanded">
+                <div class="tecnica-sec"><div class="tecnica-sec-lbl">O que é</div><div class="tecnica-sec-txt">Manter horários fixos para dormir e acordar todos os dias — incluindo fins de semana — independentemente da quantidade de sono da noite anterior.</div></div>
+                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Objetivo</div><div class="tecnica-sec-txt">Sincronizar o ritmo circadiano (relógio biológico interno) com o ciclo dia-noite, facilitando o adormecer, a manutenção e a qualidade do sono.</div></div>
+                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Comprovação científica</div><div class="tecnica-sec-txt">Estudos de cronobiologia mostram que a regularidade dos horários de sono é um dos preditores mais robustos de qualidade do sono. Irregularidade nos horários está associada a maior latência, mais despertares noturnos e humor mais baixo durante o dia.</div></div>
+                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Por que ajuda no processo terapêutico</div><div class="tecnica-sec-txt">Sono irregular prejudica a regulação emocional, a consolidação de memórias e a capacidade de aprendizado — processos centrais no trabalho terapêutico. Regularizar o sono é frequentemente o primeiro passo da Terapia Cognitivo-Comportamental para Insônia (TCC-I).</div></div>
+                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Como praticar</div><div class="tecnica-pratica">1. Defina um horário fixo para acordar e mantenha-o todos os dias.
+2. Calcule 7 a 9 horas de sono para definir o horário de dormir.
+3. Evite "compensar" sono nos fins de semana — variações de mais de 1 hora prejudicam o ritmo.
+4. Se demorar para adormecer, não antecipe o horário de deitar — isso fragiliza o "impulso de sono".
+5. Use alarme apenas para acordar, não para dormir.</div></div>
+              </div>
+            </div>
+
+            <div class="tecnica-card" onclick="toggleTec(this)">
+              <div class="tecnica-header"><div><div class="tecnica-tag">Sono</div><div class="tecnica-title">Higiene da luz e ambiente do quarto</div></div><span class="tecnica-arrow">▼</span></div>
+              <div class="tecnica-expanded">
+                <div class="tecnica-sec"><div class="tecnica-sec-lbl">O que é</div><div class="tecnica-sec-txt">Conjunto de ajustes no ambiente e na exposição à luz ao longo do dia para favorecer a produção de melatonina e a preparação do organismo para o sono.</div></div>
+                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Objetivo</div><div class="tecnica-sec-txt">Usar os sinais naturais de luz e escuridão para antecipar o sono, reduzir a latência (tempo para adormecer) e aumentar a profundidade do sono.</div></div>
+                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Comprovação científica</div><div class="tecnica-sec-txt">A luz azul de telas suprime a melatonina por até 3 horas após a exposição, atrasando o início do sono. Estudos mostram que reduzir a exposição à luz intensa à noite melhora significativamente a qualidade do sono, independentemente de outros fatores.</div></div>
+                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Por que ajuda no processo terapêutico</div><div class="tecnica-sec-txt">Ansiedade e ruminação à noite são amplificadas pela privação de sono — e a privação é frequentemente causada ou agravada por exposição inadequada à luz. Ajustar o ambiente é uma intervenção de baixo custo com alto impacto.</div></div>
+                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Como praticar</div><div class="tecnica-pratica">1. Pela manhã: exponha-se à luz natural por 10-20 min logo ao acordar.
+2. Nas 2 horas antes de dormir: reduza luzes artificiais intensas e telas.
+3. Use o quarto apenas para dormir — evite trabalhar, estudar ou usar redes sociais na cama.
+4. Mantenha o quarto escuro (use blackout se possível), silencioso e fresco (18-21°C).
+5. Se precisar usar telas à noite, ative o modo "luz quente" ou use óculos bloqueadores de luz azul.</div></div>
+              </div>
+            </div>
+
+            <div class="tecnica-card" onclick="toggleTec(this)">
+              <div class="tecnica-header"><div><div class="tecnica-tag">Sono</div><div class="tecnica-title">Ritual de desaceleração (wind-down)</div></div><span class="tecnica-arrow">▼</span></div>
+              <div class="tecnica-expanded">
+                <div class="tecnica-sec"><div class="tecnica-sec-lbl">O que é</div><div class="tecnica-sec-txt">Uma sequência de atividades calmas e previsíveis nos 30 a 60 minutos antes de dormir, que sinaliza ao sistema nervoso que é hora de reduzir a ativação.</div></div>
+                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Objetivo</div><div class="tecnica-sec-txt">Criar uma transição gradual entre o estado de alerta do dia e o estado de relaxamento necessário para adormecer, reduzindo a ruminação e a hiperativação fisiológica.</div></div>
+                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Comprovação científica</div><div class="tecnica-sec-txt">Rituais pré-sono consistentes são componentes centrais da TCC-I (Terapia Cognitivo-Comportamental para Insônia), considerada o tratamento de primeira linha para insônia. Pesquisas mostram que a previsibilidade dos comportamentos pré-sono reduz a excitação cortical e facilita o início do sono.</div></div>
+                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Por que ajuda no processo terapêutico</div><div class="tecnica-sec-txt">Pessoas com ansiedade e depressão tendem a ter hiperativação noturna — pensamentos acelerados, preocupações, ruminação. Um ritual estruturado cria um "buffer" entre o dia e o sono, reduzindo essa ativação.</div></div>
+                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Como praticar</div><div class="tecnica-pratica">1. Defina um ritual de 30-60 min e repita todas as noites no mesmo horário.
+2. Inclua atividades calmas: banho morno, leitura leve, alongamento suave, meditação guiada.
+3. Evite: notícias, discussões, decisões importantes, exercícios intensos ou refeições pesadas.
+4. Se houver preocupações ou pendências, anote-as em um caderno — isso "descarrega" a mente.
+5. Não force o sono. Se não adormecer em 20 min, levante, faça algo calmo e retorne quando sentir sono.</div></div>
+              </div>
+            </div>
+
+            <div class="tecnica-card" onclick="toggleTec(this)">
+              <div class="tecnica-header"><div><div class="tecnica-tag">Sono</div><div class="tecnica-title">Restrição de cafeína e álcool</div></div><span class="tecnica-arrow">▼</span></div>
+              <div class="tecnica-expanded">
+                <div class="tecnica-sec"><div class="tecnica-sec-lbl">O que é</div><div class="tecnica-sec-txt">Manejo estratégico do consumo de cafeína e álcool, substâncias que afetam diretamente a arquitetura do sono de formas diferentes e muitas vezes subestimadas.</div></div>
+                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Objetivo</div><div class="tecnica-sec-txt">Eliminar interferências químicas no ciclo sono-vigília, facilitando o adormecer, reduzindo despertares noturnos e aumentando a proporção de sono profundo.</div></div>
+                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Comprovação científica</div><div class="tecnica-sec-txt">A meia-vida da cafeína é de 5 a 7 horas — um café às 15h ainda tem metade da dose ativa às 20h. Estudos mostram redução de até 25% no sono de ondas lentas (sono profundo) com uso de cafeína no final do dia. O álcool, embora induza o sono, fragmenta a segunda metade da noite e suprime o sono REM.</div></div>
+                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Por que ajuda no processo terapêutico</div><div class="tecnica-sec-txt">Privação de sono profundo e REM prejudicam processamento emocional, memória e regulação do humor — justamente as funções que a terapia visa fortalecer.</div></div>
+                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Como praticar</div><div class="tecnica-pratica">1. Evite cafeína (café, chá preto, refrigerantes, energéticos) após as 14h.
+2. Se sensível à cafeína, considere cortá-la após as 12h.
+3. Evite álcool como "indutor do sono" — ele prejudica a qualidade mesmo que ajude a adormecer.
+4. Prefira chás sem cafeína à noite: camomila, melissa, valeriana.
+5. Mantenha um diário de sono por 1 semana para perceber os padrões do seu organismo.</div></div>
+              </div>
+            </div>
+
+            <div class="tecnica-card" onclick="toggleTec(this)">
+              <div class="tecnica-header"><div><div class="tecnica-tag">Sono</div><div class="tecnica-title">Atividade física e sono</div></div><span class="tecnica-arrow">▼</span></div>
+              <div class="tecnica-expanded">
+                <div class="tecnica-sec"><div class="tecnica-sec-lbl">O que é</div><div class="tecnica-sec-txt">Uso estratégico da atividade física regular como promotora do sono profundo e da qualidade geral do sono, respeitando os horários adequados para cada tipo de exercício.</div></div>
+                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Objetivo</div><div class="tecnica-sec-txt">Aumentar a pressão homeostática do sono (o "cansaço fisiológico" que facilita adormecer), reduzir o cortisol e a ansiedade, e aumentar a proporção de sono profundo.</div></div>
+                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Comprovação científica</div><div class="tecnica-sec-txt">Meta-análises mostram que exercício aeróbico regular reduz o tempo para adormecer em média em 13 minutos e aumenta o tempo total de sono em 18 minutos. O efeito é especialmente marcante em pessoas com ansiedade e insônia. Exercícios intensos à noite, porém, podem atrasar o sono por elevar a temperatura corporal e o cortisol.</div></div>
+                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Por que ajuda no processo terapêutico</div><div class="tecnica-sec-txt">Exercício físico e sono têm relação bidirecional com saúde mental. Melhorar o sono por meio do exercício cria um ciclo positivo: mais sono → melhor humor → mais disposição para se exercitar → sono ainda melhor.</div></div>
+                <div class="tecnica-sec"><div class="tecnica-sec-lbl">Como praticar</div><div class="tecnica-pratica">1. Pratique exercícios aeróbicos (caminhada, corrida, natação) por pelo menos 150 min por semana.
+2. Prefira horários matutinos ou vespertinos para exercícios intensos.
+3. Evite exercícios vigorosos nas 3 horas antes de dormir.
+4. Exercícios leves à noite (yoga, alongamento, caminhada tranquila) são bem-vindos — eles relaxam sem ativar.
+5. A consistência importa mais do que a intensidade: 20 min diários são mais eficazes do que 2h aos sábados.</div></div>
+              </div>
+            </div>
+
           </div>
+
         </div>
 
         <!-- REDE -->
@@ -768,6 +856,10 @@
       <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
       Início
     </div>
+    <div class="mobile-nav-item" id="mnav-consultas" onclick="irPara('consultas');atualizarMobileNav('consultas')">
+      <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      Consultas
+    </div>
     <div class="mobile-nav-item" id="mnav-tecnicas" onclick="irPara('tecnicas');atualizarMobileNav('tecnicas')">
       <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
       Técnicas
@@ -799,11 +891,13 @@ async function hashSenha(senha){
 const testes={
   phq9:{nome:'PHQ-9 — Depressão',instrucao:'Nas últimas 2 semanas, com que frequência você foi incomodado pelos problemas abaixo?',opcoes:['Nenhuma vez (0)','Vários dias (1)','Mais da metade dos dias (2)','Quase todos os dias (3)'],vals:[0,1,2,3],perguntas:['Pouco interesse ou pouco prazer em fazer as coisas','Sentir-se "para baixo", deprimido(a) ou sem perspectiva','Dificuldade para adormecer, permanecer dormindo ou dormir mais do que de costume','Sentir-se cansado(a) ou com pouca energia','Apetite diminuído ou aumentado','Sentir-se mal consigo mesmo(a) ou achar que é um fracasso','Dificuldade para se concentrar nas coisas','Mover-se ou falar mais lentamente que o habitual, ou estar muito agitado(a)','Pensamentos de se machucar ou de que seria melhor estar morto(a)'],classificar:p=>{if(p<=4)return{label:'Mínima',cor:'var(--green)',desc:'Seus resultados indicam sintomas mínimos de depressão. Continue cuidando do seu bem-estar com hábitos saudáveis e acompanhamento regular.'};if(p<=9)return{label:'Leve',cor:'var(--yellow)',desc:'Seus resultados indicam sintomas leves de depressão. Acompanhamento clínico e atenção ao bem-estar emocional são recomendados.'};if(p<=14)return{label:'Moderada',cor:'#b8610a',desc:'Seus resultados indicam sintomas moderados de depressão. O acompanhamento psicológico regular é indicado.'};if(p<=19)return{label:'Moderadamente grave',cor:'var(--red)',desc:'Seus resultados indicam sintomas moderadamente graves. Suporte profissional com regularidade é muito importante.'};return{label:'Grave',cor:'var(--red)',desc:'Seus resultados indicam sintomas graves de depressão. Busque suporte profissional urgente.'}}},
   gad7:{nome:'GAD-7 — Ansiedade',instrucao:'Nas últimas 2 semanas, com que frequência você foi incomodado pelos problemas abaixo?',opcoes:['Nenhuma vez (0)','Vários dias (1)','Mais da metade dos dias (2)','Quase todos os dias (3)'],vals:[0,1,2,3],perguntas:['Sentir-se nervoso(a), ansioso(a) ou muito tenso(a)','Não conseguir parar ou controlar as preocupações','Preocupar-se muito com diversas coisas','Dificuldade para relaxar','Ficar tão agitado(a) que é difícil permanecer sentado(a)','Ficar facilmente irritado(a) ou irritável','Sentir medo como se algo horrível fosse acontecer'],classificar:p=>{if(p<=4)return{label:'Mínima',cor:'var(--green)',desc:'Seus resultados indicam ansiedade mínima. Mantenha práticas de autocuidado e monitoramento regular.'};if(p<=9)return{label:'Leve',cor:'var(--yellow)',desc:'Seus resultados indicam ansiedade leve. Técnicas de relaxamento e acompanhamento podem ser benéficos.'};if(p<=14)return{label:'Moderada',cor:'#b8610a',desc:'Seus resultados indicam ansiedade moderada. O acompanhamento psicológico é indicado.'};return{label:'Grave',cor:'var(--red)',desc:'Seus resultados indicam ansiedade grave. O suporte profissional é altamente recomendado.'}}},
-  dass21:{nome:'DASS-21 — Depressão, Ansiedade e Estresse',instrucao:'Por favor, leia cada afirmação e indique o quanto ela se aplicou a você durante a última semana.',opcoes:['Não se aplicou (0)','Aplicou-se um pouco (1)','Aplicou-se bastante (2)','Aplicou-se muito (3)'],vals:[0,1,2,3],perguntas:['Achei difícil me acalmar','Percebi que tinha a boca seca','Não consegui vivenciar nenhum sentimento positivo','Tive dificuldade em respirar','Achei difícil ter iniciativa para fazer as coisas','Tive a tendência de reagir de forma exagerada às situações','Senti tremores','Senti que estava muito nervoso(a)','Preocupei-me com situações em que poderia entrar em pânico','Senti que não tinha nada a esperar do futuro','Percebi que ficava agitado(a)','Achei difícil relaxar','Senti-me desanimado(a) e melancólico(a)','Fui intolerante com as coisas que me impediam','Senti que estava quase entrando em pânico','Não consegui me entusiasmar com nada','Senti que não tinha muito valor como pessoa','Senti que estava bastante irritável','Senti os batimentos do meu coração acelerados','Tive medo sem motivo','Senti que a vida não tinha sentido'],classificar:p=>{const dep=[2,4,9,12,15,16,20].reduce((s,i)=>s+(testes.dass21.vals[respostas[i]]||0),0)*2;const anx=[1,3,6,8,14,18,19].reduce((s,i)=>s+(testes.dass21.vals[respostas[i]]||0),0)*2;const str=[0,5,7,10,11,13,17].reduce((s,i)=>s+(testes.dass21.vals[respostas[i]]||0),0)*2;const total=dep+anx+str;let label,cor;if(total<=28){label='Normal a leve';cor='var(--yellow)'}else if(total<=56){label='Moderado';cor:'#b8610a'}else{label='Grave a extremamente grave';cor='var(--red)'};return{label,cor,pontuacaoDisplay:total,desc:`Subescalas (×2): Depressão: ${dep} | Ansiedade: ${anx} | Estresse: ${str}. Total: ${total}. Interprete com seu psicólogo.`}}}
+  dass21:{nome:'DASS-21 — Depressão, Ansiedade e Estresse',instrucao:'Por favor, leia cada afirmação e indique o quanto ela se aplicou a você durante a última semana.',opcoes:['Não se aplicou (0)','Aplicou-se um pouco (1)','Aplicou-se bastante (2)','Aplicou-se muito (3)'],vals:[0,1,2,3],perguntas:['Achei difícil me acalmar','Percebi que tinha a boca seca','Não consegui vivenciar nenhum sentimento positivo','Tive dificuldade em respirar','Achei difícil ter iniciativa para fazer as coisas','Tive a tendência de reagir de forma exagerada às situações','Senti tremores','Senti que estava muito nervoso(a)','Preocupei-me com situações em que poderia entrar em pânico','Senti que não tinha nada a esperar do futuro','Percebi que ficava agitado(a)','Achei difícil relaxar','Senti-me desanimado(a) e melancólico(a)','Fui intolerante com as coisas que me impediam','Senti que estava quase entrando em pânico','Não consegui me entusiasmar com nada','Senti que não tinha muito valor como pessoa','Senti que estava bastante irritável','Senti os batimentos do meu coração acelerados','Tive medo sem motivo','Senti que a vida não tinha sentido'],classificar:p=>{const dep=[2,4,9,12,15,16,20].reduce((s,i)=>s+(testes.dass21.vals[respostas[i]]||0),0)*2;const anx=[1,3,6,8,14,18,19].reduce((s,i)=>s+(testes.dass21.vals[respostas[i]]||0),0)*2;const str=[0,5,7,10,11,13,17].reduce((s,i)=>s+(testes.dass21.vals[respostas[i]]||0),0)*2;const total=dep+anx+str;let label,cor;if(total<=28){label='Normal a leve';cor='var(--yellow)'}else if(total<=56){label='Moderado';cor:'#b8610a'}else{label='Grave a extremamente grave';cor='var(--red)'};return{label,cor,pontuacaoDisplay:total,desc:`Subescalas (×2): Depressão: ${dep} | Ansiedade: ${anx} | Estresse: ${str}. Total: ${total}. Interprete com seu psicólogo.`}}},
+  psqi:{nome:'PSQI-BR — Qualidade do Sono',instrucao:'Considerando o último mês, responda sobre os seus hábitos de sono habituais.',opcoes:['Nenhuma vez / Muito boa (0)','Menos de 1× por semana / Boa (1)','1 a 2× por semana / Ruim (2)','3× ou mais / Muito ruim (3)'],opcoesPorPergunta:[['Muito boa (0)','Boa (1)','Ruim (2)','Muito ruim (3)'],null,['Mais de 7 horas (0)','6 a 7 horas (1)','5 a 6 horas (2)','Menos de 5 horas (3)'],null,null,null,null,['Nenhuma dificuldade (0)','Problema leve (1)','Problema moderado (2)','Grande problema (3)'],null],vals:[0,1,2,3],perguntas:['Como você avaliaria a qualidade geral do seu sono no último mês?','Com que frequência você demorou mais de 30 minutos para adormecer?','Quantas horas de sono você dormiu de fato por noite (independente do tempo na cama)?','Com que frequência você acordou no meio da noite ou muito cedo e não conseguiu dormir novamente?','Com que frequência você teve dificuldades para dormir por causa de calor, frio, dor, precisar ir ao banheiro ou outro desconforto físico?','Com que frequência você tomou remédio (prescrito ou por conta própria) para ajudar a dormir?','Com que frequência você teve dificuldade para se manter acordado(a) durante atividades diárias (trabalho, estudo, refeições)?','Quanta dificuldade você teve para manter o entusiasmo e a disposição nas suas atividades habituais?','Com que frequência pensamentos, preocupações ou emoções difíceis perturbaram o seu sono?'],classificar:p=>{if(p<=5)return{label:'Boa qualidade',cor:'var(--green)',desc:'Seus resultados indicam boa qualidade de sono. Continue com seus hábitos saudáveis e acompanhamento regular.'};if(p<=9)return{label:'Comprometimento leve',cor:'var(--yellow)',desc:'Seus resultados indicam leve comprometimento do sono. Práticas de higiene do sono podem ajudar.'};if(p<=18)return{label:'Comprometimento moderado',cor:'#b8610a',desc:'Seus resultados indicam comprometimento moderado do sono. Estratégias de higiene do sono e acompanhamento terapêutico são recomendados.'};return{label:'Comprometimento grave',cor:'var(--red)',desc:'Seus resultados indicam comprometimento grave do sono. Avaliação profissional especializada é altamente recomendada.'}}
+  }
 }
 
 function fmt(iso){return new Date(iso).toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric'})}
-function badgeHtml(c){const m={'Mínima':'badge-min','Leve':'badge-leve','Normal a leve':'badge-leve','Moderada':'badge-mod','Moderado':'badge-mod','Moderadamente grave':'badge-grav','Grave':'badge-grav','Grave a extremamente grave':'badge-grav'};const cls=Object.keys(m).find(k=>c.includes(k))||'badge-leve';return`<span class="badge ${m[cls]}">${c}</span>`}
+function badgeHtml(c){const m={'Mínima':'badge-min','Leve':'badge-leve','Normal a leve':'badge-leve','Moderada':'badge-mod','Moderado':'badge-mod','Moderadamente grave':'badge-grav','Grave':'badge-grav','Grave a extremamente grave':'badge-grav','Boa qualidade':'badge-min','Comprometimento leve':'badge-leve','Comprometimento moderado':'badge-mod','Comprometimento grave':'badge-grav'};const cls=Object.keys(m).find(k=>c.includes(k))||'badge-leve';return`<span class="badge ${m[cls]}">${c}</span>`}
 
 function atualizarMobileNav(pg){
   document.querySelectorAll('.mobile-nav-item').forEach(i=>i.classList.remove('active'))
@@ -822,7 +916,7 @@ function irPara(pg){
   document.getElementById('page-'+pg).classList.add('active')
   const nav=document.getElementById('nav-'+pg)
   if(nav)nav.classList.add('active')
-  if(pg==='dashboard')carregarDashboard()
+  if(pg==='dashboard'){if(user&&user.email===EMAIL_PSI)carregarDashboardPsi();else carregarDashboard()}
   if(pg==='consultas')carregarConsultas()
   if(pg==='psi')carregarPainel()
   if(pg==='cadastro')document.getElementById('edit-nome').value=user.nome||''
@@ -882,9 +976,9 @@ function entrarNoApp(data){
   document.getElementById('screen-login').classList.add('hidden')
   document.getElementById('app').classList.add('visible')
   document.getElementById('nav-nome').textContent=data.nome||data.email
-  document.getElementById('dash-nome').textContent=(data.nome||data.email).split(' ')[0]
+  if(data.email!==EMAIL_PSI)document.getElementById('dash-nome').textContent=(data.nome||data.email).split(' ')[0]
   if(data.email===EMAIL_PSI)document.getElementById('sidebar-psi').style.display='block'
-  carregarDashboard()
+  if(data.email===EMAIL_PSI)carregarDashboardPsi();else carregarDashboard()
 }
 
 function logout(){
@@ -962,6 +1056,7 @@ function sessaoHtml(s){
 }
 
 async function carregarDashboard(){
+  if(user.email===EMAIL_PSI){await carregarDashboardPsi();return}
   const [{data},{data:sessoesData}]=await Promise.all([
     sb.from('resultados').select('*').eq('paciente_id',user.id).order('criado_em',{ascending:false}),
     sb.from('sessoes').select('*').eq('paciente_id',user.id).eq('status','realizada')
@@ -976,8 +1071,8 @@ async function carregarDashboard(){
 
 function renderLembretes(data){
   // Prazos recomendados em dias
-  const prazos={phq9:14,gad7:14,dass21:30}
-  const nomeMap={'PHQ-9':'phq9','GAD-7':'gad7','DASS-21':'dass21'}
+  const prazos={phq9:14,gad7:14,dass21:30,psqi:30}
+  const nomeMap={'PHQ-9':'phq9','GAD-7':'gad7','DASS-21':'dass21','PSQI-BR':'psqi'}
   const ultimos={}
   data.forEach(r=>{
     const k=r.teste.split('—')[0].trim()
@@ -1002,7 +1097,7 @@ function renderStats(data,sessoesRealizadas){
   testesFeitos.forEach(([,r])=>{
     const c=r.classificacao
     if(c.includes('Grave')||c.includes('grave'))nivel='vermelho'
-    else if(nivel!=='vermelho'&&(c.includes('Moderada')||c.includes('Moderado')))nivel='amarelo'
+    else if(nivel!=='vermelho'&&(c.includes('Moderada')||c.includes('Moderado')||c.includes('comprometimento')||c.includes('Comprometimento')||c.includes('ruim')))nivel='amarelo'
   })
   const farolLabels={
     verde:{tag:'Sem necessidade de atenção',cor:'verde'},
@@ -1085,6 +1180,11 @@ function renderGraficos(data){
       {y:28,label:'Leve',color:'rgba(200,150,10,0.4)'},
       {y:56,label:'Moderado',color:'rgba(184,97,10,0.4)'},
       {y:84,label:'Grave',color:'rgba(163,45,45,0.4)'}
+    ]},
+    'PSQI-BR':{cor:'#5b8fc9',desc:'Qualidade do sono — escala 0 a 27 · Acima de 5 = sono comprometido',max:27,refs:[
+      {y:5,label:'Limiar',color:'rgba(163,45,45,0.4)'},
+      {y:10,label:'Moderado',color:'rgba(184,97,10,0.4)'},
+      {y:19,label:'Grave',color:'rgba(163,45,45,0.4)'}
     ]}
   }
   Object.values(graficos).forEach(g=>g.destroy())
@@ -1145,7 +1245,8 @@ function renderPergunta(){
   document.getElementById('test-contador').textContent=`Pergunta ${perguntaAtual+1} de ${total}`
   document.getElementById('test-pergunta').textContent=t.perguntas[perguntaAtual]
   const opc=document.getElementById('test-opcoes');opc.innerHTML=''
-  t.opcoes.forEach((o,i)=>{const d=document.createElement('div');d.className='test-option'+(respostas[perguntaAtual]===i?' selected':'');d.textContent=o;d.onclick=()=>{document.querySelectorAll('.test-option').forEach(x=>x.classList.remove('selected'));d.classList.add('selected');respostas[perguntaAtual]=i};opc.appendChild(d)})
+  const opcAtual=(t.opcoesPorPergunta&&t.opcoesPorPergunta[perguntaAtual])||t.opcoes
+  opcAtual.forEach((o,i)=>{const d=document.createElement('div');d.className='test-option'+(respostas[perguntaAtual]===i?' selected':'');d.textContent=o;d.onclick=()=>{document.querySelectorAll('.test-option').forEach(x=>x.classList.remove('selected'));d.classList.add('selected');respostas[perguntaAtual]=i};opc.appendChild(d)})
   document.getElementById('btn-avancar').textContent=perguntaAtual===total-1?'Finalizar ✓':'Próxima →'
 }
 function voltarPergunta(){if(perguntaAtual>0){perguntaAtual--;renderPergunta()}else irPara('dashboard')}
@@ -1223,9 +1324,20 @@ async function verPaciente(p){
     html+=`<table class="history-table" style="margin-bottom:0.5rem"><thead><tr><th>Data</th><th>Hora</th><th>Status</th><th></th></tr></thead><tbody>`
     sessoes.forEach(s=>{
       const [sy,sm,sd]=s.data_sessao.split('-')
+      const statusCor={agendada:'var(--yellow)',realizada:'var(--green)',cancelada:'var(--red)'}
       const statusLabel={agendada:'Agendada',realizada:'Realizada',cancelada:'Cancelada'}
-      const statusCor={agendada:'var(--gold)',realizada:'var(--green)',cancelada:'var(--slate)'}
-      html+=`<tr><td>${sd}/${sm}/${sy}</td><td>${s.hora_sessao||'—'}</td><td><span style="font-size:0.62rem;font-weight:600;color:${statusCor[s.status]||'var(--text-muted)'}">${statusLabel[s.status]||s.status}</span></td><td><button onclick="excluirSessao('${s.id}','${p.id}')" style="font-size:0.6rem;background:none;border:none;cursor:pointer;color:var(--text-muted);padding:0.15rem 0.3rem" title="Remover">✕</button></td></tr>`
+      html+=`<tr>
+        <td>${sd}/${sm}/${sy}</td>
+        <td>${s.hora_sessao||'—'}</td>
+        <td>
+          <select onchange="mudarStatusSessao('${s.id}','${p.id}',this.value)" style="font-size:0.62rem;font-family:'Sora',sans-serif;padding:0.2rem 0.4rem;border:1px solid var(--border);border-radius:4px;color:${statusCor[s.status]||'var(--text-muted)'};background:var(--white);cursor:pointer;outline:none">
+            <option value="agendada"${s.status==='agendada'?' selected':''}>Agendada</option>
+            <option value="realizada"${s.status==='realizada'?' selected':''}>Realizada</option>
+            <option value="cancelada"${s.status==='cancelada'?' selected':''}>Cancelada</option>
+          </select>
+        </td>
+        <td><button onclick="excluirSessao('${s.id}','${p.id}')" style="font-size:0.6rem;background:none;border:none;cursor:pointer;color:var(--text-muted);padding:0.15rem 0.3rem;border-radius:3px" title="Remover">✕</button></td>
+      </tr>`
     })
     html+=`</tbody></table>`
   } else {
@@ -1237,7 +1349,6 @@ async function verPaciente(p){
     <div><label>Status</label><select id="novo-status-${p.id}">
       <option value="agendada">Agendada</option>
       <option value="realizada">Realizada</option>
-      <option value="cancelada">Cancelada</option>
     </select></div>
     <button class="btn-add-sessao" onclick="adicionarSessao('${p.id}')">+ Adicionar</button>
   </div>`
@@ -1277,6 +1388,195 @@ async function carregarTodosResultados(){
   if(!data||!data.length){tbody.innerHTML='<tr><td colspan="5" style="text-align:center;padding:2rem;color:var(--text-muted)">Nenhum resultado ainda.</td></tr>';return}
   tbody.innerHTML=data.map(r=>`<tr><td>${r.pacientes?.nome||'—'}</td><td>${r.teste.split('—')[0]}</td><td>${r.pontuacao}</td><td>${badgeHtml(r.classificacao)}</td><td>${fmt(r.criado_em)}</td></tr>`).join('')
 }
+async function mudarStatusSessao(sessaoId,pacienteId,novoStatus){
+  await sb.from('sessoes').update({status:novoStatus}).eq('id',sessaoId)
+  const {data:p}=await sb.from('pacientes').select('*').eq('id',pacienteId).single()
+  if(p){document.getElementById('det-'+pacienteId).classList.remove('open');verPaciente(p)}
+}
+
+// ══ PSI DASHBOARD ══
+let psiGraficos={}
+
+async function carregarDashboardPsi(){
+  const [{data:pacs},{data:todasSessoes},{data:todosResultados}]=await Promise.all([
+    sb.from('pacientes').select('*').neq('email',EMAIL_PSI).order('nome'),
+    sb.from('sessoes').select('*').eq('status','agendada'),
+    sb.from('resultados').select('*, pacientes(id,nome)').order('criado_em',{ascending:true})
+  ])
+  const pacList=pacs||[]
+  const agendadas=(todasSessoes||[]).length
+  const resultados=todosResultados||[]
+
+  // Farol por paciente
+  const ultimoPorPac={}
+  ;[...resultados].reverse().forEach(r=>{
+    if(!ultimoPorPac[r.paciente_id])ultimoPorPac[r.paciente_id]=[]
+    const k=r.teste.split('—')[0].trim()
+    if(!ultimoPorPac[r.paciente_id].find(x=>x.k===k))ultimoPorPac[r.paciente_id].push({k,c:r.classificacao})
+  })
+  let atencao=0,risco=0
+  pacList.forEach(p=>{
+    const ults=ultimoPorPac[p.id]||[]
+    if(!ults.length)return
+    let nivel='verde'
+    ults.forEach(({c})=>{
+      if(c.includes('Grave')||c.includes('grave')){nivel='vermelho'}
+      else if(nivel!=='vermelho'&&(c.includes('Moderada')||c.includes('Moderado')||c.includes('Leve')||c.includes('leve')||c.includes('comprometimento')||c.includes('Comprometimento'))){nivel='amarelo'}
+    })
+    if(nivel==='vermelho')risco++
+    else if(nivel==='amarelo')atencao++
+  })
+
+  const dash=document.getElementById('page-dashboard')
+  dash.innerHTML=`
+    <h1 class="page-title">Visão geral</h1>
+    <p class="page-sub">Panorama da sua carteira de pacientes.</p>
+    <div class="stat-row">
+      <div class="stat-card" style="display:flex;flex-direction:column;justify-content:center;border-top-color:var(--navy-mid)">
+        <div class="stat-lbl" style="margin-bottom:0.5rem">Pacientes em acompanhamento</div>
+        <div class="stat-num" style="font-family:'DM Sans',sans-serif;font-size:2.2rem;font-weight:300;color:var(--navy)">${pacList.length}</div>
+      </div>
+      <div class="stat-card" style="display:flex;flex-direction:column;justify-content:center;border-top-color:var(--yellow)">
+        <div class="stat-lbl" style="margin-bottom:0.5rem">Sessões agendadas</div>
+        <div class="stat-num" style="font-family:'DM Sans',sans-serif;font-size:2.2rem;font-weight:300;color:var(--navy)">${agendadas}</div>
+      </div>
+      <div class="stat-card" style="display:flex;flex-direction:column;justify-content:center;border-top-color:var(--red)">
+        <div class="stat-lbl" style="margin-bottom:0.65rem">Farol de Cuidado</div>
+        <div style="display:flex;flex-direction:column;gap:0.4rem">
+          <div style="display:flex;align-items:center;gap:0.5rem">
+            <div style="width:9px;height:9px;border-radius:50%;background:var(--yellow);flex-shrink:0"></div>
+            <span style="font-size:0.75rem;font-weight:500;color:var(--text)">${atencao} em atenção mediana</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:0.5rem">
+            <div style="width:9px;height:9px;border-radius:50%;background:var(--red);flex-shrink:0"></div>
+            <span style="font-size:0.75rem;font-weight:500;color:var(--text)">${risco} em maior risco</span>
+          </div>
+          ${(!atencao&&!risco&&pacList.length)?'<div style="font-size:0.72rem;font-weight:300;color:var(--text-muted)">Aguardando testes</div>':''}
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:0.85rem;margin-bottom:1.5rem;padding:0.75rem 1rem;background:var(--white);border:1px solid var(--border);border-radius:8px">
+      <span style="font-size:0.6rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);white-space:nowrap">Filtrar paciente</span>
+      <select id="psi-filtro" onchange="aplicarFiltroPsi()" style="flex:1;max-width:260px;padding:0.38rem 0.7rem;border:1px solid var(--border);border-radius:6px;font-family:'Sora',sans-serif;font-size:0.8rem;color:var(--text);background:var(--white);outline:none">
+        <option value="">Todos os pacientes</option>
+        ${pacList.map(p=>`<option value="${p.id}">${p.nome||p.email}</option>`).join('')}
+      </select>
+      <span id="psi-filtro-label" style="font-size:0.68rem;font-weight:300;color:var(--text-muted)">Os gráficos e a tabela respondem ao filtro</span>
+    </div>
+
+    <div class="section-eyebrow">Testes psicométricos</div>
+    <div class="chart-card" style="margin-bottom:1rem">
+      <div class="chart-card-sub" id="psi-psico-sub" style="font-size:0.68rem;font-weight:300;color:var(--text-muted);margin-bottom:1rem">PHQ-9 · GAD-7 · DASS-21 — última pontuação por paciente (normalizada 0–100%)</div>
+      <canvas id="canvas-psi-psico" style="max-height:240px"></canvas>
+    </div>
+
+    <div class="section-eyebrow">Qualidade do sono (PSQI-BR)</div>
+    <div class="chart-card" style="margin-bottom:1.5rem">
+      <div class="chart-card-sub" id="psi-sono-sub" style="font-size:0.68rem;font-weight:300;color:var(--text-muted);margin-bottom:1rem">Escala 0–27 · Linha tracejada = limiar clínico (5)</div>
+      <canvas id="canvas-psi-sono" style="max-height:200px"></canvas>
+    </div>
+
+    <div class="section-eyebrow">Visão geral por paciente</div>
+    <div class="history-card">
+      <div class="empty-state" id="psi-tabela-empty" style="display:none">Nenhum resultado ainda.</div>
+      <table class="history-table" id="psi-tabela">
+        <thead><tr><th>Paciente</th><th>Teste</th><th>Pontuação</th><th>Classificação</th><th>Data</th></tr></thead>
+        <tbody id="psi-tabela-body"></tbody>
+      </table>
+    </div>`
+
+  window._psiData={pacList,resultados}
+  aplicarFiltroPsi()
+}
+
+function aplicarFiltroPsi(){
+  const {pacList,resultados}=window._psiData||{}
+  if(!pacList||!resultados)return
+  const filtroEl=document.getElementById('psi-filtro')
+  const filtroId=filtroEl?filtroEl.value:''
+  const rFiltrado=filtroId?resultados.filter(r=>r.paciente_id===filtroId):resultados
+  const pacFiltrado=filtroId?pacList.filter(p=>p.id===filtroId):pacList
+  renderPsiGraficos(pacFiltrado,rFiltrado,filtroId)
+  renderPsiTabela(rFiltrado)
+}
+
+function renderPsiGraficos(pacList,resultados,filtroId){
+  Object.values(psiGraficos).forEach(g=>{try{g.destroy()}catch(e){}})
+  psiGraficos={}
+  const cPsico=document.getElementById('canvas-psi-psico')
+  const cSono=document.getElementById('canvas-psi-sono')
+  if(!cPsico||!cSono)return
+
+  const TESTS=['PHQ-9','GAD-7','DASS-21']
+  const MAX={'PHQ-9':27,'GAD-7':21,'DASS-21':126}
+  const CORES=['#b8974a','#0d1f3c','#2d7a4f','#7a4ab8','#4ab8a8','#b84a7a','#4a74b8','#b8714a']
+  const annoLimiarSono={ref0:{type:'line',yMin:5,yMax:5,borderColor:'rgba(163,45,45,0.45)',borderWidth:1.5,borderDash:[4,5],label:{display:true,content:'Limiar (5)',position:'end',font:{family:'Sora',size:9},color:'#8a9ab5',backgroundColor:'transparent'}}}
+
+  if(filtroId){
+    // Paciente específico: linha por teste
+    const subPsico=document.getElementById('psi-psico-sub')
+    if(subPsico)subPsico.textContent='Evolução ao longo do tempo'
+    const subSono=document.getElementById('psi-sono-sub')
+    if(subSono)subSono.textContent='Evolução da qualidade do sono ao longo do tempo — escala 0–27'
+
+    const porTeste={}
+    resultados.forEach(r=>{
+      const k=r.teste.split('—')[0].trim()
+      if(!TESTS.includes(k))return
+      if(!porTeste[k])porTeste[k]=[]
+      porTeste[k].push({x:fmt(r.criado_em),y:r.pontuacao})
+    })
+    const datasets=Object.keys(porTeste).map((k,i)=>({label:k,data:porTeste[k],borderColor:CORES[i],backgroundColor:'transparent',tension:0.3,pointRadius:4,borderWidth:2}))
+    if(datasets.length){
+      psiGraficos['psico']=new Chart(cPsico,{type:'line',data:{datasets},options:{responsive:true,interaction:{mode:'nearest',intersect:false},plugins:{legend:{labels:{font:{family:'Sora',size:10}}},annotation:{}},scales:{x:{ticks:{font:{family:'Sora',size:10}}},y:{beginAtZero:true,ticks:{font:{family:'Sora',size:10}},grid:{color:'rgba(194,205,224,0.3)'}}}}})
+    }else{
+      cPsico.parentElement.insertAdjacentHTML('beforeend','<div class="empty-state" style="padding:1.5rem 0 0.5rem">Nenhum teste psicométrico realizado.</div>')
+    }
+
+    const psqiPts=resultados.filter(r=>r.teste.includes('PSQI')).map(r=>({x:fmt(r.criado_em),y:r.pontuacao}))
+    if(psqiPts.length){
+      psiGraficos['sono']=new Chart(cSono,{type:'line',data:{datasets:[{label:'PSQI-BR',data:psqiPts,borderColor:'#5b8fc9',backgroundColor:'transparent',tension:0.3,pointRadius:4,borderWidth:2,pointBackgroundColor:'#5b8fc9'}]},options:{responsive:true,interaction:{mode:'nearest',intersect:false},plugins:{legend:{display:false},annotation:{annotations:annoLimiarSono}},scales:{x:{ticks:{font:{family:'Sora',size:10}}},y:{beginAtZero:true,max:27,ticks:{font:{family:'Sora',size:10}},grid:{color:'rgba(194,205,224,0.3)'}}}}})
+    }else{
+      cSono.parentElement.insertAdjacentHTML('beforeend','<div class="empty-state" style="padding:1.5rem 0 0.5rem">Nenhum PSQI realizado.</div>')
+    }
+
+  }else{
+    // Todos: barra agrupada (normalizada) para psicométricos
+    const nomeCurto=p=>(p.nome||p.email||'').split(' ')[0]
+    const ultPacTeste={}
+    ;[...resultados].reverse().forEach(r=>{
+      const k=r.teste.split('—')[0].trim()
+      if(!TESTS.includes(k))return
+      const key=r.paciente_id+'|'+k
+      if(!(key in ultPacTeste))ultPacTeste[key]=r.pontuacao
+    })
+    const datasetsBar=TESTS.map((t,i)=>({
+      label:t,
+      data:pacList.map(p=>{const v=ultPacTeste[p.id+'|'+t];return v!==undefined?Math.round(v/MAX[t]*100):null}),
+      backgroundColor:CORES[i]+'bb',borderColor:CORES[i],borderWidth:1,borderRadius:4
+    }))
+    psiGraficos['psico']=new Chart(cPsico,{type:'bar',data:{labels:pacList.map(nomeCurto),datasets:datasetsBar},options:{responsive:true,plugins:{legend:{labels:{font:{family:'Sora',size:10}}},tooltip:{callbacks:{label:i=>`${i.dataset.label}: ${i.parsed.y}%`}}},scales:{x:{ticks:{font:{family:'Sora',size:10}}},y:{beginAtZero:true,max:100,ticks:{font:{family:'Sora',size:10},callback:v=>v+'%'},grid:{color:'rgba(194,205,224,0.3)'}}}}})
+
+    // PSQI barra simples
+    const ultPsqi={}
+    ;[...resultados].reverse().forEach(r=>{if(r.teste.includes('PSQI')&&!(r.paciente_id in ultPsqi))ultPsqi[r.paciente_id]=r.pontuacao})
+    const psqiVals=pacList.map(p=>ultPsqi[p.id]!==undefined?ultPsqi[p.id]:null)
+    const psqiColors=psqiVals.map(v=>v===null?'rgba(194,205,224,0.5)':v>5?'rgba(163,45,45,0.7)':'rgba(45,122,79,0.7)')
+    psiGraficos['sono']=new Chart(cSono,{type:'bar',data:{labels:pacList.map(nomeCurto),datasets:[{label:'PSQI-BR',data:psqiVals,backgroundColor:psqiColors,borderWidth:0,borderRadius:4}]},options:{responsive:true,plugins:{legend:{display:false},annotation:{annotations:annoLimiarSono},tooltip:{callbacks:{label:i=>i.parsed.y===null?'Sem dados':`PSQI: ${i.parsed.y} — ${i.parsed.y>5?'Sono comprometido':'Boa qualidade'}`}}},scales:{x:{ticks:{font:{family:'Sora',size:10}}},y:{beginAtZero:true,max:27,ticks:{font:{family:'Sora',size:10}},grid:{color:'rgba(194,205,224,0.3)'}}}}})
+  }
+}
+
+function renderPsiTabela(resultados){
+  const tbody=document.getElementById('psi-tabela-body')
+  if(!tbody)return
+  if(!resultados.length){
+    tbody.innerHTML='<tr><td colspan="5" class="empty-state" style="text-align:center">Nenhum resultado ainda.</td></tr>'
+    return
+  }
+  tbody.innerHTML=[...resultados].reverse().map(r=>`<tr><td>${r.pacientes?.nome||'—'}</td><td>${r.teste.split('—')[0]}</td><td>${r.pontuacao}</td><td>${badgeHtml(r.classificacao)}</td><td>${fmt(r.criado_em)}</td></tr>`).join('')
+}
+
 </script>
 </body>
 </html>
