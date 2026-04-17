@@ -967,7 +967,6 @@ async function hashSenha(senha){
 ;(()=>{
   const params=new URLSearchParams(window.location.search)
   if(params.get('tab')==='primeiro'){
-    // Abre direto na aba Primeiro acesso e limpa o parâmetro da URL
     trocarAba('primeiro')
     history.replaceState(null,'',window.location.pathname)
   }
@@ -975,22 +974,27 @@ async function hashSenha(senha){
 
 // ══ Recuperação de sessão ativa ══
 ;(async()=>{
-  // Detecta redefinição de senha via link de email (evento PASSWORD_RECOVERY)
-  sb.auth.onAuthStateChange(async(event,session)=>{
-    if(event==='PASSWORD_RECOVERY'&&session){
-      document.getElementById('screen-login').classList.add('hidden')
-      document.getElementById('app').classList.add('visible')
-      const {data:pac}=await sb.from('pacientes').select('*').eq('user_id',session.user.id).single()
-      if(pac){
-        user=pac
-        document.getElementById('nav-nome').textContent=pac.nome||pac.email
-        if(pac.email!==EMAIL_PSI)document.getElementById('dash-nome').textContent=(pac.nome||pac.email).split(' ')[0]
-        irPara('cadastro')
-        document.getElementById('save-err').textContent='⚠ Você acessou via link de recuperação. Defina uma nova senha abaixo.'
-        document.getElementById('save-err').style.display='block'
+  // Se a URL contém token de recovery, prioriza o onAuthStateChange
+  const hash=window.location.hash
+  if(hash.includes('type=recovery')){
+    sb.auth.onAuthStateChange(async(event,session)=>{
+      if((event==='PASSWORD_RECOVERY'||event==='SIGNED_IN')&&session){
+        const {data:pac}=await sb.from('pacientes').select('*').eq('user_id',session.user.id).single()
+        if(pac){
+          user=pac
+          document.getElementById('screen-login').classList.add('hidden')
+          document.getElementById('app').classList.add('visible')
+          document.getElementById('nav-nome').textContent=pac.nome||pac.email
+          if(pac.email!==EMAIL_PSI)document.getElementById('dash-nome').textContent=(pac.nome||pac.email).split(' ')[0]
+          history.replaceState(null,'',window.location.pathname)
+          irPara('cadastro')
+          document.getElementById('save-err').textContent='⚠ Você acessou via link de recuperação. Defina uma nova senha abaixo.'
+          document.getElementById('save-err').style.display='block'
+        }
       }
-    }
-  })
+    })
+    return
+  }
   // Verifica sessão ativa — só restaura se não foi um logout explícito
   const {data:{session}}=await sb.auth.getSession()
   if(session){
