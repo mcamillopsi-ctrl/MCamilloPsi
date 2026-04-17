@@ -57,6 +57,11 @@
     .login-link{font-size:0.7rem;font-weight:300;color:var(--text-muted);margin-top:0.75rem;text-align:center}
     .login-link a{color:var(--gold);cursor:pointer;text-decoration:none}
     .login-link a:hover{text-decoration:underline}
+    .consent-field{margin-top:0.85rem;margin-bottom:0.25rem}
+    .consent-field label{display:flex;align-items:flex-start;gap:0.6rem;font-size:0.73rem;font-weight:300;color:var(--text-muted);line-height:1.6;cursor:pointer;text-transform:none;letter-spacing:0}
+    .consent-field input[type="checkbox"]{margin-top:3px;flex-shrink:0;accent-color:var(--navy);width:14px;height:14px;cursor:pointer}
+    .consent-field a{color:var(--gold);text-decoration:none}
+    .consent-field a:hover{text-decoration:underline}
 
     /* ══ APP ══ */
     #app{display:none;min-height:100vh}
@@ -348,6 +353,12 @@
       <div class="field"><label>Nome completo</label><input type="text" id="cad-nome" placeholder="Como prefere ser chamado(a)"></div>
       <div class="field"><label>Senha</label><input type="password" id="cad-senha" placeholder="Mínimo 6 caracteres"></div>
       <div class="field"><label>Confirmar senha</label><input type="password" id="cad-senha2" placeholder="Repita a senha" onkeydown="if(event.key==='Enter')fazerCadastro()"></div>
+      <div class="consent-field">
+        <label>
+          <input type="checkbox" id="consent-check">
+          <span>Li e concordo com a <a href="politica-de-privacidade.html" target="_blank">Política de Privacidade</a> e autorizo o tratamento dos meus dados de saúde para fins de acompanhamento psicológico.</span>
+        </label>
+      </div>
       <button class="btn-primary" onclick="fazerCadastro()">Criar minha senha</button>
       <div class="form-error" id="cad-erro"></div>
     </div>
@@ -1049,6 +1060,7 @@ async function fazerCadastro(){
   const senha=document.getElementById('cad-senha').value
   const senha2=document.getElementById('cad-senha2').value
   const erro=document.getElementById('cad-erro');erro.style.display='none'
+  if(!document.getElementById('consent-check').checked){erro.textContent='É necessário aceitar a Política de Privacidade para continuar.';erro.style.display='block';return}
   if(!email||!nome||!senha||!senha2){erro.textContent='Preencha todos os campos.';erro.style.display='block';return}
   if(senha.length<6){erro.textContent='Senha mínima de 6 caracteres.';erro.style.display='block';return}
   if(senha!==senha2){erro.textContent='As senhas não coincidem.';erro.style.display='block';return}
@@ -1063,7 +1075,7 @@ async function fazerCadastro(){
   if(authErr){erro.textContent='Erro ao criar conta: '+authErr.message;erro.style.display='block';return}
 
   // Vincula user_id e salva nome
-  await sb.from('pacientes').update({nome,user_id:authData.user.id,senha:null}).eq('email',email)
+  await sb.from('pacientes').update({nome,user_id:authData.user.id,senha:null,consentimento_em:new Date().toISOString()}).eq('email',email)
 
   // Faz login imediato
   await sb.auth.signInWithPassword({email,password:senha})
