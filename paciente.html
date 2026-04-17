@@ -1475,14 +1475,10 @@ async function enviarRecuperacao(){
   if(!email){err.textContent='Digite seu e-mail.';err.style.display='block';return}
   btn.disabled=true;btn.textContent='Enviando...'
 
-  const {data:{session}}=await sb.auth.getSession()
-  const authHeader=session?`Bearer ${session.access_token}`:`Bearer ${SUPABASE_KEY}`
-
   const res=await fetch(`${SUPABASE_URL}/functions/v1/bright-function`,{
     method:'POST',
     headers:{
       'Content-Type':'application/json',
-      'Authorization':authHeader,
       'apikey':SUPABASE_KEY
     },
     body:JSON.stringify({email})
