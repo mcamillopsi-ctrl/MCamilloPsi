@@ -887,9 +887,16 @@
               <div class="form-row"><label>E-mail do paciente</label><input type="email" id="novo-pac-email" placeholder="paciente@email.com" onkeydown="if(event.key==='Enter')cadastrarNovoPaciente()"></div>
               <div class="form-row"><label>Nome (opcional)</label><input type="text" id="novo-pac-nome" placeholder="Deixe em branco — o paciente preenche no primeiro acesso" onkeydown="if(event.key==='Enter')cadastrarNovoPaciente()"></div>
               <div id="novo-pac-erro" style="font-size:0.75rem;color:var(--red);display:none;margin-bottom:0.75rem"></div>
-              <div id="novo-pac-ok" style="font-size:0.75rem;color:var(--green);display:none;margin-bottom:0.75rem"></div>
+              <div id="novo-pac-ok" style="font-size:0.75rem;color:var(--green);display:none;margin-bottom:0.5rem"></div>
+              <div id="novo-pac-link-wrap" style="display:none;margin-bottom:0.75rem">
+                <div style="font-size:0.62rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);margin-bottom:0.3rem">Link para o paciente</div>
+                <div style="display:flex;gap:0.5rem;align-items:center">
+                  <input id="novo-pac-link" readonly style="flex:1;padding:0.45rem 0.7rem;border:1px solid var(--border);border-radius:6px;font-family:'Sora',sans-serif;font-size:0.72rem;color:var(--text);background:var(--white);outline:none" value="">
+                  <button onclick="copiarLinkPaciente()" id="btn-copiar-link" style="font-size:0.62rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:0.45rem 0.75rem;background:var(--navy);color:var(--white);border:none;border-radius:6px;cursor:pointer;white-space:nowrap">Copiar</button>
+                </div>
+              </div>
               <div style="display:flex;gap:0.75rem">
-                <button onclick="fecharModalNovoPaciente()" class="btn-ghost" style="flex:1">Cancelar</button>
+                <button id="btn-fechar-modal" onclick="fecharModalNovoPaciente()" class="btn-ghost" style="flex:1">Cancelar</button>
                 <button id="btn-cadastrar-pac" onclick="cadastrarNovoPaciente()" class="btn-action" style="flex:1">Cadastrar</button>
               </div>
             </div>
@@ -1466,6 +1473,13 @@ function abrirModalNovoPaciente(){
 
 function fecharModalNovoPaciente(){
   document.getElementById('modal-novo-pac').style.display='none'
+  // Reseta estado para próxima abertura
+  const wrap=document.getElementById('novo-pac-link-wrap')
+  if(wrap)wrap.style.display='none'
+  const btnFechar=document.getElementById('btn-fechar-modal')
+  if(btnFechar)btnFechar.textContent='Cancelar'
+  document.getElementById('novo-pac-ok').style.display='none'
+  document.getElementById('novo-pac-erro').style.display='none'
 }
 
 async function cadastrarNovoPaciente(){
@@ -1500,16 +1514,34 @@ async function cadastrarNovoPaciente(){
     erro.textContent='Erro ao cadastrar: '+error.message;erro.style.display='block';return
   }
 
-  ok.textContent='✓ Paciente cadastrado! Envie o link '+window.location.href+' para que ele faça o primeiro acesso.'
+  ok.textContent='✓ Paciente cadastrado com sucesso!'
   ok.style.display='block'
+  // Exibe campo com link copiável
+  const wrap=document.getElementById('novo-pac-link-wrap')
+  const linkInput=document.getElementById('novo-pac-link')
+  if(wrap&&linkInput){wrap.style.display='block';linkInput.value=window.location.href}
+  // Limpa campos e muda botões
   document.getElementById('novo-pac-email').value=''
   document.getElementById('novo-pac-nome').value=''
+  btn.textContent='Cadastrar outro'
+  const btnFechar=document.getElementById('btn-fechar-modal')
+  if(btnFechar)btnFechar.textContent='Fechar'
+  // Recarrega lista em background
+  carregarPainel()
+}
 
-  // Recarrega lista após 1.5s e fecha modal
-  setTimeout(()=>{
-    fecharModalNovoPaciente()
-    carregarPainel()
-  },2500)
+function copiarLinkPaciente(){
+  const input=document.getElementById('novo-pac-link')
+  if(!input)return
+  input.select();input.setSelectionRange(0,9999)
+  navigator.clipboard.writeText(input.value).then(()=>{
+    const btn=document.getElementById('btn-copiar-link')
+    if(btn){btn.textContent='✓ Copiado!';setTimeout(()=>{btn.textContent='Copiar'},2000)}
+  }).catch(()=>{
+    document.execCommand('copy')
+    const btn=document.getElementById('btn-copiar-link')
+    if(btn){btn.textContent='✓ Copiado!';setTimeout(()=>{btn.textContent='Copiar'},2000)}
+  })
 }
 
 function psiTab(tab,el){
