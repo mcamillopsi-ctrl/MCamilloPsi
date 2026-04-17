@@ -958,15 +958,23 @@ async function hashSenha(senha){
   return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('')
 }
 
+// ══ Detectar ?tab=primeiro na URL (link enviado ao novo paciente) ══
+;(()=>{
+  const params=new URLSearchParams(window.location.search)
+  if(params.get('tab')==='primeiro'){
+    // Abre direto na aba Primeiro acesso e limpa o parâmetro da URL
+    trocarAba('primeiro')
+    history.replaceState(null,'',window.location.pathname)
+  }
+})()
+
 // ══ Recuperação de sessão ativa ══
 ;(async()=>{
   // Detecta redefinição de senha via link de email (evento PASSWORD_RECOVERY)
   sb.auth.onAuthStateChange(async(event,session)=>{
     if(event==='PASSWORD_RECOVERY'&&session){
-      // Redireciona para a página de cadastro para trocar a senha
       document.getElementById('screen-login').classList.add('hidden')
       document.getElementById('app').classList.add('visible')
-      // Cria user provisório para acessar a página
       const {data:pac}=await sb.from('pacientes').select('*').eq('user_id',session.user.id).single()
       if(pac){
         user=pac
@@ -978,7 +986,7 @@ async function hashSenha(senha){
       }
     }
   })
-  // Verifica sessão ativa (usuário já logado anteriormente)
+  // Verifica sessão ativa — só restaura se não foi um logout explícito
   const {data:{session}}=await sb.auth.getSession()
   if(session){
     const {data:pac}=await sb.from('pacientes').select('*').eq('user_id',session.user.id).single()
@@ -1048,7 +1056,7 @@ async function fazerLogin(){
   const {data:pac}=await sb.from('pacientes').select('*').eq('email',email).single()
   if(pac&&(pac.senha===senhaHash||pac.senha===senha)){
     // Cria conta no Supabase Auth e vincula
-    const {data:signUpData,error:signUpErr}=await sb.auth.signUp({email,password:senha,options:{data:{nome:pac.nome}}})
+    const {data:signUpData,error:signUpErr}=await sb.auth.signUp({email,password:senha,options:{data:{nome:pac.nome},emailRedirectTo:null}})
     if(!signUpErr&&signUpData?.user){
       await sb.from('pacientes').update({user_id:signUpData.user.id,senha:null}).eq('id',pac.id)
       pac.user_id=signUpData.user.id
@@ -1078,7 +1086,7 @@ async function fazerCadastro(){
   if(pac.user_id){erro.textContent='Este e-mail já possui conta. Use "Entrar".';erro.style.display='block';return}
 
   // Cria conta no Supabase Auth
-  const {data:authData,error:authErr}=await sb.auth.signUp({email,password:senha,options:{data:{nome}}})
+  const {data:authData,error:authErr}=await sb.auth.signUp({email,password:senha,options:{data:{nome},emailRedirectTo:null}})
   if(authErr){erro.textContent='Erro ao criar conta: '+authErr.message;erro.style.display='block';return}
 
   // Vincula user_id e salva nome
@@ -1099,13 +1107,15 @@ function entrarNoApp(data){
   if(data.email===EMAIL_PSI)carregarDashboardPsi();else carregarDashboard()
 }
 
-function logout(){
-  sb.auth.signOut()
+async function logout(){
+  await sb.auth.signOut()
   user=null
   document.getElementById('screen-login').classList.remove('hidden')
   document.getElementById('app').classList.remove('visible')
   document.getElementById('login-email').value=''
   document.getElementById('login-senha').value=''
+  // Garante que não há sessão residual
+  window.location.reload()
 }
 
 async function carregarConsultas(){
@@ -1519,7 +1529,7 @@ async function cadastrarNovoPaciente(){
   // Exibe campo com link copiável
   const wrap=document.getElementById('novo-pac-link-wrap')
   const linkInput=document.getElementById('novo-pac-link')
-  if(wrap&&linkInput){wrap.style.display='block';linkInput.value=window.location.href}
+  if(wrap&&linkInput){wrap.style.display='block';const url=new URL(window.location.href);url.searchParams.set('tab','primeiro');linkInput.value=url.toString()}
   // Limpa campos e muda botões
   document.getElementById('novo-pac-email').value=''
   document.getElementById('novo-pac-nome').value=''
