@@ -852,9 +852,39 @@
 
         <!-- PAINEL PSI -->
         <div class="page" id="page-psi">
-          <h1 class="page-title">Painel de pacientes</h1>
-          <p class="page-sub">Visão geral dos seus pacientes e resultados.</p>
-          <div class="psi-tabs">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:0.2rem;flex-wrap:wrap">
+            <div>
+              <h1 class="page-title">Painel de pacientes</h1>
+              <p class="page-sub" style="margin-bottom:0">Visão geral dos seus pacientes e resultados.</p>
+            </div>
+            <button onclick="abrirModalNovoPaciente()" style="display:inline-flex;align-items:center;gap:0.5rem;font-size:0.68rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:0.55rem 1.1rem;background:var(--navy);color:var(--white);border:none;border-radius:6px;cursor:pointer;white-space:nowrap;flex-shrink:0;margin-top:0.25rem">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Novo paciente
+            </button>
+          </div>
+
+          <!-- Modal novo paciente -->
+          <div id="modal-novo-pac" style="display:none;position:fixed;inset:0;background:rgba(13,31,60,0.55);z-index:500;align-items:center;justify-content:center;padding:1rem">
+            <div style="background:var(--cream);border-radius:10px;padding:2rem;width:100%;max-width:400px;box-shadow:0 8px 40px rgba(0,0,0,0.18)">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem">
+                <div>
+                  <div style="font-family:'DM Sans',sans-serif;font-size:1.1rem;font-weight:300;color:var(--navy)">Novo paciente</div>
+                  <div style="font-size:0.72rem;font-weight:300;color:var(--text-muted);margin-top:0.15rem">O paciente fará o primeiro acesso para criar a própria senha.</div>
+                </div>
+                <button onclick="fecharModalNovoPaciente()" style="background:none;border:none;cursor:pointer;color:var(--text-muted);font-size:1.2rem;line-height:1;padding:0.2rem">✕</button>
+              </div>
+              <div class="form-row"><label>E-mail do paciente</label><input type="email" id="novo-pac-email" placeholder="paciente@email.com" onkeydown="if(event.key==='Enter')cadastrarNovoPaciente()"></div>
+              <div class="form-row"><label>Nome (opcional)</label><input type="text" id="novo-pac-nome" placeholder="Deixe em branco — o paciente preenche no primeiro acesso" onkeydown="if(event.key==='Enter')cadastrarNovoPaciente()"></div>
+              <div id="novo-pac-erro" style="font-size:0.75rem;color:var(--red);display:none;margin-bottom:0.75rem"></div>
+              <div id="novo-pac-ok" style="font-size:0.75rem;color:var(--green);display:none;margin-bottom:0.75rem"></div>
+              <div style="display:flex;gap:0.75rem">
+                <button onclick="fecharModalNovoPaciente()" class="btn-ghost" style="flex:1">Cancelar</button>
+                <button id="btn-cadastrar-pac" onclick="cadastrarNovoPaciente()" class="btn-action" style="flex:1">Cadastrar</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="psi-tabs" style="margin-top:1.5rem">
             <div class="psi-tab active" onclick="psiTab('pacientes',this)">Pacientes</div>
             <div class="psi-tab" onclick="psiTab('resultados',this)">Todos os resultados</div>
           </div>
@@ -1409,6 +1439,66 @@ async function enviarRecuperacao(){
 }
 
 function toggleTec(card){card.classList.toggle('open')}
+
+function abrirModalNovoPaciente(){
+  const m=document.getElementById('modal-novo-pac')
+  m.style.display='flex'
+  document.getElementById('novo-pac-email').value=''
+  document.getElementById('novo-pac-nome').value=''
+  document.getElementById('novo-pac-erro').style.display='none'
+  document.getElementById('novo-pac-ok').style.display='none'
+  document.getElementById('btn-cadastrar-pac').disabled=false
+  document.getElementById('btn-cadastrar-pac').textContent='Cadastrar'
+  setTimeout(()=>document.getElementById('novo-pac-email').focus(),100)
+}
+
+function fecharModalNovoPaciente(){
+  document.getElementById('modal-novo-pac').style.display='none'
+}
+
+async function cadastrarNovoPaciente(){
+  const email=document.getElementById('novo-pac-email').value.trim().toLowerCase()
+  const nome=document.getElementById('novo-pac-nome').value.trim()
+  const erro=document.getElementById('novo-pac-erro')
+  const ok=document.getElementById('novo-pac-ok')
+  const btn=document.getElementById('btn-cadastrar-pac')
+  erro.style.display='none';ok.style.display='none'
+
+  if(!email||!email.includes('@')){
+    erro.textContent='Digite um e-mail válido.';erro.style.display='block';return
+  }
+
+  // Verifica se já existe
+  const {data:existente}=await sb.from('pacientes').select('id').eq('email',email).single()
+  if(existente){
+    erro.textContent='Este e-mail já está cadastrado.';erro.style.display='block';return
+  }
+
+  btn.disabled=true;btn.textContent='Cadastrando...'
+
+  const {error}=await sb.from('pacientes').insert({
+    email,
+    nome:nome||null,
+    sessoes_anteriores:0
+  })
+
+  btn.disabled=false;btn.textContent='Cadastrar'
+
+  if(error){
+    erro.textContent='Erro ao cadastrar: '+error.message;erro.style.display='block';return
+  }
+
+  ok.textContent='✓ Paciente cadastrado! Envie o link '+window.location.href+' para que ele faça o primeiro acesso.'
+  ok.style.display='block'
+  document.getElementById('novo-pac-email').value=''
+  document.getElementById('novo-pac-nome').value=''
+
+  // Recarrega lista após 1.5s e fecha modal
+  setTimeout(()=>{
+    fecharModalNovoPaciente()
+    carregarPainel()
+  },2500)
+}
 
 function psiTab(tab,el){
   document.querySelectorAll('.psi-tab').forEach(t=>t.classList.remove('active'));el.classList.add('active')
