@@ -948,7 +948,12 @@
 <script>
 const SUPABASE_URL='https://fwmogocixvwuzaseiqvh.supabase.co'
 const SUPABASE_KEY='sb_publishable_yPPdPIvLjc6up3nHrfj5NQ_EucGid_M'
-const sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY)
+const sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{
+  auth:{
+    detectSessionInUrl:true,
+    flowType:'implicit'
+  }
+})
 const EMAIL_PSI='mcamillopsi@gmail.com'
 let user=null,testeAtual=null,perguntaAtual=0,respostas=[],graficos={},sidebarOpen=true
 
