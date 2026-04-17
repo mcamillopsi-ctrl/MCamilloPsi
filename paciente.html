@@ -1474,12 +1474,27 @@ async function enviarRecuperacao(){
   err.style.display='none';info.style.display='none'
   if(!email){err.textContent='Digite seu e-mail.';err.style.display='block';return}
   btn.disabled=true;btn.textContent='Enviando...'
-  const {error}=await sb.auth.resetPasswordForEmail(email,{
-    redirectTo:window.location.origin+window.location.pathname
+
+  const {data:{session}}=await sb.auth.getSession()
+  const authHeader=session?`Bearer ${session.access_token}`:`Bearer ${SUPABASE_KEY}`
+
+  const res=await fetch(`${SUPABASE_URL}/functions/v1/bright-function`,{
+    method:'POST',
+    headers:{
+      'Content-Type':'application/json',
+      'Authorization':authHeader,
+      'apikey':SUPABASE_KEY
+    },
+    body:JSON.stringify({email})
   })
+
   btn.disabled=false;btn.textContent='Enviar link de recuperação'
-  if(error){err.textContent='Erro: '+error.message;err.style.display='block';return}
-  info.textContent='✓ Email enviado. Verifique sua caixa de entrada (e a pasta de spam).'
+
+  if(!res.ok){
+    const e=await res.json().catch(()=>({}))
+    err.textContent='Erro ao enviar: '+(e.error||res.status);err.style.display='block';return
+  }
+  info.textContent='✓ E-mail enviado. Verifique sua caixa de entrada (e a pasta de spam).'
   info.style.display='block'
 }
 
