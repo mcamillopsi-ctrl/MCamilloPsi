@@ -1089,11 +1089,27 @@ async function fazerCadastro(){
   const {data:authData,error:authErr}=await sb.auth.signUp({email,password:senha,options:{data:{nome},emailRedirectTo:null}})
   if(authErr){erro.textContent='Erro ao criar conta: '+authErr.message;erro.style.display='block';return}
 
-  // Vincula user_id e salva nome
-  await sb.from('pacientes').update({nome,user_id:authData.user.id,senha:null,consentimento_em:new Date().toISOString()}).eq('email',email)
-
-  // Faz login imediato
+  // Faz login imediato ANTES do UPDATE para que o RLS funcione corretamente
   await sb.auth.signInWithPassword({email,password:senha})
+
+  // Agora autenticado: vincula user_id, salva nome e registra consentimento
+  const {error:upErr}=await sb.from('pacientes').update({
+    nome,
+    user_id:authData.user.id,
+    senha:null,
+    consentimento_em:new Date().toISOString()
+  }).eq('email',email)
+
+  if(upErr){
+    // Fallback: tenta via upsert com o id direto
+    await sb.from('pacientes').update({
+      nome,
+      user_id:authData.user.id,
+      senha:null,
+      consentimento_em:new Date().toISOString()
+    }).eq('id',pac.id)
+  }
+
   entrarNoApp({...pac,nome,user_id:authData.user.id})
 }
 
