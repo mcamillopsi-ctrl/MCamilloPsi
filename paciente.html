@@ -1404,16 +1404,17 @@ function renderGraficos(data){
       {y:84,label:'Grave',color:'rgba(163,45,45,0.4)'}
     ]},
     'MSQ-BR':{cor:'#5b8fc9',desc:'Mini Sleep Questionnaire — escala 10 a 70 · Acima de 24 = sono comprometido',max:70,refs:[
-      {y:25,label:'Dif. leve',color:'rgba(200,150,10,0.4)'},
-      {y:28,label:'Dif. moderada',color:'rgba(184,97,10,0.4)'},
-      {y:31,label:'Dif. grave',color:'rgba(163,45,45,0.4)'}
+      {y:25,label:'Dif. leve',color:'rgba(200,150,10,0.4)',position:'start'},
+      {y:28,label:'Dif. moderada',color:'rgba(184,97,10,0.4)',position:'center'},
+      {y:31,label:'Dif. grave',color:'rgba(163,45,45,0.4)',position:'end'}
     ]}
   }
   Object.values(graficos).forEach(g=>g.destroy())
   graficos={}
+  const nomesAcessiveis={'PHQ-9':'Sintomas depressivos','GAD-7':'Sintomas de ansiedade','DASS-21':'Humor, ansiedade e estresse','MSQ-BR':'Qualidade do sono'}
   grid.innerHTML=Object.keys(porTeste).map(nome=>`
     <div class="chart-card">
-      <div class="chart-card-title">${nome}</div>
+      <div class="chart-card-title">${nomesAcessiveis[nome]||nome}</div>
       <div class="chart-card-sub">${config[nome]?config[nome].desc:''} · Linhas tracejadas = cortes clínicos de referência</div>
       <canvas id="canvas-${nome.replace(/[^a-z0-9]/gi,'_')}" style="max-height:200px"></canvas>
     </div>`).join('')
@@ -1428,9 +1429,10 @@ function renderGraficos(data){
         type:'line',yMin:r.y,yMax:r.y,
         borderColor:r.color.replace('0.4','0.3'),
         borderWidth:1,borderDash:[4,5],
-        label:{display:true,content:r.label,position:'end',
+        label:{display:true,content:r.label,position:r.position||'end',
           font:{family:'Sora',size:9},
-          color:'#8a9ab5',backgroundColor:'transparent',padding:2}
+          color:'#8a9ab5',backgroundColor:'rgba(245,243,238,0.85)',padding:{x:4,y:2},
+          borderRadius:3}
       }
     })
     graficos[nome]=new Chart(canvas,{
