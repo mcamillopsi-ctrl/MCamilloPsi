@@ -207,7 +207,7 @@
     .tecnica-card.open .tecnica-expanded{display:block}
     .tecnica-sec{margin-bottom:0.9rem}
     .tecnica-sec:last-child{margin-bottom:0}
-    .tecnica-sec-lbl{font-size:0.58rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--navy-light);margin-bottom:0.3rem}
+    .tecnica-sec-lbl{font-size:0.67rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--navy);margin-bottom:0.35rem;padding-bottom:0.2rem;border-bottom:1px solid var(--border)}
     .tecnica-sec-txt{font-size:0.78rem;font-weight:400;line-height:1.78;color:var(--text)}
     .tecnica-pratica{background:var(--navy);border-radius:6px;padding:0.85rem 1rem;font-size:0.75rem;font-weight:300;line-height:1.78;color:rgba(255,255,255,0.88);white-space:pre-line}
     .tec-hint{font-size:0.72rem;font-weight:300;color:var(--text-muted);background:var(--gold-pale);border:1px solid rgba(184,151,74,0.2);border-radius:6px;padding:0.6rem 0.9rem;margin-bottom:1.25rem;display:flex;align-items:center;gap:0.5rem}
@@ -1405,9 +1405,9 @@ function renderGraficos(data){
       {y:84,label:'Grave',color:'rgba(163,45,45,0.4)'}
     ]},
     'MSQ-BR':{cor:'#5b8fc9',desc:'Mini Sleep Questionnaire — escala 10 a 70 · Acima de 24 = sono comprometido',max:70,refs:[
-      {y:25,label:'Dif. leve',color:'rgba(200,150,10,0.4)',position:'start',yAdjust:14},
-      {y:28,label:'Dif. moderada',color:'rgba(184,97,10,0.4)',position:'center',yAdjust:0},
-      {y:31,label:'Dif. grave',color:'rgba(163,45,45,0.4)',position:'end',yAdjust:-14}
+      {y:25,label:'Dif. leve',color:'rgba(200,150,10,0.8)',position:'start',yAdjust:50},
+      {y:28,label:'Dif. moderada',color:'rgba(184,97,10,0.8)',position:'center',yAdjust:0},
+      {y:31,label:'Dif. grave',color:'rgba(163,45,45,0.8)',position:'end',yAdjust:-50}
     ]}
   }
   Object.values(graficos).forEach(g=>g.destroy())
@@ -1428,12 +1428,12 @@ function renderGraficos(data){
     cfg.refs.forEach((r,i)=>{
       annotations['ref'+i]={
         type:'line',yMin:r.y,yMax:r.y,
-        borderColor:r.color.replace('0.4','0.3'),
-        borderWidth:1,borderDash:[4,5],
+        borderColor:r.color,
+        borderWidth:1.5,borderDash:[5,4],
         label:{display:true,content:r.label,position:r.position||'end',
           yAdjust:r.yAdjust||0,
-          font:{family:'Sora',size:9},
-          color:'#8a9ab5',backgroundColor:'rgba(245,243,238,0.85)',padding:{x:4,y:2},
+          font:{family:'Sora',size:9,weight:'600'},
+          color:'#0d1f3c',backgroundColor:'rgba(255,255,255,0.92)',padding:{x:5,y:3},
           borderRadius:3}
       }
     })
