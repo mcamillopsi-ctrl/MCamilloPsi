@@ -1455,7 +1455,7 @@ function renderGraficos(data){
         },
         scales:{
           x:{ticks:{font:{family:'Sora',size:10}},title:{display:true,text:'Data',font:{family:'Sora',size:10},color:'#8a9ab5'}},
-          y:{beginAtZero:true,max:cfg.max,ticks:{font:{family:'Sora',size:10}},title:{display:true,text:'Pontuação',font:{family:'Sora',size:10},color:'#8a9ab5'},grid:{color:'rgba(194,205,224,0.3)'}}
+          y:{min:cfg.min||0,max:cfg.max,ticks:{font:{family:'Sora',size:10}},title:{display:true,text:'Pontuação',font:{family:'Sora',size:10},color:'#8a9ab5'},grid:{color:'rgba(194,205,224,0.3)'}}
         }
       }
     })
@@ -1910,7 +1910,7 @@ function renderPsiGraficos(pacList,resultados,filtroId){
 
     const msqPts=resultados.filter(r=>r.teste.includes('MSQ')||r.teste.includes('PSQI')).map(r=>({x:fmt(r.criado_em),y:r.pontuacao}))
     if(msqPts.length){
-      psiGraficos['sono']=new Chart(cSono,{type:'line',data:{datasets:[{label:'MSQ-BR',data:msqPts,borderColor:'#5b8fc9',backgroundColor:'transparent',tension:0.3,pointRadius:4,borderWidth:2,pointBackgroundColor:'#5b8fc9'}]},options:{responsive:true,interaction:{mode:'nearest',intersect:false},plugins:{legend:{display:false},annotation:{annotations:annoLimiarSono}},scales:{x:{ticks:{font:{family:'Sora',size:10}}},y:{beginAtZero:true,max:70,ticks:{font:{family:'Sora',size:10}},grid:{color:'rgba(194,205,224,0.3)'}}}}})
+      psiGraficos['sono']=new Chart(cSono,{type:'line',data:{datasets:[{label:'MSQ-BR',data:msqPts,borderColor:'#5b8fc9',backgroundColor:'transparent',tension:0.3,pointRadius:4,borderWidth:2,pointBackgroundColor:'#5b8fc9'}]},options:{responsive:true,interaction:{mode:'nearest',intersect:false},plugins:{legend:{display:false},annotation:{annotations:annoLimiarSono}},scales:{x:{ticks:{font:{family:'Sora',size:10}}},y:{min:10,max:40,ticks:{font:{family:'Sora',size:10}},grid:{color:'rgba(194,205,224,0.3)'}}}}})
     }else{
       cSono.parentElement.insertAdjacentHTML('beforeend','<div class="empty-state" style="padding:1.5rem 0 0.5rem">Nenhum MSQ realizado.</div>')
     }
@@ -1937,7 +1937,7 @@ function renderPsiGraficos(pacList,resultados,filtroId){
     ;[...resultados].reverse().forEach(r=>{if((r.teste.includes('MSQ')||r.teste.includes('PSQI'))&&!(r.paciente_id in ultMsq))ultMsq[r.paciente_id]=r.pontuacao})
     const msqVals=pacList.map(p=>ultMsq[p.id]!==undefined?ultMsq[p.id]:null)
     const msqColors=msqVals.map(v=>v===null?'rgba(194,205,224,0.5)':v>24?'rgba(163,45,45,0.7)':'rgba(45,122,79,0.7)')
-    psiGraficos['sono']=new Chart(cSono,{type:'bar',data:{labels:pacList.map(nomeCurto),datasets:[{label:'MSQ-BR',data:msqVals,backgroundColor:msqColors,borderWidth:0,borderRadius:4}]},options:{responsive:true,plugins:{legend:{display:false},annotation:{annotations:annoLimiarSono},tooltip:{callbacks:{label:i=>i.parsed.y===null?'Sem dados':`MSQ: ${i.parsed.y} — ${i.parsed.y>24?'Sono comprometido':'Boa qualidade'}`}}},scales:{x:{ticks:{font:{family:'Sora',size:10}}},y:{beginAtZero:true,max:27,ticks:{font:{family:'Sora',size:10}},grid:{color:'rgba(194,205,224,0.3)'}}}}})
+    psiGraficos['sono']=new Chart(cSono,{type:'bar',data:{labels:pacList.map(nomeCurto),datasets:[{label:'MSQ-BR',data:msqVals,backgroundColor:msqColors,borderWidth:0,borderRadius:4}]},options:{responsive:true,plugins:{legend:{display:false},annotation:{annotations:annoLimiarSono},tooltip:{callbacks:{label:i=>i.parsed.y===null?'Sem dados':`MSQ: ${i.parsed.y} — ${i.parsed.y>24?'Sono comprometido':'Boa qualidade'}`}}},scales:{x:{ticks:{font:{family:'Sora',size:10}}},y:{min:10,max:40,ticks:{font:{family:'Sora',size:10}},grid:{color:'rgba(194,205,224,0.3)'}}}}})
   }
 }
 
