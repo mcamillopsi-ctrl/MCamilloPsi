@@ -1404,10 +1404,10 @@ function renderGraficos(data){
       {y:56,label:'Moderado',color:'rgba(184,97,10,0.4)'},
       {y:84,label:'Grave',color:'rgba(163,45,45,0.4)'}
     ]},
-    'MSQ-BR':{cor:'#5b8fc9',desc:'Mini Sleep Questionnaire — escala 10 a 70 · Acima de 24 = sono comprometido',max:70,refs:[
-      {y:25,label:'Dif. leve',color:'rgba(200,150,10,0.8)',position:'start',yAdjust:50},
-      {y:28,label:'Dif. moderada',color:'rgba(184,97,10,0.8)',position:'center',yAdjust:0},
-      {y:31,label:'Dif. grave',color:'rgba(163,45,45,0.8)',position:'end',yAdjust:-50}
+    'MSQ-BR':{cor:'#5b8fc9',desc:'Mini Sleep Questionnaire — escala 10 a 40 · Acima de 24 = sono comprometido',max:40,min:10,refs:[
+      {y:25,label:'Dif. leve',color:'rgba(200,150,10,0.9)',position:'start'},
+      {y:28,label:'Dif. moderada',color:'rgba(184,97,10,0.9)',position:'center'},
+      {y:31,label:'Dif. grave',color:'rgba(163,45,45,0.9)',position:'end'}
     ]}
   }
   Object.values(graficos).forEach(g=>g.destroy())
@@ -1429,11 +1429,10 @@ function renderGraficos(data){
       annotations['ref'+i]={
         type:'line',yMin:r.y,yMax:r.y,
         borderColor:r.color,
-        borderWidth:1.5,borderDash:[5,4],
+        borderWidth:2,borderDash:[6,4],
         label:{display:true,content:r.label,position:r.position||'end',
-          yAdjust:r.yAdjust||0,
-          font:{family:'Sora',size:9,weight:'600'},
-          color:'#0d1f3c',backgroundColor:'rgba(255,255,255,0.92)',padding:{x:5,y:3},
+          font:{family:'Sora',size:10,weight:'600'},
+          color:'#0d1f3c',backgroundColor:'rgba(255,255,255,0.96)',padding:{x:6,y:3},
           borderRadius:3}
       }
     })
