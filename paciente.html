@@ -1104,7 +1104,12 @@ function irPara(pg){
   if(page)page.classList.add('active')
   const nav=document.getElementById('nav-'+pg)
   if(nav)nav.classList.add('active')
-  if(pg==='dashboard'){if(user&&user.email===EMAIL_PSI)carregarDashboardPsi();else carregarDashboard()}
+  if(pg==='dashboard'){
+    // Reset síncrono dos cards abertos — antes do carregamento assíncrono
+    const ht=document.getElementById('tecnicas-na-home')
+    if(ht)ht.querySelectorAll('.tecnica-card.open').forEach(c=>c.classList.remove('open'))
+    if(user&&user.email===EMAIL_PSI)carregarDashboardPsi();else carregarDashboard()
+  }
   if(pg==='autoavaliacao'){carregarAutoavaliacao()}
   if(pg==='consultas')carregarConsultas()
   if(pg==='psi')carregarPainel()
@@ -1293,12 +1298,9 @@ async function carregarDashboard(){
   const sessoesRealizadas=(sessoesData||[]).length+(user.sessoes_anteriores||0)
   renderStats(resultados,sessoesRealizadas)
   renderSugestoes(resultados)
-  // Fecha qualquer card aberto de interação anterior
-  const homeTecExist=document.getElementById('tecnicas-na-home')
-  if(homeTecExist)homeTecExist.querySelectorAll('.tecnica-card.open').forEach(c=>c.classList.remove('open'))
   // Injeta conteúdo das técnicas na home (uma vez)
   // Clonamos os filhos internos do page-tecnicas para evitar herdar CSS do .page
-  if(!homeTecExist){
+  if(!document.getElementById('tecnicas-na-home')){
     const tecSrc=document.getElementById('page-tecnicas')
     const homeDash=document.getElementById('page-dashboard')
     if(tecSrc&&homeDash){
