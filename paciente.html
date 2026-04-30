@@ -1309,7 +1309,10 @@ async function carregarDashboard(){
       // Clona cada filho do page-tecnicas individualmente (exceto título e subtítulo)
       Array.from(tecSrc.children).forEach(child=>{
         if(child.classList.contains('page-title')||child.classList.contains('page-sub'))return
-        wrapper.appendChild(child.cloneNode(true))
+        const cloned=child.cloneNode(true)
+        // Garantir que todos os cards do clone começam fechados
+        cloned.querySelectorAll('.tecnica-card.open').forEach(c=>c.classList.remove('open'))
+        wrapper.appendChild(cloned)
       })
       homeDash.appendChild(wrapper)
     }
@@ -1711,7 +1714,14 @@ async function enviarRecuperacao(){
   info.style.display='block'
 }
 
-function toggleTec(card){card.classList.toggle('open')}
+function toggleTec(card){
+  const isOpen=card.classList.contains('open')
+  // Fecha todos os cards da mesma lista
+  const lista=card.closest('.tec-lista')
+  if(lista)lista.querySelectorAll('.tecnica-card').forEach(c=>c.classList.remove('open'))
+  // Abre só o clicado (se estava fechado)
+  if(!isOpen)card.classList.add('open')
+}
 
 function abrirModalNovoPaciente(){
   const m=document.getElementById('modal-novo-pac')
