@@ -1105,9 +1105,9 @@ function irPara(pg){
   const nav=document.getElementById('nav-'+pg)
   if(nav)nav.classList.add('active')
   if(pg==='dashboard'){
-    // Reset síncrono dos cards abertos — antes do carregamento assíncrono
+    // Remove clone existente para recriar sempre limpo (sem cards abertos)
     const ht=document.getElementById('tecnicas-na-home')
-    if(ht)ht.querySelectorAll('.tecnica-card.open').forEach(c=>c.classList.remove('open'))
+    if(ht)ht.remove()
     if(user&&user.email===EMAIL_PSI)carregarDashboardPsi();else carregarDashboard()
   }
   if(pg==='autoavaliacao'){carregarAutoavaliacao()}
