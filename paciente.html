@@ -110,7 +110,7 @@
     .section-eyebrow::after{content:'';flex:1;height:1px;background:var(--border)}
 
     /* ══ STAT CARDS ══ */
-    .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:0.85rem;margin-bottom:1.5rem}
+    .stat-row{display:grid;grid-template-columns:repeat(2,1fr);gap:0.85rem;margin-bottom:1.5rem}
     .stat-card{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:1rem 1.1rem;border-top:2px solid var(--gold)}
     .stat-num{font-family:'DM Sans',sans-serif;font-size:1.85rem;font-weight:300;color:var(--navy);line-height:1;margin-bottom:0.25rem}
     .stat-lbl{font-size:0.62rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted)}
@@ -1293,9 +1293,12 @@ async function carregarDashboard(){
   const sessoesRealizadas=(sessoesData||[]).length+(user.sessoes_anteriores||0)
   renderStats(resultados,sessoesRealizadas)
   renderSugestoes(resultados)
+  // Fecha qualquer card aberto de interação anterior
+  const homeTecExist=document.getElementById('tecnicas-na-home')
+  if(homeTecExist)homeTecExist.querySelectorAll('.tecnica-card.open').forEach(c=>c.classList.remove('open'))
   // Injeta conteúdo das técnicas na home (uma vez)
   // Clonamos os filhos internos do page-tecnicas para evitar herdar CSS do .page
-  if(!document.getElementById('tecnicas-na-home')){
+  if(!homeTecExist){
     const tecSrc=document.getElementById('page-tecnicas')
     const homeDash=document.getElementById('page-dashboard')
     if(tecSrc&&homeDash){
