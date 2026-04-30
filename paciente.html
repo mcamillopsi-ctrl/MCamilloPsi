@@ -1294,6 +1294,7 @@ async function carregarDashboard(){
   renderStats(resultados,sessoesRealizadas)
   renderSugestoes(resultados)
   // Injeta conteúdo das técnicas na home (uma vez)
+  // Clonamos os filhos internos do page-tecnicas para evitar herdar CSS do .page
   if(!document.getElementById('tecnicas-na-home')){
     const tecSrc=document.getElementById('page-tecnicas')
     const homeDash=document.getElementById('page-dashboard')
@@ -1305,12 +1306,11 @@ async function carregarDashboard(){
       eyebrow.style.marginTop='1.5rem'
       eyebrow.textContent='Técnicas e ferramentas'
       wrapper.appendChild(eyebrow)
-      const clone=tecSrc.cloneNode(true)
-      clone.removeAttribute('id')
-      clone.style.cssText=''
-      const h1=clone.querySelector('.page-title');if(h1)h1.remove()
-      const psub=clone.querySelector('.page-sub');if(psub)psub.remove()
-      wrapper.appendChild(clone)
+      // Clona cada filho do page-tecnicas individualmente (exceto título e subtítulo)
+      Array.from(tecSrc.children).forEach(child=>{
+        if(child.classList.contains('page-title')||child.classList.contains('page-sub'))return
+        wrapper.appendChild(child.cloneNode(true))
+      })
       homeDash.appendChild(wrapper)
     }
   }
