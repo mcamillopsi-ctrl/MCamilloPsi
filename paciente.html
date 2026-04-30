@@ -1721,10 +1721,8 @@ async function enviarRecuperacao(){
 
 function toggleTec(card){
   const isOpen=card.classList.contains('open')
-  // Fecha todos os cards da mesma lista
-  const lista=card.closest('.tec-lista')
-  if(lista)lista.querySelectorAll('.tecnica-card').forEach(c=>c.classList.remove('open'))
-  // Abre só o clicado (se estava fechado)
+  // Fecha todos os cards do documento (clone + fonte)
+  document.querySelectorAll('.tecnica-card').forEach(c=>c.classList.remove('open'))
   if(!isOpen)card.classList.add('open')
 }
 
