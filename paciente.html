@@ -214,6 +214,10 @@
     .tec-categoria{font-size:0.62rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);margin:1.75rem 0 0.65rem;display:inline-block;background:var(--cream);padding:0.25rem 0.65rem;border-radius:20px}
     .tec-lista{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0.65rem}
     .lembrete-aviso{font-size:0.7rem;font-weight:500;color:var(--red);margin-top:0.3rem;line-height:1.5}
+    /* Proteção CSS: expanded nunca visível em página inativa */
+    .page:not(.active) .tecnica-expanded{display:none!important}
+    .page:not(.active) .tecnica-arrow{transform:none!important}
+    .page:not(.active) .tecnica-card{border-color:var(--border)!important;box-shadow:none!important}
 
     /* ══ REDE ══ */
     .rede-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0.85rem;margin-bottom:1.5rem}
@@ -1382,6 +1386,8 @@ function toggleSidebar(){
 }
 
 function irPara(pg){
+  // Fecha todos os cards de técnicas em qualquer navegação
+  document.querySelectorAll('.tecnica-card').forEach(c=>c.classList.remove('open'))
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'))
   document.querySelectorAll('.sidebar-item').forEach(i=>i.classList.remove('active'))
   const page=document.getElementById('page-'+pg)
@@ -1389,8 +1395,6 @@ function irPara(pg){
   const nav=document.getElementById('nav-'+pg)
   if(nav)nav.classList.add('active')
   if(pg==='dashboard'){
-    // Fecha todos os cards de técnicas ao entrar na home
-    document.querySelectorAll('#tecnicas-na-home .tecnica-card').forEach(c=>c.classList.remove('open'))
     if(user&&user.email===EMAIL_PSI)carregarDashboardPsi();else carregarDashboard()
   }
   if(pg==='autoavaliacao'){carregarAutoavaliacao()}
