@@ -400,9 +400,9 @@
         <span>Meu cadastro</span>
       </div>
       <div class="sidebar-section">Recursos</div>
-      <div class="sidebar-item" id="nav-tecnicas" onclick="irPara('tecnicas')" title="Técnicas">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
-        <span>Técnicas e ferramentas</span>
+      <div class="sidebar-item" id="nav-autoavaliacao" onclick="irPara('autoavaliacao')" title="Autoavaliação">
+        <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        <span>Autoavaliação</span>
       </div>
       <div class="sidebar-item" id="nav-rede" onclick="irPara('rede')" title="Rede de apoio">
         <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
@@ -423,21 +423,76 @@
         <!-- DASHBOARD -->
         <div class="page active" id="page-dashboard">
           <h1 class="page-title">Olá, <span id="dash-nome"></span></h1>
-          <p class="page-sub">Acompanhe sua evolução e realize os testes disponíveis.</p>
+          <p class="page-sub">Bem-vindo ao seu espaço de cuidado.</p>
 
           <div class="stat-row" id="stat-row"></div>
 
-          <div class="section-eyebrow">Evolução ao longo do tempo</div>
-          <div id="farol-desc-bloco" style="display:none;background:var(--white);border:1px solid var(--border);border-radius:8px;padding:1rem 1.25rem;margin-bottom:1rem;border-left:3px solid var(--gold)">
-            <p id="farol-desc-texto" style="font-size:0.78rem;font-weight:300;color:var(--navy-light);line-height:1.75"></p>
-          </div>
-          <div class="graficos-grid" id="graficos-grid">
-            <div class="chart-card">
-              <div class="empty-state" id="chart-empty">Faça seu primeiro teste para visualizar sua evolução aqui.</div>
+          <!-- Bloco de sugestões inteligentes -->
+          <div id="sugestoes-bloco" style="display:none;margin-bottom:1.5rem">
+            <div class="section-eyebrow" style="margin-bottom:0.75rem">Práticas recomendadas para você</div>
+            <div id="sugestoes-conteudo" style="background:var(--white);border:1px solid var(--border);border-radius:8px;padding:1.25rem;border-left:3px solid var(--gold)">
             </div>
           </div>
 
-          <div class="section-eyebrow" style="margin-top:1.5rem">Testes disponíveis</div>
+        </div>
+
+        <!-- TESTE -->
+        <div class="page" id="page-test">
+          <p style="font-size:0.68rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem" id="test-titulo"></p>
+          <div class="test-progress-track"><div class="test-progress-bar" id="test-barra"></div></div>
+          <span class="test-counter" id="test-contador"></span>
+          <p style="font-size:0.75rem;font-weight:400;color:var(--navy);background:var(--gold-pale);border-left:2px solid var(--gold);padding:0.6rem 0.85rem;border-radius:0 5px 5px 0;margin-bottom:1.25rem" id="test-instrucao"></p>
+          <p class="test-question" id="test-pergunta"></p>
+          <div class="test-options" id="test-opcoes"></div>
+          <div class="test-nav">
+            <button class="btn-ghost" onclick="voltarPergunta()">← Anterior</button>
+            <button class="btn-action" id="btn-avancar" onclick="avancarPergunta()">Próxima →</button>
+          </div>
+        </div>
+
+        <!-- RESULTADO -->
+        <div class="page" id="page-result">
+          <p style="font-size:0.68rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold)" id="result-nome"></p>
+          <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;color:var(--navy);margin-top:0.2rem">Seu resultado</h2>
+          <div class="result-score" id="result-pts"></div>
+          <div class="result-class" id="result-class"></div>
+          <div class="result-desc" id="result-desc"></div>
+          <div class="result-actions">
+            <button class="btn-ghost" onclick="irPara('autoavaliacao')">Voltar aos testes</button>
+            <button class="btn-action" onclick="iniciarTeste(testeAtual)">Refazer teste</button>
+          </div>
+        </div>
+
+        <!-- CADASTRO -->
+        <div class="page" id="page-cadastro">
+          <h1 class="page-title">Meu cadastro</h1>
+          <p class="page-sub">Atualize seus dados de acesso quando precisar.</p>
+          <div class="form-block">
+            <div class="form-block-title">Informações pessoais</div>
+            <div class="form-row"><label>Nome completo</label><input type="text" id="edit-nome" placeholder="Seu nome"></div>
+          </div>
+          <div class="form-block">
+            <div class="form-block-title">Alterar senha</div>
+            <div class="form-row"><label>Nova senha</label><input type="password" id="edit-senha" placeholder="Deixe em branco para manter a atual"></div>
+            <div class="form-row"><label>Confirmar nova senha</label><input type="password" id="edit-senha2" placeholder="Repita a nova senha"></div>
+          </div>
+          <button class="btn-action" onclick="salvarCadastro()">Salvar alterações</button>
+          <div class="save-ok" id="save-ok">✓ Dados atualizados com sucesso.</div>
+          <div class="save-err" id="save-err"></div>
+          <div class="form-block" style="margin-top:2rem;border-color:rgba(163,45,45,0.3);border-top-color:var(--red)">
+            <div class="form-block-title" style="color:var(--red)">Zona de perigo</div>
+            <p style="font-size:0.75rem;font-weight:300;color:var(--text-muted);margin-bottom:1rem;line-height:1.65">A exclusão apaga permanentemente todos os seus dados, resultados de testes e histórico de sessões. Esta ação é irreversível.</p>
+            <button onclick="solicitarExclusao()" style="font-size:0.68rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:0.55rem 1.1rem;background:transparent;color:var(--red);border:1px solid var(--red);border-radius:6px;cursor:pointer">Excluir minha conta</button>
+          </div>
+        </div>
+
+        <!-- AUTOAVALIAÇÃO -->
+        <div class="page" id="page-autoavaliacao">
+          <h1 class="page-title">Autoavaliação</h1>
+          <p class="page-sub">Instrumentos de acompanhamento do seu bem-estar emocional.</p>
+          <div style="background:var(--gold-pale);border:1px solid rgba(184,151,74,0.25);border-radius:8px;padding:0.85rem 1.1rem;margin-bottom:1.5rem;font-size:0.75rem;font-weight:300;color:var(--navy-light);line-height:1.7">
+            💡 Estes instrumentos ajudam o seu psicólogo a acompanhar a sua evolução ao longo do processo terapêutico. <strong style="font-weight:500">Não têm caráter diagnóstico</strong> e não substituem a avaliação clínica.
+          </div>
           <div class="tests-grid">
             <div class="test-card" onclick="iniciarTeste('phq9')">
               <div class="test-name">Rastreio de sintomas depressivos</div>
@@ -472,7 +527,6 @@
               <button class="btn-test">Fazer teste</button>
             </div>
           </div>
-
           <div class="section-eyebrow" style="margin-top:1.5rem">Histórico de resultados</div>
           <div class="history-card">
             <div class="empty-state" id="historico-empty">Nenhum teste realizado ainda.</div>
@@ -483,58 +537,8 @@
           </div>
         </div>
 
-        <!-- TESTE -->
-        <div class="page" id="page-test">
-          <p style="font-size:0.68rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem" id="test-titulo"></p>
-          <div class="test-progress-track"><div class="test-progress-bar" id="test-barra"></div></div>
-          <span class="test-counter" id="test-contador"></span>
-          <p style="font-size:0.75rem;font-weight:400;color:var(--navy);background:var(--gold-pale);border-left:2px solid var(--gold);padding:0.6rem 0.85rem;border-radius:0 5px 5px 0;margin-bottom:1.25rem" id="test-instrucao"></p>
-          <p class="test-question" id="test-pergunta"></p>
-          <div class="test-options" id="test-opcoes"></div>
-          <div class="test-nav">
-            <button class="btn-ghost" onclick="voltarPergunta()">← Anterior</button>
-            <button class="btn-action" id="btn-avancar" onclick="avancarPergunta()">Próxima →</button>
-          </div>
-        </div>
-
-        <!-- RESULTADO -->
-        <div class="page" id="page-result">
-          <p style="font-size:0.68rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold)" id="result-nome"></p>
-          <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;color:var(--navy);margin-top:0.2rem">Seu resultado</h2>
-          <div class="result-score" id="result-pts"></div>
-          <div class="result-class" id="result-class"></div>
-          <div class="result-desc" id="result-desc"></div>
-          <div class="result-actions">
-            <button class="btn-ghost" onclick="irPara('dashboard')">Voltar ao início</button>
-            <button class="btn-action" onclick="iniciarTeste(testeAtual)">Refazer teste</button>
-          </div>
-        </div>
-
-        <!-- CADASTRO -->
-        <div class="page" id="page-cadastro">
-          <h1 class="page-title">Meu cadastro</h1>
-          <p class="page-sub">Atualize seus dados de acesso quando precisar.</p>
-          <div class="form-block">
-            <div class="form-block-title">Informações pessoais</div>
-            <div class="form-row"><label>Nome completo</label><input type="text" id="edit-nome" placeholder="Seu nome"></div>
-          </div>
-          <div class="form-block">
-            <div class="form-block-title">Alterar senha</div>
-            <div class="form-row"><label>Nova senha</label><input type="password" id="edit-senha" placeholder="Deixe em branco para manter a atual"></div>
-            <div class="form-row"><label>Confirmar nova senha</label><input type="password" id="edit-senha2" placeholder="Repita a nova senha"></div>
-          </div>
-          <button class="btn-action" onclick="salvarCadastro()">Salvar alterações</button>
-          <div class="save-ok" id="save-ok">✓ Dados atualizados com sucesso.</div>
-          <div class="save-err" id="save-err"></div>
-          <div class="form-block" style="margin-top:2rem;border-color:rgba(163,45,45,0.3);border-top-color:var(--red)">
-            <div class="form-block-title" style="color:var(--red)">Zona de perigo</div>
-            <p style="font-size:0.75rem;font-weight:300;color:var(--text-muted);margin-bottom:1rem;line-height:1.65">A exclusão apaga permanentemente todos os seus dados, resultados de testes e histórico de sessões. Esta ação é irreversível.</p>
-            <button onclick="solicitarExclusao()" style="font-size:0.68rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:0.55rem 1.1rem;background:transparent;color:var(--red);border:1px solid var(--red);border-radius:6px;cursor:pointer">Excluir minha conta</button>
-          </div>
-        </div>
-
-        <!-- TÉCNICAS -->
-        <div class="page" id="page-tecnicas">
+        <!-- TÉCNICAS (agora embutidas na Home via JS) -->
+        <div class="page" id="page-tecnicas" style="display:none!important">
           <h1 class="page-title">Técnicas e ferramentas</h1>
           <p class="page-sub">Recursos psicoterápicos para o seu bem-estar no dia a dia.</p>
 
@@ -998,9 +1002,9 @@ Não é necessário anotar — o simples ato de pausar e perguntar já é sufici
       <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
       Consultas
     </div>
-    <div class="mobile-nav-item" id="mnav-tecnicas" onclick="irPara('tecnicas');atualizarMobileNav('tecnicas')">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
-      Técnicas
+    <div class="mobile-nav-item" id="mnav-autoavaliacao" onclick="irPara('autoavaliacao');atualizarMobileNav('autoavaliacao')">
+      <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      Avaliação
     </div>
     <div class="mobile-nav-item" id="mnav-rede" onclick="irPara('rede');atualizarMobileNav('rede')">
       <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
@@ -1096,10 +1100,12 @@ function toggleSidebar(){
 function irPara(pg){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'))
   document.querySelectorAll('.sidebar-item').forEach(i=>i.classList.remove('active'))
-  document.getElementById('page-'+pg).classList.add('active')
+  const page=document.getElementById('page-'+pg)
+  if(page)page.classList.add('active')
   const nav=document.getElementById('nav-'+pg)
   if(nav)nav.classList.add('active')
   if(pg==='dashboard'){if(user&&user.email===EMAIL_PSI)carregarDashboardPsi();else carregarDashboard()}
+  if(pg==='autoavaliacao'){carregarAutoavaliacao()}
   if(pg==='consultas')carregarConsultas()
   if(pg==='psi')carregarPainel()
   if(pg==='cadastro')document.getElementById('edit-nome').value=user.nome||''
@@ -1286,8 +1292,34 @@ async function carregarDashboard(){
   const resultados=data||[]
   const sessoesRealizadas=(sessoesData||[]).length+(user.sessoes_anteriores||0)
   renderStats(resultados,sessoesRealizadas)
+  renderSugestoes(resultados)
+  // Injeta conteúdo das técnicas na home (uma vez)
+  if(!document.getElementById('tecnicas-na-home')){
+    const tecSrc=document.getElementById('page-tecnicas')
+    const homeDash=document.getElementById('page-dashboard')
+    if(tecSrc&&homeDash){
+      const wrapper=document.createElement('div')
+      wrapper.id='tecnicas-na-home'
+      const eyebrow=document.createElement('div')
+      eyebrow.className='section-eyebrow'
+      eyebrow.style.marginTop='1.5rem'
+      eyebrow.textContent='Técnicas e ferramentas'
+      wrapper.appendChild(eyebrow)
+      const clone=tecSrc.cloneNode(true)
+      clone.removeAttribute('id')
+      clone.style.cssText=''
+      const h1=clone.querySelector('.page-title');if(h1)h1.remove()
+      const psub=clone.querySelector('.page-sub');if(psub)psub.remove()
+      wrapper.appendChild(clone)
+      homeDash.appendChild(wrapper)
+    }
+  }
+}
+
+async function carregarAutoavaliacao(){
+  const {data}=await sb.from('resultados').select('*').eq('paciente_id',user.id).order('criado_em',{ascending:false})
+  const resultados=data||[]
   renderHistorico(resultados)
-  renderGraficos(resultados)
   renderLembretes(resultados)
 }
 
@@ -1313,20 +1345,6 @@ function renderLembretes(data){
 }
 
 function renderStats(data,sessoesRealizadas){
-  const ultimos={};data.forEach(r=>{const k=r.teste.split('—')[0].trim();if(!ultimos[k])ultimos[k]=r})
-  const testesFeitos=Object.entries(ultimos)
-  let nivel='verde'
-  testesFeitos.forEach(([,r])=>{
-    const c=r.classificacao
-    if(c.includes('Grave')||c.includes('grave'))nivel='vermelho'
-    else if(nivel!=='vermelho'&&(c.includes('Moderada')||c.includes('Moderado')||c.includes('Dificuldades moderadas')||c.includes('Dificuldades graves')||c.includes('ruim')))nivel='amarelo'
-  })
-  const farolLabels={
-    verde:{tag:'Sem necessidade de atenção',cor:'verde'},
-    amarelo:{tag:'Atenção recomendada',cor:'amarelo'},
-    vermelho:{tag:'Atenção altamente recomendada',cor:'vermelho'}
-  }
-  const fl=farolLabels[nivel]
   let dataInicio='—'
   if(user.data_inicio){const [y,m,d]=user.data_inicio.split('-');dataInicio=`${d}/${m}/${y}`}
   document.getElementById('stat-row').innerHTML=`
@@ -1337,35 +1355,7 @@ function renderStats(data,sessoesRealizadas){
     <div class="stat-card" style="display:flex;flex-direction:column;justify-content:center">
       <div class="stat-lbl" style="margin-bottom:0.5rem">Sessões realizadas</div>
       <div class="stat-num">${sessoesRealizadas}</div>
-    </div>
-    <div class="stat-card farol-card ${testesFeitos.length?nivel:''}" style="display:flex;flex-direction:column;justify-content:center">
-      <div class="stat-lbl" style="margin-bottom:0.65rem">Farol de Cuidado</div>
-      <div class="farol-inner">
-        ${testesFeitos.length?`<div class="farol-dot farol-dot-${nivel}"></div>`:''}
-        <div>
-          ${testesFeitos.length
-            ?`<div class="farol-tag ${fl.cor}">${fl.tag}</div>`
-            :'<div style="font-size:0.75rem;font-weight:300;color:var(--text-muted)">Aguardando primeiro teste</div>'}
-        </div>
-      </div>
     </div>`
-  const blocoDesc=document.getElementById('farol-desc-bloco')
-  const textoDesc=document.getElementById('farol-desc-texto')
-  const bgCores={verde:'rgba(45,122,79,0.10)',amarelo:'rgba(200,150,10,0.11)',vermelho:'rgba(163,45,45,0.10)'}
-  const bdCores={verde:'var(--green)',amarelo:'var(--yellow)',vermelho:'var(--red)'}
-  const descricoes={
-    verde:`<strong>Sem necessidade de atenção</strong> — com base nos testes realizados, os seus indicadores de saúde mental estão dentro de um nível favorável. Isso não quer dizer ausência de desafios, mas sim que os sintomas estão em patamares leves ou mínimos. Continue com o acompanhamento regular e com as práticas de autocuidado.`,
-    amarelo:`<strong>Atenção recomendada</strong> — um ou mais dos seus testes identificaram sintomas em nível moderado. É um sinal de atenção: não de alarme, mas de cuidado redobrado. Mantenha o seu acompanhamento terapêutico em dia, utilize as técnicas disponíveis nesta plataforma e converse com o seu psicólogo sobre o que está sentindo.`,
-    vermelho:`<strong>Atenção altamente recomendada</strong> — um ou mais dos seus testes identificaram sintomas em nível grave. É importante que você mantenha contato próximo com o seu psicólogo e não enfrente isso sozinho(a). Mantenha o seu acompanhamento terapêutico em dia, converse com o seu psicólogo sobre o que está sentindo e intensifique suas ações de autocuidado.`
-  }
-  if(testesFeitos.length){
-    blocoDesc.style.display='block'
-    blocoDesc.style.background=bgCores[nivel]
-    blocoDesc.style.borderLeftColor=bdCores[nivel]
-    textoDesc.innerHTML=descricoes[nivel]
-  } else {
-    blocoDesc.style.display='none'
-  }
 }
 
 function renderHistorico(data){
@@ -1373,6 +1363,148 @@ function renderHistorico(data){
   if(!data.length){empty.style.display='block';table.style.display='none';return}
   empty.style.display='none';table.style.display='table'
   document.getElementById('historico-body').innerHTML=data.map(r=>`<tr><td>${r.teste}</td><td>${r.pontuacao}</td><td>${badgeHtml(r.classificacao)}</td><td>${fmt(r.criado_em)}</td></tr>`).join('')
+}
+
+// ══ Mapeamento científico: classificação → técnicas + frequência ══
+const SUGESTOES_MAP = {
+  // PHQ-9
+  'Mínima':       {grupo:'phq9', itens:[]},
+  'Leve':         {grupo:'phq9', itens:[
+    {tec:'Ativação comportamental', freq:'3 vezes por semana'},
+    {tec:'Higiene do sono', freq:'diariamente'}
+  ]},
+  'Moderada':     {grupo:'phq9', itens:[
+    {tec:'Ativação comportamental', freq:'diariamente'},
+    {tec:'Registro de pensamentos automáticos', freq:'diariamente'}
+  ]},
+  'Moderadamente grave':{grupo:'phq9', itens:[
+    {tec:'Registro de pensamentos automáticos', freq:'diariamente'},
+    {tec:'Ativação comportamental', freq:'diariamente, 2× ao dia se possível'}
+  ]},
+  // GAD-7
+  'Normal a leve':{grupo:'gad7', itens:[
+    {tec:'Respiração diafragmática', freq:'1× ao dia'}
+  ]},
+  // DASS-21 depressão
+  // (reutiliza classificações acima via grupo)
+  // Estresse DASS
+  'Estresse leve':{grupo:'dass_stress', itens:[
+    {tec:'Atenção plena (mindfulness)', freq:'1× ao dia'}
+  ]},
+  'Estresse moderado':{grupo:'dass_stress', itens:[
+    {tec:'Relaxamento muscular progressivo', freq:'2× ao dia'},
+    {tec:'Atenção plena (mindfulness)', freq:'1× ao dia'}
+  ]},
+  'Estresse grave':{grupo:'dass_stress', itens:[
+    {tec:'Relaxamento muscular progressivo', freq:'2× ao dia'},
+    {tec:'Técnica 4-7-8', freq:'sempre que sentir tensão'}
+  ]},
+  // MSQ sono
+  'Boa qualidade de sono':         {grupo:'sono', itens:[]},
+  'Dificuldades leves de sono':    {grupo:'sono', itens:[
+    {tec:'Ritual de desaceleração', freq:'diariamente'},
+    {tec:'Higiene da luz', freq:'diariamente'}
+  ]},
+  'Dificuldades moderadas de sono':{grupo:'sono', itens:[
+    {tec:'Ritual de desaceleração', freq:'diariamente'},
+    {tec:'Higiene da luz', freq:'diariamente'},
+    {tec:'Horário regular de sono', freq:'todos os dias, mesmo fins de semana'}
+  ]},
+  'Dificuldades graves de sono':   {grupo:'sono', itens:[
+    {tec:'Ritual de desaceleração', freq:'diariamente'},
+    {tec:'Higiene da luz', freq:'diariamente'},
+    {tec:'Horário regular de sono', freq:'todos os dias'},
+    {tec:'Relaxamento muscular progressivo', freq:'antes de dormir'}
+  ]}
+}
+
+// Mapeamento GAD-7 e ansiedade DASS por score numérico
+function sugestoesPorScore(instrumento, pontuacao, classificacao){
+  if(instrumento==='GAD-7'){
+    if(pontuacao>=15) return [{tec:'Técnica 4-7-8', freq:'3× ao dia ou em momentos de crise'},{tec:'Técnica 5-4-3-2-1', freq:'em momentos de crise'},{tec:'Relaxamento muscular progressivo', freq:'2× ao dia'}]
+    if(pontuacao>=10) return [{tec:'Técnica 4-7-8', freq:'2× ao dia'},{tec:'Relaxamento muscular progressivo', freq:'2× ao dia'}]
+    if(pontuacao>=5)  return [{tec:'Respiração diafragmática', freq:'1× ao dia'},{tec:'Atenção plena (mindfulness)', freq:'1× ao dia'}]
+    return []
+  }
+  if(instrumento==='PHQ-9'){
+    if(pontuacao>=15) return [{tec:'Registro de pensamentos automáticos', freq:'diariamente'},{tec:'Ativação comportamental', freq:'diariamente, 2× ao dia se possível'}]
+    if(pontuacao>=10) return [{tec:'Ativação comportamental', freq:'diariamente'},{tec:'Registro de pensamentos automáticos', freq:'diariamente'}]
+    if(pontuacao>=5)  return [{tec:'Ativação comportamental', freq:'3× por semana'},{tec:'Higiene do sono', freq:'diariamente'}]
+    return []
+  }
+  // DASS-21: usa classificação já calculada
+  const m=SUGESTOES_MAP[classificacao]
+  return m?m.itens:[]
+}
+
+function renderSugestoes(data){
+  const bloco=document.getElementById('sugestoes-bloco')
+  const conteudo=document.getElementById('sugestoes-conteudo')
+  if(!bloco||!conteudo)return
+  // Pega o resultado mais recente de cada instrumento
+  const ultimos={}
+  ;[...data].reverse().forEach(r=>{
+    const k=(r.teste.split('—')[0].trim()).replace('PSQI-BR','MSQ-BR')
+    if(!ultimos[k])ultimos[k]=r
+  })
+  // Gera sugestões para cada instrumento
+  const blocos=[]
+  const nomeAmigavel={'PHQ-9':'Humor e disposição','GAD-7':'Ansiedade','DASS-21':'Bem-estar geral','MSQ-BR':'Qualidade do sono'}
+  Object.entries(ultimos).forEach(([instr,r])=>{
+    let itens=[]
+    if(instr==='MSQ-BR'){
+      const m=SUGESTOES_MAP[r.classificacao]
+      itens=m?m.itens:[]
+    } else if(instr==='DASS-21'){
+      // DASS-21: usa score total como proxy
+      const score=r.pontuacao||0
+      const maxDass=126
+      if(score>=maxDass*0.6)itens=[
+        {tec:'Registro de pensamentos automáticos',freq:'diariamente'},
+        {tec:'Relaxamento muscular progressivo',freq:'2× ao dia'},
+        {tec:'Técnica 4-7-8',freq:'2× ao dia'}
+      ]
+      else if(score>=maxDass*0.35)itens=[
+        {tec:'Ativação comportamental',freq:'diariamente'},
+        {tec:'Atenção plena (mindfulness)',freq:'1× ao dia'},
+        {tec:'Respiração diafragmática',freq:'2× ao dia'}
+      ]
+      else if(score>=maxDass*0.15)itens=[
+        {tec:'Respiração diafragmática',freq:'1× ao dia'},
+        {tec:'Atenção plena (mindfulness)',freq:'1× ao dia'}
+      ]
+      itens=sugestoesPorScore(instr,r.pontuacao,r.classificacao)
+    }
+    if(itens&&itens.length>0){
+      blocos.push({label:nomeAmigavel[instr]||instr, itens})
+    }
+  })
+
+  if(!blocos.length){bloco.style.display='none';return}
+  bloco.style.display='block'
+
+  const deduplicados={}
+  blocos.forEach(b=>b.itens.forEach(i=>{
+    if(!deduplicados[i.tec]||i.freq.includes('diariamente')||i.freq.includes('2×')||i.freq.includes('3×'))
+      deduplicados[i.tec]=i.freq
+  }))
+
+  // Gera texto corrido e acolhedor
+  const entradas=Object.entries(deduplicados)
+  let textoTecs=''
+  if(entradas.length===1){
+    textoTecs=`<strong style="font-weight:500;color:var(--navy)">${entradas[0][0]}</strong> (${entradas[0][1]})`
+  } else if(entradas.length===2){
+    textoTecs=`<strong style="font-weight:500;color:var(--navy)">${entradas[0][0]}</strong> (${entradas[0][1]}) e <strong style="font-weight:500;color:var(--navy)">${entradas[1][0]}</strong> (${entradas[1][1]})`
+  } else {
+    const meio=entradas.slice(0,-1).map(([t,f])=>`<strong style="font-weight:500;color:var(--navy)">${t}</strong> (${f})`).join(', ')
+    const ultimo=entradas[entradas.length-1]
+    textoTecs=`${meio} e <strong style="font-weight:500;color:var(--navy)">${ultimo[0]}</strong> (${ultimo[1]})`
+  }
+
+  conteudo.innerHTML=`<p style="font-size:0.78rem;font-weight:300;color:var(--navy-light);line-height:1.85">
+    Com base no seu último registro de autoavaliação, algumas práticas podem ser especialmente benéficas para você neste momento. Que tal dedicar um tempo para ${textoTecs}? Todas essas práticas estão disponíveis aqui na Home, sempre que você precisar. As sugestões são atualizadas automaticamente sempre que você realizar uma nova autoavaliação.
+  </p>`
 }
 
 function renderGraficos(data){
@@ -1474,7 +1606,7 @@ function renderPergunta(){
   opcAtual.forEach((o,i)=>{const d=document.createElement('div');d.className='test-option'+(respostas[perguntaAtual]===i?' selected':'');d.textContent=o;d.onclick=()=>{document.querySelectorAll('.test-option').forEach(x=>x.classList.remove('selected'));d.classList.add('selected');respostas[perguntaAtual]=i};opc.appendChild(d)})
   document.getElementById('btn-avancar').textContent=perguntaAtual===total-1?'Finalizar ✓':'Próxima →'
 }
-function voltarPergunta(){if(perguntaAtual>0){perguntaAtual--;renderPergunta()}else irPara('dashboard')}
+function voltarPergunta(){if(perguntaAtual>0){perguntaAtual--;renderPergunta()}else irPara('autoavaliacao')}
 async function avancarPergunta(){
   if(respostas[perguntaAtual]===undefined){alert('Selecione uma opção para continuar.');return}
   const t=testes[testeAtual]
