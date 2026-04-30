@@ -1298,27 +1298,27 @@ async function carregarDashboard(){
   const sessoesRealizadas=(sessoesData||[]).length+(user.sessoes_anteriores||0)
   renderStats(resultados,sessoesRealizadas)
   renderSugestoes(resultados)
-  // Injeta conteúdo das técnicas na home (uma vez)
-  // Clonamos os filhos internos do page-tecnicas para evitar herdar CSS do .page
+  // Injeta técnicas na home via innerHTML (sem cloneNode — evita estado residual)
   if(!document.getElementById('tecnicas-na-home')){
     const tecSrc=document.getElementById('page-tecnicas')
     const homeDash=document.getElementById('page-dashboard')
     if(tecSrc&&homeDash){
       const wrapper=document.createElement('div')
       wrapper.id='tecnicas-na-home'
+      // Serializa para string e remove qualquer classe 'open' antes de injetar
+      let html=tecSrc.innerHTML
+        .replace(/class="tecnica-card open"/g,'class="tecnica-card"')
+        .replace(/class="tecnica-card open /g,'class="tecnica-card ')
+      // Remove h1.page-title e p.page-sub do HTML injetado
+      const tmp=document.createElement('div')
+      tmp.innerHTML=html
+      tmp.querySelectorAll('.page-title,.page-sub').forEach(el=>el.remove())
       const eyebrow=document.createElement('div')
       eyebrow.className='section-eyebrow'
       eyebrow.style.marginTop='1.5rem'
       eyebrow.textContent='Técnicas e ferramentas'
       wrapper.appendChild(eyebrow)
-      // Clona cada filho do page-tecnicas individualmente (exceto título e subtítulo)
-      Array.from(tecSrc.children).forEach(child=>{
-        if(child.classList.contains('page-title')||child.classList.contains('page-sub'))return
-        const cloned=child.cloneNode(true)
-        // Garantir que todos os cards do clone começam fechados
-        cloned.querySelectorAll('.tecnica-card.open').forEach(c=>c.classList.remove('open'))
-        wrapper.appendChild(cloned)
-      })
+      wrapper.innerHTML+=tmp.innerHTML
       homeDash.appendChild(wrapper)
     }
   }
