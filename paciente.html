@@ -1400,7 +1400,7 @@ const SUGESTOES_MAP = {
     {tec:'Técnica 4-7-8', freq:'sempre que sentir tensão'}
   ]},
   // MSQ sono
-  'Boa qualidade de sono':         {grupo:'sono', itens:[]},
+  'Boa qualidade de sono':         {grupo:'sono', itens:[{tec:'Ritual de desaceleração', freq:'diariamente, para manter a boa qualidade do sono'}]},
   'Dificuldades leves de sono':    {grupo:'sono', itens:[
     {tec:'Ritual de desaceleração', freq:'diariamente'},
     {tec:'Higiene da luz', freq:'diariamente'}
@@ -1424,17 +1424,19 @@ function sugestoesPorScore(instrumento, pontuacao, classificacao){
     if(pontuacao>=15) return [{tec:'Técnica 4-7-8', freq:'3× ao dia ou em momentos de crise'},{tec:'Técnica 5-4-3-2-1', freq:'em momentos de crise'},{tec:'Relaxamento muscular progressivo', freq:'2× ao dia'}]
     if(pontuacao>=10) return [{tec:'Técnica 4-7-8', freq:'2× ao dia'},{tec:'Relaxamento muscular progressivo', freq:'2× ao dia'}]
     if(pontuacao>=5)  return [{tec:'Respiração diafragmática', freq:'1× ao dia'},{tec:'Atenção plena (mindfulness)', freq:'1× ao dia'}]
-    return []
+    // Score mínimo: manutenção
+    return [{tec:'Atenção plena (mindfulness)', freq:'algumas vezes por semana, para manter o bem-estar'}]
   }
   if(instrumento==='PHQ-9'){
     if(pontuacao>=15) return [{tec:'Registro de pensamentos automáticos', freq:'diariamente'},{tec:'Ativação comportamental', freq:'diariamente, 2× ao dia se possível'}]
     if(pontuacao>=10) return [{tec:'Ativação comportamental', freq:'diariamente'},{tec:'Registro de pensamentos automáticos', freq:'diariamente'}]
     if(pontuacao>=5)  return [{tec:'Ativação comportamental', freq:'3× por semana'},{tec:'Higiene do sono', freq:'diariamente'}]
-    return []
+    // Score mínimo: manutenção
+    return [{tec:'Higiene do sono', freq:'diariamente, como hábito de manutenção'}]
   }
-  // DASS-21: usa classificação já calculada
+  // DASS-21 e outros: usa classificação
   const m=SUGESTOES_MAP[classificacao]
-  return m?m.itens:[]
+  return m?m.itens:[{tec:'Atenção plena (mindfulness)', freq:'algumas vezes por semana'}]
 }
 
 function renderSugestoes(data){
@@ -1623,6 +1625,10 @@ async function calcularResultado(){
   document.getElementById('result-class').innerHTML=`<span style="color:${resultado.cor};font-weight:500">${resultado.label}</span>`
   document.getElementById('result-desc').textContent=resultado.desc
   irPara('result')
+  // Atualiza sugestões na home em background
+  sb.from('resultados').select('*').eq('paciente_id',user.id).order('criado_em',{ascending:false}).then(({data})=>{
+    if(data)renderSugestoes(data)
+  })
 }
 
 async function salvarCadastro(){
