@@ -2254,7 +2254,7 @@ async function carregarDashboardPsi(){
     const k=r.teste.split('—')[0].trim()
     if(!ultimoPorPac[r.paciente_id].find(x=>x.k===k))ultimoPorPac[r.paciente_id].push({k,c:r.classificacao})
   })
-  let atencao=0,risco=0
+  const nomesAtencao=[],nomesRisco=[]
   pacList.forEach(p=>{
     const ults=ultimoPorPac[p.id]||[]
     if(!ults.length)return
@@ -2263,9 +2263,11 @@ async function carregarDashboardPsi(){
       if(c.includes('Grave')||c.includes('grave')){nivel='vermelho'}
       else if(nivel!=='vermelho'&&(c.includes('Moderada')||c.includes('Moderado')||c.includes('Leve')||c.includes('leve')||c.includes('Dificuldades moderadas')||c.includes('Dificuldades graves'))){nivel='amarelo'}
     })
-    if(nivel==='vermelho')risco++
-    else if(nivel==='amarelo')atencao++
+    const nome=(p.nome||p.email||'').split(' ')[0]
+    if(nivel==='vermelho')nomesRisco.push(nome)
+    else if(nivel==='amarelo')nomesAtencao.push(nome)
   })
+  const atencao=nomesAtencao.length,risco=nomesRisco.length
 
   const dash=document.getElementById('page-dashboard')
   dash.innerHTML=`
