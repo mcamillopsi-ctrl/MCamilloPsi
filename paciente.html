@@ -1622,7 +1622,7 @@ async function carregarDashboard(){
     const btn=document.createElement('button')
     btn.className='btn-ver-tec'
     btn.textContent='Ver técnica →'
-    btn.onclick=function(e){e.stopPropagation();abrirDetalheTec(card)}
+    btn.setAttribute('onclick','event.stopPropagation();abrirDetalheTec(this.parentElement)')
     card.appendChild(btn)
   })
 }
