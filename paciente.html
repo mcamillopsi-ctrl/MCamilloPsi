@@ -214,6 +214,20 @@
     .tec-categoria{font-size:0.62rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);margin:1.75rem 0 0.65rem;display:inline-block;background:var(--cream);padding:0.25rem 0.65rem;border-radius:20px}
     .tec-lista{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0.65rem}
     .lembrete-aviso{font-size:0.7rem;font-weight:500;color:var(--red);margin-top:0.3rem;line-height:1.5}
+    /* Cards de técnica na Home: estáticos, sem expansão */
+    #tecnicas-na-home .tecnica-card{cursor:default}
+    #tecnicas-na-home .tecnica-card:hover{border-color:var(--border);box-shadow:none}
+    #tecnicas-na-home .tecnica-arrow{display:none!important}
+    #tecnicas-na-home .tecnica-expanded{display:none!important}
+    /* Botão Ver técnica */
+    .btn-ver-tec{display:inline-block;margin-top:0.65rem;font-size:0.6rem;font-weight:500;letter-spacing:0.07em;text-transform:uppercase;color:var(--text-muted);cursor:pointer;background:rgba(138,154,181,0.13);border:none;padding:0.2rem 0.65rem;border-radius:20px;transition:background 0.15s}
+    .btn-ver-tec:hover{background:rgba(138,154,181,0.25);color:var(--navy)}
+    /* Overlay de detalhe */
+    .tec-detalhe-overlay{display:none;position:fixed;inset:0;background:rgba(13,31,60,0.5);z-index:500;align-items:flex-start;justify-content:center;padding:2rem 1rem;overflow-y:auto}
+    .tec-detalhe-overlay.active{display:flex}
+    .tec-detalhe-box{background:var(--cream);border-radius:12px;width:100%;max-width:560px;padding:2rem;position:relative;margin:auto}
+    .tec-detalhe-fechar{position:absolute;top:1rem;right:1rem;background:none;border:none;cursor:pointer;font-size:1.1rem;color:var(--text-muted)}
+    .tec-detalhe-fechar:hover{color:var(--navy)}
 
 
     /* ══ REDE ══ */
@@ -1396,8 +1410,7 @@ function abrirDetalheTec(card){
   document.body.style.overflow='hidden'
 }
 
-function fecharDetalheTec(e){
-  if(e&&e.type==='click'&&e.target!==document.getElementById('tec-detalhe-overlay'))return
+function fecharDetalheTec(){
   document.getElementById('tec-detalhe-overlay').classList.remove('active')
   document.body.style.overflow=''
 }
