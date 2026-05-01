@@ -2235,6 +2235,9 @@ async function mudarStatusSessao(sessaoId,pacienteId,novoStatus){
 let psiGraficos={}
 
 async function carregarDashboardPsi(){
+  // Limpa o conteúdo do dashboard imediatamente (remove técnicas embutidas e conteúdo paciente)
+  ;(()=>{const d=document.getElementById('page-dashboard');if(d)d.innerHTML='<div style="font-size:0.75rem;font-weight:300;color:var(--text-muted);padding:2rem 0">Carregando...</div>'})()
+
   const [{data:pacs},{data:todasSessoes},{data:todosResultados}]=await Promise.all([
     sb.from('pacientes').select('*').neq('email',EMAIL_PSI).order('nome'),
     sb.from('sessoes').select('*').eq('status','agendada'),
