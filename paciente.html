@@ -2279,14 +2279,20 @@ async function carregarDashboardPsi(){
       </div>
       <div class="stat-card" style="display:flex;flex-direction:column;justify-content:center;border-top-color:var(--red)">
         <div class="stat-lbl" style="margin-bottom:0.65rem">Farol de Cuidado</div>
-        <div style="display:flex;flex-direction:column;gap:0.4rem">
-          <div style="display:flex;align-items:center;gap:0.5rem">
-            <div style="width:9px;height:9px;border-radius:50%;background:var(--yellow);flex-shrink:0"></div>
-            <span style="font-size:0.75rem;font-weight:500;color:var(--text)">${atencao} em atenção mediana</span>
+          <div style="display:flex;flex-direction:column;gap:0.55rem">
+          <div style="display:flex;align-items:flex-start;gap:0.5rem">
+            <div style="width:9px;height:9px;border-radius:50%;background:var(--yellow);flex-shrink:0;margin-top:3px"></div>
+            <div>
+              <span style="font-size:0.72rem;font-weight:500;color:var(--text)">${atencao} em atenção mediana</span>
+              ${nomesAtencao.length?`<div style="font-size:0.65rem;font-weight:300;color:var(--text-muted);margin-top:0.15rem">${nomesAtencao.join(', ')}</div>`:''}
+            </div>
           </div>
-          <div style="display:flex;align-items:center;gap:0.5rem">
-            <div style="width:9px;height:9px;border-radius:50%;background:var(--red);flex-shrink:0"></div>
-            <span style="font-size:0.75rem;font-weight:500;color:var(--text)">${risco} em maior risco</span>
+          <div style="display:flex;align-items:flex-start;gap:0.5rem">
+            <div style="width:9px;height:9px;border-radius:50%;background:var(--red);flex-shrink:0;margin-top:3px"></div>
+            <div>
+              <span style="font-size:0.72rem;font-weight:500;color:var(--text)">${risco} em maior risco</span>
+              ${nomesRisco.length?`<div style="font-size:0.65rem;font-weight:300;color:var(--text-muted);margin-top:0.15rem">${nomesRisco.join(', ')}</div>`:''}
+            </div>
           </div>
           ${(!atencao&&!risco&&pacList.length)?'<div style="font-size:0.72rem;font-weight:300;color:var(--text-muted)">Aguardando testes</div>':''}
         </div>
@@ -2303,16 +2309,12 @@ async function carregarDashboardPsi(){
     </div>
 
     <div class="section-eyebrow">Testes psicométricos</div>
-    <div class="chart-card" style="margin-bottom:1rem">
-      <div class="chart-card-sub" id="psi-psico-sub" style="font-size:0.68rem;font-weight:300;color:var(--text-muted);margin-bottom:1rem">PHQ-9 · GAD-7 · DASS-21 — última pontuação por paciente (normalizada 0–100%)</div>
-      <canvas id="canvas-psi-psico" style="max-height:240px"></canvas>
-    </div>
-
-    <div class="section-eyebrow">Qualidade do sono (MSQ-BR)</div>
-    <div class="chart-card" style="margin-bottom:1.5rem">
-      <div class="chart-card-sub" id="psi-sono-sub" style="font-size:0.68rem;font-weight:300;color:var(--text-muted);margin-bottom:1rem">Escala 10–70 · Linha tracejada = limiar clínico (25)</div>
-      <canvas id="canvas-psi-sono" style="max-height:200px"></canvas>
-    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem">
+      <div class="chart-card"><div style="font-size:0.72rem;font-weight:600;color:var(--navy);margin-bottom:0.2rem">PHQ-9 — Sintomas depressivos</div><div style="font-size:0.63rem;font-weight:300;color:var(--text-muted);margin-bottom:0.75rem">Escala 0–27 · Corte moderado: 10</div><canvas id="canvas-psi-phq9" style="max-height:200px"></canvas></div>
+      <div class="chart-card"><div style="font-size:0.72rem;font-weight:600;color:var(--navy);margin-bottom:0.2rem">GAD-7 — Sintomas de ansiedade</div><div style="font-size:0.63rem;font-weight:300;color:var(--text-muted);margin-bottom:0.75rem">Escala 0–21 · Corte moderado: 10</div><canvas id="canvas-psi-gad7" style="max-height:200px"></canvas></div>
+      <div class="chart-card"><div style="font-size:0.72rem;font-weight:600;color:var(--navy);margin-bottom:0.2rem">DASS-21 — Humor, ansiedade e estresse</div><div style="font-size:0.63rem;font-weight:300;color:var(--text-muted);margin-bottom:0.75rem">Escala 0–126 · Corte moderado: 28</div><canvas id="canvas-psi-dass21" style="max-height:200px"></canvas></div>
+      <div class="chart-card"><div style="font-size:0.72rem;font-weight:600;color:var(--navy);margin-bottom:0.2rem">MSQ-BR — Qualidade do sono</div><div style="font-size:0.63rem;font-weight:300;color:var(--text-muted);margin-bottom:0.75rem">Escala 10–70 · Limiar clínico: 25</div><canvas id="canvas-psi-msq" style="max-height:200px"></canvas></div>
+    </div></div>
 
     <div class="section-eyebrow">Visão geral por paciente</div>
     <div class="history-card">
@@ -2341,69 +2343,35 @@ function aplicarFiltroPsi(){
 function renderPsiGraficos(pacList,resultados,filtroId){
   Object.values(psiGraficos).forEach(g=>{try{g.destroy()}catch(e){}})
   psiGraficos={}
-  const cPsico=document.getElementById('canvas-psi-psico')
-  const cSono=document.getElementById('canvas-psi-sono')
-  if(!cPsico||!cSono)return
-
-  const TESTS=['PHQ-9','GAD-7','DASS-21']
-  const MAX={'PHQ-9':27,'GAD-7':21,'DASS-21':126}
-  const CORES=['#b8974a','#0d1f3c','#2d7a4f','#7a4ab8','#4ab8a8','#b84a7a','#4a74b8','#b8714a']
-  const annoLimiarSono={ref0:{type:'line',yMin:25,yMax:25,borderColor:'rgba(163,45,45,0.45)',borderWidth:1.5,borderDash:[4,5],label:{display:true,content:'Limiar (25)',position:'end',font:{family:'Sora',size:9},color:'#8a9ab5',backgroundColor:'transparent'}}}
-
-  if(filtroId){
-    // Paciente específico: linha por teste
-    const subPsico=document.getElementById('psi-psico-sub')
-    if(subPsico)subPsico.textContent='Evolução ao longo do tempo'
-    const subSono=document.getElementById('psi-sono-sub')
-    if(subSono)subSono.textContent='Evolução da qualidade do sono ao longo do tempo — escala 0–27'
-
-    const porTeste={}
-    resultados.forEach(r=>{
-      const k=(r.teste.split('—')[0].trim()).replace('PSQI-BR','MSQ-BR')
-      if(!TESTS.includes(k))return
-      if(!porTeste[k])porTeste[k]=[]
-      porTeste[k].push({x:fmt(r.criado_em),y:r.pontuacao})
-    })
-    const datasets=Object.keys(porTeste).map((k,i)=>({label:k,data:porTeste[k],borderColor:CORES[i],backgroundColor:'transparent',tension:0.3,pointRadius:4,borderWidth:2}))
-    if(datasets.length){
-      psiGraficos['psico']=new Chart(cPsico,{type:'line',data:{datasets},options:{responsive:true,interaction:{mode:'nearest',intersect:false},plugins:{legend:{labels:{font:{family:'Sora',size:10}}},annotation:{}},scales:{x:{ticks:{font:{family:'Sora',size:10}}},y:{beginAtZero:true,ticks:{font:{family:'Sora',size:10}},grid:{color:'rgba(194,205,224,0.3)'}}}}})
-    }else{
-      cPsico.parentElement.insertAdjacentHTML('beforeend','<div class="empty-state" style="padding:1.5rem 0 0.5rem">Nenhum teste psicométrico realizado.</div>')
-    }
-
-    const msqPts=resultados.filter(r=>r.teste.includes('MSQ')||r.teste.includes('PSQI')).map(r=>({x:fmt(r.criado_em),y:r.pontuacao}))
-    if(msqPts.length){
-      psiGraficos['sono']=new Chart(cSono,{type:'line',data:{datasets:[{label:'MSQ-BR',data:msqPts,borderColor:'#5b8fc9',backgroundColor:'transparent',tension:0.3,pointRadius:4,borderWidth:2,pointBackgroundColor:'#5b8fc9'}]},options:{responsive:true,interaction:{mode:'nearest',intersect:false},plugins:{legend:{display:false},annotation:{annotations:annoLimiarSono}},scales:{x:{ticks:{font:{family:'Sora',size:10}}},y:{min:10,max:40,ticks:{font:{family:'Sora',size:10}},grid:{color:'rgba(194,205,224,0.3)'}}}}})
-    }else{
-      cSono.parentElement.insertAdjacentHTML('beforeend','<div class="empty-state" style="padding:1.5rem 0 0.5rem">Nenhum MSQ realizado.</div>')
-    }
-
-  }else{
-    // Todos: barra agrupada (normalizada) para psicométricos
-    const nomeCurto=p=>(p.nome||p.email||'').split(' ')[0]
-    const ultPacTeste={}
-    ;[...resultados].reverse().forEach(r=>{
-      const k=(r.teste.split('—')[0].trim()).replace('PSQI-BR','MSQ-BR')
-      if(!TESTS.includes(k))return
-      const key=r.paciente_id+'|'+k
-      if(!(key in ultPacTeste))ultPacTeste[key]=r.pontuacao
-    })
-    const datasetsBar=TESTS.map((t,i)=>({
-      label:t,
-      data:pacList.map(p=>{const v=ultPacTeste[p.id+'|'+t];return v!==undefined?Math.round(v/MAX[t]*100):null}),
-      backgroundColor:CORES[i]+'bb',borderColor:CORES[i],borderWidth:1,borderRadius:4
-    }))
-    psiGraficos['psico']=new Chart(cPsico,{type:'bar',data:{labels:pacList.map(nomeCurto),datasets:datasetsBar},options:{responsive:true,plugins:{legend:{labels:{font:{family:'Sora',size:10}}},tooltip:{callbacks:{label:i=>`${i.dataset.label}: ${i.parsed.y}%`}}},scales:{x:{ticks:{font:{family:'Sora',size:10}}},y:{beginAtZero:true,max:100,ticks:{font:{family:'Sora',size:10},callback:v=>v+'%'},grid:{color:'rgba(194,205,224,0.3)'}}}}})
-
-    // MSQ barra simples
-    const ultMsq={}
-    ;[...resultados].reverse().forEach(r=>{if((r.teste.includes('MSQ')||r.teste.includes('PSQI'))&&!(r.paciente_id in ultMsq))ultMsq[r.paciente_id]=r.pontuacao})
-    const msqVals=pacList.map(p=>ultMsq[p.id]!==undefined?ultMsq[p.id]:null)
-    const msqColors=msqVals.map(v=>v===null?'rgba(194,205,224,0.5)':v>24?'rgba(163,45,45,0.7)':'rgba(45,122,79,0.7)')
-    psiGraficos['sono']=new Chart(cSono,{type:'bar',data:{labels:pacList.map(nomeCurto),datasets:[{label:'MSQ-BR',data:msqVals,backgroundColor:msqColors,borderWidth:0,borderRadius:4}]},options:{responsive:true,plugins:{legend:{display:false},annotation:{annotations:annoLimiarSono},tooltip:{callbacks:{label:i=>i.parsed.y===null?'Sem dados':`MSQ: ${i.parsed.y} — ${i.parsed.y>24?'Sono comprometido':'Boa qualidade'}`}}},scales:{x:{ticks:{font:{family:'Sora',size:10}}},y:{min:10,max:40,ticks:{font:{family:'Sora',size:10}},grid:{color:'rgba(194,205,224,0.3)'}}}}})
+  const CONFIGS={
+    'PHQ-9': {id:'canvas-psi-phq9',cor:'#b8974a',max:27,min:0,cortes:[{y:5,label:'Leve',p:'start'},{y:10,label:'Moderado',p:'center'},{y:15,label:'Grave',p:'end'}]},
+    'GAD-7': {id:'canvas-psi-gad7',cor:'#2a4a73',max:21,min:0,cortes:[{y:5,label:'Leve',p:'start'},{y:10,label:'Moderado',p:'center'},{y:15,label:'Grave',p:'end'}]},
+    'DASS-21':{id:'canvas-psi-dass21',cor:'#2d7a4f',max:126,min:0,cortes:[{y:14,label:'Leve',p:'start'},{y:28,label:'Moderado',p:'center'},{y:42,label:'Grave',p:'end'}]},
+    'MSQ-BR': {id:'canvas-psi-msq',cor:'#5b8fc9',max:40,min:10,cortes:[{y:25,label:'Dif. leve',p:'start'},{y:28,label:'Dif. mod.',p:'center'},{y:31,label:'Dif. grave',p:'end'}]}
   }
+  const nomeCurto=p=>(p.nome||p.email||'').split(' ')[0]
+  const makeAnno=cfg=>{const a={};cfg.cortes.forEach((c,i)=>{a['c'+i]={type:'line',yMin:c.y,yMax:c.y,borderColor:'rgba(163,45,45,0.5)',borderWidth:1.5,borderDash:[5,4],label:{display:true,content:c.label,position:c.p,font:{family:'Sora',size:9,weight:'600'},color:'#0d1f3c',backgroundColor:'rgba(255,255,255,0.92)',padding:{x:5,y:3},borderRadius:3}}});return a}
+  const scaleOpts=cfg=>({x:{ticks:{font:{family:'Sora',size:10}}},y:{min:cfg.min,max:cfg.max,ticks:{font:{family:'Sora',size:10}},grid:{color:'rgba(194,205,224,0.3)'}}})
+  Object.entries(CONFIGS).forEach(([teste,cfg])=>{
+    const canvas=document.getElementById(cfg.id)
+    if(!canvas)return
+    const annotations=makeAnno(cfg)
+    if(filtroId){
+      const pts=resultados.filter(r=>(r.teste.split('—')[0].trim()).replace('PSQI-BR','MSQ-BR')===teste).map(r=>({x:fmt(r.criado_em),y:r.pontuacao}))
+      if(pts.length){
+        psiGraficos[teste]=new Chart(canvas,{type:'line',data:{datasets:[{label:teste,data:pts,borderColor:cfg.cor,backgroundColor:'transparent',tension:0.3,pointRadius:4,borderWidth:2}]},options:{responsive:true,interaction:{mode:'nearest',intersect:false},plugins:{legend:{display:false},annotation:{annotations}},scales:scaleOpts(cfg)}})
+      }else{
+        canvas.parentElement.insertAdjacentHTML('beforeend','<div style="font-size:0.72rem;color:var(--text-muted);padding:0.75rem 0">Sem dados.</div>')
+      }
+    }else{
+      const ultPac={}
+      ;[...resultados].reverse().forEach(r=>{const k=(r.teste.split('—')[0].trim()).replace('PSQI-BR','MSQ-BR');if(k===teste&&!(r.paciente_id in ultPac))ultPac[r.paciente_id]=r.pontuacao})
+      const vals=pacList.map(p=>ultPac[p.id]!==undefined?ultPac[p.id]:null)
+      const colors=vals.map(v=>v===null?'rgba(194,205,224,0.4)':cfg.cor+'cc')
+      psiGraficos[teste]=new Chart(canvas,{type:'bar',data:{labels:pacList.map(nomeCurto),datasets:[{label:teste,data:vals,backgroundColor:colors,borderWidth:0,borderRadius:4}]},options:{responsive:true,plugins:{legend:{display:false},annotation:{annotations},tooltip:{callbacks:{label:i=>i.parsed.y===null?'Sem dados':`${teste}: ${i.parsed.y}`}}},scales:scaleOpts(cfg)}})
+    }
+  })
 }
-
 function renderPsiTabela(resultados){
   const tbody=document.getElementById('psi-tabela-body')
   if(!tbody)return
