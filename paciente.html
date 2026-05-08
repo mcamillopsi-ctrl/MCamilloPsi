@@ -290,6 +290,28 @@
     .psi-edit-row input:focus{border-color:var(--gold)}
     .btn-save-psi{font-size:0.65rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:0.42rem 1rem;background:var(--navy);color:var(--white);border:none;border-radius:5px;cursor:pointer}
 
+    /* ══ RPD ══ */
+    #page-rpd{max-width:600px}
+    .rpd-step-label{font-size:0.6rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);margin-bottom:0.4rem}
+    .rpd-step-title{font-size:1rem;font-weight:400;color:var(--navy);line-height:1.45;margin-bottom:0.4rem}
+    .rpd-step-hint{font-size:0.73rem;font-weight:300;color:var(--text-muted);line-height:1.7;margin-bottom:1rem;background:var(--gold-pale);border-left:2px solid var(--gold);padding:0.55rem 0.85rem;border-radius:0 5px 5px 0}
+    .rpd-textarea{width:100%;min-height:90px;padding:0.75rem 0.9rem;border:1px solid var(--border);border-radius:6px;font-family:'Sora',sans-serif;font-size:0.82rem;font-weight:300;color:var(--text);background:var(--white);resize:vertical;outline:none;transition:border-color 0.15s;line-height:1.7}
+    .rpd-textarea:focus{border-color:var(--gold)}
+    .rpd-slider-wrap{margin-top:0.75rem}
+    .rpd-slider-lbl{display:flex;justify-content:space-between;font-size:0.65rem;font-weight:400;color:var(--text-muted);margin-bottom:0.35rem}
+    .rpd-slider{width:100%;accent-color:var(--gold);cursor:pointer}
+    .rpd-slider-val{text-align:center;font-family:'DM Sans',sans-serif;font-size:1.4rem;font-weight:300;color:var(--navy);margin-top:0.3rem}
+    .rpd-progress{height:2px;background:var(--border);border-radius:2px;margin-bottom:0.5rem}
+    .rpd-progress-bar{height:100%;background:var(--gold);border-radius:2px;transition:width 0.3s}
+    .rpd-counter{font-size:0.68rem;font-weight:300;color:var(--text-muted);margin-bottom:1.5rem}
+    .rpd-result-card{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:1.25rem;margin-bottom:0.85rem}
+    .rpd-result-label{font-size:0.58rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:0.35rem}
+    .rpd-result-text{font-size:0.8rem;font-weight:300;color:var(--text);line-height:1.7}
+    .rpd-delta{display:flex;align-items:center;gap:1rem;padding:1rem 1.25rem;background:var(--cream);border-radius:8px;border:1px solid var(--border);margin-bottom:1rem}
+    .rpd-delta-num{font-family:'DM Sans',sans-serif;font-size:1.8rem;font-weight:300;color:var(--navy);line-height:1}
+    .rpd-delta-lbl{font-size:0.65rem;font-weight:400;color:var(--text-muted);margin-top:0.15rem}
+    .rpd-enc{font-size:0.78rem;font-weight:300;color:var(--navy-light);line-height:1.85;background:var(--white);border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:1.1rem 1.25rem;margin-bottom:1.5rem}
+
     @media(max-width:768px){
       .sidebar{display:none}
       .topnav{padding:0 1rem}
@@ -839,6 +861,51 @@ Não é necessário anotar — o simples ato de pausar e perguntar já é sufici
               <div class="test-lembrete" id="lembrete-msq"></div>
               <button class="btn-test">Fazer teste</button>
             </div>
+          </div>
+
+          <div class="section-eyebrow" style="margin-top:1.75rem">Ferramentas terapêuticas</div>
+          <div class="tests-grid" style="grid-template-columns:repeat(3,1fr)">
+            <div class="test-card" onclick="iniciarRPD()" style="border-top:2px solid var(--navy-mid)">
+              <div class="test-name">Registro de Pensamentos Disfuncionais</div>
+              <div class="test-desc">Exercício da TCC para identificar pensamentos automáticos, questionar sua validade e construir uma perspectiva mais equilibrada.</div>
+              <div class="test-meta">7 etapas · ~10 min</div>
+              <div style="font-size:0.62rem;font-weight:500;letter-spacing:0.06em;color:var(--navy-light);margin-top:0.4rem">✎ Texto livre guiado</div>
+              <button class="btn-test" style="background:var(--navy-mid)">Iniciar exercício</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- RPD -->
+        <div class="page" id="page-rpd">
+          <p style="font-size:0.68rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem">RPD — Registro de Pensamentos Disfuncionais</p>
+          <div class="rpd-progress"><div class="rpd-progress-bar" id="rpd-barra"></div></div>
+          <span class="rpd-counter" id="rpd-contador"></span>
+          <div class="rpd-step-label" id="rpd-step-label"></div>
+          <div class="rpd-step-title" id="rpd-step-title"></div>
+          <div class="rpd-step-hint" id="rpd-step-hint"></div>
+          <div id="rpd-input-area"></div>
+          <div class="test-nav" style="margin-top:1.5rem">
+            <button class="btn-ghost" onclick="voltarRPD()">← Anterior</button>
+            <button class="btn-action" id="btn-rpd-avancar" onclick="avancarRPD()">Próxima →</button>
+          </div>
+        </div>
+
+        <!-- RPD RESULTADO -->
+        <div class="page" id="page-rpd-result">
+          <p style="font-size:0.68rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold)">RPD — Resultado</p>
+          <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;color:var(--navy);margin-top:0.2rem;margin-bottom:1.25rem">Seu registro</h2>
+          <div id="rpd-delta-bloco" class="rpd-delta" style="display:none">
+            <div><div class="rpd-delta-num" id="rpd-delta-ini">—</div><div class="rpd-delta-lbl">Intensidade inicial</div></div>
+            <div style="font-size:1.5rem;color:var(--text-muted)">→</div>
+            <div><div class="rpd-delta-num" id="rpd-delta-rev">—</div><div class="rpd-delta-lbl">Intensidade revisada</div></div>
+            <div style="font-size:1.5rem;color:var(--text-muted)">→</div>
+            <div><div class="rpd-delta-num" id="rpd-delta-var" style="color:var(--green)">—</div><div class="rpd-delta-lbl">Variação</div></div>
+          </div>
+          <div id="rpd-enc" class="rpd-enc" style="display:none"></div>
+          <div id="rpd-resumo"></div>
+          <div class="result-actions" style="margin-top:1.5rem">
+            <button class="btn-ghost" onclick="irPara('autoavaliacao')">Voltar</button>
+            <button class="btn-action" onclick="iniciarRPD()">Novo registro</button>
           </div>
         </div>
 
@@ -1438,6 +1505,7 @@ function irPara(pg){
     if(user&&user.email===EMAIL_PSI)carregarDashboardPsi();else carregarDashboard()
   }
   if(pg==='autoavaliacao'){carregarAutoavaliacao()}
+  if(pg==='rpd'&&rpdAtual===0)renderEtapaRPD()
   if(pg==='consultas')carregarConsultas()
   if(pg==='psi')carregarPainel()
   if(pg==='cadastro')document.getElementById('edit-nome').value=user.nome||''
@@ -1830,6 +1898,248 @@ function renderSugestoes(data){
   </p>`
 }
 
+// ══════════════════════════════════════════════════════════
+// RPD — Registro de Pensamentos Disfuncionais
+// ══════════════════════════════════════════════════════════
+const RPD_ETAPAS = [
+  {
+    label: 'Etapa 1 — Situação',
+    title: 'O que aconteceu?',
+    hint: 'Descreva brevemente a situação que gerou desconforto emocional. Quando foi? O que estava fazendo? Quem estava presente? Seja específico(a) — quanto mais concreto, mais útil o exercício.',
+    tipo: 'textarea',
+    campo: 'situacao'
+  },
+  {
+    label: 'Etapa 2 — Pensamento automático',
+    title: 'Qual foi o pensamento que surgiu?',
+    hint: 'Tente capturar o pensamento exato, como ele veio à mente — sem filtrar ou reformular. Exemplos: "Eu nunca faço nada certo", "Eles devem me achar incompetente", "Isso sempre acontece comigo".',
+    tipo: 'textarea',
+    campo: 'pensamento'
+  },
+  {
+    label: 'Etapa 3 — Emoção e intensidade',
+    title: 'Que emoção você sentiu? Com que intensidade?',
+    hint: 'Nomeie a emoção principal (ansiedade, tristeza, raiva, vergonha, medo...) e use o controle abaixo para indicar a intensidade que você sentiu naquele momento.',
+    tipo: 'emocao',
+    campo: 'emocao',
+    campointensidade: 'intensidade_inicial'
+  },
+  {
+    label: 'Etapa 4 — Evidências a favor',
+    title: 'O que apoia esse pensamento?',
+    hint: 'Liste os fatos concretos que sustentam esse pensamento como verdadeiro. Atenha-se a evidências objetivas — evite interpretações ou suposições.',
+    tipo: 'textarea',
+    campo: 'evidencias_favor'
+  },
+  {
+    label: 'Etapa 5 — Evidências contra',
+    title: 'O que contradiz esse pensamento?',
+    hint: 'Agora liste os fatos que vão na direção oposta. O que aconteceu de diferente antes? Existe alguma exceção? Como outra pessoa descreveria a mesma situação?',
+    tipo: 'textarea',
+    campo: 'evidencias_contra'
+  },
+  {
+    label: 'Etapa 6 — Pensamento alternativo',
+    title: 'Como você poderia encarar essa situação de forma mais equilibrada?',
+    hint: 'Com base nas evidências a favor e contra, tente formular um pensamento mais realista — não necessariamente positivo, mas equilibrado. Um pensamento que leve em conta toda a evidência disponível.',
+    tipo: 'textarea',
+    campo: 'pensamento_alternativo'
+  },
+  {
+    label: 'Etapa 7 — Emoção revisada',
+    title: 'Como você se sente agora, após esse exercício?',
+    hint: 'Nomeie a emoção que você sente agora e indique a intensidade. É normal que diminua — mas o importante é que seja honesto(a).',
+    tipo: 'emocao',
+    campo: 'emocao_revisada',
+    campointensidade: 'intensidade_revisada'
+  }
+]
+
+let rpdAtual = 0
+let rpdRespostas = {}
+
+function iniciarRPD(){
+  rpdAtual = 0
+  rpdRespostas = {}
+  irPara('rpd')
+  renderEtapaRPD()
+}
+
+function renderEtapaRPD(){
+  const total = RPD_ETAPAS.length
+  const etapa = RPD_ETAPAS[rpdAtual]
+  document.getElementById('rpd-barra').style.width = Math.round((rpdAtual/total)*100)+'%'
+  document.getElementById('rpd-contador').textContent = `Etapa ${rpdAtual+1} de ${total}`
+  document.getElementById('rpd-step-label').textContent = etapa.label
+  document.getElementById('rpd-step-title').textContent = etapa.title
+  document.getElementById('rpd-step-hint').textContent = etapa.hint
+  document.getElementById('btn-rpd-avancar').textContent = rpdAtual === total-1 ? 'Finalizar ✓' : 'Próxima →'
+
+  const area = document.getElementById('rpd-input-area')
+  const valAtual = rpdRespostas[etapa.campo] || ''
+
+  if(etapa.tipo === 'textarea'){
+    area.innerHTML = `<textarea class="rpd-textarea" id="rpd-field" placeholder="Escreva aqui...">${valAtual}</textarea>`
+    setTimeout(()=>{ const t=document.getElementById('rpd-field'); if(t)t.focus() }, 50)
+  } else {
+    // Emoção + slider
+    const intAtual = rpdRespostas[etapa.campointensidade] !== undefined ? rpdRespostas[etapa.campointensidade] : 50
+    area.innerHTML = `
+      <textarea class="rpd-textarea" id="rpd-field" placeholder="Nome da emoção (ex: ansiedade, tristeza, raiva...)" style="min-height:60px">${valAtual}</textarea>
+      <div class="rpd-slider-wrap">
+        <div class="rpd-slider-lbl"><span>Nenhuma (0%)</span><span>Máxima (100%)</span></div>
+        <input type="range" class="rpd-slider" id="rpd-slider" min="0" max="100" value="${intAtual}"
+          oninput="document.getElementById('rpd-slider-val').textContent=this.value+'%'">
+        <div class="rpd-slider-val" id="rpd-slider-val">${intAtual}%</div>
+      </div>`
+  }
+}
+
+function voltarRPD(){
+  if(rpdAtual > 0){
+    salvarCampoRPD()
+    rpdAtual--
+    renderEtapaRPD()
+  } else {
+    irPara('autoavaliacao')
+  }
+}
+
+function salvarCampoRPD(){
+  const etapa = RPD_ETAPAS[rpdAtual]
+  const field = document.getElementById('rpd-field')
+  if(field) rpdRespostas[etapa.campo] = field.value.trim()
+  if(etapa.tipo === 'emocao'){
+    const slider = document.getElementById('rpd-slider')
+    if(slider) rpdRespostas[etapa.campointensidade] = parseInt(slider.value)
+  }
+}
+
+async function avancarRPD(){
+  salvarCampoRPD()
+  const etapa = RPD_ETAPAS[rpdAtual]
+  // Validação mínima
+  if(!rpdRespostas[etapa.campo]){
+    alert('Por favor, preencha este campo para continuar.')
+    return
+  }
+  if(rpdAtual < RPD_ETAPAS.length - 1){
+    rpdAtual++
+    renderEtapaRPD()
+  } else {
+    await finalizarRPD()
+  }
+}
+
+async function finalizarRPD(){
+  irPara('rpd-result')
+
+  // Mostra variação emocional
+  const ini = rpdRespostas.intensidade_inicial
+  const rev = rpdRespostas.intensidade_revisada
+  if(ini !== undefined && rev !== undefined){
+    const variacao = ini - rev
+    document.getElementById('rpd-delta-ini').textContent = ini + '%'
+    document.getElementById('rpd-delta-rev').textContent = rev + '%'
+    const varEl = document.getElementById('rpd-delta-var')
+    varEl.textContent = (variacao >= 0 ? '-' : '+') + Math.abs(variacao) + '%'
+    varEl.style.color = variacao > 0 ? 'var(--green)' : variacao < 0 ? 'var(--red)' : 'var(--text-muted)'
+    document.getElementById('rpd-delta-bloco').style.display = 'flex'
+  }
+
+  // Resumo das etapas
+  const campos = [
+    {label:'Situação', campo:'situacao'},
+    {label:'Pensamento automático', campo:'pensamento'},
+    {label:'Emoção inicial', campo:'emocao', extra:'intensidade_inicial'},
+    {label:'Evidências a favor', campo:'evidencias_favor'},
+    {label:'Evidências contra', campo:'evidencias_contra'},
+    {label:'Pensamento alternativo', campo:'pensamento_alternativo'},
+    {label:'Emoção revisada', campo:'emocao_revisada', extra:'intensidade_revisada'}
+  ]
+  const resumoEl = document.getElementById('rpd-resumo')
+  resumoEl.innerHTML = campos.map(c=>{
+    const val = rpdRespostas[c.campo]||'—'
+    const extra = c.extra && rpdRespostas[c.extra] !== undefined ? ` (${rpdRespostas[c.extra]}%)` : ''
+    return `<div class="rpd-result-card">
+      <div class="rpd-result-label">${c.label}</div>
+      <div class="rpd-result-text">${val}${extra}</div>
+    </div>`
+  }).join('')
+
+  // Salvar no banco
+  let textoEnc = ''
+  try {
+    const {error} = await sb.from('rpd').insert({
+      paciente_id: user.id,
+      situacao: rpdRespostas.situacao||null,
+      pensamento: rpdRespostas.pensamento||null,
+      emocao: rpdRespostas.emocao||null,
+      intensidade_inicial: rpdRespostas.intensidade_inicial||null,
+      evidencias_favor: rpdRespostas.evidencias_favor||null,
+      evidencias_contra: rpdRespostas.evidencias_contra||null,
+      pensamento_alternativo: rpdRespostas.pensamento_alternativo||null,
+      emocao_revisada: rpdRespostas.emocao_revisada||null,
+      intensidade_revisada: rpdRespostas.intensidade_revisada||null
+    })
+    if(error) console.error('Erro ao salvar RPD:', error)
+  } catch(e){ console.error(e) }
+
+  // Gerar encerramento via Claude API
+  const encEl = document.getElementById('rpd-enc')
+  encEl.innerHTML = '<span style="font-size:0.72rem;color:var(--text-muted)">Gerando reflexão...</span>'
+  encEl.style.display = 'block'
+
+  try {
+    const variacao = (rpdRespostas.intensidade_inicial||0) - (rpdRespostas.intensidade_revisada||0)
+    const prompt = `Você é um assistente de apoio psicológico dentro de uma plataforma de psicoterapia. 
+Um paciente acabou de completar um Registro de Pensamentos Disfuncionais (RPD), exercício central da TCC.
+
+Dados do registro:
+- Situação: ${rpdRespostas.situacao||''}
+- Pensamento automático: ${rpdRespostas.pensamento||''}
+- Emoção inicial: ${rpdRespostas.emocao||''} (intensidade: ${rpdRespostas.intensidade_inicial||0}%)
+- Evidências a favor do pensamento: ${rpdRespostas.evidencias_favor||''}
+- Evidências contra o pensamento: ${rpdRespostas.evidencias_contra||''}
+- Pensamento alternativo: ${rpdRespostas.pensamento_alternativo||''}
+- Emoção revisada: ${rpdRespostas.emocao_revisada||''} (intensidade: ${rpdRespostas.intensidade_revisada||0}%)
+- Variação na intensidade emocional: ${variacao > 0 ? '-'+variacao : variacao < 0 ? '+'+Math.abs(variacao) : '0'}%
+
+Escreva um parágrafo curto (3-5 frases) de encerramento para esse exercício. 
+O tom deve ser acolhedor, empático e clínico — sem ser condescendente. 
+Destaque o que o paciente fez bem neste exercício, mencione brevemente o que a variação emocional indica, e reforce por que questionar pensamentos automáticos é valioso no processo terapêutico.
+Não use títulos, bullets ou formatação — apenas texto corrido.
+NÃO faça diagnósticos, NÃO substitua o psicólogo, NÃO use linguagem clínica excessiva.`
+
+    const resp = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        messages: [{role:'user', content: prompt}]
+      })
+    })
+    const dados = await resp.json()
+    textoEnc = dados.content?.[0]?.text || ''
+    if(textoEnc){
+      encEl.textContent = textoEnc
+      // Atualiza texto no banco
+      await sb.from('rpd')
+        .update({texto_encerramento: textoEnc})
+        .eq('paciente_id', user.id)
+        .order('criado_em', {ascending:false})
+        .limit(1)
+    } else {
+      encEl.style.display = 'none'
+    }
+  } catch(e){
+    console.error('Erro ao gerar encerramento:', e)
+    encEl.style.display = 'none'
+  }
+}
+
+
 function renderGraficos(data){
   const grid=document.getElementById('graficos-grid')
   if(!data.length){
@@ -2191,6 +2501,30 @@ async function verPaciente(p){
   </div>`
   if(!data||!data.length){html+=`<p style="font-size:0.75rem;color:var(--text-muted);margin-top:1.25rem">Nenhum teste realizado ainda.</p>`}
   else{html+=`<div style="font-size:0.65rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);margin:1.25rem 0 0.75rem">Resultados de testes</div><table class="history-table"><thead><tr><th>Teste</th><th>Pontuação</th><th>Classificação</th><th>Data</th></tr></thead><tbody>${data.map(r=>`<tr><td>${r.teste}</td><td>${r.pontuacao}</td><td>${badgeHtml(r.classificacao)}</td><td>${fmt(r.criado_em)}</td></tr>`).join('')}</tbody></table>`}
+
+  // RPDs do paciente
+  const {data:rpds}=await sb.from('rpd').select('*').eq('paciente_id',p.id).order('criado_em',{ascending:false})
+  if(rpds&&rpds.length){
+    html+=`<div style="font-size:0.65rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);margin:1.5rem 0 0.75rem">Registros de Pensamentos Disfuncionais</div>`
+    rpds.forEach(r=>{
+      const ini=r.intensidade_inicial!=null?r.intensidade_inicial+'%':'—'
+      const rev=r.intensidade_revisada!=null?r.intensidade_revisada+'%':'—'
+      const variacao=r.intensidade_inicial!=null&&r.intensidade_revisada!=null?r.intensidade_inicial-r.intensidade_revisada:null
+      const varHtml=variacao!==null?`<span style="font-size:0.7rem;font-weight:500;color:${variacao>0?'var(--green)':variacao<0?'var(--red)':'var(--text-muted)'}">${variacao>0?'↓'+variacao+'%':variacao<0?'↑'+Math.abs(variacao)+'%':'='}</span>`:'—'
+      html+=`<div style="background:var(--white);border:1px solid var(--border);border-radius:8px;padding:0.9rem 1rem;margin-bottom:0.6rem">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.6rem">
+          <span style="font-size:0.6rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted)">${fmt(r.criado_em)}</span>
+          <span style="font-size:0.68rem;color:var(--text-muted)">${ini} → ${rev} ${varHtml}</span>
+        </div>
+        <div style="font-size:0.7rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.2rem">Pensamento automático</div>
+        <div style="font-size:0.78rem;font-weight:300;color:var(--text);line-height:1.6;margin-bottom:0.5rem">${r.pensamento||'—'}</div>
+        <div style="font-size:0.7rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.2rem">Pensamento alternativo</div>
+        <div style="font-size:0.78rem;font-weight:300;color:var(--text);line-height:1.6">${r.pensamento_alternativo||'—'}</div>
+        ${r.texto_encerramento?`<div style="font-size:0.72rem;font-weight:300;color:var(--navy-light);line-height:1.7;margin-top:0.65rem;padding-top:0.65rem;border-top:1px solid var(--border);font-style:italic">${r.texto_encerramento}</div>`:''}
+      </div>`
+    })
+  }
+
   det.innerHTML=html;det.classList.add('open')
 }
 
