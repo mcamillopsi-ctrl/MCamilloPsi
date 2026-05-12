@@ -2130,9 +2130,9 @@ NÃO faça diagnósticos, NÃO substitua o psicólogo, NÃO use linguagem clíni
         .order('criado_em', {ascending:false})
         .limit(1)
     } else {
-      // Mostra resposta bruta para diagnóstico
-      const respBruta = JSON.stringify(dados)
-      encEl.innerHTML = `<span style="color:var(--red);font-size:0.72rem">Reflexão não gerada. Resposta da função: ${respBruta}</span>`
+      // Mostra erro específico se vier no campo 'erro'
+      const msgErro = dados.erro || JSON.stringify(dados)
+      encEl.innerHTML = `<span style="color:var(--red);font-size:0.72rem">Reflexão não gerada. Detalhe: ${msgErro}</span>`
       encEl.style.display = 'block'
     }
   } catch(e){
