@@ -2111,17 +2111,16 @@ Destaque o que o paciente fez bem neste exercício, mencione brevemente o que a 
 Não use títulos, bullets ou formatação — apenas texto corrido.
 NÃO faça diagnósticos, NÃO substitua o psicólogo, NÃO use linguagem clínica excessiva.`
 
-    const resp = await fetch('https://api.anthropic.com/v1/messages', {
+    const resp = await fetch(`${SUPABASE_URL}/functions/v1/bright-function`, {
       method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        messages: [{role:'user', content: prompt}]
-      })
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_KEY
+      },
+      body: JSON.stringify({ tipo: 'rpd', prompt })
     })
     const dados = await resp.json()
-    textoEnc = dados.content?.[0]?.text || ''
+    textoEnc = dados.texto || ''
     if(textoEnc){
       encEl.textContent = textoEnc
       // Atualiza texto no banco
