@@ -2130,11 +2130,15 @@ NÃO faça diagnósticos, NÃO substitua o psicólogo, NÃO use linguagem clíni
         .order('criado_em', {ascending:false})
         .limit(1)
     } else {
-      encEl.style.display = 'none'
+      // Mostra resposta bruta para diagnóstico
+      const respBruta = JSON.stringify(dados)
+      encEl.innerHTML = `<span style="color:var(--red);font-size:0.72rem">Reflexão não gerada. Resposta da função: ${respBruta}</span>`
+      encEl.style.display = 'block'
     }
   } catch(e){
     console.error('Erro ao gerar encerramento:', e)
-    encEl.style.display = 'none'
+    encEl.innerHTML = `<span style="color:var(--red);font-size:0.72rem">Erro ao gerar reflexão: ${e.message||e}. Verifique o console do navegador (F12).</span>`
+    encEl.style.display = 'block'
   }
 }
 
