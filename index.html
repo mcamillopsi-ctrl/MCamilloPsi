@@ -17,32 +17,32 @@
     body{font-family:'DM Sans',sans-serif;background:var(--linen);color:var(--navy);overflow-x:hidden}
     nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.25rem 3rem;display:flex;justify-content:space-between;align-items:center;transition:background 0.4s,box-shadow 0.4s}
     nav.scrolled{background:rgba(245,240,232,0.94);backdrop-filter:blur(10px);box-shadow:0 1px 0 rgba(139,127,212,0.12)}
-    .logo{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;letter-spacing:0.08em;color:var(--white);text-transform:uppercase;transition:color 0.4s}
+    .logo{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;letter-spacing:0.08em;color:var(--navy);text-transform:uppercase;transition:color 0.4s}
     nav.scrolled .logo{color:var(--navy)}
-    .logo span{color:rgba(200,190,240,0.9)}
+    .logo span{color:var(--gold)}
     nav.scrolled .logo span{color:var(--gold)}
     .nav-links{display:flex;gap:2rem;list-style:none}
-    .nav-links a{font-size:0.78rem;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.7);text-decoration:none;transition:color 0.2s}
+    .nav-links a{font-size:0.78rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:rgba(30,26,82,0.72);text-decoration:none;transition:color 0.2s}
     nav.scrolled .nav-links a{color:var(--navy-light)}
-    .nav-links a:hover{color:var(--white)}
+    .nav-links a:hover{color:var(--navy)}
     nav.scrolled .nav-links a:hover{color:var(--gold)}
-    .nav-btn{font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:0.5rem 1.25rem;border:1px solid rgba(255,255,255,0.4);color:var(--white);background:transparent;border-radius:20px;cursor:pointer;transition:all 0.2s;text-decoration:none}
-    .nav-btn:hover{background:rgba(255,255,255,0.1)}
+    .nav-btn{font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:0.5rem 1.25rem;border:1px solid rgba(30,26,82,0.4);color:rgba(30,26,82,0.8);background:transparent;border-radius:20px;cursor:pointer;transition:all 0.2s;text-decoration:none}
+    .nav-btn:hover{background:rgba(30,26,82,0.08)}
     nav.scrolled .nav-btn{border-color:var(--gold);color:var(--gold)}
     nav.scrolled .nav-btn:hover{background:var(--gold);color:var(--white)}
     /* HERO */
-    .hero{position:relative;height:100vh;min-height:600px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+    .hero{position:relative;height:100vh;min-height:600px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:linear-gradient(170deg,#cfc8ea 0%,#dcd5ed 20%,#e8e0d5 55%,#e0d5c0 100%)}
     .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
-    .hero-video-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(to bottom, rgba(240,235,225,0.32) 0%, rgba(240,235,225,0.18) 50%, rgba(230,225,215,0.38) 100%)}
+    .hero-video-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(to bottom, rgba(220,212,200,0.55) 0%, rgba(220,212,200,0.38) 50%, rgba(210,202,188,0.6) 100%)}
     .hero-overlay{position:relative;z-index:2;text-align:center;padding:0 2rem;max-width:700px}
-    .hero-crp{font-size:0.65rem;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;color:rgba(45,40,103,0.45);margin-bottom:1.75rem}
-    .hero-phrase{font-family:'Cormorant Garamond',serif;font-size:clamp(1.75rem,3.2vw,2.65rem);font-weight:300;font-style:italic;line-height:1.5;color:#2d2867;margin-bottom:1.75rem}
-    .hero-name{font-family:'Cormorant Garamond',serif;font-size:0.95rem;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;color:rgba(45,40,103,0.5);margin-bottom:2.5rem}
+    .hero-crp{font-size:0.65rem;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:rgba(45,40,103,0.72);margin-bottom:1.75rem}
+    .hero-phrase{font-family:'Cormorant Garamond',serif;font-size:clamp(1.75rem,3.2vw,2.65rem);font-weight:400;font-style:italic;line-height:1.5;color:#1e1a52;margin-bottom:1.75rem;text-shadow:0 1px 20px rgba(245,240,232,0.5)}
+    .hero-name{font-family:'Cormorant Garamond',serif;font-size:0.95rem;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;color:rgba(45,40,103,0.75);margin-bottom:2.5rem}
     .hero-cta{display:inline-block;font-family:'DM Sans',sans-serif;font-size:0.75rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;padding:0.85rem 2.5rem;background:var(--navy);color:var(--white);border:none;border-radius:30px;cursor:pointer;text-decoration:none;transition:background 0.2s,box-shadow 0.2s;box-shadow:0 4px 20px rgba(45,40,103,0.2)}
     .hero-cta:hover{background:var(--navy-mid);box-shadow:0 6px 28px rgba(45,40,103,0.28)}
     .hero-scroll{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:0.5rem;animation:bounce 2.5s ease-in-out infinite}
-    .hero-scroll span{font-size:0.58rem;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:rgba(45,40,103,0.38)}
-    .hero-scroll svg{width:16px;height:16px;stroke:rgba(45,40,103,0.3);fill:none;stroke-width:1.5}
+    .hero-scroll span{font-size:0.58rem;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:rgba(45,40,103,0.55)}
+    .hero-scroll svg{width:16px;height:16px;stroke:rgba(45,40,103,0.5);fill:none;stroke-width:1.5}
     @keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(7px)}}
     /* Tree video — sem animações CSS necessárias */
     /* SECTIONS */
@@ -136,8 +136,9 @@
 
 <!-- HERO -->
 <section class="hero">
-  <!-- Vídeo de fundo — coloque o arquivo arvore.mp4 na raiz do projeto -->
+  <!-- Vídeo de fundo -->
   <video class="hero-video" autoplay muted loop playsinline>
+    <source src="./arvore.mp4" type="video/mp4">
     <source src="arvore.mp4" type="video/mp4">
   </video>
   <!-- Overlay para garantir legibilidade do texto -->
