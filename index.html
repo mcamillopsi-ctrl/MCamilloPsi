@@ -3,149 +3,127 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="format-detection" content="telephone=no,address=no,email=no">
-  <meta name="description" content="Matheus Camillo — Psicólogo Clínico e Organizacional. Terapia Cognitivo-Comportamental (TCC) online com base em evidências científicas. CRP 06/193290.">
-
-  <!-- Open Graph -->
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Matheus Camillo — Psicólogo Clínico e Organizacional">
-  <meta property="og:description" content="Terapia Cognitivo-Comportamental online com base em evidências científicas. Agende sua consulta.">
-  <meta property="og:image" content="https://mcamillopsi.com.br/foto-matheus.jpeg">
-  <meta property="og:url" content="https://mcamillopsi.com.br">
-  <meta property="og:locale" content="pt_BR">
-
   <title>Matheus Camillo — Psicólogo Clínico e Organizacional</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
     :root{
-      --navy:#0d1f3c;
-      --navy-mid:#1a3358;
-      --navy-light:#2a4a73;
-      --slate:#8a9ab5;
-      --slate-light:#c2cde0;
-      --gold:#b8974a;
-      --gold-light:#d4b472;
-      --cream:#f5f3ee;
-      --white:#ffffff;
-      --text-body:#3d4e66;
+      --navy:#2d2867;--navy-mid:#3d3580;--navy-light:#5a52a8;
+      --slate:#9290b5;--slate-light:#cbc9e2;
+      --gold:#8b7fd4;--gold-light:#a99de0;--gold-pale:#f0effe;
+      --cream:#f5f0e8;--linen:#ede7d9;--white:#ffffff;--text-body:#3d3860;
     }
     html{scroll-behavior:smooth}
-    body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--navy);overflow-x:hidden}
-    nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.25rem 3rem;display:flex;justify-content:space-between;align-items:center;background:rgba(245,243,238,0.92);backdrop-filter:blur(8px);border-bottom:1px solid rgba(184,151,74,0.15)}
-    .logo{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;letter-spacing:0.08em;color:var(--navy);text-transform:uppercase}
-    .logo span{color:var(--gold)}
+    body{font-family:'DM Sans',sans-serif;background:var(--linen);color:var(--navy);overflow-x:hidden}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.25rem 3rem;display:flex;justify-content:space-between;align-items:center;transition:background 0.4s,box-shadow 0.4s}
+    nav.scrolled{background:rgba(245,240,232,0.94);backdrop-filter:blur(10px);box-shadow:0 1px 0 rgba(139,127,212,0.12)}
+    .logo{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;letter-spacing:0.08em;color:var(--white);text-transform:uppercase;transition:color 0.4s}
+    nav.scrolled .logo{color:var(--navy)}
+    .logo span{color:rgba(200,190,240,0.9)}
+    nav.scrolled .logo span{color:var(--gold)}
     .nav-links{display:flex;gap:2rem;list-style:none}
-    .nav-links a{font-size:0.8rem;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;color:var(--navy-light);text-decoration:none;transition:color 0.2s}
-    .nav-links a:hover{color:var(--gold)}
-    .nav-btn{font-size:0.75rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:0.5rem 1.25rem;border:1px solid var(--gold);color:var(--gold);background:transparent;border-radius:2px;cursor:pointer;transition:all 0.2s;text-decoration:none}
-    .nav-btn:hover{background:var(--gold);color:var(--white)}
-    .hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden}
-    .hero-left{background:var(--navy);display:flex;flex-direction:column;justify-content:center;padding:8rem 4rem 5rem 4rem;position:relative}
-    .hero-left::after{content:'';position:absolute;top:0;right:-1px;bottom:0;width:60px;background:var(--cream);clip-path:polygon(100% 0,100% 100%,0 100%)}
-    .hero-eyebrow{font-size:0.7rem;font-weight:400;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;display:flex;align-items:center;gap:0.75rem}
-    .hero-eyebrow::before{content:'';width:2rem;height:1px;background:var(--gold)}
-    .hero-name{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,4vw,3.8rem);font-weight:300;line-height:1.1;color:var(--white);margin-bottom:0.5rem}
-    .hero-name em{font-style:italic;font-weight:300;color:var(--slate-light)}
-    .hero-title{font-size:0.85rem;font-weight:300;letter-spacing:0.15em;text-transform:uppercase;color:var(--slate);margin-bottom:2.5rem;padding-left:0.15rem}
-    .hero-divider{width:3rem;height:1px;background:var(--gold);margin-bottom:2rem}
-    .hero-tagline{font-size:1rem;font-weight:300;line-height:1.75;color:var(--slate-light);max-width:380px;margin-bottom:1.5rem}
-    .hero-tagline + .hero-tagline{margin-bottom:1.5rem}
-    .hero-cta-row{display:flex;gap:1rem;align-items:center;margin-top:1.5rem}
-    .btn-primary{font-family:'DM Sans',sans-serif;font-size:0.78rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;padding:0.85rem 2rem;background:var(--gold);color:var(--white);border:none;border-radius:2px;cursor:pointer;transition:background 0.2s;text-decoration:none;display:inline-block}
-    .btn-primary:hover{background:var(--gold-light)}
-    .btn-ghost{font-family:'DM Sans',sans-serif;font-size:0.78rem;font-weight:400;letter-spacing:0.12em;text-transform:uppercase;padding:0.85rem 2rem;background:transparent;color:var(--slate-light);border:1px solid rgba(194,205,224,0.3);border-radius:2px;cursor:pointer;transition:all 0.2s}
-    .btn-ghost:hover{border-color:var(--slate-light);color:var(--white)}
-    .hero-right{background:var(--cream);display:flex;flex-direction:column;justify-content:center;padding:8rem 4rem 5rem 5rem;position:relative}
-    .hero-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:3rem}
-    .stat-card{border-left:2px solid var(--gold);padding:1rem 1.25rem}
-    .stat-num{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;color:var(--navy);line-height:1}
-    .stat-label{font-size:0.72rem;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;color:var(--slate);margin-top:0.35rem}
-    .areas-title{font-size:0.7rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:1.25rem}
-    .areas-list{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem}
-    .area-item{display:flex;align-items:center;gap:0.75rem;font-size:0.88rem;font-weight:300;color:var(--text-body)}
-    .area-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0}
-    section{padding:5rem 6rem}
+    .nav-links a{font-size:0.78rem;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.7);text-decoration:none;transition:color 0.2s}
+    nav.scrolled .nav-links a{color:var(--navy-light)}
+    .nav-links a:hover{color:var(--white)}
+    nav.scrolled .nav-links a:hover{color:var(--gold)}
+    .nav-btn{font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:0.5rem 1.25rem;border:1px solid rgba(255,255,255,0.4);color:var(--white);background:transparent;border-radius:20px;cursor:pointer;transition:all 0.2s;text-decoration:none}
+    .nav-btn:hover{background:rgba(255,255,255,0.1)}
+    nav.scrolled .nav-btn{border-color:var(--gold);color:var(--gold)}
+    nav.scrolled .nav-btn:hover{background:var(--gold);color:var(--white)}
+    /* HERO */
+    .hero{position:relative;height:100vh;min-height:600px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+    .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+    .hero-video-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(to bottom, rgba(240,235,225,0.32) 0%, rgba(240,235,225,0.18) 50%, rgba(230,225,215,0.38) 100%)}
+    .hero-overlay{position:relative;z-index:2;text-align:center;padding:0 2rem;max-width:700px}
+    .hero-crp{font-size:0.65rem;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;color:rgba(45,40,103,0.45);margin-bottom:1.75rem}
+    .hero-phrase{font-family:'Cormorant Garamond',serif;font-size:clamp(1.75rem,3.2vw,2.65rem);font-weight:300;font-style:italic;line-height:1.5;color:#2d2867;margin-bottom:1.75rem}
+    .hero-name{font-family:'Cormorant Garamond',serif;font-size:0.95rem;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;color:rgba(45,40,103,0.5);margin-bottom:2.5rem}
+    .hero-cta{display:inline-block;font-family:'DM Sans',sans-serif;font-size:0.75rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;padding:0.85rem 2.5rem;background:var(--navy);color:var(--white);border:none;border-radius:30px;cursor:pointer;text-decoration:none;transition:background 0.2s,box-shadow 0.2s;box-shadow:0 4px 20px rgba(45,40,103,0.2)}
+    .hero-cta:hover{background:var(--navy-mid);box-shadow:0 6px 28px rgba(45,40,103,0.28)}
+    .hero-scroll{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:0.5rem;animation:bounce 2.5s ease-in-out infinite}
+    .hero-scroll span{font-size:0.58rem;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:rgba(45,40,103,0.38)}
+    .hero-scroll svg{width:16px;height:16px;stroke:rgba(45,40,103,0.3);fill:none;stroke-width:1.5}
+    @keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(7px)}}
+    /* Tree video — sem animações CSS necessárias */
+    /* SECTIONS */
+    .sw{background:rgba(255,252,247,0.88)}
+    .sw-alt{background:rgba(243,237,226,0.86)}
+    section{padding:5.5rem 6rem}
     .section-label{font-size:0.68rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
     .section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3vw,2.8rem);font-weight:300;line-height:1.2;color:var(--navy);margin-bottom:2.5rem}
-    .about-section{background:var(--white);display:grid;grid-template-columns:1fr 2fr;gap:5rem;align-items:start}
-    .about-img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:2px;display:block}
+    /* INTRO */
+    .intro-s{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;padding:5.5rem 6rem}
+    .intro-text p{font-size:0.95rem;font-weight:300;line-height:1.85;color:var(--text-body);margin-bottom:1.25rem}
+    .intro-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,2.5vw,2.4rem);font-weight:300;line-height:1.2;color:var(--navy);margin-bottom:1.5rem}
+    .cta-row{display:flex;gap:1rem;align-items:center;margin-top:2rem}
+    .btn-p{font-family:'DM Sans',sans-serif;font-size:0.78rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:0.85rem 2rem;background:var(--navy);color:var(--white);border:none;border-radius:30px;cursor:pointer;transition:background 0.2s;text-decoration:none;display:inline-block}
+    .btn-p:hover{background:var(--navy-mid)}
+    .btn-g{font-family:'DM Sans',sans-serif;font-size:0.78rem;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;padding:0.85rem 2rem;background:transparent;color:var(--navy-light);border:1px solid rgba(90,82,168,0.3);border-radius:30px;cursor:pointer;transition:all 0.2s}
+    .btn-g:hover{border-color:var(--gold);color:var(--gold)}
+    .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+    .stat-card{border-left:2px solid var(--gold);padding:1rem 1.25rem;background:rgba(255,255,255,0.55);border-radius:0 14px 14px 0}
+    .stat-num{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;color:var(--navy);line-height:1}
+    .stat-lbl{font-size:0.7rem;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;color:var(--slate);margin-top:0.35rem}
+    /* ABOUT */
+    .about-s{display:grid;grid-template-columns:1fr 2fr;gap:5rem;align-items:start;padding:5.5rem 6rem}
+    .about-img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:18px;display:block;box-shadow:0 8px 40px rgba(45,40,103,0.1)}
     .about-body p{font-size:0.95rem;font-weight:300;line-height:1.85;color:var(--text-body);margin-bottom:1.25rem}
-    .about-quote{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:300;font-style:italic;line-height:1.8;color:var(--navy-light);border-left:2px solid var(--gold);padding-left:1.25rem;margin-top:1.5rem;margin-bottom:1.25rem}
-    .about-quote-attr{font-size:0.78rem;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;color:var(--slate);margin-top:0.5rem;padding-left:1.25rem}
-    .credentials{display:flex;flex-direction:column;gap:0.75rem;margin-top:2rem;padding-top:2rem;border-top:1px solid var(--slate-light)}
+    .about-quote{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:300;font-style:italic;line-height:1.8;color:var(--navy-light);border-left:2px solid var(--gold);border-radius:0;padding-left:1.25rem;margin:1.5rem 0 1.25rem}
+    .about-qa{font-size:0.78rem;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;color:var(--slate);margin-top:0.5rem;padding-left:1.25rem}
+    .creds{display:flex;flex-direction:column;gap:0.75rem;margin-top:2rem;padding-top:2rem;border-top:1px solid rgba(139,127,212,0.15)}
     .cred-item{display:flex;gap:1rem;align-items:flex-start;font-size:0.82rem;font-weight:300;color:var(--text-body)}
     .cred-year{font-weight:500;color:var(--navy);min-width:3.5rem;font-size:0.8rem}
-    .services-section{background:var(--navy);padding:5rem 6rem}
-    .services-section .section-title{color:var(--white)}
-    .services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5px;background:rgba(42,74,115,0.5)}
-    .service-card{background:var(--navy);padding:2.5rem 2rem;border:1px solid rgba(42,74,115,0.6);transition:border-color 0.25s}
-    .service-card:hover{border-color:var(--gold)}
-    .service-num{font-family:'Cormorant Garamond',serif;font-size:3.5rem;font-weight:300;color:rgba(184,151,74,0.6);line-height:1;margin-bottom:1rem}
-    .service-name{font-size:0.9rem;font-weight:500;letter-spacing:0.05em;color:var(--white);margin-bottom:0.75rem}
-    .service-desc{font-size:0.82rem;font-weight:300;line-height:1.7;color:var(--slate)}
-    .abordagem-section{background:var(--cream);padding:5rem 6rem}
-    .abordagem-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:3rem}
-    .abordagem-card{background:var(--white);padding:2.5rem;border-top:2px solid var(--gold)}
-    .abordagem-card-eyebrow{font-size:0.68rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem}
-    .abordagem-card-title{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;line-height:1.2;color:var(--navy);margin-bottom:1.25rem}
-    .abordagem-card p{font-size:0.9rem;font-weight:300;line-height:1.85;color:var(--text-body);margin-bottom:1rem}
-    .abordagem-card p:last-child{margin-bottom:0}
-    .portal-section{background:var(--cream);text-align:center;padding:5rem 6rem}
-    .portal-inner{max-width:640px;margin:0 auto}
+    /* ABORDAGEM */
+    .ab-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:3rem}
+    .ab-card{background:rgba(255,255,255,0.65);padding:2.5rem;border-radius:20px;border-top:2px solid var(--gold);box-shadow:0 2px 20px rgba(139,127,212,0.07)}
+    .ab-ey{font-size:0.68rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem}
+    .ab-title{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;line-height:1.2;color:var(--navy);margin-bottom:1.25rem}
+    .ab-card p{font-size:0.9rem;font-weight:300;line-height:1.85;color:var(--text-body);margin-bottom:1rem}
+    .ab-card p:last-child{margin-bottom:0}
+    /* SERVICES */
+    .svc-s{background:var(--navy);padding:5.5rem 6rem}
+    .svc-s .section-label{color:var(--gold-light)}
+    .svc-s .section-title{color:var(--white)}
+    .svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:rgba(90,82,168,0.25);border-radius:18px;overflow:hidden;margin-top:1rem}
+    .svc-card{background:rgba(45,40,103,0.82);padding:2.5rem 2rem;border:1px solid rgba(90,82,168,0.18);transition:background 0.25s}
+    .svc-card:hover{background:rgba(61,53,128,0.88)}
+    .svc-num{font-family:'Cormorant Garamond',serif;font-size:3.5rem;font-weight:300;color:rgba(139,127,212,0.45);line-height:1;margin-bottom:1rem}
+    .svc-name{font-size:0.9rem;font-weight:500;letter-spacing:0.05em;color:var(--white);margin-bottom:0.75rem}
+    .svc-desc{font-size:0.82rem;font-weight:300;line-height:1.7;color:var(--slate-light)}
+    /* PORTAL */
+    .portal-s{text-align:center;padding:5.5rem 6rem}
+    .portal-in{max-width:640px;margin:0 auto}
     .portal-icon{width:3.5rem;height:3.5rem;margin:0 auto 2rem;border:1px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center}
     .portal-body{font-size:0.95rem;font-weight:300;line-height:1.85;color:var(--text-body);margin-bottom:2.5rem}
-    .portal-cta-row{display:flex;gap:1rem;justify-content:center}
-    .contact-section{background:var(--navy);padding:5rem 6rem;text-align:center}
-    .contact-section .section-label{color:var(--gold)}
-    .contact-section .section-title{color:var(--white)}
-    .contact-inner{max-width:540px;margin:0 auto}
-    .contact-email{display:inline-flex;align-items:center;gap:0.75rem;font-size:1rem;font-weight:300;letter-spacing:0.05em;color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(184,151,74,0.3);padding-bottom:0.25rem;transition:border-color 0.2s}
-    .contact-email:hover{border-color:var(--gold)}
-    .contact-note{font-size:0.85rem;font-weight:300;color:var(--slate);margin-top:1.5rem;line-height:1.7}
-    footer{background:var(--navy);padding:2.5rem 6rem;display:flex;justify-content:space-between;align-items:center}
-    .footer-logo{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--white)}
-    .footer-logo span{color:var(--gold)}
-    .footer-copy{font-size:0.75rem;font-weight:300;color:var(--slate)}
-    .footer-crp{font-size:0.75rem;font-weight:400;letter-spacing:0.08em;color:var(--gold)}
-    .fade-in{opacity:0;transform:translateY(18px);animation:fadeUp 0.7s ease forwards}
-    @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
-    .delay-1{animation-delay:0.15s}.delay-2{animation-delay:0.3s}.delay-3{animation-delay:0.45s}.delay-4{animation-delay:0.6s}
+    /* CONTACT */
+    .contact-s{background:var(--navy);padding:5.5rem 6rem;text-align:center}
+    .contact-s .section-label{color:var(--gold-light)}
+    .contact-in{max-width:540px;margin:0 auto}
+    .contact-email{display:inline-flex;align-items:center;gap:0.75rem;font-size:1rem;font-weight:300;letter-spacing:0.05em;color:var(--gold-light);text-decoration:none;border-bottom:1px solid rgba(169,157,224,0.25);padding-bottom:0.25rem;transition:border-color 0.2s}
+    .contact-email:hover{border-color:var(--gold-light)}
+    .contact-note{font-size:0.85rem;font-weight:300;color:var(--slate-light);margin-top:1.5rem;line-height:1.7}
+    footer{background:var(--navy);padding:2.5rem 6rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(90,82,168,0.2)}
+    .fl{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--white)}
+    .fl span{color:var(--gold-light)}
+    .fc{font-size:0.75rem;font-weight:300;color:var(--slate)}
+    .fcrp{font-size:0.75rem;font-weight:400;letter-spacing:0.08em;color:var(--gold-light)}
+    .fade-in{opacity:0;transform:translateY(22px);transition:opacity 0.75s ease,transform 0.75s ease}
+    .fade-in.visible{opacity:1;transform:translateY(0)}
     @media(max-width:768px){
-      nav{padding:1rem 1.5rem}
-      .nav-links{display:none}
-      .nav-btn{font-size:0.7rem;padding:0.4rem 0.9rem}
-      .hero{grid-template-columns:1fr;min-height:auto}
-      .hero-left{padding:5.5rem 1.5rem 3rem;order:1}
-      .hero-left::after{display:none}
-      .hero-right{padding:3rem 1.5rem;order:2}
-      .hero-name{font-size:2.2rem}
-      .hero-stat-grid{grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:2rem}
-      .areas-list{grid-template-columns:1fr}
-      .hero-cta-row{flex-direction:column;align-items:stretch;gap:0.75rem}
-      .hero-cta-row .btn-primary,.hero-cta-row .btn-ghost{text-align:center;width:100%}
-      section{padding:3rem 1.5rem}
-      .about-section{grid-template-columns:1fr;gap:2rem}
-      .services-section{padding:3rem 1.5rem}
-      .services-grid{grid-template-columns:1fr}
-      .abordagem-section{padding:3rem 1.5rem}
-      .abordagem-grid{grid-template-columns:1fr;gap:1.5rem;margin-top:2rem}
-      .portal-section{padding:3rem 1.5rem}
-      .portal-cta-row{flex-direction:column;align-items:stretch}
-      .portal-cta-row .btn-primary,.portal-cta-row a{width:100%;text-align:center}
-      .contact-section{padding:3rem 1.5rem}
-      .contact-email{word-break:break-all;font-size:0.85rem}
+      nav{padding:1rem 1.5rem}.nav-links{display:none}
+      .intro-s,.about-s{grid-template-columns:1fr;gap:2.5rem;padding:3rem 1.5rem}
+      section{padding:3rem 1.5rem}.svc-s{padding:3rem 1.5rem}
+      .svc-grid{grid-template-columns:1fr}.ab-grid{grid-template-columns:1fr}
+      .contact-s,.portal-s{padding:3rem 1.5rem}
       footer{padding:2rem 1.5rem;flex-direction:column;gap:0.75rem;text-align:center}
+      .cta-row{flex-direction:column}
+      .hero-phrase{font-size:1.6rem}
     }
   </style>
 </head>
 <body>
 
-<nav>
+<nav id="main-nav">
   <div class="logo">MCamillo<span>Psi</span></div>
   <ul class="nav-links">
     <li><a href="#sobre">Sobre</a></li>
@@ -156,234 +134,148 @@
   <a class="nav-btn" href="paciente.html">Área do Paciente</a>
 </nav>
 
-
+<!-- HERO -->
 <section class="hero">
-  <div class="hero-left">
-    <div class="hero-eyebrow fade-in">Psicologia Clínica</div>
-    <h1 class="hero-name fade-in delay-1">Terapeuta Cognitivo<br><em>Matheus Camillo</em></h1>
-    <p class="hero-title fade-in delay-2">Psicólogo Clínico e Organizacional · CRP 06/193290</p>
-    <div class="hero-divider fade-in delay-2"></div>
-
-    <p class="hero-tagline fade-in delay-3">
-      Se você chegou até aqui, orgulhe-se! Você já deu um passo importante em prol da sua saúde mental.
-    </p>
-    <p class="hero-tagline fade-in delay-3">
-      Como terapeuta cognitivo, meu objetivo é ajudar meus pacientes a identificar suas aspirações, valores e propósito, focando em seus pontos fortes e recursos para superar obstáculos e chegar a conclusões mais coerentes sobre si mesmos e suas experiências.
-    </p>
-    <p class="hero-tagline fade-in delay-3">
-      Caso entenda que posso ser útil na sua busca, ficarei realizado em contribuir nessa jornada.
-    </p>
-
-    <div class="hero-cta-row fade-in delay-4">
-      <!-- Botão agendar — abre o Cal.com em nova aba -->
-      <a
-        class="btn-primary"
-        href="https://cal.com/matheus-camillo-m6tgtd/online-psychotherapy?overlayCalendar=true"
-        target="_blank"
-        rel="noopener noreferrer"
-      >Agendar consulta</a>
-      <a class="btn-ghost" href="#sobre" style="text-decoration:none;text-align:center">Saiba mais</a>
-    </div>
+  <!-- Vídeo de fundo — coloque o arquivo arvore.mp4 na raiz do projeto -->
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="arvore.mp4" type="video/mp4">
+  </video>
+  <!-- Overlay para garantir legibilidade do texto -->
+  <div class="hero-video-overlay"></div>
+  <div class="hero-overlay">
+    <p class="hero-crp fade-in">Psicólogo Clínico · CRP 06/193290</p>
+    <p class="hero-phrase fade-in" style="animation-delay:0.2s">"Cuidar de si mesmo é o ponto<br>de partida de tudo que importa."</p>
+    <p class="hero-name fade-in" style="animation-delay:0.4s">Matheus Camillo</p>
+    <a class="hero-cta fade-in" style="animation-delay:0.6s" href="https://cal.com/matheus-camillo-m6tgtd/online-psychotherapy?overlayCalendar=true" target="_blank" rel="noopener noreferrer">Agendar consulta</a>
   </div>
-
-  <div class="hero-right">
-    <div class="hero-stat-grid fade-in delay-1">
-      <div class="stat-card">
-        <div class="stat-num">+6</div>
-        <div class="stat-label">Anos de atuação</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num">+1000</div>
-        <div class="stat-label">Consultas realizadas</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num">2</div>
-        <div class="stat-label">Especializações</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num">TCC</div>
-        <div class="stat-label">Padrão ouro em evidência científica</div>
-      </div>
-    </div>
-
-    <div class="fade-in delay-2">
-      <p class="areas-title">Áreas de atuação</p>
-      <div class="areas-list">
-        <div class="area-item"><span class="area-dot"></span>Ansiedade</div>
-        <div class="area-item"><span class="area-dot"></span>Ansiedade Generalizada (TAG)</div>
-        <div class="area-item"><span class="area-dot"></span>Autoconhecimento</div>
-        <div class="area-item"><span class="area-dot"></span>Autoestima</div>
-        <div class="area-item"><span class="area-dot"></span>Burnout</div>
-        <div class="area-item"><span class="area-dot"></span>Conflitos Amorosos</div>
-        <div class="area-item"><span class="area-dot"></span>Conflitos Familiares</div>
-        <div class="area-item"><span class="area-dot"></span>Depressão</div>
-        <div class="area-item"><span class="area-dot"></span>Psicologia Organizacional</div>
-      </div>
-    </div>
+  <div class="hero-scroll">
+    <span>Continuar</span>
+    <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
   </div>
 </section>
 
-
-<section class="about-section" id="sobre">
-  <div class="about-sidebar">
-    <img
-      src="foto-matheus.jpeg"
-      alt="Foto de perfil - Matheus Camillo"
-      class="about-img"
-    >
-  </div>
-
-  <div class="about-body">
-    <p class="section-label">Sobre mim</p>
-    <h2 class="section-title">Uma abordagem<br>humana e científica</h2>
-
-    <p>
-      Com uma cabeça repleta de dúvidas sobre a vida e sobre o futuro, há 12 anos tomava a decisão de me tornar psicólogo. A motivação para isso? Ajudar pessoas a se afastarem do sofrimento e, assim, contribuir com a sociedade. 12 anos se passaram, e o propósito segue o mesmo.
-    </p>
-    <p>
-      Essa jornada me levou por caminhos que moldaram profundamente minha forma de trabalhar. Passei por grandes empresas e por startups de tecnologia em crescimento acelerado — ambientes que me expuseram a uma diversidade enorme de perfis, pressões e desafios humanos. Foi nesse percurso que consolidei algo que carrego como princípio: uma atuação firmemente ancorada na ciência, comprometida com as melhores evidências disponíveis, mas que nunca perde de vista o que há de mais essencial no processo terapêutico — a conexão humana.
-    </p>
-
-    <blockquote class="about-quote">
-      "Conheça todas as teorias, domine todas as técnicas, mas ao tocar uma alma humana, seja apenas outra alma humana."
-    </blockquote>
-    <p class="about-quote-attr">— Carl Jung</p>
-
-    <div class="credentials">
-      <div class="cred-item">
-        <span class="cred-year">2020</span>
-        Graduação em Psicologia — Universidade Presbiteriana Mackenzie e Universidade Paulista
-      </div>
-      <div class="cred-item">
-        <span class="cred-year">2024</span>
-        Especialização em Terapia Cognitivo-Comportamental — Pontifícia Universidade Católica do Rio Grande do Sul (PUC-RS)
-      </div>
-      <div class="cred-item">
-        <span class="cred-year">2026</span>
-        Especializando em Neurociências do Comportamento — Pontifícia Universidade Católica do Rio Grande do Sul (PUC-RS)
+<!-- INTRO -->
+<div class="sw">
+  <div class="intro-s fade-in" id="sobre">
+    <div class="stat-grid">
+      <div class="stat-card"><div class="stat-num">12+</div><div class="stat-lbl">Anos de atuação</div></div>
+      <div class="stat-card"><div class="stat-num">100%</div><div class="stat-lbl">Online</div></div>
+      <div class="stat-card"><div class="stat-num">TCC</div><div class="stat-lbl">Baseada em evidências</div></div>
+      <div class="stat-card"><div class="stat-num">50min</div><div class="stat-lbl">Por sessão</div></div>
+    </div>
+    <div class="intro-text">
+      <p class="section-label">Psicologia Clínica</p>
+      <h2 class="intro-title">Se você chegou até aqui,<br>orgulhe-se.</h2>
+      <p>Você já deu um passo importante em prol da sua saúde mental. Como terapeuta cognitivo, meu objetivo é ajudar meus pacientes a identificar suas aspirações, valores e propósito, focando em seus pontos fortes e recursos para superar obstáculos e chegar a conclusões mais coerentes sobre si mesmos e suas experiências.</p>
+      <p>Caso entenda que posso ser útil na sua busca, ficarei realizado em contribuir nessa jornada.</p>
+      <div class="cta-row">
+        <a class="btn-p" href="https://cal.com/matheus-camillo-m6tgtd/online-psychotherapy?overlayCalendar=true" target="_blank" rel="noopener noreferrer">Agendar consulta</a>
+        <a class="btn-g" href="#abordagem">Saiba mais</a>
       </div>
     </div>
   </div>
-</section>
+</div>
 
-
-
-
-<section class="abordagem-section" id="abordagem">
-  <p class="section-label">Abordagem</p>
-  <h2 class="section-title">A ciência por trás<br>do cuidado</h2>
-
-  <div class="abordagem-grid">
-
-    <div class="abordagem-card">
-      <p class="abordagem-card-eyebrow">Terapia Cognitivo-Comportamental</p>
-      <h3 class="abordagem-card-title">O que é a TCC e como ela funciona</h3>
-      <p>
-        Desenvolvida na década de 1960 pelo psiquiatra norte-americano Aaron T. Beck, na Universidade da Pensilvânia, a Terapia Cognitivo-Comportamental surgiu de uma pergunta simples, mas revolucionária: e se o sofrimento emocional estivesse ligado não aos eventos em si, mas à forma como interpretamos esses eventos?
-      </p>
-      <p>
-        Beck identificou que seus pacientes com depressão compartilhavam padrões de pensamento distorcidos — os chamados pensamentos automáticos — que alimentavam sentimentos de desesperança e comportamentos disfuncionais. A partir daí, desenvolveu um método estruturado para identificar, questionar e transformar esses padrões.
-      </p>
-      <p>
-        A TCC é uma abordagem orientada para o presente, focada em metas concretas e com duração definida. Ela parte do princípio de que pensamentos, emoções e comportamentos estão interligados — e que modificar a forma como pensamos gera mudanças reais em como sentimos e agimos. Décadas de pesquisa científica a consolidaram como o padrão ouro em eficácia para o tratamento de ansiedade, depressão, burnout, transtornos de humor e muitos outros quadros clínicos.
-      </p>
+<!-- SOBRE -->
+<div class="sw-alt">
+  <section class="about-s fade-in">
+    <div>
+      <img src="foto-matheus.jpeg" alt="Foto de perfil - Matheus Camillo" class="about-img">
     </div>
-
-    <div class="abordagem-card">
-      <p class="abordagem-card-eyebrow">Neurociência do Comportamento</p>
-      <h3 class="abordagem-card-title">O que o cérebro revela sobre o sofrimento</h3>
-      <p>
-        A Neurociência do Comportamento estuda como o funcionamento cerebral influencia diretamente nossas emoções, pensamentos e ações. Trata-se de uma ponte entre a biologia e a psicologia: enquanto a TCC age sobre os padrões de pensamento, a neurociência explica o que acontece no cérebro quando esses padrões se transformam.
-      </p>
-      <p>
-        Pesquisas mostram que intervenções psicológicas como a TCC são capazes de promover mudanças concretas no cérebro — reduzindo a hiperatividade da amígdala, estrutura associada ao medo e à ameaça, e fortalecendo o córtex pré-frontal, responsável pelo controle emocional e pela tomada de decisão. Isso significa que a psicoterapia não apenas muda a forma como pensamos: ela, literalmente, reconfigura o cérebro.
-      </p>
-      <p>
-        Integrar o conhecimento neurocientífico à prática clínica permite compreender o sofrimento do paciente em sua dimensão mais completa — biológica, cognitiva e emocional — tornando o cuidado mais personalizado, mais preciso e mais eficaz.
-      </p>
+    <div class="about-body">
+      <p class="section-label">Sobre mim</p>
+      <h2 class="section-title">Uma abordagem<br>humana e científica</h2>
+      <p>Com uma cabeça repleta de dúvidas sobre a vida e sobre o futuro, há 12 anos tomava a decisão de me tornar psicólogo. A motivação para isso? Ajudar pessoas a se afastarem do sofrimento e, assim, contribuir com a sociedade. 12 anos se passaram, e o propósito segue o mesmo.</p>
+      <p>Essa jornada me levou por caminhos que moldaram profundamente minha forma de trabalhar. Passei por grandes empresas e por startups de tecnologia em crescimento acelerado — ambientes que me expuseram a uma diversidade enorme de perfis, pressões e desafios humanos. Foi nesse percurso que consolidei algo que carrego como princípio: uma atuação firmemente ancorada na ciência, comprometida com as melhores evidências disponíveis, mas que nunca perde de vista o que há de mais essencial no processo terapêutico — a conexão humana.</p>
+      <blockquote class="about-quote">"Conheça todas as teorias, domine todas as técnicas, mas ao tocar uma alma humana, seja apenas outra alma humana."</blockquote>
+      <p class="about-qa">— Carl Jung</p>
+      <div class="creds">
+        <div class="cred-item"><span class="cred-year">2020</span>Graduação em Psicologia — Universidade Presbiteriana Mackenzie e Universidade Paulista</div>
+        <div class="cred-item"><span class="cred-year">2024</span>Especialização em Terapia Cognitivo-Comportamental — Pontifícia Universidade Católica do Rio Grande do Sul (PUC-RS)</div>
+        <div class="cred-item"><span class="cred-year">2026</span>Especializando em Neurociências do Comportamento — Pontifícia Universidade Católica do Rio Grande do Sul (PUC-RS)</div>
+      </div>
     </div>
+  </section>
+</div>
 
-  </div>
-</section>
+<!-- ABORDAGEM -->
+<div class="sw" id="abordagem">
+  <section class="fade-in">
+    <p class="section-label">Abordagem</p>
+    <h2 class="section-title">A ciência por trás<br>do cuidado</h2>
+    <div class="ab-grid">
+      <div class="ab-card">
+        <p class="ab-ey">Terapia Cognitivo-Comportamental</p>
+        <h3 class="ab-title">O que é a TCC e como ela funciona</h3>
+        <p>Desenvolvida na década de 1960 pelo psiquiatra norte-americano Aaron T. Beck, na Universidade da Pensilvânia, a Terapia Cognitivo-Comportamental surgiu de uma pergunta simples, mas revolucionária: e se o sofrimento emocional estivesse ligado não aos eventos em si, mas à forma como interpretamos esses eventos?</p>
+        <p>Beck identificou que seus pacientes com depressão compartilhavam padrões de pensamento distorcidos — os chamados pensamentos automáticos — que alimentavam sentimentos de desesperança e comportamentos disfuncionais. A partir daí, desenvolveu um método estruturado para identificar, questionar e transformar esses padrões.</p>
+        <p>A TCC é uma abordagem orientada para o presente, focada em metas concretas e com duração definida. Ela parte do princípio de que pensamentos, emoções e comportamentos estão interligados — e que modificar a forma como pensamos gera mudanças reais em como sentimos e agimos.</p>
+      </div>
+      <div class="ab-card">
+        <p class="ab-ey">Neurociência do Comportamento</p>
+        <h3 class="ab-title">O que o cérebro revela sobre o sofrimento</h3>
+        <p>A Neurociência do Comportamento estuda como o funcionamento cerebral influencia diretamente nossas emoções, pensamentos e ações. Trata-se de uma ponte entre a biologia e a psicologia: enquanto a TCC age sobre os padrões de pensamento, a neurociência explica o que acontece no cérebro quando esses padrões se transformam.</p>
+        <p>Pesquisas mostram que intervenções psicológicas como a TCC são capazes de promover mudanças concretas no cérebro — reduzindo a hiperatividade da amígdala, estrutura associada ao medo e à ameaça, e fortalecendo o córtex pré-frontal, responsável pelo controle emocional e pela tomada de decisão.</p>
+        <p>Integrar o conhecimento neurocientífico à prática clínica permite compreender o sofrimento do paciente em sua dimensão mais completa — biológica, cognitiva e emocional — tornando o cuidado mais personalizado, mais preciso e mais eficaz.</p>
+      </div>
+    </div>
+  </section>
+</div>
 
-
-<section class="services-section" id="especialidades">
-  <p class="section-label" style="color:var(--gold)">Especialidades</p>
+<!-- ESPECIALIDADES -->
+<section class="svc-s fade-in" id="especialidades">
+  <p class="section-label">Especialidades</p>
   <h2 class="section-title">Como posso<br>te ajudar</h2>
-
-  <div class="services-grid">
-    <div class="service-card">
-      <div class="service-num">01</div>
-      <div class="service-name">Psicoterapia Individual</div>
-      <div class="service-desc">
-        Consulta em ambiente online, individualizado e sigiloso, com duração de 50 minutos.
-      </div>
-    </div>
-    <div class="service-card">
-      <div class="service-num">02</div>
-      <div class="service-name">Monitoramento Contínuo</div>
-      <div class="service-desc">
-        Acompanhamento de indicadores de saúde mental ao longo do tempo pela plataforma exclusiva para pacientes.
-      </div>
-    </div>
-    <div class="service-card">
-      <div class="service-num">03</div>
-      <div class="service-name">Ferramentas e Técnicas</div>
-      <div class="service-desc">
-        Acesso a ferramentas e técnicas para manejo de sintomas depressivos, ansiosos e de estresse pela plataforma exclusiva para pacientes.
-      </div>
-    </div>
-    <div class="service-card">
-      <div class="service-num">04</div>
-      <div class="service-name">Suporte via WhatsApp</div>
-      <div class="service-desc">
-        Acompanhamento contínuo via WhatsApp para apoios adicionais e urgências.
-      </div>
-    </div>
+  <div class="svc-grid">
+    <div class="svc-card"><div class="svc-num">01</div><div class="svc-name">Psicoterapia Individual</div><div class="svc-desc">Consulta em ambiente online, individualizado e sigiloso, com duração de 50 minutos.</div></div>
+    <div class="svc-card"><div class="svc-num">02</div><div class="svc-name">Monitoramento Contínuo</div><div class="svc-desc">Acompanhamento de indicadores de saúde mental ao longo do tempo pela plataforma exclusiva para pacientes.</div></div>
+    <div class="svc-card"><div class="svc-num">03</div><div class="svc-name">Ferramentas e Técnicas</div><div class="svc-desc">Acesso a ferramentas e técnicas para manejo de sintomas depressivos, ansiosos e de estresse pela plataforma exclusiva para pacientes.</div></div>
+    <div class="svc-card"><div class="svc-num">04</div><div class="svc-name">Suporte via WhatsApp</div><div class="svc-desc">Acompanhamento contínuo via WhatsApp para apoios adicionais e urgências.</div></div>
   </div>
 </section>
 
-
-<section class="portal-section">
-  <div class="portal-inner">
-    <div class="portal-icon">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#b8974a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="3" y="11" width="18" height="11" rx="2"/>
-        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-        <circle cx="12" cy="16" r="1" fill="#b8974a"/>
-      </svg>
+<!-- PORTAL -->
+<div class="sw">
+  <section class="portal-s fade-in">
+    <div class="portal-in">
+      <div class="portal-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8b7fd4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1" fill="#8b7fd4"/></svg>
+      </div>
+      <p class="section-label">Área do Paciente</p>
+      <h2 class="section-title" style="font-size:2rem">Seu espaço de<br>acompanhamento</h2>
+      <p class="portal-body">Pacientes em acompanhamento têm acesso a uma plataforma exclusiva com testes psicométricos validados, histórico de resultados e indicadores personalizados de saúde mental — tudo com total segurança e privacidade.</p>
+      <div style="display:flex;justify-content:center">
+        <a class="btn-p" href="paciente.html">Acessar plataforma</a>
+      </div>
     </div>
-    <p class="section-label">Área do Paciente</p>
-    <h2 class="section-title" style="font-size:2rem">Seu espaço de<br>acompanhamento</h2>
-    <p class="portal-body">
-      Pacientes em acompanhamento têm acesso a uma plataforma exclusiva com
-      testes psicométricos validados, histórico de resultados e indicadores
-      personalizados de saúde mental — tudo com total segurança e privacidade.
-    </p>
-    <div class="portal-cta-row">
-      <a href="paciente.html" class="btn-primary" style="text-decoration:none">Acessar plataforma</a>
-    </div>
-  </div>
-</section>
+  </section>
+</div>
 
-
-
-<section class="contact-section" id="contato">
-  <div class="contact-inner">
+<!-- CONTATO -->
+<section class="contact-s fade-in" id="contato">
+  <div class="contact-in">
     <p class="section-label">Contato</p>
+    <h2 class="section-title" style="color:var(--white);margin-bottom:2rem">Vamos conversar?</h2>
     <a class="contact-email" href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#109;&#99;&#97;&#109;&#105;&#108;&#108;&#111;&#112;&#115;&#105;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b8974a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#a99de0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
       &#109;&#99;&#97;&#109;&#105;&#108;&#108;&#111;&#112;&#115;&#105;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;
     </a>
+    <p class="contact-note">Respondo em até 24 horas em dias úteis.</p>
   </div>
 </section>
 
-
 <footer>
-  <div class="footer-logo">MCamillo<span>Psi</span></div>
-  <div class="footer-copy">© 2026 · MCamilloPsi · Todos os direitos reservados</div>
-  <div class="footer-crp">CRP 06/193290</div>
+  <div class="fl">MCamillo<span>Psi</span></div>
+  <div class="fc">© 2026 · MCamilloPsi · Todos os direitos reservados</div>
+  <div class="fcrp">CRP 06/193290</div>
 </footer>
 
+<script>
+const nav=document.getElementById('main-nav')
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>60)},{passive:true})
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:0.1})
+document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el))
+setTimeout(()=>{document.querySelectorAll('.hero .fade-in').forEach(el=>el.classList.add('visible'))},80)
+</script>
 </body>
 </html>
