@@ -32,7 +32,8 @@
     nav.scrolled .nav-btn:hover{background:var(--gold);color:var(--white)}
     /* HERO */
     .hero{position:relative;height:100vh;min-height:600px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:linear-gradient(170deg,#cfc8ea 0%,#dcd5ed 20%,#e8e0d5 55%,#e0d5c0 100%)}
-    .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+    .hero-video-wrap{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+    .hero-video-iframe{position:absolute;top:50%;left:50%;width:177.78vh;min-width:100%;height:56.25vw;min-height:100%;transform:translate(-50%,-50%);border:none}
     .hero-video-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(to bottom, rgba(220,212,200,0.55) 0%, rgba(220,212,200,0.38) 50%, rgba(210,202,188,0.6) 100%)}
     .hero-overlay{position:relative;z-index:2;text-align:center;padding:0 2rem;max-width:700px}
     .hero-crp{font-size:0.65rem;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:rgba(45,40,103,0.72);margin-bottom:1.75rem}
@@ -136,10 +137,15 @@
 
 <!-- HERO -->
 <section class="hero">
-  <!-- Vídeo de fundo via jsDelivr CDN -->
-  <video class="hero-video" autoplay muted loop playsinline>
-    <source src="https://cdn.jsdelivr.net/gh/mcamillopsi-ctrl/MCamilloPsi@main/arvore.mp4" type="video/mp4">
-  </video>
+  <!-- Vídeo de fundo via Vimeo -->
+  <div class="hero-video-wrap">
+    <iframe
+      src="https://player.vimeo.com/video/1195676758?autoplay=1&loop=1&muted=1&background=1&controls=0&title=0&byline=0&portrait=0"
+      frameborder="0"
+      allow="autoplay; fullscreen"
+      class="hero-video-iframe">
+    </iframe>
+  </div>
   <!-- Overlay para garantir legibilidade do texto -->
   <div class="hero-video-overlay"></div>
   <div class="hero-overlay">
