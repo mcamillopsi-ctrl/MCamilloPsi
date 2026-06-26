@@ -979,7 +979,7 @@ Não é necessário anotar — o simples ato de pausar e perguntar já é sufici
                   </div>
                 </div>
               </div>
-              <div class="stop-cycle-info" id="stop-cycle-info">Ciclo 1 de 3</div>
+              <div class="stop-cycle-info" id="stop-cycle-info">Ciclo 1 de 5</div>
             </div>
           </div>
 
@@ -2150,7 +2150,7 @@ function stopRunPhase(){
       if(stopPhaseIdx >= STOP_PHASES.length){
         stopPhaseIdx = 0
         stopCycleCount++
-        if(stopCycleCount >= 3){
+        if(stopCycleCount >= 5){
           // 3 ciclos completos — avança para O
           label.textContent = 'Muito bem'
           timerNum.textContent = ''
@@ -2159,7 +2159,7 @@ function stopRunPhase(){
           setTimeout(()=>stopIrPara('o'), 1000)
           return
         }
-        cycleInfo.textContent = `Ciclo ${stopCycleCount + 1} de 3`
+        cycleInfo.textContent = `Ciclo ${stopCycleCount + 1} de 5`
       }
       stopRunPhase()
     }
