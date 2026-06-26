@@ -958,7 +958,7 @@ Não é necessário anotar — o simples ato de pausar e perguntar já é sufici
             <div class="stop-letter">T</div>
             <div class="stop-step-label">Respire</div>
             <div class="stop-step-title">Siga o ritmo da respiração.</div>
-            <div class="stop-breath-hint">Inspire quando o círculo expandir · Segure · Expire quando contrair<br>O exercício avança automaticamente após 3 ciclos.</div>
+            <div class="stop-breath-hint">Inspire quando o círculo expandir · Segure · Expire quando contrair<br>O exercício avança automaticamente após 5 ciclos.</div>
             <div class="stop-breath-wrap">
               <div class="stop-breath-svg-wrap">
                 <svg class="stop-timer-svg" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
@@ -2096,7 +2096,7 @@ function stopIrPara(etapa){
     if(ring){ring.style.strokeDashoffset=STOP_CIRCUMFERENCE;ring.style.stroke=STOP_PHASES[0].color}
     const inner=document.getElementById('stop-inner-circle')
     if(inner) inner.classList.remove('expanded')
-    document.getElementById('stop-cycle-info').textContent='Ciclo 1 de 3'
+    document.getElementById('stop-cycle-info').textContent='Ciclo 1 de 5'
     document.getElementById('stop-phase-label').textContent='Pronto?'
     document.getElementById('stop-timer-num').textContent=''
     if(stopAnimFrame) cancelAnimationFrame(stopAnimFrame)
