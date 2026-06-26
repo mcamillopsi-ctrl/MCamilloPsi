@@ -911,14 +911,44 @@ Não é necessário anotar — o simples ato de pausar e perguntar já é sufici
         <div class="page" id="page-stop">
           <p style="font-size:0.68rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem">STOP — Atenção Plena</p>
 
-          <!-- S -->
-          <div id="stop-s">
-            <div class="stop-letter">S</div>
-            <div class="stop-step-label">Pare</div>
-            <div class="stop-step-title">Interrompa o que está fazendo agora.</div>
-            <div class="stop-step-desc">Este exercício pede apenas alguns minutos de atenção. Coloque o celular em uma superfície plana, sente-se confortavelmente e, por um momento, pare completamente o que estava fazendo.<br><br>Você não precisa resolver nada agora. Só precisa estar aqui.</div>
+          <!-- INTRO -->
+          <div id="stop-intro">
+            <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;color:var(--navy);margin-bottom:0.25rem">Técnica STOP</h2>
+            <p style="font-size:0.78rem;font-weight:300;color:var(--text-muted);margin-bottom:1.5rem;line-height:1.7">Um exercício de atenção plena da TCC para sair do piloto automático e retomar contato com o momento presente.</p>
+            <div style="background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1.25rem;margin-bottom:1.5rem">
+              <div style="display:flex;flex-direction:column;gap:0.85rem">
+                <div style="display:flex;gap:1rem;align-items:flex-start">
+                  <span style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;color:var(--gold);line-height:1;min-width:1.5rem">S</span>
+                  <div><div style="font-size:0.72rem;font-weight:600;color:var(--navy);margin-bottom:0.15rem">Stop — Pare</div><div style="font-size:0.78rem;font-weight:300;color:var(--text-muted);line-height:1.6">Interrompa intencionalmente o que está fazendo e o fluxo de pensamentos automáticos.</div></div>
+                </div>
+                <div style="display:flex;gap:1rem;align-items:flex-start">
+                  <span style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;color:var(--gold);line-height:1;min-width:1.5rem">T</span>
+                  <div><div style="font-size:0.72rem;font-weight:600;color:var(--navy);margin-bottom:0.15rem">Take a breath — Respire</div><div style="font-size:0.78rem;font-weight:300;color:var(--text-muted);line-height:1.6">Faça uma respiração guiada para regular o sistema nervoso e criar espaço interno.</div></div>
+                </div>
+                <div style="display:flex;gap:1rem;align-items:flex-start">
+                  <span style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;color:var(--gold);line-height:1;min-width:1.5rem">O</span>
+                  <div><div style="font-size:0.72rem;font-weight:600;color:var(--navy);margin-bottom:0.15rem">Observe — Observe</div><div style="font-size:0.78rem;font-weight:300;color:var(--text-muted);line-height:1.6">Volte a atenção para dentro e para fora — o que está acontecendo em você e ao seu redor?</div></div>
+                </div>
+                <div style="display:flex;gap:1rem;align-items:flex-start">
+                  <span style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;color:var(--gold);line-height:1;min-width:1.5rem">P</span>
+                  <div><div style="font-size:0.72rem;font-weight:600;color:var(--navy);margin-bottom:0.15rem">Proceed — Prossiga com consciência</div><div style="font-size:0.78rem;font-weight:300;color:var(--text-muted);line-height:1.6">Com a mente mais oxigenada, decida como avançar com base nos fatos — não no impulso.</div></div>
+                </div>
+              </div>
+            </div>
             <div class="test-nav">
               <button class="btn-ghost" onclick="irPara('autoavaliacao')">← Voltar</button>
+              <button class="btn-action" onclick="stopIrPara('s')">Começar →</button>
+            </div>
+          </div>
+
+          <!-- S -->
+          <div id="stop-s" style="display:none">
+            <div class="stop-letter">S</div>
+            <div class="stop-step-label">Stop — Pare</div>
+            <div class="stop-step-title">Dê a si mesmo uma ordem para parar.</div>
+            <div class="stop-step-desc">Imagine uma placa de <strong style="font-weight:500;color:var(--navy)">PARE</strong> bem à sua frente — ou diga mentalmente a palavra <em>"Pare"</em> para si mesmo, com firmeza.<br><br>Esse gesto simples tem um propósito preciso: ele chama a atenção do seu próprio cérebro de volta para o presente e interrompe o fluxo de pensamentos automáticos que estava em curso.<br><br>Você não precisa resolver nada agora. Só precisa parar.</div>
+            <div class="test-nav">
+              <button class="btn-ghost" onclick="stopIrPara('intro')">← Anterior</button>
               <button class="btn-action" onclick="stopIrPara('t')">Estou pronto →</button>
             </div>
           </div>
@@ -956,16 +986,20 @@ Não é necessário anotar — o simples ato de pausar e perguntar já é sufici
           <!-- O -->
           <div id="stop-o" style="display:none">
             <div class="stop-letter">O</div>
-            <div class="stop-step-label">Observe</div>
+            <div class="stop-step-label">Observe — Observe</div>
             <div class="stop-step-title">O que está acontecendo agora?</div>
-            <div class="stop-step-desc">Sem julgamento, apenas observe. Responda com o que vier à mente — não há resposta certa.</div>
-            <div>
-              <label class="stop-obs-label">O que estou pensando agora?</label>
-              <textarea class="stop-textarea" id="stop-pensamento" placeholder="Que pensamentos estão presentes neste momento?"></textarea>
+            <div class="stop-step-desc">Sem julgamento. Olhe para dentro e para fora — não há resposta certa.</div>
+            <div style="background:var(--gold-pale);border:1px solid var(--border);border-radius:10px;padding:0.75rem 1rem;margin-bottom:1.1rem">
+              <div style="font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--navy-light);margin-bottom:0.6rem">Internamente</div>
               <label class="stop-obs-label">O que estou sentindo no corpo?</label>
-              <textarea class="stop-textarea" id="stop-corpo" placeholder="Tensão, leveza, cansaço, agitação... o que percebe fisicamente?"></textarea>
-              <label class="stop-obs-label">Que emoção está presente?</label>
-              <textarea class="stop-textarea" id="stop-emocao" placeholder="Ansiedade, tristeza, irritação, calma, indiferença..."></textarea>
+              <textarea class="stop-textarea" id="stop-corpo" placeholder="Tensão, aperto no peito, leveza, cansaço, agitação... o que percebe fisicamente?"></textarea>
+              <label class="stop-obs-label">Que pensamentos estão passando?</label>
+              <textarea class="stop-textarea" id="stop-pensamento" placeholder="Observe os pensamentos como se fossem nuvens passando — sem se prender a eles."></textarea>
+            </div>
+            <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;padding:0.75rem 1rem;margin-bottom:1.1rem">
+              <div style="font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--navy-light);margin-bottom:0.6rem">Externamente</div>
+              <label class="stop-obs-label">O que está de fato acontecendo ao meu redor?</label>
+              <textarea class="stop-textarea" id="stop-externo" placeholder="Descreva o ambiente, as pessoas, a situação — os fatos concretos, não as interpretações."></textarea>
             </div>
             <div class="test-nav">
               <button class="btn-ghost" onclick="stopIrPara('t')">← Anterior</button>
@@ -976,10 +1010,10 @@ Não é necessário anotar — o simples ato de pausar e perguntar já é sufici
           <!-- P -->
           <div id="stop-p" style="display:none">
             <div class="stop-letter">P</div>
-            <div class="stop-step-label">Prossiga</div>
-            <div class="stop-step-title">Como você quer avançar a partir daqui?</div>
-            <div class="stop-step-desc">Com essa consciência do que está acontecendo em você, reflita: o que seria mais útil ou cuidadoso fazer agora? Você pode retomar o que estava fazendo — mas com mais presença.</div>
-            <textarea class="stop-textarea" id="stop-prosseguir" style="min-height:100px" placeholder="Como quero prosseguir a partir daqui..."></textarea>
+            <div class="stop-step-label">Proceed — Prossiga com consciência</div>
+            <div class="stop-step-title">Agora que sua mente está mais oxigenada — o que faz mais sentido fazer?</div>
+            <div class="stop-step-desc">Você parou, respirou e observou o que estava acontecendo dentro e fora de você. Isso cria uma diferença: em vez de reagir ao impulso do momento, você agora pode escolher uma resposta mais alinhada com os <strong style="font-weight:500;color:var(--navy)">fatos reais da situação</strong>.<br><br>Reflita: o que seria mais útil, coerente ou cuidadoso fazer agora?</div>
+            <textarea class="stop-textarea" id="stop-prosseguir" style="min-height:110px" placeholder="Levando em conta o que observei, o que faz mais sentido fazer ou pensar agora..."></textarea>
             <div class="test-nav">
               <button class="btn-ghost" onclick="stopIrPara('o')">← Anterior</button>
               <button class="btn-action" onclick="stopFinalizar()">Concluir ✓</button>
@@ -2043,11 +2077,11 @@ function iniciarSTOP(){
   stopPhaseStartTime = null
   if(stopAnimFrame) cancelAnimationFrame(stopAnimFrame)
   irPara('stop')
-  stopIrPara('s')
+  stopIrPara('intro')
 }
 
 function stopIrPara(etapa){
-  ;['s','t','o','p','fim'].forEach(e=>{
+  ;['intro','s','t','o','p','fim'].forEach(e=>{
     const el=document.getElementById('stop-'+e)
     if(el) el.style.display='none'
   })
