@@ -310,6 +310,31 @@
     .rpd-delta{display:flex;align-items:center;gap:1rem;padding:1rem 1.25rem;background:var(--gold-pale);border-radius:14px;border:1px solid var(--border);margin-bottom:1rem}
     .rpd-delta-num{font-family:'DM Sans',sans-serif;font-size:1.8rem;font-weight:300;color:var(--navy);line-height:1}
     .rpd-delta-lbl{font-size:0.65rem;font-weight:400;color:var(--text-muted);margin-top:0.15rem}
+    /* ══ STOP ══ */
+    #page-stop{max-width:520px}
+    .stop-letter{font-family:'Cormorant Garamond',serif;font-size:5rem;font-weight:300;color:var(--gold);line-height:1;margin-bottom:0.5rem}
+    .stop-step-label{font-size:0.6rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);margin-bottom:0.35rem}
+    .stop-step-title{font-size:1rem;font-weight:400;color:var(--navy);line-height:1.4;margin-bottom:0.6rem}
+    .stop-step-desc{font-size:0.82rem;font-weight:300;color:var(--text-muted);line-height:1.75;margin-bottom:1.5rem}
+    .stop-textarea{width:100%;min-height:80px;padding:0.75rem 0.9rem;border:1px solid var(--border);border-radius:10px;font-family:'Sora',sans-serif;font-size:0.82rem;font-weight:300;color:var(--text);background:var(--white);resize:vertical;outline:none;transition:border-color 0.15s;line-height:1.7;margin-bottom:0.85rem}
+    .stop-textarea:focus{border-color:var(--gold)}
+    .stop-obs-label{font-size:0.62rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--navy);margin-bottom:0.35rem;display:block}
+    /* Breathing */
+    .stop-breath-wrap{display:flex;flex-direction:column;align-items:center;margin:1.25rem 0 1.5rem;user-select:none}
+    .stop-breath-svg-wrap{position:relative;width:220px;height:220px;margin:0 auto}
+    .stop-timer-svg{width:220px;height:220px}
+    .stop-breath-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.15rem}
+    .stop-inner-circle{width:110px;height:110px;border-radius:50%;background:var(--gold-pale);border:2px solid var(--gold);transition:transform 0.8s ease-in-out;display:flex;align-items:center;justify-content:center}
+    .stop-inner-circle.expanded{transform:scale(1.22)}
+    .stop-phase-label{font-size:0.7rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--navy-light)}
+    .stop-timer-num{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;color:var(--navy);line-height:1}
+    .stop-cycle-info{font-size:0.68rem;font-weight:400;letter-spacing:0.1em;color:var(--text-muted);margin-top:0.75rem}
+    .stop-breath-hint{font-size:0.72rem;font-weight:300;color:var(--text-muted);text-align:center;margin-bottom:0.5rem;line-height:1.6}
+    .stop-fim-card{background:var(--gold-pale);border:1px solid var(--border);border-radius:14px;padding:1.5rem;text-align:center;margin-bottom:1.5rem}
+    .stop-fim-icon{font-size:2rem;margin-bottom:0.75rem}
+    .stop-fim-title{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:300;color:var(--navy);margin-bottom:0.5rem}
+    .stop-fim-desc{font-size:0.82rem;font-weight:300;color:var(--text-muted);line-height:1.75}
+
     .rpd-enc{font-size:0.78rem;font-weight:300;color:var(--navy-light);line-height:1.85;background:var(--gold-pale);border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:0 12px 12px 0;padding:1.1rem 1.25rem;margin-bottom:1.5rem}
 
     @media(max-width:768px){
@@ -864,13 +889,113 @@ Não é necessário anotar — o simples ato de pausar e perguntar já é sufici
           </div>
 
           <div class="section-eyebrow" style="margin-top:1.75rem">Ferramentas terapêuticas</div>
-          <div class="tests-grid" style="grid-template-columns:repeat(3,1fr)">
+          <div class="tests-grid" style="grid-template-columns:repeat(2,1fr)">
             <div class="test-card" onclick="iniciarRPD()" style="border-top:2px solid var(--navy-mid)">
               <div class="test-name">Registro de Pensamentos Disfuncionais</div>
               <div class="test-desc">Exercício da TCC para identificar pensamentos automáticos, questionar sua validade e construir uma perspectiva mais equilibrada.</div>
               <div class="test-meta">7 etapas · ~10 min</div>
               <div style="font-size:0.62rem;font-weight:500;letter-spacing:0.06em;color:var(--navy-light);margin-top:0.4rem">✎ Texto livre guiado</div>
               <button class="btn-test" style="background:var(--navy-mid)">Iniciar exercício</button>
+            </div>
+            <div class="test-card" onclick="iniciarSTOP()" style="border-top:2px solid var(--gold)">
+              <div class="test-name">Técnica STOP</div>
+              <div class="test-desc">Prática de atenção plena da TCC para interromper o piloto automático, regular a respiração e retomar contato com o momento presente.</div>
+              <div class="test-meta">4 etapas · ~5 min</div>
+              <div style="font-size:0.62rem;font-weight:500;letter-spacing:0.06em;color:var(--gold);margin-top:0.4rem">◎ Inclui exercício de respiração guiada</div>
+              <button class="btn-test">Iniciar exercício</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- STOP -->
+        <div class="page" id="page-stop">
+          <p style="font-size:0.68rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem">STOP — Atenção Plena</p>
+
+          <!-- S -->
+          <div id="stop-s">
+            <div class="stop-letter">S</div>
+            <div class="stop-step-label">Pare</div>
+            <div class="stop-step-title">Interrompa o que está fazendo agora.</div>
+            <div class="stop-step-desc">Este exercício pede apenas alguns minutos de atenção. Coloque o celular em uma superfície plana, sente-se confortavelmente e, por um momento, pare completamente o que estava fazendo.<br><br>Você não precisa resolver nada agora. Só precisa estar aqui.</div>
+            <div class="test-nav">
+              <button class="btn-ghost" onclick="irPara('autoavaliacao')">← Voltar</button>
+              <button class="btn-action" onclick="stopIrPara('t')">Estou pronto →</button>
+            </div>
+          </div>
+
+          <!-- T -->
+          <div id="stop-t" style="display:none">
+            <div class="stop-letter">T</div>
+            <div class="stop-step-label">Respire</div>
+            <div class="stop-step-title">Siga o ritmo da respiração.</div>
+            <div class="stop-breath-hint">Inspire quando o círculo expandir · Segure · Expire quando contrair<br>O exercício avança automaticamente após 3 ciclos.</div>
+            <div class="stop-breath-wrap">
+              <div class="stop-breath-svg-wrap">
+                <svg class="stop-timer-svg" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="110" cy="110" r="90" fill="none" stroke="rgba(139,127,212,0.12)" stroke-width="7"/>
+                  <circle id="stop-ring" cx="110" cy="110" r="90"
+                    fill="none" stroke="#8b7fd4" stroke-width="7"
+                    stroke-linecap="round"
+                    stroke-dasharray="565.49"
+                    stroke-dashoffset="565.49"
+                    transform="rotate(-90 110 110)"/>
+                </svg>
+                <div class="stop-breath-center">
+                  <div class="stop-inner-circle" id="stop-inner-circle">
+                    <div style="display:flex;flex-direction:column;align-items:center">
+                      <span class="stop-phase-label" id="stop-phase-label">Inspire</span>
+                      <span class="stop-timer-num" id="stop-timer-num">4</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="stop-cycle-info" id="stop-cycle-info">Ciclo 1 de 3</div>
+            </div>
+          </div>
+
+          <!-- O -->
+          <div id="stop-o" style="display:none">
+            <div class="stop-letter">O</div>
+            <div class="stop-step-label">Observe</div>
+            <div class="stop-step-title">O que está acontecendo agora?</div>
+            <div class="stop-step-desc">Sem julgamento, apenas observe. Responda com o que vier à mente — não há resposta certa.</div>
+            <div>
+              <label class="stop-obs-label">O que estou pensando agora?</label>
+              <textarea class="stop-textarea" id="stop-pensamento" placeholder="Que pensamentos estão presentes neste momento?"></textarea>
+              <label class="stop-obs-label">O que estou sentindo no corpo?</label>
+              <textarea class="stop-textarea" id="stop-corpo" placeholder="Tensão, leveza, cansaço, agitação... o que percebe fisicamente?"></textarea>
+              <label class="stop-obs-label">Que emoção está presente?</label>
+              <textarea class="stop-textarea" id="stop-emocao" placeholder="Ansiedade, tristeza, irritação, calma, indiferença..."></textarea>
+            </div>
+            <div class="test-nav">
+              <button class="btn-ghost" onclick="stopIrPara('t')">← Anterior</button>
+              <button class="btn-action" onclick="stopIrPara('p')">Próxima →</button>
+            </div>
+          </div>
+
+          <!-- P -->
+          <div id="stop-p" style="display:none">
+            <div class="stop-letter">P</div>
+            <div class="stop-step-label">Prossiga</div>
+            <div class="stop-step-title">Como você quer avançar a partir daqui?</div>
+            <div class="stop-step-desc">Com essa consciência do que está acontecendo em você, reflita: o que seria mais útil ou cuidadoso fazer agora? Você pode retomar o que estava fazendo — mas com mais presença.</div>
+            <textarea class="stop-textarea" id="stop-prosseguir" style="min-height:100px" placeholder="Como quero prosseguir a partir daqui..."></textarea>
+            <div class="test-nav">
+              <button class="btn-ghost" onclick="stopIrPara('o')">← Anterior</button>
+              <button class="btn-action" onclick="stopFinalizar()">Concluir ✓</button>
+            </div>
+          </div>
+
+          <!-- FIM -->
+          <div id="stop-fim" style="display:none">
+            <div class="stop-fim-card">
+              <div class="stop-fim-icon">◎</div>
+              <div class="stop-fim-title">Exercício concluído.</div>
+              <div class="stop-fim-desc">Você pausou, respirou e observou o que estava acontecendo em você. Isso já é prática — e cada vez que você faz isso, o músculo da atenção plena se fortalece um pouco mais.</div>
+            </div>
+            <div class="result-actions">
+              <button class="btn-ghost" onclick="irPara('autoavaliacao')">Voltar</button>
+              <button class="btn-action" onclick="iniciarSTOP()">Fazer novamente</button>
             </div>
           </div>
         </div>
@@ -1897,6 +2022,122 @@ function renderSugestoes(data){
     Com base no seu último registro de autoavaliação, algumas práticas podem ser especialmente benéficas para você neste momento. Que tal dedicar um tempo para ${textoTecs}? Todas essas práticas estão disponíveis aqui na Home, sempre que você precisar. As sugestões são atualizadas automaticamente sempre que você realizar uma nova autoavaliação.
   </p>`
 }
+
+// ══════════════════════════════════════════════════════════
+// STOP — Técnica de Atenção Plena
+// ══════════════════════════════════════════════════════════
+const STOP_PHASES = [
+  { label: 'Inspire',  duration: 4, color: '#5a52a8', expand: true  },
+  { label: 'Segure',   duration: 2, color: '#8b7fd4', expand: true  },
+  { label: 'Expire',   duration: 6, color: '#2d7a4f', expand: false }
+]
+const STOP_CIRCUMFERENCE = 2 * Math.PI * 90  // r=90 → 565.49
+let stopAnimFrame = null
+let stopPhaseIdx = 0
+let stopCycleCount = 0
+let stopPhaseStartTime = null
+
+function iniciarSTOP(){
+  stopPhaseIdx = 0
+  stopCycleCount = 0
+  stopPhaseStartTime = null
+  if(stopAnimFrame) cancelAnimationFrame(stopAnimFrame)
+  irPara('stop')
+  stopIrPara('s')
+}
+
+function stopIrPara(etapa){
+  ;['s','t','o','p','fim'].forEach(e=>{
+    const el=document.getElementById('stop-'+e)
+    if(el) el.style.display='none'
+  })
+  const target=document.getElementById('stop-'+etapa)
+  if(target) target.style.display='block'
+
+  if(etapa==='t'){
+    stopPhaseIdx=0
+    stopCycleCount=0
+    // Reset ring
+    const ring=document.getElementById('stop-ring')
+    if(ring){ring.style.strokeDashoffset=STOP_CIRCUMFERENCE;ring.style.stroke=STOP_PHASES[0].color}
+    const inner=document.getElementById('stop-inner-circle')
+    if(inner) inner.classList.remove('expanded')
+    document.getElementById('stop-cycle-info').textContent='Ciclo 1 de 3'
+    document.getElementById('stop-phase-label').textContent='Pronto?'
+    document.getElementById('stop-timer-num').textContent=''
+    if(stopAnimFrame) cancelAnimationFrame(stopAnimFrame)
+    // Pequeno delay para o usuário se preparar
+    setTimeout(()=>stopRunPhase(), 1200)
+  }
+}
+
+function stopRunPhase(){
+  const phase = STOP_PHASES[stopPhaseIdx]
+  const ring  = document.getElementById('stop-ring')
+  const inner = document.getElementById('stop-inner-circle')
+  const label = document.getElementById('stop-phase-label')
+  const timerNum = document.getElementById('stop-timer-num')
+  const cycleInfo = document.getElementById('stop-cycle-info')
+  if(!ring) return
+
+  // Atualiza cor do anel e texto
+  ring.style.stroke = phase.color
+  ring.style.strokeDashoffset = STOP_CIRCUMFERENCE  // reset anel
+  label.textContent = phase.label
+
+  // Círculo interno: expande em inspire/segure, contrai em expire
+  // Atualiza a duração da transição CSS para a duração da fase
+  inner.style.transition = `transform ${phase.duration * 0.9}s ease-in-out`
+  if(phase.expand){
+    inner.classList.add('expanded')
+  } else {
+    inner.classList.remove('expanded')
+  }
+
+  const phaseDurationMs = phase.duration * 1000
+  stopPhaseStartTime = performance.now()
+
+  function tick(now){
+    const elapsed = now - stopPhaseStartTime
+    const progress = Math.min(elapsed / phaseDurationMs, 1)
+
+    // Anel preenche progressivamente
+    ring.style.strokeDashoffset = STOP_CIRCUMFERENCE * (1 - progress)
+
+    // Contador regressivo
+    const remaining = Math.max(1, Math.ceil((phaseDurationMs - elapsed) / 1000))
+    timerNum.textContent = remaining
+
+    if(progress < 1){
+      stopAnimFrame = requestAnimationFrame(tick)
+    } else {
+      // Avança para próxima fase
+      stopPhaseIdx++
+      if(stopPhaseIdx >= STOP_PHASES.length){
+        stopPhaseIdx = 0
+        stopCycleCount++
+        if(stopCycleCount >= 3){
+          // 3 ciclos completos — avança para O
+          label.textContent = 'Muito bem'
+          timerNum.textContent = ''
+          inner.classList.remove('expanded')
+          cycleInfo.textContent = 'Concluído ✓'
+          setTimeout(()=>stopIrPara('o'), 1000)
+          return
+        }
+        cycleInfo.textContent = `Ciclo ${stopCycleCount + 1} de 3`
+      }
+      stopRunPhase()
+    }
+  }
+
+  stopAnimFrame = requestAnimationFrame(tick)
+}
+
+function stopFinalizar(){
+  stopIrPara('fim')
+}
+
 
 // ══════════════════════════════════════════════════════════
 // RPD — Registro de Pensamentos Disfuncionais
