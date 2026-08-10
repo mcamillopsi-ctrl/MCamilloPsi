@@ -12,19 +12,19 @@
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
     :root{
-      --navy:#2d2867;
-      --navy-mid:#3d3580;
-      --navy-light:#5a52a8;
-      --slate:#9290b5;
-      --slate-light:#cbc9e2;
-      --gold:#8b7fd4;
-      --gold-light:#a99de0;
-      --gold-pale:#f0effe;
-      --cream:#f5f3ff;
-      --white:#ffffff;
-      --text:#2d2867;
-      --text-muted:#7b79a8;
-      --border:#e2dfef;
+      --navy:#0b0b14;
+      --navy-mid:#16182c;
+      --navy-light:#3d3d47;
+      --slate:#7d7c85;
+      --slate-light:#cfced3;
+      --gold:#7d8fae;
+      --gold-light:#9db0cc;
+      --gold-pale:#eef1f5;
+      --cream:#e4e3e6;
+      --white:#f2f2f2;
+      --text:#0b0b14;
+      --text-muted:#6f6e73;
+      --border:#dcdbde;
       --green:#2d7a4f;
       --red:#a32d2d;
       --yellow:#c8960a;
@@ -38,7 +38,7 @@
     /* ══ LOGIN ══ */
     #screen-login{position:fixed;inset:0;background:var(--navy);display:flex;align-items:center;justify-content:center;z-index:1000}
     #screen-login.hidden{display:none}
-    .login-box{background:var(--white);padding:2.5rem 2rem;width:100%;max-width:380px;border-radius:20px;box-shadow:0 8px 40px rgba(45,40,103,0.15)}
+    .login-box{background:var(--white);padding:2.5rem 2rem;width:100%;max-width:380px;border-radius:20px;box-shadow:0 8px 40px rgba(11,11,20,0.15)}
     .login-logo{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:600;letter-spacing:0.06em;color:var(--navy);text-transform:uppercase;margin-bottom:0.25rem}
     .login-logo span{color:var(--gold)}
     .login-sub{font-size:0.78rem;font-weight:300;color:var(--text-muted);margin-bottom:1.75rem}
@@ -48,7 +48,7 @@
     .field{margin-bottom:1rem}
     .field label{display:block;font-size:0.65rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:0.4rem}
     .field input{width:100%;padding:0.6rem 0.85rem;border:1px solid var(--border);border-radius:10px;font-family:'Sora',sans-serif;font-size:0.85rem;font-weight:300;color:var(--text);background:var(--white);transition:border-color 0.15s;outline:none}
-    .field input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(184,151,74,0.12)}
+    .field input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(125,143,174,0.12)}
     .btn-primary{width:100%;padding:0.65rem;background:var(--navy);color:var(--white);border:none;border-radius:10px;font-family:'Sora',sans-serif;font-size:0.72rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;transition:background 0.15s;margin-top:0.5rem}
     .btn-primary:hover{background:var(--navy-mid)}
     .form-error{font-size:0.75rem;color:var(--red);margin-top:0.6rem;display:none}
@@ -77,7 +77,7 @@
     .topnav-logo span{color:var(--gold)}
     .topnav-right{display:flex;align-items:center;gap:0.75rem}
     .topnav-user{font-size:0.75rem;font-weight:300;color:var(--slate-light)}
-    .btn-logout{font-size:0.65rem;font-weight:400;letter-spacing:0.06em;text-transform:uppercase;padding:0.28rem 0.75rem;border:1px solid rgba(194,205,224,0.25);color:var(--slate-light);background:transparent;border-radius:5px;cursor:pointer;transition:all 0.15s}
+    .btn-logout{font-size:0.65rem;font-weight:400;letter-spacing:0.06em;text-transform:uppercase;padding:0.28rem 0.75rem;border:1px solid rgba(207,206,211,0.25);color:var(--slate-light);background:transparent;border-radius:5px;cursor:pointer;transition:all 0.15s}
     .btn-logout:hover{border-color:var(--slate-light);color:var(--white)}
 
     /* ══ LAYOUT ══ */
@@ -111,7 +111,7 @@
 
     /* ══ STAT CARDS ══ */
     .stat-row{display:grid;grid-template-columns:repeat(2,1fr);gap:0.85rem;margin-bottom:1.5rem}
-    .stat-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1rem 1.1rem;border-top:2px solid var(--gold);box-shadow:0 2px 12px rgba(139,127,212,0.07)}
+    .stat-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1rem 1.1rem;border-top:2px solid var(--gold);box-shadow:0 2px 12px rgba(125,143,174,0.07)}
     .stat-num{font-family:'DM Sans',sans-serif;font-size:1.85rem;font-weight:300;color:var(--navy);line-height:1;margin-bottom:0.25rem}
     .stat-lbl{font-size:0.62rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted)}
 
@@ -132,12 +132,12 @@
 
     /* ══ MULTI-GRÁFICO ══ */
     .graficos-grid{display:flex;flex-direction:column;gap:1rem;margin-bottom:1.5rem}
-    .chart-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1.25rem;box-shadow:0 2px 12px rgba(139,127,212,0.06)}
+    .chart-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1.25rem;box-shadow:0 2px 12px rgba(125,143,174,0.06)}
     .chart-card-title{font-size:0.72rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--navy);margin-bottom:0.2rem}
     .chart-card-sub{font-size:0.68rem;font-weight:300;color:var(--text-muted);margin-bottom:1rem;line-height:1.55}
     .tests-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0.85rem;margin-bottom:1.5rem}
-    .test-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1.1rem;cursor:pointer;transition:border-color 0.15s,box-shadow 0.15s;box-shadow:0 2px 8px rgba(139,127,212,0.06)}
-    .test-card:hover{border-color:var(--gold);box-shadow:0 4px 20px rgba(139,127,212,0.18)}
+    .test-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1.1rem;cursor:pointer;transition:border-color 0.15s,box-shadow 0.15s;box-shadow:0 2px 8px rgba(125,143,174,0.06)}
+    .test-card:hover{border-color:var(--gold);box-shadow:0 4px 20px rgba(125,143,174,0.18)}
     .test-name{font-size:0.88rem;font-weight:600;color:var(--navy);margin-bottom:0.2rem}
     .test-desc{font-size:0.74rem;font-weight:300;color:var(--text-muted);line-height:1.55;margin-bottom:0.6rem}
     .test-meta{font-size:0.62rem;font-weight:500;letter-spacing:0.07em;text-transform:uppercase;color:var(--text-muted)}
@@ -148,7 +148,7 @@
     .btn-test:hover{background:var(--navy-mid)}
 
     /* ══ HISTORICO ══ */
-    .history-card{background:var(--white);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:1.5rem;box-shadow:0 2px 8px rgba(139,127,212,0.06)}
+    .history-card{background:var(--white);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:1.5rem;box-shadow:0 2px 8px rgba(125,143,174,0.06)}
     .history-table{width:100%;border-collapse:collapse}
     .history-table th{font-size:0.6rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);padding:0.6rem 1rem;text-align:left;background:var(--cream);border-bottom:1px solid var(--border)}
     .history-table td{font-size:0.78rem;font-weight:300;color:var(--text);padding:0.65rem 1rem;border-bottom:1px solid var(--border)}
@@ -185,7 +185,7 @@
 
     /* ══ CADASTRO ══ */
     #page-cadastro{max-width:440px}
-    .form-block{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1.25rem;margin-bottom:1rem;box-shadow:0 2px 8px rgba(139,127,212,0.06)}
+    .form-block{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1.25rem;margin-bottom:1rem;box-shadow:0 2px 8px rgba(125,143,174,0.06)}
     .form-block-title{font-size:0.68rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:1rem}
     .form-row{margin-bottom:0.9rem}
     .form-row label{display:block;font-size:0.65rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);margin-bottom:0.35rem}
@@ -195,9 +195,9 @@
     .save-err{font-size:0.75rem;color:var(--red);display:none;margin-top:0.6rem}
 
     /* ══ TÉCNICAS ══ */
-    .tecnica-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1rem;cursor:pointer;transition:border-color 0.15s,box-shadow 0.15s;box-shadow:0 2px 8px rgba(139,127,212,0.06)}
+    .tecnica-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1rem;cursor:pointer;transition:border-color 0.15s,box-shadow 0.15s;box-shadow:0 2px 8px rgba(125,143,174,0.06)}
     .tecnica-card:hover{border-color:var(--gold)}
-    .tecnica-card.open{border-color:var(--gold);box-shadow:0 4px 20px rgba(139,127,212,0.18)}
+    .tecnica-card.open{border-color:var(--gold);box-shadow:0 4px 20px rgba(125,143,174,0.18)}
     .tecnica-tag{display:inline-block;font-size:0.58rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:0.15rem 0.55rem;border-radius:20px;background:var(--gold-pale);color:var(--gold);margin-bottom:0.5rem}
     .tecnica-header{display:flex;justify-content:space-between;align-items:flex-start;gap:0.4rem}
     .tecnica-title{font-size:0.74rem;font-weight:600;color:var(--navy);line-height:1.4}
@@ -207,10 +207,10 @@
     .tecnica-card.open .tecnica-expanded{display:block}
     .tecnica-sec{margin-bottom:0.75rem}
     .tecnica-sec:last-child{margin-bottom:0}
-    .tecnica-sec-lbl{font-size:0.62rem;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:var(--navy);margin-bottom:0.3rem;padding-bottom:0.18rem;border-bottom:1px solid rgba(13,31,60,0.12)}
+    .tecnica-sec-lbl{font-size:0.62rem;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:var(--navy);margin-bottom:0.3rem;padding-bottom:0.18rem;border-bottom:1px solid rgba(11,11,20,0.12)}
     .tecnica-sec-txt{font-size:0.71rem;font-weight:400;line-height:1.75;color:var(--text)}
     .tecnica-pratica{background:var(--navy);border-radius:6px;padding:0.75rem 0.9rem;font-size:0.7rem;font-weight:300;line-height:1.75;color:rgba(255,255,255,0.88);white-space:pre-line}
-    .tec-hint{font-size:0.72rem;font-weight:300;color:var(--text-muted);background:var(--gold-pale);border:1px solid rgba(139,127,212,0.2);border-radius:10px;padding:0.6rem 0.9rem;margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem}
+    .tec-hint{font-size:0.72rem;font-weight:300;color:var(--text-muted);background:var(--gold-pale);border:1px solid rgba(125,143,174,0.2);border-radius:10px;padding:0.6rem 0.9rem;margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem}
     .tec-categoria{font-size:0.62rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);margin:1.75rem 0 0.65rem;display:inline-block;background:var(--cream);padding:0.25rem 0.65rem;border-radius:20px}
     .tec-lista{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0.65rem}
     .lembrete-aviso{font-size:0.7rem;font-weight:500;color:var(--red);margin-top:0.3rem;line-height:1.5}
@@ -220,12 +220,12 @@
     #tecnicas-na-home .tecnica-arrow{display:none!important}
     #tecnicas-na-home .tecnica-expanded{display:none!important}
     /* Botão Ver técnica */
-    .btn-ver-tec{display:inline-block;margin-top:0.65rem;font-size:0.54rem;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-muted);cursor:pointer;background:rgba(138,154,181,0.13);border:none;padding:0.18rem 0.55rem;border-radius:20px;transition:background 0.15s}
-    .btn-ver-tec:hover{background:rgba(138,154,181,0.25);color:var(--navy)}
+    .btn-ver-tec{display:inline-block;margin-top:0.65rem;font-size:0.54rem;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-muted);cursor:pointer;background:rgba(125,143,174,0.13);border:none;padding:0.18rem 0.55rem;border-radius:20px;transition:background 0.15s}
+    .btn-ver-tec:hover{background:rgba(125,143,174,0.25);color:var(--navy)}
     /* Overlay de detalhe */
-    .tec-detalhe-overlay{display:none;position:fixed;inset:0;background:rgba(13,31,60,0.5);z-index:500;align-items:flex-start;justify-content:center;padding:2rem 1rem;overflow-y:auto}
+    .tec-detalhe-overlay{display:none;position:fixed;inset:0;background:rgba(11,11,20,0.5);z-index:500;align-items:flex-start;justify-content:center;padding:2rem 1rem;overflow-y:auto}
     .tec-detalhe-overlay.active{display:flex}
-    .tec-detalhe-box{background:var(--white);border-radius:20px;box-shadow:0 8px 40px rgba(45,40,103,0.15);width:100%;max-width:600px;padding:2rem;position:relative;margin:auto}
+    .tec-detalhe-box{background:var(--white);border-radius:20px;box-shadow:0 8px 40px rgba(11,11,20,0.15);width:100%;max-width:600px;padding:2rem;position:relative;margin:auto}
     .tec-detalhe-box .tecnica-sec{margin-bottom:1.1rem}
     .tec-detalhe-box .tecnica-tag{font-size:0.72rem;padding:0.2rem 0.7rem}
     .tec-detalhe-box .tecnica-title{font-size:0.9rem;font-weight:600;margin-bottom:0.15rem}
@@ -238,7 +238,7 @@
 
     /* ══ REDE ══ */
     .rede-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0.85rem;margin-bottom:1.5rem}
-    .rede-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1rem;box-shadow:0 2px 8px rgba(139,127,212,0.06)}
+    .rede-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1rem;box-shadow:0 2px 8px rgba(125,143,174,0.06)}
     .rede-name{font-size:0.82rem;font-weight:600;color:var(--navy);margin-bottom:0.12rem}
     .rede-type{font-size:0.6rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:0.55rem}
     .rede-info{font-size:0.74rem;font-weight:300;color:var(--text-muted);line-height:1.7}
@@ -250,7 +250,7 @@
 
     /* ══ CONSULTAS ══ */
     .consultas-stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:0.85rem;margin-bottom:1.5rem}
-    .consulta-item{background:var(--white);border:1px solid var(--border);border-radius:14px;box-shadow:0 2px 8px rgba(139,127,212,0.06);padding:0.85rem 1rem;display:flex;align-items:center;gap:0.85rem}
+    .consulta-item{background:var(--white);border:1px solid var(--border);border-radius:14px;box-shadow:0 2px 8px rgba(125,143,174,0.06);padding:0.85rem 1rem;display:flex;align-items:center;gap:0.85rem}
     .consulta-item.agendada{border-left:3px solid var(--yellow)}
     .consulta-item.realizada{border-left:3px solid var(--green);opacity:0.8}
     .consulta-item.cancelada{border-left:3px solid var(--red);opacity:0.7}
@@ -304,7 +304,7 @@
     .rpd-progress{height:2px;background:var(--border);border-radius:2px;margin-bottom:0.5rem}
     .rpd-progress-bar{height:100%;background:var(--gold);border-radius:2px;transition:width 0.3s}
     .rpd-counter{font-size:0.68rem;font-weight:300;color:var(--text-muted);margin-bottom:1.5rem}
-    .rpd-result-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1.25rem;margin-bottom:0.85rem;box-shadow:0 2px 8px rgba(139,127,212,0.06)}
+    .rpd-result-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1.25rem;margin-bottom:0.85rem;box-shadow:0 2px 8px rgba(125,143,174,0.06)}
     .rpd-result-label{font-size:0.58rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:0.35rem}
     .rpd-result-text{font-size:0.8rem;font-weight:300;color:var(--text);line-height:1.7}
     .rpd-delta{display:flex;align-items:center;gap:1rem;padding:1rem 1.25rem;background:var(--gold-pale);border-radius:14px;border:1px solid var(--border);margin-bottom:1rem}
@@ -850,7 +850,7 @@ Não é necessário anotar — o simples ato de pausar e perguntar já é sufici
         <div class="page" id="page-autoavaliacao">
           <h1 class="page-title">Autoavaliação</h1>
           <p class="page-sub">Instrumentos de acompanhamento do seu bem-estar emocional.</p>
-          <div style="background:var(--gold-pale);border:1px solid rgba(184,151,74,0.25);border-radius:8px;padding:0.85rem 1.1rem;margin-bottom:1.5rem;font-size:0.75rem;font-weight:300;color:var(--navy-light);line-height:1.7">
+          <div style="background:var(--gold-pale);border:1px solid rgba(125,143,174,0.25);border-radius:8px;padding:0.85rem 1.1rem;margin-bottom:1.5rem;font-size:0.75rem;font-weight:300;color:var(--navy-light);line-height:1.7">
             💡 Estes instrumentos ajudam o seu psicólogo a acompanhar a sua evolução ao longo do processo terapêutico. <strong style="font-weight:500">Não têm caráter diagnóstico</strong> e não substituem a avaliação clínica.
           </div>
           <div class="tests-grid">
@@ -962,9 +962,9 @@ Não é necessário anotar — o simples ato de pausar e perguntar já é sufici
             <div class="stop-breath-wrap">
               <div class="stop-breath-svg-wrap">
                 <svg class="stop-timer-svg" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="110" cy="110" r="90" fill="none" stroke="rgba(139,127,212,0.12)" stroke-width="7"/>
+                  <circle cx="110" cy="110" r="90" fill="none" stroke="rgba(125,143,174,0.12)" stroke-width="7"/>
                   <circle id="stop-ring" cx="110" cy="110" r="90"
-                    fill="none" stroke="#8b7fd4" stroke-width="7"
+                    fill="none" stroke="#7d8fae" stroke-width="7"
                     stroke-linecap="round"
                     stroke-dasharray="565.49"
                     stroke-dashoffset="565.49"
@@ -1443,7 +1443,7 @@ Não é necessário anotar — o simples ato de pausar e perguntar já é sufici
           <h1 class="page-title">Minhas consultas</h1>
           <p class="page-sub">Acompanhe suas sessões agendadas e realizadas.</p>
 
-          <div style="background:var(--gold-pale);border:1px solid rgba(184,151,74,0.2);border-radius:8px;padding:0.85rem 1.1rem;margin-bottom:1.25rem;font-size:0.73rem;font-weight:300;color:var(--navy-light);line-height:1.75">
+          <div style="background:var(--gold-pale);border:1px solid rgba(125,143,174,0.2);border-radius:8px;padding:0.85rem 1.1rem;margin-bottom:1.25rem;font-size:0.73rem;font-weight:300;color:var(--navy-light);line-height:1.75">
             💡 Se os seus agendamentos já são feitos por outro canal — como Plataforma de psicoterapia — esta seção pode ser ignorada. Ela é mais útil caso o seu acompanhamento se torne particular, momento em que o controle de sessões passará a ser feito diretamente aqui.
           </div>
 
@@ -1482,7 +1482,7 @@ Não é necessário anotar — o simples ato de pausar e perguntar já é sufici
           </div>
 
           <!-- Modal novo paciente -->
-          <div id="modal-novo-pac" style="display:none;position:fixed;inset:0;background:rgba(13,31,60,0.55);z-index:500;align-items:center;justify-content:center;padding:1rem">
+          <div id="modal-novo-pac" style="display:none;position:fixed;inset:0;background:rgba(11,11,20,0.55);z-index:500;align-items:center;justify-content:center;padding:1rem">
             <div style="background:var(--cream);border-radius:10px;padding:2rem;width:100%;max-width:400px;box-shadow:0 8px 40px rgba(0,0,0,0.18)">
               <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem">
                 <div>
@@ -2061,8 +2061,8 @@ function renderSugestoes(data){
 // STOP — Técnica de Atenção Plena
 // ══════════════════════════════════════════════════════════
 const STOP_PHASES = [
-  { label: 'Inspire',  duration: 4, color: '#5a52a8', expand: true  },
-  { label: 'Segure',   duration: 2, color: '#8b7fd4', expand: true  },
+  { label: 'Inspire',  duration: 4, color: '#3d3d47', expand: true  },
+  { label: 'Segure',   duration: 2, color: '#7d8fae', expand: true  },
   { label: 'Expire',   duration: 6, color: '#2d7a4f', expand: false }
 ]
 const STOP_CIRCUMFERENCE = 2 * Math.PI * 90  // r=90 → 565.49
@@ -2432,12 +2432,12 @@ function renderGraficos(data){
     porTeste[k].push({x:fmt(r.criado_em),y:r.pontuacao})
   })
   const config={
-    'PHQ-9':{cor:'#b8974a',desc:'Sintomas depressivos — escala 0 a 27',max:27,refs:[
+    'PHQ-9':{cor:'#7d8fae',desc:'Sintomas depressivos — escala 0 a 27',max:27,refs:[
       {y:5,label:'Leve',color:'rgba(200,150,10,0.4)'},
       {y:10,label:'Moderado',color:'rgba(184,97,10,0.4)'},
       {y:20,label:'Grave',color:'rgba(163,45,45,0.4)'}
     ]},
-    'GAD-7':{cor:'#0d1f3c',desc:'Sintomas de ansiedade generalizada — escala 0 a 21',max:21,refs:[
+    'GAD-7':{cor:'#3d3d47',desc:'Sintomas de ansiedade generalizada — escala 0 a 21',max:21,refs:[
       {y:5,label:'Leve',color:'rgba(200,150,10,0.4)'},
       {y:10,label:'Moderado',color:'rgba(184,97,10,0.4)'},
       {y:15,label:'Grave',color:'rgba(163,45,45,0.4)'}
@@ -2475,7 +2475,7 @@ function renderGraficos(data){
         borderWidth:2,borderDash:[6,4],
         label:{display:true,content:r.label,position:r.position||'end',
           font:{family:'Sora',size:10,weight:'600'},
-          color:'#0d1f3c',backgroundColor:'rgba(255,255,255,0.96)',padding:{x:6,y:3},
+          color:'#0b0b14',backgroundColor:'rgba(255,255,255,0.96)',padding:{x:6,y:3},
           borderRadius:3}
       }
     })
@@ -2496,8 +2496,8 @@ function renderGraficos(data){
           tooltip:{callbacks:{label:i=>`${nome}: ${i.parsed.y} — ${testes[nome.toLowerCase().replace('-','')]?testes[nome.toLowerCase().replace('-','')].classificar(i.parsed.y).label:i.parsed.y}`}}
         },
         scales:{
-          x:{ticks:{font:{family:'Sora',size:10}},title:{display:true,text:'Data',font:{family:'Sora',size:10},color:'#8a9ab5'}},
-          y:{min:cfg.min||0,max:cfg.max,ticks:{font:{family:'Sora',size:10}},title:{display:true,text:'Pontuação',font:{family:'Sora',size:10},color:'#8a9ab5'},grid:{color:'rgba(194,205,224,0.3)'}}
+          x:{ticks:{font:{family:'Sora',size:10}},title:{display:true,text:'Data',font:{family:'Sora',size:10},color:'#7d8fae'}},
+          y:{min:cfg.min||0,max:cfg.max,ticks:{font:{family:'Sora',size:10}},title:{display:true,text:'Pontuação',font:{family:'Sora',size:10},color:'#7d8fae'},grid:{color:'rgba(207,206,211,0.3)'}}
         }
       }
     })
@@ -2961,14 +2961,14 @@ function renderPsiGraficos(pacList,resultados,filtroId){
   Object.values(psiGraficos).forEach(g=>{try{g.destroy()}catch(e){}})
   psiGraficos={}
   const CONFIGS={
-    'PHQ-9': {id:'canvas-psi-phq9',cor:'#b8974a',max:27,min:0,cortes:[{y:5,label:'Leve',p:'start'},{y:10,label:'Moderado',p:'center'},{y:15,label:'Grave',p:'end'}]},
+    'PHQ-9': {id:'canvas-psi-phq9',cor:'#7d8fae',max:27,min:0,cortes:[{y:5,label:'Leve',p:'start'},{y:10,label:'Moderado',p:'center'},{y:15,label:'Grave',p:'end'}]},
     'GAD-7': {id:'canvas-psi-gad7',cor:'#2a4a73',max:21,min:0,cortes:[{y:5,label:'Leve',p:'start'},{y:10,label:'Moderado',p:'center'},{y:15,label:'Grave',p:'end'}]},
     'DASS-21':{id:'canvas-psi-dass21',cor:'#2d7a4f',max:126,min:0,cortes:[{y:14,label:'Leve',p:'start'},{y:28,label:'Moderado',p:'center'},{y:42,label:'Grave',p:'end'}]},
     'MSQ-BR': {id:'canvas-psi-msq',cor:'#5b8fc9',max:40,min:10,cortes:[{y:25,label:'Dif. leve',p:'start'},{y:28,label:'Dif. mod.',p:'center'},{y:31,label:'Dif. grave',p:'end'}]}
   }
   const nomeCurto=p=>(p.nome||p.email||'').split(' ')[0]
-  const makeAnno=cfg=>{const a={};cfg.cortes.forEach((c,i)=>{a['c'+i]={type:'line',yMin:c.y,yMax:c.y,borderColor:'rgba(163,45,45,0.5)',borderWidth:1.5,borderDash:[5,4],label:{display:true,content:c.label,position:c.p,font:{family:'Sora',size:9,weight:'600'},color:'#0d1f3c',backgroundColor:'rgba(255,255,255,0.92)',padding:{x:5,y:3},borderRadius:3}}});return a}
-  const scaleOpts=cfg=>({x:{ticks:{font:{family:'Sora',size:10}}},y:{min:cfg.min,max:cfg.max,ticks:{font:{family:'Sora',size:10}},grid:{color:'rgba(194,205,224,0.3)'}}})
+  const makeAnno=cfg=>{const a={};cfg.cortes.forEach((c,i)=>{a['c'+i]={type:'line',yMin:c.y,yMax:c.y,borderColor:'rgba(163,45,45,0.5)',borderWidth:1.5,borderDash:[5,4],label:{display:true,content:c.label,position:c.p,font:{family:'Sora',size:9,weight:'600'},color:'#0b0b14',backgroundColor:'rgba(255,255,255,0.92)',padding:{x:5,y:3},borderRadius:3}}});return a}
+  const scaleOpts=cfg=>({x:{ticks:{font:{family:'Sora',size:10}}},y:{min:cfg.min,max:cfg.max,ticks:{font:{family:'Sora',size:10}},grid:{color:'rgba(207,206,211,0.3)'}}})
   Object.entries(CONFIGS).forEach(([teste,cfg])=>{
     const canvas=document.getElementById(cfg.id)
     if(!canvas)return
@@ -2984,7 +2984,7 @@ function renderPsiGraficos(pacList,resultados,filtroId){
       const ultPac={}
       ;[...resultados].reverse().forEach(r=>{const k=(r.teste.split('—')[0].trim()).replace('PSQI-BR','MSQ-BR');if(k===teste&&!(r.paciente_id in ultPac))ultPac[r.paciente_id]=r.pontuacao})
       const vals=pacList.map(p=>ultPac[p.id]!==undefined?ultPac[p.id]:null)
-      const colors=vals.map(v=>v===null?'rgba(194,205,224,0.4)':cfg.cor+'cc')
+      const colors=vals.map(v=>v===null?'rgba(207,206,211,0.4)':cfg.cor+'cc')
       psiGraficos[teste]=new Chart(canvas,{type:'bar',data:{labels:pacList.map(nomeCurto),datasets:[{label:teste,data:vals,backgroundColor:colors,borderWidth:0,borderRadius:4}]},options:{responsive:true,plugins:{legend:{display:false},annotation:{annotations},tooltip:{callbacks:{label:i=>i.parsed.y===null?'Sem dados':`${teste}: ${i.parsed.y}`}}},scales:scaleOpts(cfg)}})
     }
   })
