@@ -15,21 +15,21 @@
     }
     html{scroll-behavior:smooth}
     body{font-family:'DM Sans',sans-serif;background:var(--linen);color:var(--navy);overflow-x:hidden}
-    nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.25rem 3rem;display:flex;justify-content:space-between;align-items:center;transition:background 0.4s,box-shadow 0.4s;background:rgba(228,227,230,0.94);backdrop-filter:blur(10px);box-shadow:0 1px 0 rgba(11,11,20,0.08)}
-    nav.scrolled{background:rgba(228,227,230,0.94);backdrop-filter:blur(10px);box-shadow:0 1px 0 rgba(11,11,20,0.08)}
-    .logo{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;letter-spacing:0.08em;color:var(--navy);text-transform:uppercase;transition:color 0.4s}
-    nav.scrolled .logo{color:var(--navy)}
-    .logo span{color:var(--gold)}
-    nav.scrolled .logo span{color:var(--gold)}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.25rem 3rem;display:flex;justify-content:space-between;align-items:center;transition:background 0.4s,box-shadow 0.4s;background:rgba(11,11,20,0.94);backdrop-filter:blur(10px);box-shadow:0 1px 0 rgba(255,255,255,0.08)}
+    nav.scrolled{background:rgba(11,11,20,0.94);backdrop-filter:blur(10px);box-shadow:0 1px 0 rgba(255,255,255,0.08)}
+    .logo{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;letter-spacing:0.08em;color:var(--white);text-transform:uppercase;transition:color 0.4s}
+    nav.scrolled .logo{color:var(--white)}
+    .logo span{color:var(--gold-light)}
+    nav.scrolled .logo span{color:var(--gold-light)}
     .nav-links{display:flex;gap:2rem;list-style:none}
-    .nav-links a{font-size:0.78rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--navy-light);text-decoration:none;transition:color 0.2s}
-    nav.scrolled .nav-links a{color:var(--navy-light)}
-    .nav-links a:hover{color:var(--gold)}
-    nav.scrolled .nav-links a:hover{color:var(--gold)}
-    .nav-btn{font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:0.5rem 1.25rem;border:1px solid var(--gold);color:var(--gold);background:transparent;border-radius:2px;cursor:pointer;transition:all 0.2s;text-decoration:none}
-    .nav-btn:hover{background:var(--gold);color:var(--white)}
-    nav.scrolled .nav-btn{border-color:var(--gold);color:var(--gold)}
-    nav.scrolled .nav-btn:hover{background:var(--gold);color:var(--white)}
+    .nav-links a{font-size:0.78rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:rgba(242,242,242,0.75);text-decoration:none;transition:color 0.2s}
+    nav.scrolled .nav-links a{color:rgba(242,242,242,0.75)}
+    .nav-links a:hover{color:var(--gold-light)}
+    nav.scrolled .nav-links a:hover{color:var(--gold-light)}
+    .nav-btn{font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:0.5rem 1.25rem;border:1px solid var(--gold-light);color:var(--gold-light);background:transparent;border-radius:2px;cursor:pointer;transition:all 0.2s;text-decoration:none}
+    .nav-btn:hover{background:var(--gold-light);color:var(--navy)}
+    nav.scrolled .nav-btn{border-color:var(--gold-light);color:var(--gold-light)}
+    nav.scrolled .nav-btn:hover{background:var(--gold-light);color:var(--navy)}
     /* HERO */
     .hero{position:relative;height:100vh;min-height:600px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:linear-gradient(170deg,#d8d7db 0%,#dedde1 20%,#e6e5e8 55%,#ece9e4 100%)}
     .hero-video-wrap{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none}
@@ -155,6 +155,7 @@
     @media(max-width:768px){
       nav{padding:1rem 1.5rem}.nav-links{display:none}
       .hero-split{grid-template-columns:1fr;min-height:auto;padding-top:4.5rem}
+      .hero-split::before{inset:0}
       .hero-split-left{padding:2.5rem 1.5rem}
       .hero-split-right{padding:0 1.5rem 2.5rem}
       .hero-photo-wrap{min-height:340px}
@@ -270,7 +271,7 @@
   <p class="section-label">Especialidades</p>
   <h2 class="section-title">Como posso<br><em>te ajudar</em></h2>
   <div class="svc-grid">
-    <div class="svc-card"><div class="svc-num">01</div><div class="svc-name">Psicoterapia Individual</div><div class="svc-desc">Consulta em ambiente online, individualizado e sigiloso, com duração de 60 minutos.</div></div>
+    <div class="svc-card"><div class="svc-num">01</div><div class="svc-name">Psicoterapia Individual</div><div class="svc-desc">Consulta em ambiente online, individualizado e sigiloso, com duração de 50 minutos.</div></div>
     <div class="svc-card"><div class="svc-num">02</div><div class="svc-name">Monitoramento Contínuo</div><div class="svc-desc">Acompanhamento de indicadores de saúde mental ao longo do tempo pela plataforma exclusiva para pacientes.</div></div>
     <div class="svc-card"><div class="svc-num">03</div><div class="svc-name">Ferramentas e Técnicas</div><div class="svc-desc">Acesso a ferramentas e técnicas para manejo de sintomas depressivos, ansiosos e de estresse pela plataforma exclusiva para pacientes.</div></div>
     <div class="svc-card"><div class="svc-num">04</div><div class="svc-name">Suporte via WhatsApp</div><div class="svc-desc">Acompanhamento contínuo via WhatsApp para apoios adicionais e urgências.</div></div>
