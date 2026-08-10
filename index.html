@@ -8,47 +8,47 @@
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
     :root{
-      --navy:#2d2867;--navy-mid:#3d3580;--navy-light:#5a52a8;
-      --slate:#9290b5;--slate-light:#cbc9e2;
-      --gold:#8b7fd4;--gold-light:#a99de0;--gold-pale:#f0effe;
-      --cream:#f5f0e8;--linen:#ede7d9;--white:#ffffff;--text-body:#3d3860;
+      --navy:#0b0b14;--navy-mid:#16182c;--navy-light:#3d3d47;
+      --slate:#7d7c85;--slate-light:#cfced3;
+      --gold:#7d8fae;--gold-light:#9db0cc;--gold-pale:#eef1f5;
+      --cream:#e4e3e6;--linen:#e6e5e8;--white:#f2f2f2;--text-body:#6f6e73;
     }
     html{scroll-behavior:smooth}
     body{font-family:'DM Sans',sans-serif;background:var(--linen);color:var(--navy);overflow-x:hidden}
-    nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.25rem 3rem;display:flex;justify-content:space-between;align-items:center;transition:background 0.4s,box-shadow 0.4s}
-    nav.scrolled{background:rgba(245,240,232,0.94);backdrop-filter:blur(10px);box-shadow:0 1px 0 rgba(139,127,212,0.12)}
-    .logo{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;letter-spacing:0.08em;color:var(--white);text-transform:uppercase;transition:color 0.4s;text-shadow:0 1px 6px rgba(0,0,0,0.2)}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.25rem 3rem;display:flex;justify-content:space-between;align-items:center;transition:background 0.4s,box-shadow 0.4s;background:rgba(228,227,230,0.94);backdrop-filter:blur(10px);box-shadow:0 1px 0 rgba(11,11,20,0.08)}
+    nav.scrolled{background:rgba(228,227,230,0.94);backdrop-filter:blur(10px);box-shadow:0 1px 0 rgba(11,11,20,0.08)}
+    .logo{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;letter-spacing:0.08em;color:var(--navy);text-transform:uppercase;transition:color 0.4s}
     nav.scrolled .logo{color:var(--navy)}
-    .logo span{color:rgba(200,190,240,0.95)}
+    .logo span{color:var(--gold)}
     nav.scrolled .logo span{color:var(--gold)}
     .nav-links{display:flex;gap:2rem;list-style:none}
-    .nav-links a{font-size:0.78rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.85);text-decoration:none;transition:color 0.2s;text-shadow:0 1px 4px rgba(0,0,0,0.2)}
+    .nav-links a{font-size:0.78rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--navy-light);text-decoration:none;transition:color 0.2s}
     nav.scrolled .nav-links a{color:var(--navy-light)}
-    .nav-links a:hover{color:var(--white)}
+    .nav-links a:hover{color:var(--gold)}
     nav.scrolled .nav-links a:hover{color:var(--gold)}
-    .nav-btn{font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:0.5rem 1.25rem;border:1px solid rgba(255,255,255,0.55);color:rgba(255,255,255,0.9);background:transparent;border-radius:20px;cursor:pointer;transition:all 0.2s;text-decoration:none}
-    .nav-btn:hover{background:rgba(255,255,255,0.12)}
+    .nav-btn{font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:0.5rem 1.25rem;border:1px solid var(--gold);color:var(--gold);background:transparent;border-radius:2px;cursor:pointer;transition:all 0.2s;text-decoration:none}
+    .nav-btn:hover{background:var(--gold);color:var(--white)}
     nav.scrolled .nav-btn{border-color:var(--gold);color:var(--gold)}
     nav.scrolled .nav-btn:hover{background:var(--gold);color:var(--white)}
     /* HERO */
-    .hero{position:relative;height:100vh;min-height:600px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:linear-gradient(170deg,#cfc8ea 0%,#dcd5ed 20%,#e8e0d5 55%,#e0d5c0 100%)}
+    .hero{position:relative;height:100vh;min-height:600px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:linear-gradient(170deg,#d8d7db 0%,#dedde1 20%,#e6e5e8 55%,#ece9e4 100%)}
     .hero-video-wrap{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none}
     .hero-video-iframe{position:absolute;top:50%;left:50%;width:177.78vh;min-width:100%;height:56.25vw;min-height:100%;transform:translate(-50%,-50%);border:none}
-    .hero-video-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(to bottom, rgba(20,16,60,0.38) 0%, rgba(20,16,60,0.28) 40%, rgba(20,16,60,0.48) 100%)}
+    .hero-video-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(to bottom, rgba(10,10,18,0.4) 0%, rgba(10,10,18,0.3) 40%, rgba(10,10,18,0.5) 100%)}
     .hero-overlay{position:relative;z-index:2;text-align:center;padding:0 2rem;max-width:700px}
     .hero-crp{font-size:0.65rem;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.82);margin-bottom:1.75rem;text-shadow:0 1px 8px rgba(0,0,0,0.3)}
     .hero-phrase{font-family:'Cormorant Garamond',serif;font-size:clamp(1.75rem,3.2vw,2.65rem);font-weight:400;font-style:italic;line-height:1.5;color:rgba(255,255,255,0.96);margin-bottom:1.75rem;text-shadow:0 2px 20px rgba(0,0,0,0.35)}
     .hero-name{font-family:'Cormorant Garamond',serif;font-size:0.95rem;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.78);margin-bottom:2.5rem;text-shadow:0 1px 8px rgba(0,0,0,0.3)}
-    .hero-cta{display:inline-block;font-family:'DM Sans',sans-serif;font-size:0.75rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;padding:0.85rem 2.5rem;background:var(--navy);color:var(--white);border:none;border-radius:30px;cursor:pointer;text-decoration:none;transition:background 0.2s,box-shadow 0.2s;box-shadow:0 4px 20px rgba(45,40,103,0.2)}
-    .hero-cta:hover{background:var(--navy-mid);box-shadow:0 6px 28px rgba(45,40,103,0.28)}
+    .hero-cta{display:inline-block;font-family:'DM Sans',sans-serif;font-size:0.75rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;padding:0.85rem 2.5rem;background:var(--navy);color:var(--white);border:none;border-radius:2px;cursor:pointer;text-decoration:none;transition:background 0.2s,box-shadow 0.2s;box-shadow:0 4px 20px rgba(11,11,20,0.25)}
+    .hero-cta:hover{background:var(--navy-mid);box-shadow:0 6px 28px rgba(11,11,20,0.32)}
     .hero-scroll{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:0.5rem;animation:bounce 2.5s ease-in-out infinite}
     .hero-scroll span{font-size:0.58rem;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.65)}
     .hero-scroll svg{width:16px;height:16px;stroke:rgba(255,255,255,0.6);fill:none;stroke-width:1.5}
     @keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(7px)}}
     /* Tree video — sem animações CSS necessárias */
     /* SECTIONS */
-    .sw{background:rgba(255,252,247,0.88)}
-    .sw-alt{background:rgba(243,237,226,0.86)}
+    .sw{background:rgba(228,227,230,0.9)}
+    .sw-alt{background:rgba(242,242,242,0.9)}
     section{padding:5.5rem 6rem}
     .section-label{font-size:0.68rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
     .section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3vw,2.8rem);font-weight:300;line-height:1.2;color:var(--navy);margin-bottom:2.5rem}
@@ -57,26 +57,26 @@
     .intro-text p{font-size:0.95rem;font-weight:300;line-height:1.85;color:var(--text-body);margin-bottom:1.25rem}
     .intro-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,2.5vw,2.4rem);font-weight:300;line-height:1.2;color:var(--navy);margin-bottom:1.5rem}
     .cta-row{display:flex;gap:1rem;align-items:center;margin-top:2rem}
-    .btn-p{font-family:'DM Sans',sans-serif;font-size:0.78rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:0.85rem 2rem;background:var(--navy);color:var(--white);border:none;border-radius:30px;cursor:pointer;transition:background 0.2s;text-decoration:none;display:inline-block}
+    .btn-p{font-family:'DM Sans',sans-serif;font-size:0.78rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:0.85rem 2rem;background:var(--navy);color:var(--white);border:none;border-radius:2px;cursor:pointer;transition:background 0.2s;text-decoration:none;display:inline-block}
     .btn-p:hover{background:var(--navy-mid)}
-    .btn-g{font-family:'DM Sans',sans-serif;font-size:0.78rem;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;padding:0.85rem 2rem;background:transparent;color:var(--navy-light);border:1px solid rgba(90,82,168,0.3);border-radius:30px;cursor:pointer;transition:all 0.2s}
+    .btn-g{font-family:'DM Sans',sans-serif;font-size:0.78rem;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;padding:0.85rem 2rem;background:transparent;color:var(--navy-light);border:1px solid rgba(11,11,20,0.22);border-radius:2px;cursor:pointer;transition:all 0.2s}
     .btn-g:hover{border-color:var(--gold);color:var(--gold)}
     .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
-    .stat-card{border-left:2px solid var(--gold);padding:1rem 1.25rem;background:rgba(255,255,255,0.55);border-radius:0 14px 14px 0}
+    .stat-card{border-left:2px solid var(--gold);padding:1rem 1.25rem;background:rgba(242,242,242,0.65);border-radius:0 2px 2px 0}
     .stat-num{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;color:var(--navy);line-height:1}
     .stat-lbl{font-size:0.7rem;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;color:var(--slate);margin-top:0.35rem}
     /* ABOUT */
     .about-s{display:grid;grid-template-columns:1fr 2fr;gap:5rem;align-items:start;padding:5.5rem 6rem}
-    .about-img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:18px;display:block;box-shadow:0 8px 40px rgba(45,40,103,0.1)}
+    .about-img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:3px;display:block;box-shadow:0 8px 40px rgba(11,11,20,0.14)}
     .about-body p{font-size:0.95rem;font-weight:300;line-height:1.85;color:var(--text-body);margin-bottom:1.25rem}
     .about-quote{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:300;font-style:italic;line-height:1.8;color:var(--navy-light);border-left:2px solid var(--gold);border-radius:0;padding-left:1.25rem;margin:1.5rem 0 1.25rem}
     .about-qa{font-size:0.78rem;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;color:var(--slate);margin-top:0.5rem;padding-left:1.25rem}
-    .creds{display:flex;flex-direction:column;gap:0.75rem;margin-top:2rem;padding-top:2rem;border-top:1px solid rgba(139,127,212,0.15)}
+    .creds{display:flex;flex-direction:column;gap:0.75rem;margin-top:2rem;padding-top:2rem;border-top:1px solid rgba(11,11,20,0.12)}
     .cred-item{display:flex;gap:1rem;align-items:flex-start;font-size:0.82rem;font-weight:300;color:var(--text-body)}
     .cred-year{font-weight:500;color:var(--navy);min-width:3.5rem;font-size:0.8rem}
     /* ABORDAGEM */
     .ab-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:3rem}
-    .ab-card{background:rgba(255,255,255,0.65);padding:2.5rem;border-radius:20px;border-top:2px solid var(--gold);box-shadow:0 2px 20px rgba(139,127,212,0.07)}
+    .ab-card{background:rgba(242,242,242,0.72);padding:2.5rem;border-radius:3px;border-top:2px solid var(--gold);box-shadow:0 2px 20px rgba(11,11,20,0.08)}
     .ab-ey{font-size:0.68rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem}
     .ab-title{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;line-height:1.2;color:var(--navy);margin-bottom:1.25rem}
     .ab-card p{font-size:0.9rem;font-weight:300;line-height:1.85;color:var(--text-body);margin-bottom:1rem}
@@ -85,10 +85,10 @@
     .svc-s{background:var(--navy);padding:5.5rem 6rem}
     .svc-s .section-label{color:var(--gold-light)}
     .svc-s .section-title{color:var(--white)}
-    .svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:rgba(90,82,168,0.25);border-radius:18px;overflow:hidden;margin-top:1rem}
-    .svc-card{background:rgba(45,40,103,0.82);padding:2.5rem 2rem;border:1px solid rgba(90,82,168,0.18);transition:background 0.25s}
-    .svc-card:hover{background:rgba(61,53,128,0.88)}
-    .svc-num{font-family:'Cormorant Garamond',serif;font-size:3.5rem;font-weight:300;color:rgba(139,127,212,0.45);line-height:1;margin-bottom:1rem}
+    .svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden;margin-top:1rem}
+    .svc-card{background:rgba(18,22,45,0.85);padding:2.5rem 2rem;border:1px solid rgba(255,255,255,0.08);transition:background 0.25s}
+    .svc-card:hover{background:rgba(255,255,255,0.05)}
+    .svc-num{font-family:'Cormorant Garamond',serif;font-size:3.5rem;font-weight:300;color:rgba(255,255,255,0.15);line-height:1;margin-bottom:1rem}
     .svc-name{font-size:0.9rem;font-weight:500;letter-spacing:0.05em;color:var(--white);margin-bottom:0.75rem}
     .svc-desc{font-size:0.82rem;font-weight:300;line-height:1.7;color:var(--slate-light)}
     /* PORTAL */
@@ -100,25 +100,73 @@
     .contact-s{background:var(--navy);padding:5.5rem 6rem;text-align:center}
     .contact-s .section-label{color:var(--gold-light)}
     .contact-in{max-width:540px;margin:0 auto}
-    .contact-email{display:inline-flex;align-items:center;gap:0.75rem;font-size:1rem;font-weight:300;letter-spacing:0.05em;color:var(--gold-light);text-decoration:none;border-bottom:1px solid rgba(169,157,224,0.25);padding-bottom:0.25rem;transition:border-color 0.2s}
+    .contact-email{display:inline-flex;align-items:center;gap:0.75rem;font-size:1rem;font-weight:300;letter-spacing:0.05em;color:var(--gold-light);text-decoration:none;border-bottom:1px solid rgba(157,176,204,0.3);padding-bottom:0.25rem;transition:border-color 0.2s}
     .contact-email:hover{border-color:var(--gold-light)}
     .contact-note{font-size:0.85rem;font-weight:300;color:var(--slate-light);margin-top:1.5rem;line-height:1.7}
-    footer{background:var(--navy);padding:2.5rem 6rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(90,82,168,0.2)}
+    footer{background:var(--navy);padding:2.5rem 6rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,0.1)}
     .fl{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--white)}
     .fl span{color:var(--gold-light)}
     .fc{font-size:0.75rem;font-weight:300;color:var(--slate)}
     .fcrp{font-size:0.75rem;font-weight:400;letter-spacing:0.08em;color:var(--gold-light)}
     .fade-in{opacity:0;transform:translateY(22px);transition:opacity 0.75s ease,transform 0.75s ease}
     .fade-in.visible{opacity:1;transform:translateY(0)}
+    /* HERO SPLIT (layout novo) */
+    .hero-split{display:grid;grid-template-columns:1.05fr 0.95fr;min-height:92vh;padding-top:5.5rem;background:var(--linen);position:relative}
+    .hero-split::before{content:'';position:absolute;inset:0 50% 0 0;background-image:radial-gradient(rgba(11,11,20,0.05) 1px,transparent 1px);background-size:24px 24px;-webkit-mask-image:linear-gradient(to bottom,transparent,black 15%,black 80%,transparent);mask-image:linear-gradient(to bottom,transparent,black 15%,black 80%,transparent);pointer-events:none}
+    .hero-split-left{padding:2rem 4rem 4rem 6rem;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:1}
+    .hero-split .stat-grid{margin-top:2.5rem;max-width:480px}
+    .hero-split-right{position:relative;padding:2rem 6rem 4rem 0}
+    .hero-photo-wrap{position:relative;height:100%;min-height:520px;border-radius:2px;overflow:hidden;background:var(--navy)}
+    .hero-photo-wrap::after{content:'';position:absolute;top:16px;right:16px;width:26px;height:26px;border-top:1px solid rgba(255,255,255,0.4);border-right:1px solid rgba(255,255,255,0.4);z-index:2}
+    .hero-photo-img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(35%) contrast(1.05)}
+    .hero-photo-shade{position:absolute;inset:0;background:linear-gradient(to top,rgba(5,5,10,0.85) 0%,rgba(5,5,10,0.15) 45%,transparent 65%)}
+    .hero-photo-quote{position:absolute;left:2rem;right:2rem;bottom:2rem;z-index:1}
+    .hero-photo-quote p{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:300;font-style:italic;line-height:1.6;color:rgba(255,255,255,0.95);border-left:2px solid var(--gold);padding-left:1rem}
+    .hero-photo-quote span{display:block;margin-top:0.75rem;padding-left:1rem;font-size:0.7rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.6)}
+    /* TRAJETORIA (layout novo p/ secao Sobre) */
+    .traj-s{padding:5.5rem 6rem}
+    .traj-bio{max-width:760px;margin-bottom:3rem}
+    .traj-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:5rem;align-items:start}
+    .traj-grid .creds{border-top:none;padding-top:0;margin-top:0}
+    .traj-side{border-left:1px solid rgba(11,11,20,0.12);padding-left:2rem}
+    .traj-side .about-quote{margin-top:0}
+    .traj-crp{font-size:0.75rem;font-weight:400;letter-spacing:0.1em;color:var(--slate);margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(11,11,20,0.12)}
+    /* COMO TRABALHAMOS: centraliza cabecalho + badge numerado circular */
+    .svc-s{text-align:center}
+    .svc-s .section-label,.svc-s .section-title{text-align:center}
+    .svc-grid{text-align:left;max-width:1000px;margin:1rem auto 0}
+    .svc-num{width:2.4rem;height:2.4rem;border-radius:50%;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:400;color:var(--gold-light);margin-bottom:1.25rem}
+    /* DEPOIMENTOS (secao nova) */
+    .testim-s{padding:5.5rem 6rem;text-align:center}
+    .testim-s .section-label,.testim-s .section-title{text-align:center}
+    .testim-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:1rem;text-align:left}
+    .testim-card{background:var(--white);border:1px solid rgba(11,11,20,0.08);border-radius:2px;padding:1.75rem}
+    .testim-top{display:flex;align-items:center;gap:0.75rem;margin-bottom:1.25rem}
+    .testim-avatar{width:2.4rem;height:2.4rem;border-radius:50%;background:var(--cream);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--navy);flex-shrink:0}
+    .testim-quote{font-size:0.85rem;font-weight:300;color:var(--text-body);line-height:1.75}
+    .testim-name{font-size:0.78rem;font-weight:600;color:var(--navy)}
+    .testim-note{font-size:0.72rem;font-weight:300;color:var(--slate);margin-top:2rem}
+    /* CTA final (2 botoes) */
+    .contact-cta-row{display:flex;gap:1rem;justify-content:center;margin-top:2rem}
+    .btn-contact-outline{font-family:'DM Sans',sans-serif;font-size:0.78rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:0.85rem 2rem;background:transparent;color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.35);border-radius:2px;cursor:pointer;transition:all 0.2s;text-decoration:none;display:inline-block}
+    .btn-contact-outline:hover{border-color:rgba(255,255,255,0.7);background:rgba(255,255,255,0.05)}
     @media(max-width:768px){
       nav{padding:1rem 1.5rem}.nav-links{display:none}
-      .intro-s,.about-s{grid-template-columns:1fr;gap:2.5rem;padding:3rem 1.5rem}
+      .hero-split{grid-template-columns:1fr;min-height:auto;padding-top:4.5rem}
+      .hero-split-left{padding:2.5rem 1.5rem}
+      .hero-split-right{padding:0 1.5rem 2.5rem}
+      .hero-photo-wrap{min-height:340px}
+      .traj-s,.about-s{padding:3rem 1.5rem}
+      .traj-grid{grid-template-columns:1fr;gap:2.5rem}
+      .traj-side{border-left:none;padding-left:0;border-top:1px solid rgba(11,11,20,0.12);padding-top:2rem}
       section{padding:3rem 1.5rem}.svc-s{padding:3rem 1.5rem}
       .svc-grid{grid-template-columns:1fr}.ab-grid{grid-template-columns:1fr}
+      .testim-s{padding:3rem 1.5rem}
+      .testim-grid{grid-template-columns:1fr}
       .contact-s,.portal-s{padding:3rem 1.5rem}
+      .contact-cta-row{flex-direction:column}
       footer{padding:2rem 1.5rem;flex-direction:column;gap:0.75rem;text-align:center}
       .cta-row{flex-direction:column}
-      .hero-phrase{font-size:1.6rem}
     }
   </style>
 </head>
@@ -136,42 +184,11 @@
 </nav>
 
 <!-- HERO -->
-<section class="hero">
-  <!-- Vídeo de fundo via Vimeo -->
-  <div class="hero-video-wrap">
-    <iframe
-      src="https://player.vimeo.com/video/1195676758?autoplay=1&loop=1&muted=1&background=1&controls=0&title=0&byline=0&portrait=0"
-      frameborder="0"
-      allow="autoplay; fullscreen"
-      class="hero-video-iframe">
-    </iframe>
-  </div>
-  <!-- Overlay para garantir legibilidade do texto -->
-  <div class="hero-video-overlay"></div>
-  <div class="hero-overlay">
-    <p class="hero-crp fade-in">Psicólogo Clínico · CRP 06/193290</p>
-    <p class="hero-phrase fade-in" style="animation-delay:0.2s">"Cuidar de si mesmo é o ponto<br>de partida de tudo que importa."</p>
-    <p class="hero-name fade-in" style="animation-delay:0.4s">Matheus Camillo</p>
-    <a class="hero-cta fade-in" style="animation-delay:0.6s" href="https://cal.com/matheus-camillo-m6tgtd/online-psychotherapy?overlayCalendar=true" target="_blank" rel="noopener noreferrer">Agendar consulta</a>
-  </div>
-  <div class="hero-scroll">
-    <span>Continuar</span>
-    <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-  </div>
-</section>
-
-<!-- INTRO -->
-<div class="sw">
-  <div class="intro-s fade-in" id="sobre">
-    <div class="stat-grid">
-      <div class="stat-card"><div class="stat-num">7+</div><div class="stat-lbl">Anos de atuação</div></div>
-      <div class="stat-card"><div class="stat-num">100%</div><div class="stat-lbl">Online</div></div>
-      <div class="stat-card"><div class="stat-num">TCC e Neurociência</div><div class="stat-lbl">Baseada em evidências</div></div>
-      <div class="stat-card"><div class="stat-num">60 min</div><div class="stat-lbl">Por sessão</div></div>
-    </div>
-    <div class="intro-text">
-      <p class="section-label">Psicologia Clínica</p>
-      <h2 class="intro-title">Se você chegou até aqui,<br>orgulhe-se.</h2>
+<section class="hero-split" id="sobre">
+  <div class="hero-split-left">
+    <p class="section-label fade-in">Psicólogo Clínico · CRP 06/193290</p>
+    <h2 class="intro-title fade-in">Se você chegou até aqui,<br><em>orgulhe-se.</em></h2>
+    <div class="intro-text fade-in">
       <p>Você já deu um passo importante em prol da sua saúde mental. Como terapeuta cognitivo, meu objetivo é ajudar meus pacientes a identificar suas aspirações, valores e propósito, focando em seus pontos fortes e recursos para superar obstáculos e chegar a conclusões mais coerentes sobre si mesmos e suas experiências.</p>
       <p>Caso entenda que posso ser útil na sua busca, ficarei realizado em contribuir nessa jornada.</p>
       <div class="cta-row">
@@ -179,26 +196,44 @@
         <a class="btn-g" href="#abordagem">Saiba mais</a>
       </div>
     </div>
-  </div>
-</div>
-
-<!-- SOBRE -->
-<div class="sw-alt">
-  <section class="about-s fade-in">
-    <div>
-      <img src="foto-matheus.jpeg" alt="Foto de perfil - Matheus Camillo" class="about-img">
+    <div class="stat-grid fade-in">
+      <div class="stat-card"><div class="stat-num">7+</div><div class="stat-lbl">Anos de atuação</div></div>
+      <div class="stat-card"><div class="stat-num">100%</div><div class="stat-lbl">Online</div></div>
+      <div class="stat-card"><div class="stat-num">TCC e Neurociência</div><div class="stat-lbl">Baseada em evidências</div></div>
+      <div class="stat-card"><div class="stat-num">60 min</div><div class="stat-lbl">Por sessão</div></div>
     </div>
-    <div class="about-body">
-      <p class="section-label">Sobre mim</p>
-      <h2 class="section-title">Uma abordagem<br>humana e científica</h2>
-      <p>Com uma cabeça repleta de dúvidas sobre a vida e sobre o futuro, há 12 anos tomava a decisão de me tornar psicólogo. A motivação para isso? Ajudar pessoas a se afastarem do sofrimento e, assim, contribuir com a sociedade. 12 anos se passaram, e o propósito segue o mesmo.</p>
-      <p>Essa jornada me levou por caminhos que moldaram profundamente minha forma de trabalhar. Passei por grandes empresas e por startups de tecnologia em crescimento acelerado — ambientes que me expuseram a uma diversidade enorme de perfis, pressões e desafios humanos. Foi nesse percurso que consolidei algo que carrego como princípio: uma atuação firmemente ancorada na ciência, comprometida com as melhores evidências disponíveis, mas que nunca perde de vista o que há de mais essencial no processo terapêutico — a conexão humana.</p>
-      <blockquote class="about-quote">"Conheça todas as teorias, domine todas as técnicas, mas ao tocar uma alma humana, seja apenas outra alma humana."</blockquote>
-      <p class="about-qa">— Carl Jung</p>
+  </div>
+  <div class="hero-split-right fade-in">
+    <div class="hero-photo-wrap">
+      <img src="foto-matheus.jpeg" alt="Foto de perfil - Matheus Camillo" class="hero-photo-img">
+      <div class="hero-photo-shade"></div>
+      <div class="hero-photo-quote">
+        <p>"Cuidar de si mesmo é o ponto de partida de tudo que importa."</p>
+        <span>Matheus Camillo</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE / TRAJETORIA -->
+<div class="sw-alt">
+  <section class="traj-s fade-in">
+    <p class="section-label">Sobre mim</p>
+    <h2 class="section-title">Uma abordagem<br><em>humana e científica</em></h2>
+    <div class="traj-bio">
+      <p>Há doze anos, com a cabeça cheia de dúvidas sobre a vida e sobre o futuro, tomei a decisão de me tornar psicólogo. A motivação? Ajudar pessoas a se afastarem do sofrimento e, com isso, contribuir um pouco com a sociedade. O tempo passou, mas o propósito permanece o mesmo.</p>
+      <p>Essa jornada moldou profundamente a forma como trabalho e como penso. No âmbito organizacional, passei por grandes empresas e por startups em crescimento acelerado, ambientes que me expuseram a uma diversidade imensa de perfis, pressões e desafios humanos. No âmbito clínico, o contato constante com as mais diversas formas de sofrimento e vulnerabilidade também transformou meu modo de enxergar a vida, um aprendizado que segue em curso. Desse percurso nasceu um princípio que carrego até hoje: uma atuação firmemente ancorada na ciência, comprometida com as melhores evidências disponíveis, mas que nunca perde de vista o que há de mais essencial no processo terapêutico, a conexão humana.</p>
+    </div>
+    <div class="traj-grid">
       <div class="creds">
         <div class="cred-item"><span class="cred-year">2020</span>Graduação em Psicologia — Universidade Presbiteriana Mackenzie e Universidade Paulista</div>
         <div class="cred-item"><span class="cred-year">2024</span>Especialização em Terapia Cognitivo-Comportamental — Pontifícia Universidade Católica do Rio Grande do Sul (PUC-RS)</div>
         <div class="cred-item"><span class="cred-year">2026</span>Especializando em Neurociências do Comportamento — Pontifícia Universidade Católica do Rio Grande do Sul (PUC-RS)</div>
+      </div>
+      <div class="traj-side">
+        <blockquote class="about-quote">"Conheça todas as teorias, domine todas as técnicas, mas ao tocar uma alma humana, seja apenas outra alma humana."</blockquote>
+        <p class="about-qa">— Carl Jung</p>
+        <div class="traj-crp">CRP 06/193290</div>
       </div>
     </div>
   </section>
@@ -231,7 +266,7 @@
 <!-- ESPECIALIDADES -->
 <section class="svc-s fade-in" id="especialidades">
   <p class="section-label">Especialidades</p>
-  <h2 class="section-title">Como posso<br>te ajudar</h2>
+  <h2 class="section-title">Como posso<br><em>te ajudar</em></h2>
   <div class="svc-grid">
     <div class="svc-card"><div class="svc-num">01</div><div class="svc-name">Psicoterapia Individual</div><div class="svc-desc">Consulta em ambiente online, individualizado e sigiloso, com duração de 50 minutos.</div></div>
     <div class="svc-card"><div class="svc-num">02</div><div class="svc-name">Monitoramento Contínuo</div><div class="svc-desc">Acompanhamento de indicadores de saúde mental ao longo do tempo pela plataforma exclusiva para pacientes.</div></div>
@@ -240,12 +275,35 @@
   </div>
 </section>
 
+<!-- DEPOIMENTOS -->
+<div class="sw">
+  <section class="testim-s fade-in">
+    <p class="section-label">Depoimentos</p>
+    <h2 class="section-title">O que dizem<br><em>do trabalho</em></h2>
+    <div class="testim-grid">
+      <div class="testim-card">
+        <div class="testim-top"><span class="testim-avatar">E</span><span class="testim-name">Emerson G.</span></div>
+        <p class="testim-quote">"Matheus é um profissional excelente, sempre muito empático, cuidadoso com a história do paciente"</p>
+      </div>
+      <div class="testim-card">
+        <div class="testim-top"><span class="testim-avatar">S</span><span class="testim-name">Stefhany B.</span></div>
+        <p class="testim-quote">"Matheus é um profissional muito atencioso, preocupado com o bem estar de seus pacientes. Demonstra escuta atenta, respeito e sensibilidade durante as sessões, o processo com ele tem sido muito positivo para mim, mesmo com idas e vindas!"</p>
+      </div>
+      <div class="testim-card">
+        <div class="testim-top"><span class="testim-avatar">R</span><span class="testim-name">Ryan</span></div>
+        <p class="testim-quote">"Matheus is very kind and attentive and gives calming responses and is happy to work long term."</p>
+      </div>
+    </div>
+    <p class="testim-note">Avaliações reais de pacientes atendidos</p>
+  </section>
+</div>
+
 <!-- PORTAL -->
 <div class="sw">
   <section class="portal-s fade-in">
     <div class="portal-in">
       <div class="portal-icon">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8b7fd4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1" fill="#8b7fd4"/></svg>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7d8fae" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1" fill="#7d8fae"/></svg>
       </div>
       <p class="section-label">Área do Paciente</p>
       <h2 class="section-title" style="font-size:2rem">Seu espaço de<br>acompanhamento</h2>
@@ -261,12 +319,12 @@
 <section class="contact-s fade-in" id="contato">
   <div class="contact-in">
     <p class="section-label">Contato</p>
-    <h2 class="section-title" style="color:var(--white);margin-bottom:2rem">Vamos conversar?</h2>
-    <a class="contact-email" href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#109;&#99;&#97;&#109;&#105;&#108;&#108;&#111;&#112;&#115;&#105;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#a99de0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
-      &#109;&#99;&#97;&#109;&#105;&#108;&#108;&#111;&#112;&#115;&#105;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;
-    </a>
-    <p class="contact-note">Respondo em até 24 horas em dias úteis.</p>
+    <h2 class="section-title" style="color:var(--white);margin-bottom:1.25rem"><em>Vamos conversar?</em></h2>
+    <p class="contact-note" style="margin-top:0">Respondo em até 24 horas em dias úteis.</p>
+    <div class="contact-cta-row">
+      <a class="btn-p" href="https://cal.com/matheus-camillo-m6tgtd/online-psychotherapy?overlayCalendar=true" target="_blank" rel="noopener noreferrer">Agendar consulta</a>
+      <a class="btn-contact-outline" href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#109;&#99;&#97;&#109;&#105;&#108;&#108;&#111;&#112;&#115;&#105;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;">Enviar e-mail</a>
+    </div>
   </div>
 </section>
 
@@ -281,7 +339,7 @@ const nav=document.getElementById('main-nav')
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>60)},{passive:true})
 const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:0.1})
 document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el))
-setTimeout(()=>{document.querySelectorAll('.hero .fade-in').forEach(el=>el.classList.add('visible'))},80)
+setTimeout(()=>{document.querySelectorAll('.hero-split .fade-in').forEach(el=>el.classList.add('visible'))},80)
 </script>
 </body>
 </html>
