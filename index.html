@@ -72,6 +72,7 @@
     .about-quote{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:300;font-style:italic;line-height:1.8;color:var(--navy-light);border-left:2px solid var(--gold);border-radius:0;padding-left:1.25rem;margin:1.5rem 0 1.25rem}
     .about-qa{font-size:0.78rem;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;color:var(--slate);margin-top:0.5rem;padding-left:1.25rem}
     .creds{display:flex;flex-direction:column;gap:0.75rem;margin-top:2rem;padding-top:2rem;border-top:1px solid rgba(11,11,20,0.12)}
+    .creds>*{min-width:0}
     .cred-item{display:flex;gap:1rem;align-items:flex-start;font-size:0.82rem;font-weight:300;color:var(--text-body)}
     .cred-year{font-weight:500;color:var(--navy);min-width:3.5rem;font-size:0.8rem}
     /* ABORDAGEM */
@@ -114,6 +115,7 @@
     .hero-split{display:grid;grid-template-columns:1.05fr 0.95fr;min-height:92vh;padding-top:5.5rem;background:var(--linen);position:relative}
     .hero-split::before{content:'';position:absolute;inset:0 50% 0 0;background-image:radial-gradient(rgba(11,11,20,0.05) 1px,transparent 1px);background-size:24px 24px;-webkit-mask-image:linear-gradient(to bottom,transparent,black 15%,black 80%,transparent);mask-image:linear-gradient(to bottom,transparent,black 15%,black 80%,transparent);pointer-events:none}
     .hero-split-left{padding:2rem 4rem 4rem 6rem;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:1}
+    .hero-split-left>*{min-width:0}
     .hero-split .stat-grid{margin-top:2.5rem;max-width:480px}
     .hero-split-right{position:relative;padding:2rem 6rem 4rem 0}
     .hero-photo-wrap{position:relative;height:100%;min-height:520px;border-radius:2px;overflow:hidden;background:var(--navy)}
