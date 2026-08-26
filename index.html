@@ -154,6 +154,24 @@
     .contact-cta-row{display:flex;gap:1rem;justify-content:center;margin-top:2rem}
     .btn-contact-outline{font-family:'DM Sans',sans-serif;font-size:0.78rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:0.85rem 2rem;background:transparent;color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.35);border-radius:2px;cursor:pointer;transition:all 0.2s;text-decoration:none;display:inline-block}
     .btn-contact-outline:hover{border-color:rgba(255,255,255,0.7);background:rgba(255,255,255,0.05)}
+    /* DUVIDAS (FAQ - secao nova) */
+    .faq-s{text-align:center}
+    .faq-s .section-label,.faq-s .section-title{text-align:center}
+    .faq-list{max-width:780px;margin:1rem auto 0;text-align:left}
+    .faq-item{border-bottom:1px solid rgba(11,11,20,0.12)}
+    .faq-item:first-child{border-top:1px solid rgba(11,11,20,0.12)}
+    .faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;gap:1.5rem;padding:1.5rem 0;background:none;border:none;cursor:pointer;text-align:left;font-family:'DM Sans',sans-serif;font-size:0.95rem;font-weight:500;color:var(--navy)}
+    .faq-q:hover{color:var(--gold)}
+    .faq-icon{position:relative;flex-shrink:0;width:1.6rem;height:1.6rem;border:1px solid var(--gold);border-radius:50%;transition:background 0.3s}
+    .faq-icon span{position:absolute;top:50%;left:50%;background:var(--gold);transition:transform 0.3s,background 0.3s}
+    .faq-icon .h{width:9px;height:1px;transform:translate(-50%,-50%)}
+    .faq-icon .v{width:1px;height:9px;transform:translate(-50%,-50%)}
+    .faq-item.open .faq-icon{background:var(--gold)}
+    .faq-item.open .faq-icon span{background:var(--white)}
+    .faq-item.open .faq-icon .v{transform:translate(-50%,-50%) rotate(90deg) scaleY(0)}
+    .faq-a{max-height:0;overflow:hidden;transition:max-height 0.4s ease}
+    .faq-a-in{padding:0 2.5rem 1.5rem 0}
+    .faq-a-in p{font-size:0.88rem;font-weight:300;line-height:1.85;color:var(--text-body)}
     @media(max-width:768px){
       nav{padding:1rem 1.5rem}.nav-links{display:none}
       .hero-split{grid-template-columns:1fr;min-height:auto;padding-top:4.5rem}
@@ -172,22 +190,22 @@
       .contact-cta-row{flex-direction:column}
       footer{padding:2rem 1.5rem;flex-direction:column;gap:0.75rem;text-align:center}
       .cta-row{flex-direction:column}
+      .faq-a-in{padding-right:1.25rem}
     }
   </style>
 </head>
 <body>
-
 <nav id="main-nav">
   <div class="logo">MCamillo<span>Psi</span></div>
   <ul class="nav-links">
     <li><a href="#sobre">Sobre</a></li>
     <li><a href="#abordagem">Abordagem</a></li>
     <li><a href="#acompanhamento">Acompanhamento</a></li>
+    <li><a href="#duvidas">Dúvidas</a></li>
     <li><a href="#contato">Contato</a></li>
   </ul>
   <a class="nav-btn" href="paciente.html">Área do Paciente</a>
 </nav>
-
 <!-- HERO -->
 <section class="hero-split" id="sobre">
   <div class="hero-split-left">
@@ -219,7 +237,6 @@
     </div>
   </div>
 </section>
-
 <!-- SOBRE / TRAJETORIA -->
 <div class="sw-alt">
   <section class="traj-s fade-in">
@@ -231,9 +248,9 @@
     </div>
     <div class="traj-grid">
       <div class="creds">
-        <div class="cred-item"><span class="cred-year">2020</span>Graduação em Psicologia — Universidade Presbiteriana Mackenzie e Universidade Paulista</div>
-        <div class="cred-item"><span class="cred-year">2024</span>Especialização em Terapia Cognitivo-Comportamental — Pontifícia Universidade Católica do Rio Grande do Sul (PUC-RS)</div>
-        <div class="cred-item"><span class="cred-year">2026</span>Especializando em Neurociências do Comportamento — Pontifícia Universidade Católica do Rio Grande do Sul (PUC-RS)</div>
+        <div class="cred-item"><span class="cred-year">2020</span>Graduado em Psicologia — Universidade Presbiteriana Mackenzie e Universidade Paulista</div>
+        <div class="cred-item"><span class="cred-year">2024</span>Especialista em Terapia Cognitivo-Comportamental — Pontifícia Universidade Católica (PUC-RS)</div>
+        <div class="cred-item"><span class="cred-year">2026</span>Especialista em Neurociências do Comportamento — Pontifícia Universidade Católica (PUC-RS)</div>
       </div>
       <div class="traj-side">
         <blockquote class="about-quote">"Conheça todas as teorias, domine todas as técnicas, mas ao tocar uma alma humana, seja apenas outra alma humana."</blockquote>
@@ -243,7 +260,6 @@
     </div>
   </section>
 </div>
-
 <!-- ABORDAGEM -->
 <div class="sw" id="abordagem">
   <section class="fade-in">
@@ -267,7 +283,6 @@
     </div>
   </section>
 </div>
-
 <!-- ACOMPANHAMENTO -->
 <section class="svc-s fade-in" id="acompanhamento">
   <p class="section-label">Acompanhamento</p>
@@ -279,7 +294,6 @@
     <div class="svc-card"><div class="svc-num">04</div><div class="svc-name">Suporte via WhatsApp</div><div class="svc-desc">Acompanhamento contínuo via WhatsApp para apoios adicionais e urgências.</div></div>
   </div>
 </section>
-
 <!-- DEPOIMENTOS -->
 <div class="sw">
   <section class="testim-s fade-in">
@@ -302,9 +316,89 @@
     <p class="testim-note">Avaliações reais de pacientes atendidos</p>
   </section>
 </div>
-
+<!-- DUVIDAS -->
+<div class="sw-alt" id="duvidas">
+  <section class="faq-s fade-in">
+    <p class="section-label">Dúvidas frequentes</p>
+    <h2 class="section-title">Perguntas que<br><em>talvez você tenha</em></h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-1">
+          <span>Como funciona a primeira sessão?</span>
+          <span class="faq-icon"><span class="h"></span><span class="v"></span></span>
+        </button>
+        <div class="faq-a" id="faq-a-1">
+          <div class="faq-a-in"><p>A primeira sessão é dedicada a te conhecer: sua história, o que te trouxe até aqui e o que você espera desse processo. É também o momento de eu explicar como trabalho e de você tirar qualquer dúvida antes de decidirmos seguir juntos.</p></div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-2">
+          <span>Quanto tempo dura o processo terapêutico? Existe um número certo de sessões?</span>
+          <span class="faq-icon"><span class="h"></span><span class="v"></span></span>
+        </button>
+        <div class="faq-a" id="faq-a-2">
+          <div class="faq-a-in"><p>Não existe um número fixo — cada processo tem o seu próprio ritmo. Alguns objetivos mais pontuais podem ser trabalhados em poucos meses; processos mais profundos costumam se estender por mais tempo. Isso é construído e revisado junto com você ao longo do caminho.</p></div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-3">
+          <span>Com que frequência as sessões acontecem?</span>
+          <span class="faq-icon"><span class="h"></span><span class="v"></span></span>
+        </button>
+        <div class="faq-a" id="faq-a-3">
+          <div class="faq-a-in"><p>O mais comum é semanal, principalmente no início — é o que costuma sustentar o processo com consistência. Conforme os objetivos avançam, a frequência pode ser reavaliada junto com você.</p></div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-4">
+          <span>O que diferencia a TCC de outras abordagens de terapia?</span>
+          <span class="faq-icon"><span class="h"></span><span class="v"></span></span>
+        </button>
+        <div class="faq-a" id="faq-a-4">
+          <div class="faq-a-in"><p>A TCC é uma abordagem estruturada, orientada para o presente e para metas concretas. Em vez de se ater apenas à história de vida, ela trabalha diretamente os padrões de pensamento, emoção e comportamento que sustentam o sofrimento — com técnicas práticas e evidências científicas sobre sua eficácia.</p></div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-5">
+          <span>Terapia substitui acompanhamento psiquiátrico ou uso de medicação?</span>
+          <span class="faq-icon"><span class="h"></span><span class="v"></span></span>
+        </button>
+        <div class="faq-a" id="faq-a-5">
+          <div class="faq-a-in"><p>Não. Psicoterapia e acompanhamento psiquiátrico são complementares, não substitutos. Quando identifico a necessidade de avaliação médica, faço o encaminhamento — e, se você já tem acompanhamento psiquiátrico, trabalho em conjunto com esse cuidado.</p></div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-6">
+          <span>Terapia online é tão eficaz quanto presencial?</span>
+          <span class="faq-icon"><span class="h"></span><span class="v"></span></span>
+        </button>
+        <div class="faq-a" id="faq-a-6">
+          <div class="faq-a-in"><p>Sim. Estudos mostram que a psicoterapia online tem eficácia comparável à presencial para a maioria das demandas. Além disso, ela oferece mais flexibilidade de horário e elimina a necessidade de deslocamento — o que, para muita gente, facilita a constância no tratamento.</p></div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-7">
+          <span>Como sei se eu "realmente preciso" de terapia?</span>
+          <span class="faq-icon"><span class="h"></span><span class="v"></span></span>
+        </button>
+        <div class="faq-a" id="faq-a-7">
+          <div class="faq-a-in"><p>Não é preciso estar em crise para começar. Terapia é útil tanto para quem enfrenta um sofrimento mais intenso quanto para quem busca autoconhecimento ou quer lidar melhor com os desafios do dia a dia. Se a dúvida existe, geralmente já vale a pena conversar.</p></div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-8">
+          <span>O que é dito na sessão fica realmente confidencial?</span>
+          <span class="faq-icon"><span class="h"></span><span class="v"></span></span>
+        </button>
+        <div class="faq-a" id="faq-a-8">
+          <div class="faq-a-in"><p>Sim. O sigilo profissional é um dos pilares éticos da psicologia, previsto no Código de Ética do CFP. Tudo o que é compartilhado na sessão é confidencial, com exceção das situações previstas por lei (como risco de vida), que são tratadas com todo o cuidado e, sempre que possível, conversadas com você antes de qualquer ação.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
 <!-- PORTAL -->
-<div class="sw-alt">
+<div class="sw">
   <section class="portal-s fade-in">
     <div class="portal-in">
       <div class="portal-icon">
@@ -319,7 +413,6 @@
     </div>
   </section>
 </div>
-
 <!-- CONTATO -->
 <section class="contact-s fade-in" id="contato">
   <div class="contact-in">
@@ -332,19 +425,42 @@
     </div>
   </div>
 </section>
-
 <footer>
   <div class="fl">MCamillo<span>Psi</span></div>
   <div class="fc">© 2026 · MCamilloPsi · Todos os direitos reservados</div>
   <div class="fcrp">CRP 06/193290</div>
 </footer>
-
 <script>
 const nav=document.getElementById('main-nav')
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>60)},{passive:true})
 const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:0.1})
 document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el))
 setTimeout(()=>{document.querySelectorAll('.hero-split .fade-in').forEach(el=>el.classList.add('visible'))},80)
+
+// FAQ accordion
+document.querySelectorAll('.faq-q').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const item=btn.closest('.faq-item')
+    const answer=item.querySelector('.faq-a')
+    const isOpen=item.classList.contains('open')
+    document.querySelectorAll('.faq-item.open').forEach(openItem=>{
+      if(openItem!==item){
+        openItem.classList.remove('open')
+        openItem.querySelector('.faq-a').style.maxHeight=null
+        openItem.querySelector('.faq-q').setAttribute('aria-expanded','false')
+      }
+    })
+    if(isOpen){
+      item.classList.remove('open')
+      answer.style.maxHeight=null
+      btn.setAttribute('aria-expanded','false')
+    }else{
+      item.classList.add('open')
+      answer.style.maxHeight=answer.scrollHeight+'px'
+      btn.setAttribute('aria-expanded','true')
+    }
+  })
+})
 </script>
 </body>
 </html>
