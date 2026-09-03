@@ -63,7 +63,7 @@
     .btn-g:hover{border-color:var(--gold);color:var(--gold)}
     .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
     .stat-card{border-left:2px solid var(--gold);padding:1rem 1.25rem;background:rgba(242,242,242,0.65);border-radius:0 2px 2px 0;min-width:0}
-    .stat-num{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;color:var(--navy);line-height:1}
+    .stat-num{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;color:var(--navy);line-height:1.05;overflow-wrap:break-word;word-break:break-word}
     .stat-lbl{font-size:0.7rem;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;color:var(--slate);margin-top:0.35rem}
     /* ABOUT */
     .about-s{display:grid;grid-template-columns:1fr 2fr;gap:5rem;align-items:start;padding:5.5rem 6rem}
@@ -191,6 +191,8 @@
       footer{padding:2rem 1.5rem;flex-direction:column;gap:0.75rem;text-align:center}
       .cta-row{flex-direction:column}
       .faq-a-in{padding-right:1.25rem}
+      .stat-card{padding:0.85rem 1rem}
+      .stat-num{font-size:1.5rem;line-height:1.15}
     }
   </style>
 </head>
@@ -436,7 +438,6 @@ window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scr
 const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:0.1})
 document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el))
 setTimeout(()=>{document.querySelectorAll('.hero-split .fade-in').forEach(el=>el.classList.add('visible'))},80)
-
 // FAQ accordion
 document.querySelectorAll('.faq-q').forEach(btn=>{
   btn.addEventListener('click',()=>{
