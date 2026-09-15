@@ -891,7 +891,7 @@ Não é necessário anotar — o simples ato de pausar e perguntar já é sufici
 
         <!-- BIG FIVE — TESTE -->
         <div class="page" id="page-bigfive-test">
-          <p style="font-size:0.68rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem">Mapeamento de Personalidade (Big Five)</p>
+          <p style="font-size:0.68rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem" id="bf-titulo-versao">Mapeamento de Personalidade (Big Five)</p>
           <div class="test-progress-track"><div class="test-progress-bar" id="bf-barra"></div></div>
           <span class="test-counter" id="bf-contador"></span>
           <p style="font-size:0.75rem;font-weight:400;color:var(--navy);background:var(--gold-pale);border-left:2px solid var(--gold);padding:0.6rem 0.85rem;border-radius:0 5px 5px 0;margin-bottom:1.25rem">Leia cada afirmação e indique o quanto ela descreve você, de forma geral. Não há respostas certas ou erradas.</p>
@@ -906,15 +906,16 @@ Não é necessário anotar — o simples ato de pausar e perguntar já é sufici
         <!-- BIG FIVE — RESULTADO -->
         <div class="page" id="page-bigfive-resultado">
           <p style="font-size:0.68rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold)">Mapeamento de Personalidade</p>
-          <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;color:var(--navy);margin-top:0.2rem;margin-bottom:0.3rem">Seu perfil Big Five</h2>
-          <p style="font-size:0.75rem;font-weight:300;color:var(--text-muted);margin-bottom:1rem;line-height:1.7">Toque em cada domínio para ver o detalhamento por facetas. Não existem perfis "certos" ou "errados" — são apenas tendências de personalidade.</p>
+          <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;color:var(--navy);margin-top:0.2rem;margin-bottom:0.15rem">Seu perfil Big Five</h2>
+          <p style="font-size:0.62rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-muted);margin-bottom:0.75rem" id="bf-resultado-versao-tag"></p>
+          <p style="font-size:0.75rem;font-weight:300;color:var(--text-muted);margin-bottom:1rem;line-height:1.7">Toque em cada domínio para ver o detalhamento por facetas (quando disponível). Não existem perfis "certos" ou "errados" — são apenas tendências de personalidade.</p>
           <div style="background:var(--gold-pale);border:1px solid rgba(125,143,174,0.25);border-radius:8px;padding:0.85rem 1.1rem;margin-bottom:1.25rem;font-size:0.72rem;font-weight:300;color:var(--navy-light);line-height:1.7">
-            ℹ️ Os níveis <strong style="font-weight:500">baixo / médio / alto</strong> indicam apenas onde sua resposta média caiu <strong style="font-weight:500">dentro da própria escala de 1 a 5</strong> deste questionário — não é uma comparação normativa com outras pessoas (não existe uma tabela pública de percentis para este instrumento). Use como um retrato de tendências, não como uma classificação definitiva.
+            ℹ️ Os níveis <strong style="font-weight:500">baixo / médio / alto</strong> indicam apenas onde sua resposta média caiu <strong style="font-weight:500">dentro da própria escala de 1 a 5</strong> deste questionário — não é uma comparação normativa com outras pessoas (não existe uma tabela pública de percentis para este instrumento). Nas versões reduzida (60) e rápida (20), cada domínio é medido por menos perguntas do que na versão completa, então o resultado tem menos precisão — use como um retrato de tendências, não como uma classificação definitiva.
           </div>
           <div id="bf-resultado-conteudo"></div>
           <div class="result-actions">
             <button class="btn-ghost" onclick="irPara('autoavaliacao')">Voltar aos testes</button>
-            <button class="btn-action" onclick="iniciarBigFive()">Refazer mapeamento</button>
+            <button class="btn-action" onclick="irPara('autoavaliacao')">Escolher outra versão</button>
           </div>
         </div>
 
@@ -988,12 +989,27 @@ Não é necessário anotar — o simples ato de pausar e perguntar já é sufici
             💡 O modelo dos <strong style="font-weight:500">Cinco Grandes Fatores de Personalidade (Big Five)</strong> descreve traços de personalidade relativamente estáveis — Neuroticismo, Extroversão, Abertura à Experiência, Afabilidade e Consciência. É um mapeamento de personalidade, <strong style="font-weight:500">não um instrumento clínico ou diagnóstico</strong>.
           </div>
           <div class="tests-grid" style="grid-template-columns:1fr">
-            <div class="test-card" onclick="iniciarBigFive()" style="border-top:2px solid var(--navy)">
+            <div class="test-card" style="cursor:default;border-top:2px solid var(--navy)">
               <div class="test-name">Mapeamento de Personalidade (Big Five / IPIP-NEO)</div>
-              <div class="test-desc">Questionário amplo baseado no modelo científico dos Cinco Grandes Fatores de Personalidade, com resultado detalhado por 5 domínios e 30 facetas.</div>
-              <div class="test-meta">120 perguntas · ~15–20 min</div>
+              <div class="test-desc">Questionário baseado no modelo científico dos Cinco Grandes Fatores de Personalidade. Escolha a versão: quanto mais perguntas, mais preciso o detalhamento por facetas.</div>
               <div class="test-lembrete" id="bf-ultimo-resultado"></div>
-              <button class="btn-test" style="background:var(--navy)">Iniciar mapeamento</button>
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:0.6rem;margin-top:0.85rem">
+                <div style="border:1px solid var(--border);border-radius:10px;padding:0.65rem 0.75rem;text-align:center">
+                  <div style="font-size:0.7rem;font-weight:600;color:var(--navy)">Completo</div>
+                  <div style="font-size:0.62rem;color:var(--text-muted);margin:0.15rem 0 0.5rem">120 perguntas · ~15–20 min<br>5 domínios + 30 facetas</div>
+                  <button class="btn-test" style="margin-top:0;width:100%;background:var(--navy)" onclick="iniciarBigFive('120')">Iniciar</button>
+                </div>
+                <div style="border:1px solid var(--border);border-radius:10px;padding:0.65rem 0.75rem;text-align:center">
+                  <div style="font-size:0.7rem;font-weight:600;color:var(--navy)">Reduzido</div>
+                  <div style="font-size:0.62rem;color:var(--text-muted);margin:0.15rem 0 0.5rem">60 perguntas · ~8–10 min<br>5 domínios + 30 facetas</div>
+                  <button class="btn-test" style="margin-top:0;width:100%;background:var(--navy-mid)" onclick="iniciarBigFive('60')">Iniciar</button>
+                </div>
+                <div style="border:1px solid var(--border);border-radius:10px;padding:0.65rem 0.75rem;text-align:center">
+                  <div style="font-size:0.7rem;font-weight:600;color:var(--navy)">Rápido</div>
+                  <div style="font-size:0.62rem;color:var(--text-muted);margin:0.15rem 0 0.5rem">20 perguntas · ~3 min<br>só 5 domínios (sem facetas)</div>
+                  <button class="btn-test" style="margin-top:0;width:100%;background:var(--gold)" onclick="iniciarBigFive('20')">Iniciar</button>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -1672,7 +1688,7 @@ const sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{
 })
 const EMAIL_PSI='mcamillopsi@gmail.com'
 let user=null,testeAtual=null,perguntaAtual=0,respostas=[],graficos={},sidebarOpen=true
-let bfPerguntaAtual=0,bfRespostas=[],bfUltimoResultado=null
+let bfPerguntaAtual=0,bfRespostas=[],bfUltimoResultado=null,bfVersaoAtual='120',bfPerguntasAtivas=[]
 
 // ══ SHA-256 (mantido apenas para migração de contas legadas) ══
 async function hashSenha(senha){
@@ -1750,36 +1766,46 @@ const TAREFA_QUESTIONARIOS={
 // variável (facet[key] em vez de scores[domínio].facet[faceta]).
 // ══════════════════════════════════════════════════════════════════════
 const BIG5_PERGUNTAS=[
-  ['Me preocupo com as coisas','plus','N',1],['Faço amigos com facilidade','plus','E',1],['Tenho uma imaginação fértil','plus','O',1],['Confio nos outros','plus','A',1],
-  ['Concluo as tarefas com sucesso','plus','C',1],['Fico com raiva facilmente','plus','N',2],['Amo grandes festas','plus','E',2],['Acredito na importância da arte','plus','O',2],
-  ['Uso os outros para alcançar meus fins','minus','A',2],['Gosto de organizar as coisas','plus','C',2],['Frequentemente me sinto triste','plus','N',3],['Assumo a liderança das coisas','plus','E',3],
-  ['Experimento minhas emoções intensamente','plus','O',3],['Adoro ajudar aos outros','plus','A',3],['Mantenho minhas promessas','plus','C',3],['Tenho dificuldade de me aproximar dos outros','plus','N',4],
-  ['Estou sempre ocupado(a)','plus','E',4],['Prefiro variedade à rotina','plus','O',4],['Amo uma boa briga','minus','A',4],['Trabalho muito','plus','C',4],
-  ['Adoro ir em farras','plus','N',5],['Busco sempre emoção (adrenalina)','plus','E',5],['Gosto de ler textos desafiadores','plus','O',5],['Acredito ser melhor que os outros','minus','A',5],
-  ['Estou sempre preparado(a)','plus','C',5],['Entro em pânico facilmente','plus','N',6],['Irradio alegria','plus','E',6],['Costumo votar em candidatos políticos liberais (progressistas)','plus','O',6],
-  ['Me preocupo com os desabrigados','plus','A',6],['Mergulho de cabeça nas coisas sem pensar','minus','C',6],['Temo o pior','plus','N',1],['Me sinto confortável no meio das pessoas','plus','E',1],
-  ['Adoro histórias fantásticas de fantasia e ficção','plus','O',1],['Acredito que os outros têm boas intenções','plus','A',1],['Sou excelente no que eu faço','plus','C',1],['Me irrito facilmente','plus','N',2],
-  ['Converso com muitas pessoas diferentes em festas','plus','E',2],['Vejo beleza em coisas que outros podem não notar','plus','O',2],['Trapaceio para tirar vantagem','minus','A',2],['Frequentemente esqueço de colocar as coisas de volta em seu lugar','minus','C',2],
-  ['Não gosto de mim','plus','N',3],['Tento liderar os outros','plus','E',3],['Sinto as emoções dos outros','plus','O',3],['Me preocupo com os outros','plus','A',3],
-  ['Digo a verdade','plus','C',3],['Tenho medo de chamar a atenção','plus','N',4],['Estou sempre preparado(a)','plus','E',4],['Prefiro lidar com coisas que eu conheça','minus','O',4],
-  ['Grito com os outros','minus','A',4],['Supero as expectativas','plus','C',4],['Raramente me excedo em festas','minus','N',5],['Busco aventura','plus','E',5],
-  ['Evito discussões filosóficas','minus','O',5],['Penso muito em mim','minus','A',5],['Transformo meus planos em realidade','plus','C',5],['Me sinto sobrecarregado(a) com os eventos','plus','N',6],
-  ['Me divirto bastante','plus','E',6],['Acredito que certo e errado são relativos','plus','O',6],['Sinto simpatia por aqueles que estão em situação pior do que eu','plus','A',6],['Tomo decisões difíceis','minus','C',6],
-  ['Tenho medo de muitas coisas','plus','N',1],['Evito contatos com outras pessoas','minus','E',1],['Amo ficar sonhando no mundo da lua','plus','O',1],['Confio no que as pessoas dizem','plus','A',1],
-  ['Executo as tarefas sem maiores problemas','plus','C',1],['Perco a paciência facilmente','plus','N',2],['Prefiro ficar sozinho(a)','minus','E',2],['Não gosto de poesia','minus','O',2],
-  ['Tiro vantagem dos outros','minus','A',2],['Meu quarto é uma bagunça','minus','C',2],['Estou sempre deprimido(a)','plus','N',3],['Assumo o controle das coisas','plus','E',3],
-  ['Raramente percebo minhas reações emocionais','minus','O',3],['Sou indiferente ao sentimento dos outros','minus','A',3],['Quebro as regras','minus','C',3],['Só me sinto bem com meus amigos(as)','plus','N',4],
-  ['Faço muitas coisas no tempo livre','plus','E',4],['Não gosto de mudanças','minus','O',4],['Insulto os outros','minus','A',4],['Eu trabalho apenas o suficiente para sobreviver','minus','C',4],
-  ['Resisto facilmente às tentações','minus','N',5],['Gosto de ser inconsequente','plus','E',5],['Tenho dificuldade em entender ideias abstratas','minus','O',5],['Tenho uma opinião muito positiva sobre mim mesmo(a)','minus','A',5],
-  ['Fico perdendo tempo','minus','C',5],['Sinto que sou incapaz de lidar com as coisas','plus','N',6],['Amo a vida','plus','E',6],['Costumo votar em candidatos políticos conservadores','minus','O',6],
-  ['Não me interesso pelos problemas dos outros','minus','A',6],['Me apresso nas coisas','minus','C',6],['Me estresso facilmente','plus','N',1],['Mantenho distância dos outros','minus','E',1],
-  ['Gosto de me perder em pensamentos','plus','O',1],['Desconfio das pessoas','minus','A',1],['Sei como fazer as coisas','plus','C',1],['Não me incomodo facilmente','minus','N',2],
-  ['Evito multidões','minus','E',2],['Não gosto de ir ao museu de arte','minus','O',2],['Atrapalho os planos dos outros','minus','A',2],['Deixo minhas coisas espalhadas','minus','C',2],
-  ['Me sinto confortável comigo mesmo(a)','minus','N',3],['Aguardo outras pessoas tomarem a liderança das coisas','minus','E',3],['Não entendo pessoas que agem emotivamente','minus','O',3],['Não tiro tempo para os outros','minus','A',3],
-  ['Quebro minhas promessas','minus','C',3],['Não me incomodo com situações sociais difíceis','minus','N',4],['Gosto de pegar leve','minus','E',4],['Me considero ter costumes tradicionais','minus','O',4],
-  ['Entro em contato com os outros','minus','A',4],['Dedico pouco tempo e esforço no meu trabalho','minus','C',4],['Controlo minhas vontades','minus','N',5],['Ajo de forma descontrolada','plus','E',5],
-  ['Não me interesso por discussões teóricas','minus','O',5],['Gosto de falar das minhas virtudes','minus','A',5],['Tenho dificuldade para começar as tarefas','minus','C',5],['Permaneço calmo(a) sob pressão','minus','N',6],
-  ['Vejo o lado bom da vida','plus','E',6],['Acredito que precisamos ser rígidos com o crime','minus','O',6],['Tento não pensar nos necessitados','minus','A',6],['Ajo sem pensar','minus','C',6]
+  ['Me preocupo com as coisas','plus','N',1,1,0],['Faço amigos com facilidade','plus','E',1,0,0],['Tenho uma imaginação fértil','plus','O',1,0,0],
+  ['Confio nos outros','plus','A',1,0,0],['Concluo as tarefas com sucesso','plus','C',1,1,0],['Fico com raiva facilmente','plus','N',2,1,1],
+  ['Amo grandes festas','plus','E',2,1,1],['Acredito na importância da arte','plus','O',2,1,1],['Uso os outros para alcançar meus fins','minus','A',2,1,0],
+  ['Gosto de organizar as coisas','plus','C',2,0,0],['Frequentemente me sinto triste','plus','N',3,0,0],['Assumo a liderança das coisas','plus','E',3,1,1],
+  ['Experimento minhas emoções intensamente','plus','O',3,1,0],['Adoro ajudar aos outros','plus','A',3,1,0],['Mantenho minhas promessas','plus','C',3,1,0],
+  ['Tenho dificuldade de me aproximar dos outros','plus','N',4,1,1],['Estou sempre ocupado(a)','plus','E',4,1,0],['Prefiro variedade à rotina','plus','O',4,0,0],
+  ['Amo uma boa briga','minus','A',4,0,0],['Trabalho muito','plus','C',4,0,0],['Adoro ir em farras','plus','N',5,0,0],
+  ['Busco sempre emoção (adrenalina)','plus','E',5,0,0],['Gosto de ler textos desafiadores','plus','O',5,0,0],['Acredito ser melhor que os outros','minus','A',5,0,0],
+  ['Estou sempre preparado(a)','plus','C',5,0,0],['Entro em pânico facilmente','plus','N',6,1,0],['Irradio alegria','plus','E',6,0,0],
+  ['Costumo votar em candidatos políticos liberais (progressistas)','plus','O',6,1,0],['Me preocupo com os desabrigados','plus','A',6,1,0],['Mergulho de cabeça nas coisas sem pensar','minus','C',6,1,1],
+  ['Temo o pior','plus','N',1,0,0],['Me sinto confortável no meio das pessoas','plus','E',1,1,1],['Adoro histórias fantásticas de fantasia e ficção','plus','O',1,1,0],
+  ['Acredito que os outros têm boas intenções','plus','A',1,0,0],['Sou excelente no que eu faço','plus','C',1,0,0],['Me irrito facilmente','plus','N',2,0,0],
+  ['Converso com muitas pessoas diferentes em festas','plus','E',2,0,0],['Vejo beleza em coisas que outros podem não notar','plus','O',2,0,0],['Trapaceio para tirar vantagem','minus','A',2,0,0],
+  ['Frequentemente esqueço de colocar as coisas de volta em seu lugar','minus','C',2,0,0],['Não gosto de mim','plus','N',3,1,0],['Tento liderar os outros','plus','E',3,0,0],
+  ['Sinto as emoções dos outros','plus','O',3,0,0],['Me preocupo com os outros','plus','A',3,1,1],['Digo a verdade','plus','C',3,0,0],
+  ['Tenho medo de chamar a atenção','plus','N',4,1,0],['Estou sempre preparado(a)','plus','E',4,1,0],['Prefiro lidar com coisas que eu conheça','minus','O',4,1,0],
+  ['Grito com os outros','minus','A',4,1,0],['Supero as expectativas','plus','C',4,0,0],['Raramente me excedo em festas','minus','N',5,1,0],
+  ['Busco aventura','plus','E',5,1,0],['Evito discussões filosóficas','minus','O',5,1,0],['Penso muito em mim','minus','A',5,1,1],
+  ['Transformo meus planos em realidade','plus','C',5,0,0],['Me sinto sobrecarregado(a) com os eventos','plus','N',6,1,0],['Me divirto bastante','plus','E',6,0,0],
+  ['Acredito que certo e errado são relativos','plus','O',6,0,0],['Sinto simpatia por aqueles que estão em situação pior do que eu','plus','A',6,1,0],['Tomo decisões difíceis','minus','C',6,0,0],
+  ['Tenho medo de muitas coisas','plus','N',1,0,0],['Evito contatos com outras pessoas','minus','E',1,1,0],['Amo ficar sonhando no mundo da lua','plus','O',1,1,1],
+  ['Confio no que as pessoas dizem','plus','A',1,1,1],['Executo as tarefas sem maiores problemas','plus','C',1,1,0],['Perco a paciência facilmente','plus','N',2,1,0],
+  ['Prefiro ficar sozinho(a)','minus','E',2,0,0],['Não gosto de poesia','minus','O',2,0,0],['Tiro vantagem dos outros','minus','A',2,1,1],
+  ['Meu quarto é uma bagunça','minus','C',2,1,1],['Estou sempre deprimido(a)','plus','N',3,1,1],['Assumo o controle das coisas','plus','E',3,1,0],
+  ['Raramente percebo minhas reações emocionais','minus','O',3,0,0],['Sou indiferente ao sentimento dos outros','minus','A',3,0,0],['Quebro as regras','minus','C',3,0,0],
+  ['Só me sinto bem com meus amigos(as)','plus','N',4,0,0],['Faço muitas coisas no tempo livre','plus','E',4,0,0],['Não gosto de mudanças','minus','O',4,1,1],
+  ['Insulto os outros','minus','A',4,1,0],['Eu trabalho apenas o suficiente para sobreviver','minus','C',4,1,1],['Resisto facilmente às tentações','minus','N',5,0,0],
+  ['Gosto de ser inconsequente','plus','E',5,0,0],['Tenho dificuldade em entender ideias abstratas','minus','O',5,0,0],['Tenho uma opinião muito positiva sobre mim mesmo(a)','minus','A',5,1,0],
+  ['Fico perdendo tempo','minus','C',5,1,0],['Sinto que sou incapaz de lidar com as coisas','plus','N',6,0,0],['Amo a vida','plus','E',6,1,0],
+  ['Costumo votar em candidatos políticos conservadores','minus','O',6,1,0],['Não me interesso pelos problemas dos outros','minus','A',6,0,0],['Me apresso nas coisas','minus','C',6,0,0],
+  ['Me estresso facilmente','plus','N',1,1,1],['Mantenho distância dos outros','minus','E',1,0,0],['Gosto de me perder em pensamentos','plus','O',1,0,0],
+  ['Desconfio das pessoas','minus','A',1,1,0],['Sei como fazer as coisas','plus','C',1,0,0],['Não me incomodo facilmente','minus','N',2,0,0],
+  ['Evito multidões','minus','E',2,1,0],['Não gosto de ir ao museu de arte','minus','O',2,1,0],['Atrapalho os planos dos outros','minus','A',2,0,0],
+  ['Deixo minhas coisas espalhadas','minus','C',2,1,0],['Me sinto confortável comigo mesmo(a)','minus','N',3,0,0],['Aguardo outras pessoas tomarem a liderança das coisas','minus','E',3,0,0],
+  ['Não entendo pessoas que agem emotivamente','minus','O',3,1,0],['Não tiro tempo para os outros','minus','A',3,0,0],['Quebro minhas promessas','minus','C',3,1,1],
+  ['Não me incomodo com situações sociais difíceis','minus','N',4,0,0],['Gosto de pegar leve','minus','E',4,0,0],['Me considero ter costumes tradicionais','minus','O',4,0,0],
+  ['Entro em contato com os outros','minus','A',4,0,0],['Dedico pouco tempo e esforço no meu trabalho','minus','C',4,1,0],['Controlo minhas vontades','minus','N',5,1,0],
+  ['Ajo de forma descontrolada','plus','E',5,1,0],['Não me interesso por discussões teóricas','minus','O',5,1,1],['Gosto de falar das minhas virtudes','minus','A',5,0,0],
+  ['Tenho dificuldade para começar as tarefas','minus','C',5,1,0],['Permaneço calmo(a) sob pressão','minus','N',6,0,0],['Vejo o lado bom da vida','plus','E',6,1,1],
+  ['Acredito que precisamos ser rígidos com o crime','minus','O',6,0,0],['Tento não pensar nos necessitados','minus','A',6,0,0],['Ajo sem pensar','minus','C',6,1,0]
 ]
 
 const BIG5_DOMINIOS={
@@ -1792,15 +1818,37 @@ const BIG5_DOMINIOS={
 
 const BIG5_OPCOES=['Discordo totalmente','Discordo parcialmente','Nem discordo, nem concordo','Concordo parcialmente','Concordo totalmente']
 const BIG5_ORDEM_EXIBICAO=['O','C','E','A','N']
+// Cada item de BIG5_PERGUNTAS é [texto, keyed, domínio, faceta, incluídoNaVersao60, incluídoNaVersao20]
+// Versão 60: 2 itens/faceta (30 facetas) escolhidos pela maior correlação item-total
+//   publicada na Tabela 1 de Johnson (2014) — mesma lógica usada para construir
+//   formas reduzidas oficiais do IPIP-NEO. Mantém as 30 facetas, com menos precisão.
+// Versão 20: só domínios (sem facetas), inspirada na estrutura do Mini-IPIP
+//   (Donnellan et al., 2006) — mas construída aqui com os itens do nosso próprio
+//   banco já traduzido (não é uma tradução do Mini-IPIP original): para cada
+//   domínio, pegamos o melhor item de cada uma das 4 facetas com o item mais
+//   forte, garantindo alguma diversidade de conteúdo dentro do domínio.
+const BIG5_VERSOES={
+  '120':{label:'Completo',perguntas:120,tempo:'~15–20 min',facetas:true},
+  '60':{label:'Reduzido',perguntas:60,tempo:'~8–10 min',facetas:true},
+  '20':{label:'Rápido',perguntas:20,tempo:'~3 min',facetas:false}
+}
 
 function big5Classificar(media){if(media>3.5)return 'alto';if(media<2.5)return 'baixo';return 'neutro'}
 function big5NivelLabel(n){return n==='alto'?'Alta':n==='baixo'?'Baixa':'Média'}
 function big5NivelBadgeClass(n){return 'b5-badge-'+n}
 
-// Calcula pontuação por domínio e por faceta a partir das respostas (índices 0-4)
-function calcularBigFive(respostas){
+function big5PerguntasDaVersao(versao){
+  if(versao==='120')return BIG5_PERGUNTAS
+  const flagIdx=versao==='60'?4:5
+  return BIG5_PERGUNTAS.filter(p=>p[flagIdx]===1)
+}
+
+// Calcula pontuação por domínio e por faceta a partir das respostas (índices 0-4).
+// `perguntas` é a lista efetivamente respondida (120, 60 ou 20 itens).
+function calcularBigFive(respostas,perguntas){
+  perguntas=perguntas||BIG5_PERGUNTAS
   const dominios={}
-  BIG5_PERGUNTAS.forEach((p,i)=>{
+  perguntas.forEach((p,i)=>{
     const idx=respostas[i]
     if(idx===undefined)return
     const [,keyed,dom,facet]=p
@@ -1824,17 +1872,22 @@ function calcularBigFive(respostas){
   return dominios
 }
 
-function iniciarBigFive(){
+function iniciarBigFive(versao){
+  versao=versao||'120'
+  bfVersaoAtual=versao
+  bfPerguntasAtivas=big5PerguntasDaVersao(versao)
   bfPerguntaAtual=0;bfRespostas=[]
   irPara('bigfive-test')
   renderBigFivePergunta()
 }
 
 function renderBigFivePergunta(){
-  const total=BIG5_PERGUNTAS.length
+  const total=bfPerguntasAtivas.length
+  const v=BIG5_VERSOES[bfVersaoAtual]
+  document.getElementById('bf-titulo-versao').textContent=`Mapeamento de Personalidade (Big Five) — versão ${v.label.toLowerCase()}`
   document.getElementById('bf-barra').style.width=Math.round((bfPerguntaAtual/total)*100)+'%'
   document.getElementById('bf-contador').textContent=`Pergunta ${bfPerguntaAtual+1} de ${total}`
-  document.getElementById('bf-pergunta').textContent=BIG5_PERGUNTAS[bfPerguntaAtual][0]
+  document.getElementById('bf-pergunta').textContent=bfPerguntasAtivas[bfPerguntaAtual][0]
   const opc=document.getElementById('bf-opcoes');opc.innerHTML=''
   BIG5_OPCOES.forEach((o,i)=>{
     const d=document.createElement('div')
@@ -1852,21 +1905,26 @@ function voltarBigFivePergunta(){
 
 async function avancarBigFivePergunta(){
   if(bfRespostas[bfPerguntaAtual]===undefined){alert('Selecione uma opção para continuar.');return}
-  if(bfPerguntaAtual<BIG5_PERGUNTAS.length-1){bfPerguntaAtual++;renderBigFivePergunta()}
+  if(bfPerguntaAtual<bfPerguntasAtivas.length-1){bfPerguntaAtual++;renderBigFivePergunta()}
   else await calcularBigFiveResultado()
 }
 
 async function calcularBigFiveResultado(){
-  const dominios=calcularBigFive(bfRespostas)
-  await sb.from('resultados_bigfive').insert({paciente_id:user.id,respostas:bfRespostas,dominios})
-  bfUltimoResultado={dominios,criado_em:new Date().toISOString()}
-  renderBigFiveResultado(dominios,'bf-resultado-conteudo')
+  const dominios=calcularBigFive(bfRespostas,bfPerguntasAtivas)
+  await sb.from('resultados_bigfive').insert({paciente_id:user.id,respostas:bfRespostas,dominios,versao:bfVersaoAtual})
+  bfUltimoResultado={dominios,criado_em:new Date().toISOString(),versao:bfVersaoAtual}
+  renderBigFiveResultado(dominios,'bf-resultado-conteudo',BIG5_VERSOES[bfVersaoAtual].facetas)
+  document.getElementById('bf-resultado-versao-tag').textContent=`Versão ${BIG5_VERSOES[bfVersaoAtual].label.toLowerCase()} (${BIG5_VERSOES[bfVersaoAtual].perguntas} perguntas)`
   irPara('bigfive-resultado')
   renderBigFiveUltimo()
 }
 
 // Monta o HTML de resultado (usado tanto na tela do paciente quanto no painel do psicólogo)
-function renderBigFiveResultado(dominios,containerId,somenteLeitura){
+// mostrarFacetas=false (versão de 20 perguntas) esconde o detalhamento por faceta,
+// já que com só 4 itens espalhados em algumas facetas por domínio não há cobertura
+// suficiente para reportar as 30 facetas com sentido.
+function renderBigFiveResultado(dominios,containerId,mostrarFacetas){
+  if(mostrarFacetas===undefined)mostrarFacetas=true
   const idPrefix=containerId
   let html=''
   BIG5_ORDEM_EXIBICAO.forEach(letra=>{
@@ -1875,18 +1933,19 @@ function renderBigFiveResultado(dominios,containerId,somenteLeitura){
     if(!d||!info)return
     const pct=Math.max(0,Math.min(100,((d.media-1)/4)*100))
     const cardId=`${idPrefix}-dom-${letra}`
-    html+=`<div class="b5-domain-card" id="${cardId}" onclick="toggleBigFiveDomain('${cardId}')">
+    const temFacetas=mostrarFacetas&&Object.keys(d.facetas).length>0
+    html+=`<div class="b5-domain-card" id="${cardId}" ${temFacetas?`onclick="toggleBigFiveDomain('${cardId}')"`:'style="cursor:default"'}>
       <div class="b5-domain-header">
         <div style="flex:1">
           <div class="b5-domain-title">${info.nome}</div>
           <div class="b5-domain-resumo">${info.resumo}</div>
         </div>
         <span class="b5-badge ${big5NivelBadgeClass(d.nivel)}">${big5NivelLabel(d.nivel)}</span>
-        <span class="b5-domain-arrow">▼</span>
+        ${temFacetas?'<span class="b5-domain-arrow">▼</span>':''}
       </div>
       <div class="b5-bar-track"><div class="b5-bar-fill" style="width:${pct}%"></div></div>
       <div class="b5-domain-desc">${info[d.nivel]}</div>
-      <div class="b5-facets">
+      ${temFacetas?`<div class="b5-facets">
         ${Object.keys(d.facetas).sort((a,b)=>a-b).map(fk=>{
           const f=d.facetas[fk]
           const finfo=info.facetas[fk]
@@ -1901,7 +1960,7 @@ function renderBigFiveResultado(dominios,containerId,somenteLeitura){
             <div class="b5-facet-text" style="margin-top:0.3rem">${finfo.texto}</div>
           </div>`
         }).join('')}
-      </div>
+      </div>`:''}
     </div>`
   })
   document.getElementById(containerId).innerHTML=html
@@ -1922,13 +1981,16 @@ async function renderBigFiveUltimo(){
   const {data}=await sb.from('resultados_bigfive').select('*').eq('paciente_id',user.id).order('criado_em',{ascending:false}).limit(1)
   if(!data||!data.length){el.textContent='';bfUltimoResultado=null;return}
   bfUltimoResultado=data[0]
+  const vInfo=BIG5_VERSOES[data[0].versao||'120']
   el.className='test-lembrete ok'
-  el.innerHTML=`Último mapeamento: ${fmt(data[0].criado_em)} · <a href="javascript:void(0)" onclick="event.stopPropagation();verUltimoBigFive()" style="color:var(--gold);text-decoration:underline">ver resultado</a>`
+  el.innerHTML=`Último mapeamento (${vInfo.label.toLowerCase()}, ${fmt(data[0].criado_em)}) · <a href="javascript:void(0)" onclick="event.stopPropagation();verUltimoBigFive()" style="color:var(--gold);text-decoration:underline">ver resultado</a>`
 }
 
 function verUltimoBigFive(){
   if(!bfUltimoResultado)return
-  renderBigFiveResultado(bfUltimoResultado.dominios,'bf-resultado-conteudo')
+  const vInfo=BIG5_VERSOES[bfUltimoResultado.versao||'120']
+  renderBigFiveResultado(bfUltimoResultado.dominios,'bf-resultado-conteudo',vInfo.facetas)
+  document.getElementById('bf-resultado-versao-tag').textContent=`Versão ${vInfo.label.toLowerCase()} (${vInfo.perguntas} perguntas)`
   irPara('bigfive-resultado')
 }
 
@@ -3235,12 +3297,13 @@ async function verPaciente(p){
   if(bigfivePac&&bigfivePac.length){
     const ultimoBf=bigfivePac[0]
     const containerBfId=`bf-psi-${p.id}`
+    const ultimoBfVersaoInfo=BIG5_VERSOES[ultimoBf.versao||'120']
     html+=`<div style="font-size:0.65rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);margin:1.25rem 0 0.5rem">Mapeamento de Personalidade (Big Five)</div>
-    <div class="b5-psi-mini">${bigfivePac.length>1?`${bigfivePac.length} mapeamentos realizados · `:''}Mais recente: ${fmt(ultimoBf.criado_em)}</div>
-    <div class="b5-psi-mini" style="font-style:italic">Níveis baixo/médio/alto = posição na própria escala de 1-5 (não há norma populacional pública para este instrumento).</div>
+    <div class="b5-psi-mini">${bigfivePac.length>1?`${bigfivePac.length} mapeamentos realizados · `:''}Mais recente: ${fmt(ultimoBf.criado_em)} · versão ${ultimoBfVersaoInfo.label.toLowerCase()} (${ultimoBfVersaoInfo.perguntas} perguntas)</div>
+    <div class="b5-psi-mini" style="font-style:italic">Níveis baixo/médio/alto = posição na própria escala de 1-5 (não há norma populacional pública para este instrumento). Versões reduzida/rápida têm menos precisão que a completa.</div>
     <div id="${containerBfId}"></div>`
     // Renderiza de forma assíncrona pois depende do DOM já estar montado
-    setTimeout(()=>renderBigFiveResultado(ultimoBf.dominios,containerBfId),0)
+    setTimeout(()=>renderBigFiveResultado(ultimoBf.dominios,containerBfId,ultimoBfVersaoInfo.facetas),0)
   }
 
   // RPDs do paciente
