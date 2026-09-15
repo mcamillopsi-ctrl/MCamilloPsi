@@ -895,6 +895,9 @@ Não é necessário anotar — o simples ato de pausar e perguntar já é sufici
           <div class="test-progress-track"><div class="test-progress-bar" id="bf-barra"></div></div>
           <span class="test-counter" id="bf-contador"></span>
           <p style="font-size:0.75rem;font-weight:400;color:var(--navy);background:var(--gold-pale);border-left:2px solid var(--gold);padding:0.6rem 0.85rem;border-radius:0 5px 5px 0;margin-bottom:1.25rem">Leia cada afirmação e indique o quanto ela descreve você, de forma geral. Não há respostas certas ou erradas.</p>
+          <div id="bf-aviso-politico" style="display:none;font-size:0.7rem;font-weight:300;color:var(--navy-light);background:#fff8e0;border-left:2px solid var(--yellow);padding:0.6rem 0.85rem;border-radius:0 5px 5px 0;margin-bottom:0.75rem;line-height:1.6">
+            ⚠️ Esta pergunta faz parte da faceta "Liberalismo" do instrumento original e trata de posicionamento político. Responda à vontade — inclusive marcando "nem discordo, nem concordo" se preferir não se posicionar.
+          </div>
           <p class="test-question" id="bf-pergunta"></p>
           <div class="test-options" id="bf-opcoes"></div>
           <div class="test-nav">
@@ -1887,7 +1890,11 @@ function renderBigFivePergunta(){
   document.getElementById('bf-titulo-versao').textContent=`Mapeamento de Personalidade (Big Five) — versão ${v.label.toLowerCase()}`
   document.getElementById('bf-barra').style.width=Math.round((bfPerguntaAtual/total)*100)+'%'
   document.getElementById('bf-contador').textContent=`Pergunta ${bfPerguntaAtual+1} de ${total}`
-  document.getElementById('bf-pergunta').textContent=bfPerguntasAtivas[bfPerguntaAtual][0]
+  const atual=bfPerguntasAtivas[bfPerguntaAtual]
+  document.getElementById('bf-pergunta').textContent=atual[0]
+  // Aviso para os itens da faceta O6 (Liberalismo), que tratam de posicionamento político —
+  // avisamos antes de cada um em vez de removê-los, para manter fidelidade ao instrumento original.
+  document.getElementById('bf-aviso-politico').style.display=(atual[2]==='O'&&atual[3]===6)?'block':'none'
   const opc=document.getElementById('bf-opcoes');opc.innerHTML=''
   BIG5_OPCOES.forEach((o,i)=>{
     const d=document.createElement('div')
