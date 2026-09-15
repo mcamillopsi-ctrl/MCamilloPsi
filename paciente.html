@@ -146,6 +146,30 @@
     .test-lembrete.vencido{color:#b8610a}
     .btn-test{display:inline-block;margin-top:0.75rem;font-size:0.66rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:0.38rem 0.9rem;background:var(--navy);color:var(--white);border:none;border-radius:5px;cursor:pointer;transition:background 0.15s}
     .btn-test:hover{background:var(--navy-mid)}
+    /* ══ BIG FIVE — MAPEAMENTO DE PERSONALIDADE (novo) ══ */
+    .b5-badge{display:inline-block;font-size:0.6rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:20px;white-space:nowrap}
+    .b5-badge-baixo{background:var(--gold-pale);color:var(--navy-light)}
+    .b5-badge-medio{background:#fff8e0;color:var(--yellow)}
+    .b5-badge-alto{background:#eef1f5;color:var(--gold)}
+    .b5-bar-track{height:6px;background:var(--border);border-radius:4px;margin:0.35rem 0 0;overflow:hidden}
+    .b5-bar-fill{height:100%;background:var(--gold);border-radius:4px;transition:width 0.4s}
+    .b5-domain-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1.1rem 1.25rem;margin-bottom:0.85rem;cursor:pointer;transition:border-color 0.15s,box-shadow 0.15s;box-shadow:0 2px 8px rgba(125,143,174,0.06)}
+    .b5-domain-card:hover{border-color:var(--gold)}
+    .b5-domain-card.open{border-color:var(--gold);box-shadow:0 4px 20px rgba(125,143,174,0.18)}
+    .b5-domain-header{display:flex;justify-content:space-between;align-items:flex-start;gap:0.6rem}
+    .b5-domain-title{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:500;color:var(--navy)}
+    .b5-domain-resumo{font-size:0.75rem;font-weight:300;color:var(--text-muted);margin:0.2rem 0 0;line-height:1.6}
+    .b5-domain-desc{font-size:0.78rem;font-weight:300;color:var(--text);line-height:1.7;margin-top:0.6rem}
+    .b5-domain-arrow{font-size:0.58rem;color:var(--gold);font-weight:700;flex-shrink:0;margin-top:0.3rem;transition:transform 0.2s}
+    .b5-domain-card.open .b5-domain-arrow{transform:rotate(180deg)}
+    .b5-facets{display:none;margin-top:0.9rem;padding-top:0.9rem;border-top:1px solid var(--border)}
+    .b5-domain-card.open .b5-facets{display:block}
+    .b5-facet{margin-bottom:0.9rem}
+    .b5-facet:last-child{margin-bottom:0}
+    .b5-facet-head{display:flex;justify-content:space-between;align-items:center;gap:0.5rem;margin-bottom:0.15rem}
+    .b5-facet-title{font-size:0.76rem;font-weight:600;color:var(--navy)}
+    .b5-facet-text{font-size:0.72rem;font-weight:300;color:var(--text-muted);line-height:1.6}
+    .b5-psi-mini{font-size:0.72rem;font-weight:300;color:var(--text-muted);margin-bottom:0.5rem}
 
     /* ══ HISTORICO ══ */
     .history-card{background:var(--white);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:1.5rem;box-shadow:0 2px 8px rgba(125,143,174,0.06)}
@@ -865,6 +889,35 @@ Não é necessário anotar — o simples ato de pausar e perguntar já é sufici
           </div>
         </div>
 
+        <!-- BIG FIVE — TESTE -->
+        <div class="page" id="page-bigfive-test">
+          <p style="font-size:0.68rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem">Mapeamento de Personalidade (Big Five)</p>
+          <div class="test-progress-track"><div class="test-progress-bar" id="bf-barra"></div></div>
+          <span class="test-counter" id="bf-contador"></span>
+          <p style="font-size:0.75rem;font-weight:400;color:var(--navy);background:var(--gold-pale);border-left:2px solid var(--gold);padding:0.6rem 0.85rem;border-radius:0 5px 5px 0;margin-bottom:1.25rem">Leia cada afirmação e indique o quanto ela descreve você, de forma geral. Não há respostas certas ou erradas.</p>
+          <p class="test-question" id="bf-pergunta"></p>
+          <div class="test-options" id="bf-opcoes"></div>
+          <div class="test-nav">
+            <button class="btn-ghost" onclick="voltarBigFivePergunta()">← Anterior</button>
+            <button class="btn-action" id="bf-btn-avancar" onclick="avancarBigFivePergunta()">Próxima →</button>
+          </div>
+        </div>
+
+        <!-- BIG FIVE — RESULTADO -->
+        <div class="page" id="page-bigfive-resultado">
+          <p style="font-size:0.68rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold)">Mapeamento de Personalidade</p>
+          <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;color:var(--navy);margin-top:0.2rem;margin-bottom:0.3rem">Seu perfil Big Five</h2>
+          <p style="font-size:0.75rem;font-weight:300;color:var(--text-muted);margin-bottom:1rem;line-height:1.7">Toque em cada domínio para ver o detalhamento por facetas. Não existem perfis "certos" ou "errados" — são apenas tendências de personalidade.</p>
+          <div style="background:var(--gold-pale);border:1px solid rgba(125,143,174,0.25);border-radius:8px;padding:0.85rem 1.1rem;margin-bottom:1.25rem;font-size:0.72rem;font-weight:300;color:var(--navy-light);line-height:1.7">
+            ℹ️ Os níveis <strong style="font-weight:500">baixo / médio / alto</strong> indicam apenas onde sua resposta média caiu <strong style="font-weight:500">dentro da própria escala de 1 a 5</strong> deste questionário — não é uma comparação normativa com outras pessoas (não existe uma tabela pública de percentis para este instrumento). Use como um retrato de tendências, não como uma classificação definitiva.
+          </div>
+          <div id="bf-resultado-conteudo"></div>
+          <div class="result-actions">
+            <button class="btn-ghost" onclick="irPara('autoavaliacao')">Voltar aos testes</button>
+            <button class="btn-action" onclick="iniciarBigFive()">Refazer mapeamento</button>
+          </div>
+        </div>
+
         <!-- CADASTRO -->
         <div class="page" id="page-cadastro">
           <h1 class="page-title">Meu cadastro</h1>
@@ -927,6 +980,20 @@ Não é necessário anotar — o simples ato de pausar e perguntar já é sufici
               <div style="font-size:0.62rem;font-weight:500;letter-spacing:0.06em;color:var(--gold);margin-top:0.4rem">⟳ Recomendado: mensalmente</div>
               <div class="test-lembrete" id="lembrete-msq"></div>
               <button class="btn-test">Fazer teste</button>
+            </div>
+          </div>
+
+          <div class="section-eyebrow" style="margin-top:1.75rem">Mapeamento de personalidade</div>
+          <div style="background:var(--gold-pale);border:1px solid rgba(125,143,174,0.25);border-radius:8px;padding:0.85rem 1.1rem;margin-bottom:1rem;font-size:0.75rem;font-weight:300;color:var(--navy-light);line-height:1.7">
+            💡 O modelo dos <strong style="font-weight:500">Cinco Grandes Fatores de Personalidade (Big Five)</strong> descreve traços de personalidade relativamente estáveis — Neuroticismo, Extroversão, Abertura à Experiência, Afabilidade e Consciência. É um mapeamento de personalidade, <strong style="font-weight:500">não um instrumento clínico ou diagnóstico</strong>.
+          </div>
+          <div class="tests-grid" style="grid-template-columns:1fr">
+            <div class="test-card" onclick="iniciarBigFive()" style="border-top:2px solid var(--navy)">
+              <div class="test-name">Mapeamento de Personalidade (Big Five / IPIP-NEO)</div>
+              <div class="test-desc">Questionário amplo baseado no modelo científico dos Cinco Grandes Fatores de Personalidade, com resultado detalhado por 5 domínios e 30 facetas.</div>
+              <div class="test-meta">120 perguntas · ~15–20 min</div>
+              <div class="test-lembrete" id="bf-ultimo-resultado"></div>
+              <button class="btn-test" style="background:var(--navy)">Iniciar mapeamento</button>
             </div>
           </div>
 
@@ -1605,6 +1672,7 @@ const sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{
 })
 const EMAIL_PSI='mcamillopsi@gmail.com'
 let user=null,testeAtual=null,perguntaAtual=0,respostas=[],graficos={},sidebarOpen=true
+let bfPerguntaAtual=0,bfRespostas=[],bfUltimoResultado=null
 
 // ══ SHA-256 (mantido apenas para migração de contas legadas) ══
 async function hashSenha(senha){
@@ -1670,7 +1738,200 @@ const TAREFA_QUESTIONARIOS={
   msq:{nomeCurto:'MSQ-BR',label:'Rastreio da qualidade do sono (MSQ-BR)',intervaloPadrao:30}
 }
 
-function fmt(iso){return new Date(iso).toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric'})}
+// ══════════════════════════════════════════════════════════════════════
+// BIG FIVE — MAPEAMENTO DE PERSONALIDADE (novo)
+// Conteúdo (perguntas, escolhas e textos de resultado em pt-br) adaptado
+// do projeto open-source rubynor/bigfive-web (licença MIT), que por sua vez
+// implementa o modelo IPIP-NEO (Cinco Grandes Fatores de Personalidade).
+// A lógica de pontuação foi reimplementada aqui (não é uma cópia do pacote
+// @bigfive-org/score/@bigfive-org/results) corrigindo um bug identificado
+// no mapeamento de facetas do pacote de resultados original, onde a
+// pontuação por faceta nunca era encontrada por erro de referência de
+// variável (facet[key] em vez de scores[domínio].facet[faceta]).
+// ══════════════════════════════════════════════════════════════════════
+const BIG5_PERGUNTAS=[
+  ['Me preocupo com as coisas','plus','N',1],['Faço amigos com facilidade','plus','E',1],['Tenho uma imaginação fértil','plus','O',1],['Confio nos outros','plus','A',1],
+  ['Concluo as tarefas com sucesso','plus','C',1],['Fico com raiva facilmente','plus','N',2],['Amo grandes festas','plus','E',2],['Acredito na importância da arte','plus','O',2],
+  ['Uso os outros para alcançar meus fins','minus','A',2],['Gosto de organizar as coisas','plus','C',2],['Frequentemente me sinto triste','plus','N',3],['Assumo a liderança das coisas','plus','E',3],
+  ['Experimento minhas emoções intensamente','plus','O',3],['Adoro ajudar aos outros','plus','A',3],['Mantenho minhas promessas','plus','C',3],['Tenho dificuldade de me aproximar dos outros','plus','N',4],
+  ['Estou sempre ocupado(a)','plus','E',4],['Prefiro variedade à rotina','plus','O',4],['Amo uma boa briga','minus','A',4],['Trabalho muito','plus','C',4],
+  ['Adoro ir em farras','plus','N',5],['Busco sempre emoção (adrenalina)','plus','E',5],['Gosto de ler textos desafiadores','plus','O',5],['Acredito ser melhor que os outros','minus','A',5],
+  ['Estou sempre preparado(a)','plus','C',5],['Entro em pânico facilmente','plus','N',6],['Irradio alegria','plus','E',6],['Costumo votar em candidatos políticos liberais (progressistas)','plus','O',6],
+  ['Me preocupo com os desabrigados','plus','A',6],['Mergulho de cabeça nas coisas sem pensar','minus','C',6],['Temo o pior','plus','N',1],['Me sinto confortável no meio das pessoas','plus','E',1],
+  ['Adoro histórias fantásticas de fantasia e ficção','plus','O',1],['Acredito que os outros têm boas intenções','plus','A',1],['Sou excelente no que eu faço','plus','C',1],['Me irrito facilmente','plus','N',2],
+  ['Converso com muitas pessoas diferentes em festas','plus','E',2],['Vejo beleza em coisas que outros podem não notar','plus','O',2],['Trapaceio para tirar vantagem','minus','A',2],['Frequentemente esqueço de colocar as coisas de volta em seu lugar','minus','C',2],
+  ['Não gosto de mim','plus','N',3],['Tento liderar os outros','plus','E',3],['Sinto as emoções dos outros','plus','O',3],['Me preocupo com os outros','plus','A',3],
+  ['Digo a verdade','plus','C',3],['Tenho medo de chamar a atenção','plus','N',4],['Estou sempre preparado(a)','plus','E',4],['Prefiro lidar com coisas que eu conheça','minus','O',4],
+  ['Grito com os outros','minus','A',4],['Supero as expectativas','plus','C',4],['Raramente me excedo em festas','minus','N',5],['Busco aventura','plus','E',5],
+  ['Evito discussões filosóficas','minus','O',5],['Penso muito em mim','minus','A',5],['Transformo meus planos em realidade','plus','C',5],['Me sinto sobrecarregado(a) com os eventos','plus','N',6],
+  ['Me divirto bastante','plus','E',6],['Acredito que certo e errado são relativos','plus','O',6],['Sinto simpatia por aqueles que estão em situação pior do que eu','plus','A',6],['Tomo decisões difíceis','minus','C',6],
+  ['Tenho medo de muitas coisas','plus','N',1],['Evito contatos com outras pessoas','minus','E',1],['Amo ficar sonhando no mundo da lua','plus','O',1],['Confio no que as pessoas dizem','plus','A',1],
+  ['Executo as tarefas sem maiores problemas','plus','C',1],['Perco a paciência facilmente','plus','N',2],['Prefiro ficar sozinho(a)','minus','E',2],['Não gosto de poesia','minus','O',2],
+  ['Tiro vantagem dos outros','minus','A',2],['Meu quarto é uma bagunça','minus','C',2],['Estou sempre deprimido(a)','plus','N',3],['Assumo o controle das coisas','plus','E',3],
+  ['Raramente percebo minhas reações emocionais','minus','O',3],['Sou indiferente ao sentimento dos outros','minus','A',3],['Quebro as regras','minus','C',3],['Só me sinto bem com meus amigos(as)','plus','N',4],
+  ['Faço muitas coisas no tempo livre','plus','E',4],['Não gosto de mudanças','minus','O',4],['Insulto os outros','minus','A',4],['Eu trabalho apenas o suficiente para sobreviver','minus','C',4],
+  ['Resisto facilmente às tentações','minus','N',5],['Gosto de ser inconsequente','plus','E',5],['Tenho dificuldade em entender ideias abstratas','minus','O',5],['Tenho uma opinião muito positiva sobre mim mesmo(a)','minus','A',5],
+  ['Fico perdendo tempo','minus','C',5],['Sinto que sou incapaz de lidar com as coisas','plus','N',6],['Amo a vida','plus','E',6],['Costumo votar em candidatos políticos conservadores','minus','O',6],
+  ['Não me interesso pelos problemas dos outros','minus','A',6],['Me apresso nas coisas','minus','C',6],['Me estresso facilmente','plus','N',1],['Mantenho distância dos outros','minus','E',1],
+  ['Gosto de me perder em pensamentos','plus','O',1],['Desconfio das pessoas','minus','A',1],['Sei como fazer as coisas','plus','C',1],['Não me incomodo facilmente','minus','N',2],
+  ['Evito multidões','minus','E',2],['Não gosto de ir ao museu de arte','minus','O',2],['Atrapalho os planos dos outros','minus','A',2],['Deixo minhas coisas espalhadas','minus','C',2],
+  ['Me sinto confortável comigo mesmo(a)','minus','N',3],['Aguardo outras pessoas tomarem a liderança das coisas','minus','E',3],['Não entendo pessoas que agem emotivamente','minus','O',3],['Não tiro tempo para os outros','minus','A',3],
+  ['Quebro minhas promessas','minus','C',3],['Não me incomodo com situações sociais difíceis','minus','N',4],['Gosto de pegar leve','minus','E',4],['Me considero ter costumes tradicionais','minus','O',4],
+  ['Entro em contato com os outros','minus','A',4],['Dedico pouco tempo e esforço no meu trabalho','minus','C',4],['Controlo minhas vontades','minus','N',5],['Ajo de forma descontrolada','plus','E',5],
+  ['Não me interesso por discussões teóricas','minus','O',5],['Gosto de falar das minhas virtudes','minus','A',5],['Tenho dificuldade para começar as tarefas','minus','C',5],['Permaneço calmo(a) sob pressão','minus','N',6],
+  ['Vejo o lado bom da vida','plus','E',6],['Acredito que precisamos ser rígidos com o crime','minus','O',6],['Tento não pensar nos necessitados','minus','A',6],['Ajo sem pensar','minus','C',6]
+]
+
+const BIG5_DOMINIOS={
+  N:{nome:'Neuroticismo',resumo:'Neuroticismo: tendência a sentir emoções negativas.',baixo:'Sua pontuação para "neuroticismo" é baixa, indicando que você é bastante calmo, equilibrado e estável. Você não reage com emoções intensas em situações difíceis. Em momentos de estresse você tende a ser bastante tranquilo e não responde emocionalmente com raiva. Geralmente confiam em sua capacidade de lidar com situações adversas ou desconfortáveis.',neutro:'Sua pontuação para "neuroticismo" é média, indicando que seu nível de reatividade emocional é típica da população em geral. Situações estressantes e frustrantes são um pouco perturbadoras para você, mas você geralmente é capaz de superar esses sentimentos e lidar bem com essas situações.',alto:'Sua pontuação para "neuroticismo" é alta, indicando que você tende a experimentar emoções negativas muito intensamente e têm dificuldade em controlar essas emoções quando surgem. As pessoas te consideram sensível e emotivo. Pessoas com essa personalidade são mais vulneráveis à angústia psicológica do que os indivíduos que pontuam mais baixo.',facetas:{1:{titulo:'Ansiedade',texto:'Tipo de pessoa que está sempre \'em alerta\'. Sente ansiedade e que algo perigoso está prestes a acontecer. São mais propensos a sentir medo e tensão em situações comuns. Pessoas com baixa pontuação para ansiedade geralmente não têm medo, são calmas e tranquilas.'},2:{titulo:'Raiva',texto:'As pessoas com alta pontuação nessa categoria se frustram quando as coisas não vão do seu jeito e têm tendência a sentir amargura e raiva. Gostam de ser tratados de forma justa e se sentem injustiçados quando enganados. Pessoas com pontuação baixa dificilmente passam raiva.'},3:{titulo:'Melancolia',texto:'Pontuações altas identificam pessoas que têm dificuldade em iniciar atividades e propensão maior a experimentar sintomas depressivos, como perda de energia, dificuldade de concentração e problemas com o sono. Já as pessoas com pontuação baixa tendem a não sentir esses sentimentos depressivos.'},4:{titulo:'Autoconsciência',texto:'Pessoas impulsivas são incapazes de controlar desejos ou impulsos. Sentem dificuldade em resistir a vontades. Eles tendem a sanar seus prazeres e buscam recompensas instantâneas ao invés de longo-prazo. Já pessoas pouco impulsivas não passam por situações exageradas em relação a seus desejos, pois conseguem resistir. Por esse motivo costumam ser mais moderados.'},5:{titulo:'Impulsividade',texto:'Pessoas impulsivas são incapazes de controlar desejos ou impulsos. Sentem dificuldade em resistir a vontades. Eles tendem a sanar seus prazeres e buscam recompensas instantâneas ao invês de longo-prazo. Já pessoas pouco impulsivas não experimentam necessidades exageradas ou desejos que são impossíveis de resistir, por esse motivo costumam ser mais moderados.'},6:{titulo:'Vulnerabilidade',texto:'Pessoas que pontuam alto nessa competência têm dificuldade em lidar com o estresse. Estão mais propensos a passar por situações de pânico, confusão e desamparo quando sob pressão. Pessoas com pouca pontuação para vulnerabilidade se sentem mais equilibrados, confiantes e pensam com clareza quando passam por momentos de estresse.'}}},
+  E:{nome:'Extroversão',resumo:'A extroversão é marcada pela sociabilidade, engajamento com o mundo externo.',baixo:'Sua pontuação para "extroversão" é baixa, indicando que você tende a ser mais introvertido, reservado e tranquilo. Você curte a solidão e atividades individuais. Ter alguns amigos próximos pra você já é um grande nível de socialização.',neutro:'Sua pontuação extroversão é média, indicando que você não é nem super tímido e nem o mais comunicativo do seu grupo. Você aproveita o tempo com outros, mas também gosta de estar sozinho.',alto:'Sua pontuação para extroversão é alta, indicando que você é bastante sociável, extrovertido, energético e animado. Você prefere estar por perto de pessoas a maior parte do tempo.',facetas:{1:{titulo:'Simpatia',texto:'Pessoas amigáveis, que fazem amigos rapidamente e com muita facilidade. Os que pontuam baixo para simpatia não são necessariamente frios e hostis, são apenas menos comunicativos, mais distantes e reservados.'},2:{titulo:'Sociabilidade',texto:'Preferência pela companhia dos outros e evita estar sozinho. Se sentem bem em multidões/aglomerações. Já os que pontuam pouco tendem a se sentir tensos em grandes multidões e por isso evitam aglomerações. Não são antisociais/antipáticos, apenas sentem mais necessidade de privacidade e tempo para si mesmos do que as pessoas que têm pontuação alta.'},3:{titulo:'Assertividade',texto:'Gostam de assumir o comando e direcionar as atividades dos outros. Tendem a conquistar cargos de liderança e dominar situações sociais. Já as pessoas com pontuação baixa tendem a ser mais quietos e não se incomodam quando os outros comandam as atividades em grupos.'},4:{titulo:'Atividade',texto:'Pessoas com estilo de vida acelerado e propensos a estarem ativos. Gostam de estar em movimento e normalmente estão envolvidos em muitas atividades ao mesmo tempo. Pesoas que tem pontuação baixa seguem um ritmo mais lento e tranquilo, são mais relaxadas.'},5:{titulo:'Busca de Sensações',texto:'Alegres e estimulados. Têm preferência por barulho. Ficam entediados facilmente, adoram luzes brilhantes e movimento. Eles são mais propensos a arriscar-se e viver fortes emoções. Os com pontuação baixa não gostam de barulho e tumulto e fogem de experiências com fortes emoções.'},6:{titulo:'Emoções Positivas',texto:'Pessoas alto astral, bem humoradas, lidam com as situações com emoções positivas com felicidade, entusiasmo e alegria. As pessoas que alcançam uma pontuação baixa não tem um temperamento tão enérgico e alto astral'}}},
+  O:{nome:'Abertura à Experiência',resumo:'Pessoas criativas, apreciadores da arte e da beleza e que gostam do novo.',baixo:'Sua pontuação para "abertura para experiência" é baixa, indicando que você gosta de pensar em termos simples e claros. Te descrevem como prático e realista.',neutro:'Sua pontuação para "abertura para experiência" é média, indicando que você gosta de tradição, mas está disposto a tentar coisas novas. Você costuma pensar de maneira neutra, nem simples nem complicada. Os outros te vêem como uma pessoa educada mas não super intelectual.',alto:'Sua pontuação para "abertura para experiência" é alta, indicando que você gosta de novidades, de variar as atividades, e de mudanças. Você é curioso e criativo.',facetas:{1:{titulo:'Fantasia',texto:'Vida mental ativa, critiva e de forte imaginação. Para essas pessoas o mundo real é muito comum, normal e rotineiro, por isso estão sempre criando maneiras de fantasiar um mundo mais interessante e fabuloso. Quem não tem uma pontuação alta para fantasia são mais orientados por fatos do que imaginação.'},2:{titulo:'Estética',texto:'Forte valorização da arte e da beleza, interesse pela poesia, arte e música. Essas pessoas normalmente desenvolvem habilidades artísticas e têm sensibilidade a eventos naturais e a estética. Já as pessoas que têm baixa pontuação, tem pouca ou nenhuma sensibilidade estética e interesse pela arte.'},3:{titulo:'Emotividade',texto:'Receptivos e conscientes de seus próprios sentimentos e emoções. Sentem emoções fortes e tendem a expressá-las abertamente. As pessaos pouco emotivas tendem a não expressar suas emoções abertamente.'},4:{titulo:'Aventura',texto:'Dispostos a explorar novos lugares, experimentar novos alimentos e começar novas atividades. Pessoas aventureiras estão sempre em busca do desconhecido, gostam de desbravar lugares e não gostam de rotina. É aquela pessoa que gosta de mudar a cada dia seu caminho de volta para casa. Ao contrário, as pessoas que pontuam pouco para aventura se sentem desconfortáveis com mudanças e preferem rotinas familiares.'},5:{titulo:'Intelecto',texto:'Curioso e cheio de ideias. Interesse por argumentos filosóficos. Pessoas abertas para o novo e incomum, gostam de debater questões intelectuais, de decifrar enigmas e de desafios para a mente. Normalmente se saem melhores em questões de raciocínio rápido e lógica. Já as pessoas com pontuação baixa preferem lidar com pessoas em vez de ideias. Eles consideram os exercícios intelectuais uma perda de tempo.'},6:{titulo:'Liberalismo',texto:'Gosta de explorar e avaliar seus próprios valores sociais, políticos e religiosos. Liberalismo psicológico refere-se a uma abertura a desafiar autoridade, o convencional e tradicional. Demonstra aversão em relação às regras, se questiona com frequência sobre o que é imposto e aprecia revoluções sociais. Não se importam com estabilidade e segurança, são inconformados e entram em conflito com a tradição. Já o contrário, os conservadores psicológicos, preferem a segurança e estabilidade. Se sentem bem com o tradicional e normalmente não saem da sua zona de conforto.'}}},
+  A:{nome:'Afabilidade',resumo:'Pessoas agradáveis aos outros, simpáticos. Se preocupam com a cooperação e a harmonia social e facilmente se dão bem com outras pessoas.',baixo:'Sua pontuação para "afabilidade" é baixa, indicando que você se preocupa mais com as próprias necessidades do que com a dos outros. As pessoas podem te considerar rigoroso, crítico, e inflexível.',neutro:'Seu nível de "amabilidade" é médio, indicando que você se preocupa com as necessidades alheias, mas, dificilmente você se sacrifica para fazê-las ou agradar aos outros.',alto:'Seu alto nível de "afabilidade" indica um forte interesse em atender necessidades dos outros, promover o bem-estar dos que estão a sua volta e o cooperativismo. Você é agradável, simpático, e solidário.',facetas:{1:{titulo:'Confiança',texto:'Quem pontua alto para confiança normalmente acredita que a maioria das pessoas são justas, honestas e bem-intencionadas por natureza. Pessoas com baixa pontuação são desconfiados, enxergam os outros como egoístas, desonestos e perigosos.'},2:{titulo:'Moralidade',texto:'Pessoas que se baseiam na ética e justiça, indivíduo sincero e franco. Esse grupo têm facilidade em lidar com outras pessoas e normalmente não gostam de manipulações nas relações. Pontuação baixa caracteriza pessoas que acreditam que é necessário ou comum que as relações sociais causam decepções.'},3:{titulo:'Altruísmo',texto:'Se sentem recompensados ao ajudar outras pessoas como forma de auto-realização, fortemente movidos pela compaixão e dedicados a promover o bem-estar dos outros. Extremamente generoso e disposto a ajudar aqueles que estão em necessidade. Pontuação baixa para altruísmo indica pessoas que não se sentem bem ajudando necessitados. Ajudar parece mais uma obrigação para eles do que uma ação gratificante.'},4:{titulo:'Cooperação',texto:'Indivíduos que não gostam de confrontos/agressividade. Preferem comprometer ou negar suas próprias necessidades, se isso resultar em harmonia entre os demais. Já os que pontuam pouco são mais propensos a intimidar os outros para conseguir o que querem.'},5:{titulo:'Modéstia',texto:'Pesssoas que falam de realizações próprias com bastante humildade. Não gostam de ser considerados superiores ou melhores do que os outros. Em alguns casos essa atitude pode ocasionar baixa autoconfiança/autoestima. Os que têm pontuação baixa se consideram superiores e podem ser vistos como arrogante por outras pessoas.'},6:{titulo:'Empatia',texto:'Pontuação alta indica capacidade de se pôr no lugar do outro. Sentem a dor alheia com compaixão e se preocupam com os demais. O sofrimento humano é algo que os afeta fortemente. Os que pontuam baixo nessa competência não se afetam muito pelo sofrimento humano. Acreditam na meritocracia e que julgamentos são baseados na razão. Estão mais preocupados com a verdade e justiça imparcial do que com a misericórdia/pena.'}}},
+  C:{nome:'Consciência',resumo:'Diz respeito à forma como controlamos, conduzimos e direcionamos nossos impulsos.',baixo:'Sua pontuação em "Consciência" é baixa, indicando que você gosta de viver o agora e faz as coisas de maneira impulsiva. Seu trabalho tende a ser desorganizado e costumam te avaliar como descuidado.',neutro:'Sua pontuação em "Consciência" é média. Isso significa que você é razoavelmente organizado e tem auto-controle.',alto:'"Sua pontuação em Consciência" é alta. Você é uma pessoa que define bem seus objetivos e os realiza com determinação. Te consideram confiável e trabalhador."',facetas:{1:{titulo:'Autoeficácia',texto:'Quem pontua alto normalmente tem confiança para realizar as coisas. Se sente capaz, acredita que têm a inteligência (senso comum) e autocontrole necessários para alcançar o sucesso e lidam tranquilamente com os desafios e dificuldades da vida. Pessoas com pontuação baixa não se sentem eficazes, e podem se sentir perdidos, como se não estivessem no controle de suas vidas.'},2:{titulo:'Ordem',texto:'Pontuação alta indica clareza e abordagem metódica das tarefas. Essas pessoas gostam de viver de acordo com rotinas e horários, costumam criar listas e fazer planejamento. Organização é seu sobrenome. Pessoas com baixa pontuação tendem a ser desorganizadas e dispersas.'},3:{titulo:'Senso de Dever',texto:'Pessoas conscientes, muito dogmáticas em seus valores. Valorizam o dever e obrigação. Têm um forte senso de moral. Pessoas com pontuação baixa consideram regras, contratos e regulamentações exageradas, podendo ser vistos como não confiáveis ou até mesmo irresponsáveis.'},4:{titulo:'Realização-Esforço',texto:'Disposição para trabalhar duro e são motivados por metas (se esforçam para alcançar a excelência). Gostam de se sentir reconhecidos e tem objetivos claros na vida. Às vezes a busca por perfeição os tornam \'workaholic\', obcecados com o trabalho. Pessoas que pontuam pouco nessa competência se sentem realizados quando cumprem determinada tarefa com o mínimo de trabalho/esforço, podendo ser visto como preguiçoso.'},5:{titulo:'Autodisciplina',texto:'Alta capacidade de seguir com as tarefas e limitar a distração. Se mantém a persistentes mesmo em tarefas difíceis ou que não gostem de fazer. Não procrastinam para começar e finalizar tarefas e são extremamente focadas quando iniciam uma atividade. Aqueles com pouca autodisciplina procrastinam e tem mais dificuldade de \'acompanhar o ritmo\'. Muitas vezes não conseguem completar tarefas, mesmo as que eles queiram muito finalizar.'},6:{titulo:'Cautela',texto:'Tendem a refletir cuidadosamente sobre as decisões antes de agir. Pensam nas possibilidades e consequências das ações antes de tomar uma decisão. Já os que pontuam baixo normalmente falam/fazem a primeira coisa que vem à mente sem pensar muito nas consequências das suas palavras e ações.'}}}
+}
+
+const BIG5_OPCOES=['Discordo totalmente','Discordo parcialmente','Nem discordo, nem concordo','Concordo parcialmente','Concordo totalmente']
+const BIG5_ORDEM_EXIBICAO=['O','C','E','A','N']
+
+function big5Classificar(media){if(media>3.5)return 'alto';if(media<2.5)return 'baixo';return 'neutro'}
+function big5NivelLabel(n){return n==='alto'?'Alta':n==='baixo'?'Baixa':'Média'}
+function big5NivelBadgeClass(n){return 'b5-badge-'+n}
+
+// Calcula pontuação por domínio e por faceta a partir das respostas (índices 0-4)
+function calcularBigFive(respostas){
+  const dominios={}
+  BIG5_PERGUNTAS.forEach((p,i)=>{
+    const idx=respostas[i]
+    if(idx===undefined)return
+    const [,keyed,dom,facet]=p
+    const score=keyed==='plus'?(idx+1):(5-idx)
+    if(!dominios[dom])dominios[dom]={score:0,count:0,facetas:{}}
+    const d=dominios[dom]
+    d.score+=score;d.count++
+    if(!d.facetas[facet])d.facetas[facet]={score:0,count:0}
+    d.facetas[facet].score+=score;d.facetas[facet].count++
+  })
+  Object.keys(dominios).forEach(k=>{
+    const d=dominios[k]
+    d.media=d.score/d.count
+    d.nivel=big5Classificar(d.media)
+    Object.keys(d.facetas).forEach(fk=>{
+      const f=d.facetas[fk]
+      f.media=f.score/f.count
+      f.nivel=big5Classificar(f.media)
+    })
+  })
+  return dominios
+}
+
+function iniciarBigFive(){
+  bfPerguntaAtual=0;bfRespostas=[]
+  irPara('bigfive-test')
+  renderBigFivePergunta()
+}
+
+function renderBigFivePergunta(){
+  const total=BIG5_PERGUNTAS.length
+  document.getElementById('bf-barra').style.width=Math.round((bfPerguntaAtual/total)*100)+'%'
+  document.getElementById('bf-contador').textContent=`Pergunta ${bfPerguntaAtual+1} de ${total}`
+  document.getElementById('bf-pergunta').textContent=BIG5_PERGUNTAS[bfPerguntaAtual][0]
+  const opc=document.getElementById('bf-opcoes');opc.innerHTML=''
+  BIG5_OPCOES.forEach((o,i)=>{
+    const d=document.createElement('div')
+    d.className='test-option'+(bfRespostas[bfPerguntaAtual]===i?' selected':'')
+    d.textContent=o
+    d.onclick=()=>{document.querySelectorAll('#bf-opcoes .test-option').forEach(x=>x.classList.remove('selected'));d.classList.add('selected');bfRespostas[bfPerguntaAtual]=i}
+    opc.appendChild(d)
+  })
+  document.getElementById('bf-btn-avancar').textContent=bfPerguntaAtual===total-1?'Finalizar ✓':'Próxima →'
+}
+
+function voltarBigFivePergunta(){
+  if(bfPerguntaAtual>0){bfPerguntaAtual--;renderBigFivePergunta()}else irPara('autoavaliacao')
+}
+
+async function avancarBigFivePergunta(){
+  if(bfRespostas[bfPerguntaAtual]===undefined){alert('Selecione uma opção para continuar.');return}
+  if(bfPerguntaAtual<BIG5_PERGUNTAS.length-1){bfPerguntaAtual++;renderBigFivePergunta()}
+  else await calcularBigFiveResultado()
+}
+
+async function calcularBigFiveResultado(){
+  const dominios=calcularBigFive(bfRespostas)
+  await sb.from('resultados_bigfive').insert({paciente_id:user.id,respostas:bfRespostas,dominios})
+  bfUltimoResultado={dominios,criado_em:new Date().toISOString()}
+  renderBigFiveResultado(dominios,'bf-resultado-conteudo')
+  irPara('bigfive-resultado')
+  renderBigFiveUltimo()
+}
+
+// Monta o HTML de resultado (usado tanto na tela do paciente quanto no painel do psicólogo)
+function renderBigFiveResultado(dominios,containerId,somenteLeitura){
+  const idPrefix=containerId
+  let html=''
+  BIG5_ORDEM_EXIBICAO.forEach(letra=>{
+    const info=BIG5_DOMINIOS[letra]
+    const d=dominios[letra]
+    if(!d||!info)return
+    const pct=Math.max(0,Math.min(100,((d.media-1)/4)*100))
+    const cardId=`${idPrefix}-dom-${letra}`
+    html+=`<div class="b5-domain-card" id="${cardId}" onclick="toggleBigFiveDomain('${cardId}')">
+      <div class="b5-domain-header">
+        <div style="flex:1">
+          <div class="b5-domain-title">${info.nome}</div>
+          <div class="b5-domain-resumo">${info.resumo}</div>
+        </div>
+        <span class="b5-badge ${big5NivelBadgeClass(d.nivel)}">${big5NivelLabel(d.nivel)}</span>
+        <span class="b5-domain-arrow">▼</span>
+      </div>
+      <div class="b5-bar-track"><div class="b5-bar-fill" style="width:${pct}%"></div></div>
+      <div class="b5-domain-desc">${info[d.nivel]}</div>
+      <div class="b5-facets">
+        ${Object.keys(d.facetas).sort((a,b)=>a-b).map(fk=>{
+          const f=d.facetas[fk]
+          const finfo=info.facetas[fk]
+          if(!finfo)return ''
+          const fpct=Math.max(0,Math.min(100,((f.media-1)/4)*100))
+          return `<div class="b5-facet">
+            <div class="b5-facet-head">
+              <span class="b5-facet-title">${finfo.titulo}</span>
+              <span class="b5-badge ${big5NivelBadgeClass(f.nivel)}">${big5NivelLabel(f.nivel)}</span>
+            </div>
+            <div class="b5-bar-track"><div class="b5-bar-fill" style="width:${fpct}%"></div></div>
+            <div class="b5-facet-text" style="margin-top:0.3rem">${finfo.texto}</div>
+          </div>`
+        }).join('')}
+      </div>
+    </div>`
+  })
+  document.getElementById(containerId).innerHTML=html
+}
+
+function toggleBigFiveDomain(cardId){
+  const el=document.getElementById(cardId)
+  if(!el)return
+  const isOpen=el.classList.contains('open')
+  el.parentElement.querySelectorAll('.b5-domain-card').forEach(c=>c.classList.remove('open'))
+  if(!isOpen)el.classList.add('open')
+}
+
+// Busca o último mapeamento Big Five do paciente logado e atualiza o card na Autoavaliação
+async function renderBigFiveUltimo(){
+  const el=document.getElementById('bf-ultimo-resultado')
+  if(!el||!user||user.email===EMAIL_PSI)return
+  const {data}=await sb.from('resultados_bigfive').select('*').eq('paciente_id',user.id).order('criado_em',{ascending:false}).limit(1)
+  if(!data||!data.length){el.textContent='';bfUltimoResultado=null;return}
+  bfUltimoResultado=data[0]
+  el.className='test-lembrete ok'
+  el.innerHTML=`Último mapeamento: ${fmt(data[0].criado_em)} · <a href="javascript:void(0)" onclick="event.stopPropagation();verUltimoBigFive()" style="color:var(--gold);text-decoration:underline">ver resultado</a>`
+}
+
+function verUltimoBigFive(){
+  if(!bfUltimoResultado)return
+  renderBigFiveResultado(bfUltimoResultado.dominios,'bf-resultado-conteudo')
+  irPara('bigfive-resultado')
+}
+
 function badgeHtml(c){const m={'Mínima':'badge-min','Leve':'badge-leve','Normal a leve':'badge-leve','Moderada':'badge-mod','Moderado':'badge-mod','Moderadamente grave':'badge-grav','Grave':'badge-grav','Grave a extremamente grave':'badge-grav','Boa qualidade de sono':'badge-min','Dificuldades leves de sono':'badge-leve','Dificuldades moderadas de sono':'badge-mod','Dificuldades graves de sono':'badge-grav'};const cls=Object.keys(m).find(k=>c.includes(k))||'badge-leve';return`<span class="badge ${m[cls]}">${c}</span>`}
 
 function atualizarMobileNav(pg){
@@ -1922,6 +2183,7 @@ async function carregarAutoavaliacao(){
   const resultados=data||[]
   renderHistorico(resultados)
   renderLembretes(resultados)
+  renderBigFiveUltimo()
 }
 
 function renderLembretes(data){
@@ -2883,6 +3145,7 @@ async function verPaciente(p){
   const {data}=await sb.from('resultados').select('*').eq('paciente_id',p.id).order('criado_em',{ascending:false})
   const {data:sessoes}=await sb.from('sessoes').select('*').eq('paciente_id',p.id).order('data_sessao',{ascending:false})
   const {data:tarefasPac}=await sb.from('tarefas').select('*').eq('paciente_id',p.id).order('criado_em',{ascending:false})
+  const {data:bigfivePac}=await sb.from('resultados_bigfive').select('*').eq('paciente_id',p.id).order('criado_em',{ascending:false})
   let tempoHtml='—'
   if(p.data_inicio){const dias=Math.floor((new Date()-new Date(p.data_inicio))/86400000);const meses=Math.floor(dias/30);tempoHtml=meses>0?`${meses} mês${meses>1?'es':''}`:`${dias} dia${dias!==1?'s':''}`}
   let html=`<div class="psi-edit-row"><div><label>Sessões anteriores à plataforma</label><input type="number" min="0" id="psi-sessoes-${p.id}" value="${p.sessoes_anteriores||0}"></div><div><label>Data de início</label><input type="date" id="psi-inicio-${p.id}" value="${p.data_inicio||''}"></div></div>
@@ -2967,6 +3230,18 @@ async function verPaciente(p){
 
   if(!data||!data.length){html+=`<p style="font-size:0.75rem;color:var(--text-muted);margin-top:1.25rem">Nenhum teste realizado ainda.</p>`}
   else{html+=`<div style="font-size:0.65rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);margin:1.25rem 0 0.75rem">Resultados de testes</div><table class="history-table"><thead><tr><th>Teste</th><th>Pontuação</th><th>Classificação</th><th>Data</th></tr></thead><tbody>${data.map(r=>`<tr><td>${r.teste}</td><td>${r.pontuacao}</td><td>${badgeHtml(r.classificacao)}</td><td>${fmt(r.criado_em)}</td></tr>`).join('')}</tbody></table>`}
+
+  // ══ Mapeamento Big Five (novo) ══
+  if(bigfivePac&&bigfivePac.length){
+    const ultimoBf=bigfivePac[0]
+    const containerBfId=`bf-psi-${p.id}`
+    html+=`<div style="font-size:0.65rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);margin:1.25rem 0 0.5rem">Mapeamento de Personalidade (Big Five)</div>
+    <div class="b5-psi-mini">${bigfivePac.length>1?`${bigfivePac.length} mapeamentos realizados · `:''}Mais recente: ${fmt(ultimoBf.criado_em)}</div>
+    <div class="b5-psi-mini" style="font-style:italic">Níveis baixo/médio/alto = posição na própria escala de 1-5 (não há norma populacional pública para este instrumento).</div>
+    <div id="${containerBfId}"></div>`
+    // Renderiza de forma assíncrona pois depende do DOM já estar montado
+    setTimeout(()=>renderBigFiveResultado(ultimoBf.dominios,containerBfId),0)
+  }
 
   // RPDs do paciente
   const {data:rpds}=await sb.from('rpd').select('*').eq('paciente_id',p.id).order('criado_em',{ascending:false})
