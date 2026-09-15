@@ -337,6 +337,41 @@
 
     .rpd-enc{font-size:0.78rem;font-weight:300;color:var(--navy-light);line-height:1.85;background:var(--gold-pale);border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:0 12px 12px 0;padding:1.1rem 1.25rem;margin-bottom:1.5rem}
 
+    /* ══ TAREFAS INDICADAS PELO PSICÓLOGO (novo) ══ */
+    #tarefas-psi-bloco{margin-bottom:1.5rem}
+    .tarefa-card{background:var(--white);border:1px solid var(--border);border-left:3px solid var(--navy-light);border-radius:0 14px 14px 0;padding:0.9rem 1.1rem;margin-bottom:0.6rem;box-shadow:0 2px 8px rgba(125,143,174,0.06)}
+    .tarefa-card.vencida{border-left-color:#b8610a}
+    .tarefa-card:last-child{margin-bottom:0}
+    .tarefa-header{display:flex;align-items:flex-start;justify-content:space-between;gap:0.75rem}
+    .tarefa-tipo-tag{display:inline-block;font-size:0.56rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:0.14rem 0.5rem;border-radius:20px;background:var(--gold-pale);color:var(--gold);margin-bottom:0.35rem}
+    .tarefa-titulo{font-size:0.82rem;font-weight:600;color:var(--navy)}
+    .tarefa-instrucao{font-size:0.75rem;font-weight:300;color:var(--text-muted);line-height:1.6;margin-top:0.25rem}
+    .tarefa-status{font-size:0.65rem;font-weight:500;margin-top:0.45rem}
+    .tarefa-status.ok{color:var(--green)}
+    .tarefa-status.vencida{color:#b8610a}
+    .tarefa-status.aguardando{color:var(--text-muted)}
+    .tarefa-acoes{display:flex;gap:0.5rem;margin-top:0.6rem;flex-wrap:wrap}
+    .btn-tarefa-mini{font-size:0.62rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;padding:0.32rem 0.75rem;border-radius:6px;cursor:pointer;border:none;background:var(--navy);color:var(--white);transition:background 0.15s}
+    .btn-tarefa-mini:hover{background:var(--navy-mid)}
+    .btn-tarefa-mini.ghost{background:transparent;border:1px solid var(--border);color:var(--text-muted)}
+    .btn-tarefa-mini.ghost:hover{border-color:var(--slate);color:var(--text)}
+
+    /* ══ PAINEL PSI — GESTÃO DE TAREFAS (novo) ══ */
+    .psi-tarefas-bloco{margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid var(--border)}
+    .psi-tarefa-item{display:flex;align-items:flex-start;justify-content:space-between;gap:0.75rem;background:var(--cream);border-radius:8px;padding:0.65rem 0.85rem;margin-bottom:0.45rem}
+    .psi-tarefa-item.inativa{opacity:0.55}
+    .psi-tarefa-info .tarefa-titulo{font-size:0.78rem}
+    .psi-tarefa-meta{font-size:0.63rem;font-weight:400;color:var(--text-muted);margin-top:0.2rem}
+    .psi-tarefa-form{background:var(--white);border:1px dashed var(--border);border-radius:10px;padding:0.9rem 1rem;margin-top:0.75rem}
+    .psi-tarefa-form-row{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;margin-bottom:0.6rem}
+    .psi-tarefa-form label{display:block;font-size:0.6rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);margin-bottom:0.3rem}
+    .psi-tarefa-form input,.psi-tarefa-form select,.psi-tarefa-form textarea{width:100%;padding:0.45rem 0.65rem;border:1px solid var(--border);border-radius:6px;font-family:'Sora',sans-serif;font-size:0.76rem;color:var(--text);background:var(--white);outline:none}
+    .psi-tarefa-form textarea{min-height:55px;resize:vertical}
+    .psi-tarefa-form input:focus,.psi-tarefa-form select:focus,.psi-tarefa-form textarea:focus{border-color:var(--gold)}
+    .psi-tarefa-checkbox-row{display:flex;align-items:center;gap:0.5rem;margin-bottom:0.6rem}
+    .psi-tarefa-checkbox-row input{width:auto;accent-color:var(--navy)}
+    .psi-tarefa-checkbox-row label{margin:0;font-size:0.68rem;text-transform:none;letter-spacing:0;font-weight:400;color:var(--text)}
+
     @media(max-width:768px){
       .sidebar{display:none}
       .topnav{padding:0 1rem}
@@ -369,6 +404,7 @@
       .result-desc{text-align:left}
       .patient-row{grid-template-columns:1fr;gap:0.35rem}
       .psi-edit-row{grid-template-columns:1fr}
+      .psi-tarefa-form-row{grid-template-columns:1fr}
       .rede-hero{flex-direction:column;gap:0.75rem;text-align:center}
       .login-box{padding:2rem 1.25rem;border-radius:8px}
       .section-eyebrow{font-size:0.58rem}
@@ -508,6 +544,12 @@
             <div class="section-eyebrow" style="margin-bottom:0.75rem">Práticas recomendadas para você</div>
             <div id="sugestoes-conteudo" style="background:var(--white);border:1px solid var(--border);border-radius:8px;padding:1.25rem;border-left:3px solid var(--gold)">
             </div>
+          </div>
+
+          <!-- Tarefas indicadas pelo psicólogo (novo) -->
+          <div id="tarefas-psi-bloco" style="display:none">
+            <div class="section-eyebrow" style="margin-bottom:0.75rem">Tarefas indicadas pelo seu psicólogo</div>
+            <div id="tarefas-psi-conteudo"></div>
           </div>
 
           <!-- Técnicas embutidas diretamente (sem clone) -->
@@ -855,7 +897,7 @@ Não é necessário anotar — o simples ato de pausar e perguntar já é sufici
           </div>
           <div class="tests-grid">
             <div class="test-card" onclick="iniciarTeste('phq9')">
-              <div class="test-name">Rastreio de sintomas depressivos</div>
+              <div class="test-name">Rastreio de humor (PHQ-9)</div>
               <div class="test-desc">Avalia a presença e a intensidade de sintomas relacionados ao humor nas últimas 2 semanas. Ajuda a acompanhar sua evolução ao longo do processo terapêutico.</div>
               <div class="test-meta">9 perguntas · ~3 min</div>
               <div style="font-size:0.62rem;font-weight:500;letter-spacing:0.06em;color:var(--gold);margin-top:0.4rem">⟳ Recomendado: a cada 2 semanas</div>
@@ -863,7 +905,7 @@ Não é necessário anotar — o simples ato de pausar e perguntar já é sufici
               <button class="btn-test">Fazer teste</button>
             </div>
             <div class="test-card" onclick="iniciarTeste('gad7')">
-              <div class="test-name">Rastreio de sintomas de ansiedade</div>
+              <div class="test-name">Rastreio de sintomas de ansiedade (GAD-7)</div>
               <div class="test-desc">Avalia a frequência e a intensidade de sintomas relacionados à ansiedade nas últimas 2 semanas. Um instrumento importante para acompanhar sua evolução.</div>
               <div class="test-meta">7 perguntas · ~2 min</div>
               <div style="font-size:0.62rem;font-weight:500;letter-spacing:0.06em;color:var(--gold);margin-top:0.4rem">⟳ Recomendado: a cada 2 semanas</div>
@@ -871,7 +913,7 @@ Não é necessário anotar — o simples ato de pausar e perguntar já é sufici
               <button class="btn-test">Fazer teste</button>
             </div>
             <div class="test-card" onclick="iniciarTeste('dass21')">
-              <div class="test-name">Rastreio de humor, ansiedade e estresse</div>
+              <div class="test-name">Rastreio de humor, ansiedade e estresse (DASS-21)</div>
               <div class="test-desc">Avalia três dimensões do bem-estar emocional com base na última semana — humor, ansiedade e nível de estresse — oferecendo uma visão integrada do seu estado.</div>
               <div class="test-meta">21 perguntas · ~5 min</div>
               <div style="font-size:0.62rem;font-weight:500;letter-spacing:0.06em;color:var(--gold);margin-top:0.4rem">⟳ Recomendado: mensalmente</div>
@@ -879,7 +921,7 @@ Não é necessário anotar — o simples ato de pausar e perguntar já é sufici
               <button class="btn-test">Fazer teste</button>
             </div>
             <div class="test-card" onclick="iniciarTeste('msq')">
-              <div class="test-name">Rastreio da qualidade do sono</div>
+              <div class="test-name">Rastreio da qualidade do sono (MSQ-BR)</div>
               <div class="test-desc">Avalia a frequência de dificuldades para dormir e a sonolência durante o dia. A qualidade do sono está diretamente ligada ao bem-estar emocional e à eficácia do processo terapêutico.</div>
               <div class="test-meta">10 perguntas · ~2 min</div>
               <div style="font-size:0.62rem;font-weight:500;letter-spacing:0.06em;color:var(--gold);margin-top:0.4rem">⟳ Recomendado: mensalmente</div>
@@ -1618,6 +1660,16 @@ const testes={
   }
 }
 
+// ══ Mapeamento questionário <-> id técnico e cadência padrão de lembrete ══
+// (as cadências abaixo já eram usadas em renderLembretes; reaproveitadas aqui
+// como padrão sugerido ao psicólogo ao atribuir uma tarefa de questionário)
+const TAREFA_QUESTIONARIOS={
+  phq9:{nomeCurto:'PHQ-9',label:'Rastreio de humor (PHQ-9)',intervaloPadrao:14},
+  gad7:{nomeCurto:'GAD-7',label:'Rastreio de sintomas de ansiedade (GAD-7)',intervaloPadrao:14},
+  dass21:{nomeCurto:'DASS-21',label:'Rastreio de humor, ansiedade e estresse (DASS-21)',intervaloPadrao:30},
+  msq:{nomeCurto:'MSQ-BR',label:'Rastreio da qualidade do sono (MSQ-BR)',intervaloPadrao:30}
+}
+
 function fmt(iso){return new Date(iso).toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric'})}
 function badgeHtml(c){const m={'Mínima':'badge-min','Leve':'badge-leve','Normal a leve':'badge-leve','Moderada':'badge-mod','Moderado':'badge-mod','Moderadamente grave':'badge-grav','Grave':'badge-grav','Grave a extremamente grave':'badge-grav','Boa qualidade de sono':'badge-min','Dificuldades leves de sono':'badge-leve','Dificuldades moderadas de sono':'badge-mod','Dificuldades graves de sono':'badge-grav'};const cls=Object.keys(m).find(k=>c.includes(k))||'badge-leve';return`<span class="badge ${m[cls]}">${c}</span>`}
 
@@ -1852,6 +1904,7 @@ async function carregarDashboard(){
   const sessoesRealizadas=(sessoesData||[]).length+(user.sessoes_anteriores||0)
   renderStats(resultados,sessoesRealizadas)
   renderSugestoes(resultados)
+  carregarTarefasPaciente(resultados)
   // Adiciona botões "Ver técnica" nos cards da home (uma vez)
   document.querySelectorAll('#tecnicas-na-home .tecnica-card:not([data-ver-ok])').forEach(card=>{
     card.setAttribute('data-ver-ok','1')
@@ -2058,6 +2111,97 @@ function renderSugestoes(data){
 }
 
 // ══════════════════════════════════════════════════════════
+// TAREFAS INDICADAS PELO PSICÓLOGO (novo)
+// ══════════════════════════════════════════════════════════
+// Tabela Supabase esperada: tarefas
+//   id, paciente_id, tipo ('pratica'|'questionario'), titulo, questionario_id,
+//   instrucao, recorrente (bool), intervalo_dias (int), ativo (bool),
+//   criado_em, interrompido_em
+// Ver instruções de criação da tabela (SQL) enviadas separadamente.
+
+const TAREFA_NOME_MAP={'PHQ-9':'phq9','GAD-7':'gad7','DASS-21':'dass21','MSQ-BR':'msq'}
+
+async function carregarTarefasPaciente(resultadosJaCarregados){
+  const bloco=document.getElementById('tarefas-psi-bloco')
+  const conteudo=document.getElementById('tarefas-psi-conteudo')
+  if(!bloco||!conteudo)return
+
+  const {data:tarefas,error}=await sb.from('tarefas').select('*').eq('paciente_id',user.id).eq('ativo',true).order('criado_em',{ascending:true})
+  if(error||!tarefas||!tarefas.length){bloco.style.display='none';return}
+
+  // Último resultado por instrumento (reaproveita os resultados já carregados na Home)
+  const ultimoPorInstrumento={}
+  ;[...(resultadosJaCarregados||[])].reverse().forEach(r=>{
+    const k=(r.teste.split('—')[0].trim()).replace('PSQI-BR','MSQ-BR')
+    const id=TAREFA_NOME_MAP[k]
+    if(id)ultimoPorInstrumento[id]=r.criado_em
+  })
+
+  bloco.style.display='block'
+  conteudo.innerHTML=tarefas.map(t=>renderTarefaCard(t,ultimoPorInstrumento)).join('')
+}
+
+function renderTarefaCard(t,ultimoPorInstrumento){
+  if(t.tipo==='questionario'){
+    const info=TAREFA_QUESTIONARIOS[t.questionario_id]
+    const nomeTeste=info?info.label:(t.titulo||t.questionario_id)
+    const ultimo=ultimoPorInstrumento[t.questionario_id]
+    let statusHtml='',vencida=false
+    if(!ultimo){
+      statusHtml=`<div class="tarefa-status aguardando">Ainda não respondido — seu psicólogo indicou este questionário para você.</div>`
+    } else if(t.recorrente&&t.intervalo_dias){
+      const dias=Math.floor((new Date()-new Date(ultimo))/86400000)
+      if(dias>=t.intervalo_dias){
+        vencida=true
+        statusHtml=`<div class="tarefa-status vencida">⚠ Já se passaram ${dias} dias desde a última resposta — hora de responder novamente.</div>`
+      } else {
+        const faltam=t.intervalo_dias-dias
+        statusHtml=`<div class="tarefa-status ok">Respondido há ${dias} dia${dias!==1?'s':''}. Próximo lembrete em ${faltam} dia${faltam!==1?'s':''}.</div>`
+      }
+    } else {
+      statusHtml=`<div class="tarefa-status ok">Última resposta: ${fmt(ultimo)}.</div>`
+    }
+    return `<div class="tarefa-card${vencida?' vencida':''}">
+      <div class="tarefa-header">
+        <div>
+          <div class="tarefa-tipo-tag">Questionário</div>
+          <div class="tarefa-titulo">${nomeTeste}</div>
+          ${t.instrucao?`<div class="tarefa-instrucao">${t.instrucao}</div>`:''}
+          ${statusHtml}
+        </div>
+      </div>
+      <div class="tarefa-acoes">
+        <button class="btn-tarefa-mini" onclick="irPara('autoavaliacao');setTimeout(()=>iniciarTeste('${t.questionario_id}'),50)">Responder agora</button>
+      </div>
+    </div>`
+  }
+  // tipo === 'pratica'
+  return `<div class="tarefa-card">
+    <div class="tarefa-header">
+      <div>
+        <div class="tarefa-tipo-tag">Prática</div>
+        <div class="tarefa-titulo">${t.titulo}</div>
+        ${t.instrucao?`<div class="tarefa-instrucao">${t.instrucao}</div>`:''}
+      </div>
+    </div>
+    <div class="tarefa-acoes">
+      <button class="btn-tarefa-mini ghost" onclick="abrirTarefaPratica('${(t.titulo||'').replace(/'/g,"\\'")}')">Ver técnica →</button>
+    </div>
+  </div>`
+}
+
+// Abre o overlay de detalhe da técnica cujo título bate com o indicado pelo psicólogo
+function abrirTarefaPratica(titulo){
+  const cards=document.querySelectorAll('#tecnicas-na-home .tecnica-card')
+  const alvo=[...cards].find(c=>{
+    const t=c.querySelector('.tecnica-title')
+    return t&&t.textContent.trim().toLowerCase()===titulo.trim().toLowerCase()
+  })
+  if(alvo){abrirDetalheTec(alvo)}
+  else{irPara('dashboard')}
+}
+
+// ══════════════════════════════════════════════════════════
 // STOP — Técnica de Atenção Plena
 // ══════════════════════════════════════════════════════════
 const STOP_PHASES = [
@@ -2171,7 +2315,6 @@ function stopRunPhase(){
 function stopFinalizar(){
   stopIrPara('fim')
 }
-
 
 // ══════════════════════════════════════════════════════════
 // RPD — Registro de Pensamentos Disfuncionais
@@ -2417,7 +2560,6 @@ NÃO faça diagnósticos, NÃO substitua o psicólogo, NÃO use linguagem clíni
   }
 }
 
-
 function renderGraficos(data){
   const grid=document.getElementById('graficos-grid')
   if(!data.length){
@@ -2536,7 +2678,7 @@ async function calcularResultado(){
   irPara('result')
   // Atualiza sugestões na home em background
   sb.from('resultados').select('*').eq('paciente_id',user.id).order('criado_em',{ascending:false}).then(({data})=>{
-    if(data)renderSugestoes(data)
+    if(data){renderSugestoes(data);carregarTarefasPaciente(data)}
   })
 }
 
@@ -2740,6 +2882,7 @@ async function verPaciente(p){
   document.querySelectorAll('.patient-detail').forEach(d=>d.classList.remove('open'))
   const {data}=await sb.from('resultados').select('*').eq('paciente_id',p.id).order('criado_em',{ascending:false})
   const {data:sessoes}=await sb.from('sessoes').select('*').eq('paciente_id',p.id).order('data_sessao',{ascending:false})
+  const {data:tarefasPac}=await sb.from('tarefas').select('*').eq('paciente_id',p.id).order('criado_em',{ascending:false})
   let tempoHtml='—'
   if(p.data_inicio){const dias=Math.floor((new Date()-new Date(p.data_inicio))/86400000);const meses=Math.floor(dias/30);tempoHtml=meses>0?`${meses} mês${meses>1?'es':''}`:`${dias} dia${dias!==1?'s':''}`}
   let html=`<div class="psi-edit-row"><div><label>Sessões anteriores à plataforma</label><input type="number" min="0" id="psi-sessoes-${p.id}" value="${p.sessoes_anteriores||0}"></div><div><label>Data de início</label><input type="date" id="psi-inicio-${p.id}" value="${p.data_inicio||''}"></div></div>
@@ -2777,6 +2920,51 @@ async function verPaciente(p){
     </select></div>
     <button class="btn-add-sessao" onclick="adicionarSessao('${p.id}')">+ Adicionar</button>
   </div>`
+
+  // ══ Tarefas indicadas (novo) ══
+  html+=`<div class="psi-tarefas-bloco">
+    <div style="font-size:0.65rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:0.75rem">Tarefas indicadas ao paciente</div>`
+  const ativas=(tarefasPac||[]).filter(t=>t.ativo)
+  const inativas=(tarefasPac||[]).filter(t=>!t.ativo)
+  if(!ativas.length&&!inativas.length){
+    html+=`<p style="font-size:0.75rem;color:var(--text-muted);margin-bottom:0.75rem">Nenhuma tarefa atribuída ainda.</p>`
+  }
+  ativas.forEach(t=>{html+=psiTarefaItemHtml(t,p.id,true)})
+  if(inativas.length){
+    html+=`<div style="font-size:0.6rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);margin:0.75rem 0 0.4rem">Interrompidas</div>`
+    inativas.forEach(t=>{html+=psiTarefaItemHtml(t,p.id,false)})
+  }
+  html+=`<div class="psi-tarefa-form" id="psi-tarefa-form-${p.id}">
+    <div class="psi-tarefa-form-row">
+      <div><label>Tipo</label><select id="tarefa-tipo-${p.id}" onchange="alternarCamposTarefa('${p.id}')">
+        <option value="pratica">Prática</option>
+        <option value="questionario">Questionário</option>
+      </select></div>
+      <div id="tarefa-campo-questionario-${p.id}">
+        <label>Questionário</label>
+        <select id="tarefa-questionario-${p.id}" onchange="preencherIntervaloPadrao('${p.id}')">
+          ${Object.entries(TAREFA_QUESTIONARIOS).map(([id,info])=>`<option value="${id}">${info.label}</option>`).join('')}
+        </select>
+      </div>
+      <div id="tarefa-campo-titulo-${p.id}" style="display:none">
+        <label>Título da prática</label>
+        <input type="text" id="tarefa-titulo-${p.id}" placeholder="Ex: Ativação comportamental">
+      </div>
+    </div>
+    <div class="psi-tarefa-form-row" style="grid-template-columns:1fr">
+      <div><label>Instrução (opcional)</label><textarea id="tarefa-instrucao-${p.id}" placeholder="Uma observação para o paciente, se quiser"></textarea></div>
+    </div>
+    <div class="psi-tarefa-checkbox-row" id="tarefa-recorrente-row-${p.id}">
+      <input type="checkbox" id="tarefa-recorrente-${p.id}" checked onchange="document.getElementById('tarefa-intervalo-wrap-${p.id}').style.display=this.checked?'block':'none'">
+      <label for="tarefa-recorrente-${p.id}">Lembrete recorrente</label>
+    </div>
+    <div class="psi-tarefa-form-row" id="tarefa-intervalo-wrap-${p.id}" style="grid-template-columns:1fr">
+      <div><label>Repetir a cada (dias)</label><input type="number" min="1" id="tarefa-intervalo-${p.id}" value="14"></div>
+    </div>
+    <button class="btn-save-psi" onclick="cadastrarTarefa('${p.id}')">+ Atribuir tarefa</button>
+  </div>
+  </div>`
+
   if(!data||!data.length){html+=`<p style="font-size:0.75rem;color:var(--text-muted);margin-top:1.25rem">Nenhum teste realizado ainda.</p>`}
   else{html+=`<div style="font-size:0.65rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);margin:1.25rem 0 0.75rem">Resultados de testes</div><table class="history-table"><thead><tr><th>Teste</th><th>Pontuação</th><th>Classificação</th><th>Data</th></tr></thead><tbody>${data.map(r=>`<tr><td>${r.teste}</td><td>${r.pontuacao}</td><td>${badgeHtml(r.classificacao)}</td><td>${fmt(r.criado_em)}</td></tr>`).join('')}</tbody></table>`}
 
@@ -2804,6 +2992,75 @@ async function verPaciente(p){
   }
 
   det.innerHTML=html;det.classList.add('open')
+}
+
+// ══ Gestão de tarefas pelo psicólogo (novo) ══
+function psiTarefaItemHtml(t,pacienteId,ativa){
+  const label=t.tipo==='questionario'?(TAREFA_QUESTIONARIOS[t.questionario_id]?TAREFA_QUESTIONARIOS[t.questionario_id].label:t.questionario_id):t.titulo
+  const meta=t.tipo==='questionario'
+    ? (t.recorrente?`Lembrete a cada ${t.intervalo_dias} dias`:'Sem lembrete recorrente')
+    : 'Prática indicada'
+  return `<div class="psi-tarefa-item${ativa?'':' inativa'}">
+    <div class="psi-tarefa-info">
+      <div class="tarefa-titulo">${label}</div>
+      <div class="psi-tarefa-meta">${t.tipo==='questionario'?'Questionário':'Prática'} · ${meta}${t.instrucao?' · "'+t.instrucao+'"':''}</div>
+    </div>
+    ${ativa
+      ? `<button class="btn-tarefa-mini ghost" onclick="interromperTarefa('${t.id}','${pacienteId}')">Interromper</button>`
+      : `<button class="btn-tarefa-mini" onclick="reativarTarefa('${t.id}','${pacienteId}')">Reativar</button>`}
+  </div>`
+}
+
+function alternarCamposTarefa(pacienteId){
+  const tipo=document.getElementById('tarefa-tipo-'+pacienteId).value
+  document.getElementById('tarefa-campo-questionario-'+pacienteId).style.display=tipo==='questionario'?'block':'none'
+  document.getElementById('tarefa-campo-titulo-'+pacienteId).style.display=tipo==='pratica'?'block':'none'
+  document.getElementById('tarefa-recorrente-row-'+pacienteId).style.display=tipo==='questionario'?'flex':'none'
+  document.getElementById('tarefa-intervalo-wrap-'+pacienteId).style.display=(tipo==='questionario'&&document.getElementById('tarefa-recorrente-'+pacienteId).checked)?'block':'none'
+  if(tipo==='questionario')preencherIntervaloPadrao(pacienteId)
+}
+
+function preencherIntervaloPadrao(pacienteId){
+  const qId=document.getElementById('tarefa-questionario-'+pacienteId).value
+  const info=TAREFA_QUESTIONARIOS[qId]
+  const intervaloEl=document.getElementById('tarefa-intervalo-'+pacienteId)
+  if(info&&intervaloEl)intervaloEl.value=info.intervaloPadrao
+}
+
+async function cadastrarTarefa(pacienteId){
+  const tipo=document.getElementById('tarefa-tipo-'+pacienteId).value
+  const instrucao=document.getElementById('tarefa-instrucao-'+pacienteId).value.trim()||null
+  let payload={paciente_id:pacienteId,tipo,instrucao,ativo:true}
+
+  if(tipo==='questionario'){
+    const qId=document.getElementById('tarefa-questionario-'+pacienteId).value
+    const info=TAREFA_QUESTIONARIOS[qId]
+    const recorrente=document.getElementById('tarefa-recorrente-'+pacienteId).checked
+    const intervalo=parseInt(document.getElementById('tarefa-intervalo-'+pacienteId).value)||info.intervaloPadrao
+    payload={...payload,titulo:info.label,questionario_id:qId,recorrente,intervalo_dias:recorrente?intervalo:null}
+  } else {
+    const titulo=document.getElementById('tarefa-titulo-'+pacienteId).value.trim()
+    if(!titulo){alert('Descreva o título da prática.');return}
+    payload={...payload,titulo,questionario_id:null,recorrente:false,intervalo_dias:null}
+  }
+
+  const {error}=await sb.from('tarefas').insert(payload)
+  if(error){alert('Erro ao atribuir tarefa: '+error.message);return}
+
+  const {data:p}=await sb.from('pacientes').select('*').eq('id',pacienteId).single()
+  if(p){document.getElementById('det-'+pacienteId).classList.remove('open');verPaciente(p)}
+}
+
+async function interromperTarefa(tarefaId,pacienteId){
+  await sb.from('tarefas').update({ativo:false,interrompido_em:new Date().toISOString()}).eq('id',tarefaId)
+  const {data:p}=await sb.from('pacientes').select('*').eq('id',pacienteId).single()
+  if(p){document.getElementById('det-'+pacienteId).classList.remove('open');verPaciente(p)}
+}
+
+async function reativarTarefa(tarefaId,pacienteId){
+  await sb.from('tarefas').update({ativo:true,interrompido_em:null}).eq('id',tarefaId)
+  const {data:p}=await sb.from('pacientes').select('*').eq('id',pacienteId).single()
+  if(p){document.getElementById('det-'+pacienteId).classList.remove('open');verPaciente(p)}
 }
 
 async function adicionarSessao(pacienteId){
