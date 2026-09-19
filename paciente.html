@@ -448,6 +448,42 @@
       .mobile-nav{display:block}
       .content{padding-bottom:5rem}
     }
+    /* ══ CHECK-IN DIÁRIO ══ */
+    .ci-card{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:1.1rem 1.15rem;margin-bottom:1.25rem}
+    .ci-title{font-size:16px;font-weight:600;color:var(--navy);margin-bottom:2px}
+    .ci-sub{font-size:13px;color:var(--text-muted);margin-bottom:14px;line-height:1.5}
+    .ci-humor{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+    .ci-opt{min-height:64px;border:1px solid var(--border);background:var(--cream);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;cursor:pointer;font-family:inherit;padding:6px 2px;transition:border-color .15s,background .15s}
+    .ci-opt:hover{border-color:var(--gold)}
+    .ci-opt .ci-dot{width:13px;height:13px;border-radius:50%}
+    .ci-opt span{font-size:11.5px;color:var(--text-muted);text-align:center;line-height:1.25}
+    .ci-opt.sel{background:var(--navy);border-color:var(--navy)}
+    .ci-opt.sel span{color:#f2ece3}
+    .ci-bloco{margin-top:16px}
+    .ci-lbl{font-size:13px;font-weight:600;color:var(--navy);margin-bottom:10px}
+    .ci-emos{display:flex;flex-wrap:wrap;gap:8px}
+    .ci-emo{min-height:44px;padding:10px 14px;border-radius:999px;border:1px solid var(--border);background:var(--white);font-family:inherit;font-size:14px;color:var(--text);cursor:pointer}
+    .ci-emo.sel{background:var(--navy);border-color:var(--navy);color:#f2ece3}
+    .ci-nota{width:100%;min-height:84px;padding:12px 14px;border:1px solid var(--border);border-radius:12px;font-family:inherit;font-size:14.5px;line-height:1.6;color:var(--text);background:var(--white);resize:vertical;outline:none}
+    .ci-nota:focus{border-color:var(--gold)}
+    .ci-save{min-height:50px;width:100%;margin-top:14px;border:none;border-radius:999px;background:var(--navy);color:var(--white);font-family:inherit;font-size:15px;font-weight:500;cursor:pointer}
+    .ci-save:hover{background:var(--navy-mid)}
+    .ci-save:disabled{opacity:0.45;cursor:default}
+    .ci-feito{display:flex;gap:12px;align-items:flex-start;padding:2px 0}
+    .ci-feito-ok{width:24px;height:24px;border-radius:50%;background:var(--green);color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    /* ══ DEVOLUTIVAS ══ */
+    .dev-card{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:1.1rem 1.15rem;margin-bottom:0.85rem}
+    .dev-card.destaque{background:var(--navy);border-color:var(--navy)}
+    .dev-top{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+    .dev-av{width:30px;height:30px;border-radius:50%;background:var(--gold-pale);color:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Newsreader',serif;font-size:15px;flex-shrink:0}
+    .dev-card.destaque .dev-av{background:rgba(210,154,124,0.22);color:var(--gold-light)}
+    .dev-meta{font-size:12.5px;color:var(--text-muted)}
+    .dev-card.destaque .dev-meta{color:var(--slate-light)}
+    .dev-texto{font-size:15px;line-height:1.7;color:var(--text)}
+    .dev-card.destaque .dev-texto{font-family:'Newsreader',serif;font-size:18px;line-height:1.6;color:#faf7f2}
+    .dev-nota{margin-top:1rem;padding:13px 15px;background:var(--gold-pale);border-radius:12px;font-size:13.5px;line-height:1.65;color:var(--navy-light)}
+    .psi-dev-form textarea{width:100%;min-height:80px;padding:0.6rem 0.75rem;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:0.82rem;line-height:1.6;color:var(--text);resize:vertical;outline:none}
+    .psi-dev-item{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:0.8rem 0.9rem;margin-bottom:0.5rem}
   </style>
 </head>
 <body>
@@ -527,6 +563,10 @@
         <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
         <span>Home</span>
       </div>
+      <div class="sidebar-item" id="nav-devolutivas" onclick="irPara('devolutivas')" title="Devolutivas">
+        <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        <span>Devolutivas</span>
+      </div>
       <div class="sidebar-item" id="nav-consultas" onclick="irPara('consultas')" title="Minhas consultas">
         <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
         <span>Minhas consultas</span>
@@ -561,6 +601,39 @@
           <h1 class="page-title">Olá, <span id="dash-nome"></span></h1>
           <p class="page-sub">Bem-vindo ao seu espaço de cuidado.</p>
 
+          <!-- CHECK-IN DIÁRIO -->
+          <div class="ci-card" id="ci-card">
+            <div id="ci-form">
+              <div class="ci-title">Check-in de hoje</div>
+              <div class="ci-sub">Como você está agora? Leva 15 segundos.</div>
+              <div class="ci-humor">
+                <button type="button" class="ci-opt" id="ci-opt-1" onclick="ciSelecionarHumor(1)"><span class="ci-dot" style="background:var(--red)"></span><span>Muito mal</span></button>
+                <button type="button" class="ci-opt" id="ci-opt-2" onclick="ciSelecionarHumor(2)"><span class="ci-dot" style="background:#b8663f"></span><span>Mal</span></button>
+                <button type="button" class="ci-opt" id="ci-opt-3" onclick="ciSelecionarHumor(3)"><span class="ci-dot" style="background:var(--yellow)"></span><span>Neutro</span></button>
+                <button type="button" class="ci-opt" id="ci-opt-4" onclick="ciSelecionarHumor(4)"><span class="ci-dot" style="background:#6f7a4a"></span><span>Bem</span></button>
+                <button type="button" class="ci-opt" id="ci-opt-5" onclick="ciSelecionarHumor(5)"><span class="ci-dot" style="background:var(--green)"></span><span>Muito bem</span></button>
+              </div>
+              <div class="ci-bloco" id="ci-emocoes-bloco" style="display:none">
+                <div class="ci-lbl">Quais emoções estão mais presentes?</div>
+                <div class="ci-emos" id="ci-emocoes"></div>
+              </div>
+              <div class="ci-bloco" id="ci-nota-bloco" style="display:none">
+                <div class="ci-lbl">Descreva brevemente o que te fez sentir assim <span style="font-weight:400;color:var(--text-muted)">(opcional)</span></div>
+                <textarea class="ci-nota" id="ci-nota" placeholder="Uma ou duas linhas bastam."></textarea>
+              </div>
+              <button type="button" class="ci-save" id="ci-save" onclick="salvarCheckin()" disabled>Salvar check-in</button>
+            </div>
+            <div id="ci-feito" style="display:none">
+              <div class="ci-feito">
+                <span class="ci-feito-ok">✓</span>
+                <div>
+                  <div class="ci-title" style="margin-bottom:4px">Check-in registrado</div>
+                  <div class="ci-sub" style="margin-bottom:0" id="ci-feito-txt"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div class="stat-row" id="stat-row"></div>
 
           <!-- Bloco de sugestões inteligentes -->
@@ -574,6 +647,14 @@
           <div id="tarefas-psi-bloco" style="display:none">
             <div class="section-eyebrow" style="margin-bottom:0.75rem">Tarefas indicadas pelo seu psicólogo</div>
             <div id="tarefas-psi-conteudo"></div>
+          </div>
+
+          <div onclick="irPara('rede')" style="cursor:pointer;background:var(--white);border:1px solid var(--border);border-radius:14px;padding:0.95rem 1.1rem;margin-bottom:1.25rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:56px">
+            <div>
+              <div style="font-size:15px;font-weight:600;color:var(--navy)">Rede de apoio</div>
+              <div style="font-size:13px;color:var(--text-muted);margin-top:2px">Serviços públicos e gratuitos de saúde mental</div>
+            </div>
+            <span style="font-size:18px;color:var(--gold)">→</span>
           </div>
 
           <!-- Técnicas embutidas diretamente (sem clone) -->
@@ -1596,6 +1677,14 @@ Não é necessário anotar — o simples ato de pausar e perguntar já é sufici
           </div>
         </div>
 
+        <!-- DEVOLUTIVAS -->
+        <div class="page" id="page-devolutivas">
+          <h1 class="page-title">Devolutivas</h1>
+          <p class="page-sub">O que o Matheus compartilhou com você sobre o seu processo.</p>
+          <div id="devolutivas-lista"></div>
+          <div class="dev-nota">Seus registros e resultados de testes ficam com o Matheus e são conversados em sessão. Aqui você vê o que ele escolheu te devolver.</div>
+        </div>
+
         <!-- PAINEL PSI -->
         <div class="page" id="page-psi">
           <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:0.2rem;flex-wrap:wrap">
@@ -1669,9 +1758,9 @@ Não é necessário anotar — o simples ato de pausar e perguntar já é sufici
       <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
       Avaliação
     </div>
-    <div class="mobile-nav-item" id="mnav-rede" onclick="irPara('rede');atualizarMobileNav('rede')">
-      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
-      Apoio
+    <div class="mobile-nav-item" id="mnav-devolutivas" onclick="irPara('devolutivas');atualizarMobileNav('devolutivas')">
+      <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+      Devolutivas
     </div>
     <div class="mobile-nav-item" id="mnav-cadastro" onclick="irPara('cadastro');atualizarMobileNav('cadastro')">
       <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
@@ -2046,6 +2135,7 @@ function irPara(pg){
     if(user&&user.email===EMAIL_PSI)carregarDashboardPsi();else carregarDashboard()
   }
   if(pg==='autoavaliacao'){carregarAutoavaliacao()}
+  if(pg==='devolutivas')carregarDevolutivas()
   if(pg==='rpd'&&rpdAtual===0)renderEtapaRPD()
   if(pg==='consultas')carregarConsultas()
   if(pg==='psi')carregarPainel()
@@ -2226,6 +2316,7 @@ function sessaoHtml(s){
 
 async function carregarDashboard(){
   if(user.email===EMAIL_PSI){await carregarDashboardPsi();return}
+  carregarCheckinHoje()
   const [{data},{data:sessoesData}]=await Promise.all([
     sb.from('resultados').select('*').eq('paciente_id',user.id).order('criado_em',{ascending:false}),
     sb.from('sessoes').select('*').eq('paciente_id',user.id).eq('status','realizada')
@@ -2292,6 +2383,7 @@ function renderStats(data,sessoesRealizadas){
 
 function renderHistorico(data){
   const empty=document.getElementById('historico-empty');const table=document.getElementById('historico-table')
+  if(!ehPsi()){empty.style.display='block';empty.textContent='Seus resultados ficam com o Matheus e são conversados em sessão. Na aba Devolutivas você acompanha os comentários dele sobre o seu processo.';table.style.display='none';return}
   if(!data.length){empty.style.display='block';table.style.display='none';return}
   empty.style.display='none';table.style.display='table'
   document.getElementById('historico-body').innerHTML=data.map(r=>`<tr><td>${r.teste}</td><td>${r.pontuacao}</td><td>${badgeHtml(r.classificacao)}</td><td>${fmt(r.criado_em)}</td></tr>`).join('')
@@ -2893,6 +2985,7 @@ NÃO faça diagnósticos, NÃO substitua o psicólogo, NÃO use linguagem clíni
 
 function renderGraficos(data){
   const grid=document.getElementById('graficos-grid')
+  if(!ehPsi()){grid.innerHTML='<div class="chart-card"><div class="empty-state">A evolução dos seus resultados é acompanhada pelo Matheus e discutida em sessão.</div></div>';return}
   if(!data.length){
     grid.innerHTML='<div class="chart-card"><div class="empty-state">Faça seu primeiro teste para visualizar sua evolução aqui.</div></div>'
     return
@@ -3003,9 +3096,15 @@ async function calcularResultado(){
   resultado=t.classificar(pontuacao)
   await sb.from('resultados').insert({paciente_id:user.id,teste:t.nome,respostas,pontuacao,classificacao:resultado.label})
   document.getElementById('result-nome').textContent=t.nome
-  document.getElementById('result-pts').textContent=pontuacao
-  document.getElementById('result-class').innerHTML=`<span style="color:${resultado.cor};font-weight:500">${resultado.label}</span>`
-  document.getElementById('result-desc').textContent=resultado.desc
+  if(ehPsi()){
+    document.getElementById('result-pts').textContent=pontuacao
+    document.getElementById('result-class').innerHTML=`<span style="color:${resultado.cor};font-weight:500">${resultado.label}</span>`
+    document.getElementById('result-desc').textContent=resultado.desc
+  }else{
+    document.getElementById('result-pts').textContent='✓'
+    document.getElementById('result-class').innerHTML='<span style="color:var(--green);font-weight:500">Respostas registradas</span>'
+    document.getElementById('result-desc').textContent='Obrigado por responder. O Matheus recebe este resultado e conversa com você sobre ele na sessão — o que vale comentar aparece na aba Devolutivas.'
+  }
   irPara('result')
   // Atualiza sugestões na home em background
   sb.from('resultados').select('*').eq('paciente_id',user.id).order('criado_em',{ascending:false}).then(({data})=>{
@@ -3208,6 +3307,7 @@ async function carregarPainel(){
 }
 
 async function verPaciente(p){
+  window.__psiPacs=window.__psiPacs||{};window.__psiPacs[p.id]=p
   const det=document.getElementById('det-'+p.id)
   if(det.classList.contains('open')){det.classList.remove('open');return}
   document.querySelectorAll('.patient-detail').forEach(d=>d.classList.remove('open'))
@@ -3335,6 +3435,54 @@ async function verPaciente(p){
       </div>`
     })
   }
+
+  // ══ Check-ins diários (novo) ══
+  const {data:cks}=await sb.from('checkins').select('*').eq('paciente_id',p.id).order('data',{ascending:false}).limit(30)
+  html+=`<div style="font-size:0.65rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);margin:1.5rem 0 0.75rem">Check-ins diários</div>`
+  if(!cks||!cks.length){
+    html+=`<p style="font-size:0.75rem;color:var(--text-muted)">Nenhum check-in registrado ainda.</p>`
+  }else{
+    const corHumor={1:'var(--red)',2:'#b8663f',3:'var(--yellow)',4:'#6f7a4a',5:'var(--green)'}
+    const labelHumor={1:'Muito mal',2:'Mal',3:'Neutro',4:'Bem',5:'Muito bem'}
+    html+=`<div style="display:flex;align-items:flex-end;gap:3px;height:60px;margin-bottom:0.85rem">`
+    cks.slice().reverse().forEach(c=>{
+      html+=`<div title="${c.data} · ${labelHumor[c.humor]||''}" style="flex:1;height:${(c.humor||1)*20}%;background:${corHumor[c.humor]||'var(--border)'};border-radius:2px"></div>`
+    })
+    html+=`</div>`
+    cks.slice(0,8).forEach(c=>{
+      const [cy,cm,cd]=String(c.data).split('-')
+      const emos=(c.emocoes&&c.emocoes.length)?c.emocoes.join(', '):'—'
+      html+=`<div style="background:var(--white);border:1px solid var(--border);border-radius:8px;padding:0.7rem 0.85rem;margin-bottom:0.45rem">
+        <div style="display:flex;justify-content:space-between;gap:0.75rem;align-items:center">
+          <span style="font-size:0.7rem;font-weight:600;color:var(--navy)">${cd}/${cm} · ${labelHumor[c.humor]||''}</span>
+          <span style="font-size:0.7rem;color:var(--text-muted)">${emos}</span>
+        </div>
+        ${c.nota?`<div style="font-size:0.78rem;font-weight:300;color:var(--text);line-height:1.6;margin-top:0.4rem">${c.nota}</div>`:''}
+      </div>`
+    })
+  }
+
+  // ══ Devolutivas (novo) ══
+  const {data:devs}=await sb.from('devolutivas').select('*').eq('paciente_id',p.id).order('criado_em',{ascending:false})
+  html+=`<div style="font-size:0.65rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);margin:1.5rem 0 0.75rem">Devolutivas publicadas ao paciente</div>`
+  if(devs&&devs.length){
+    devs.forEach(d=>{
+      html+=`<div class="psi-dev-item">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:0.75rem;margin-bottom:0.4rem">
+          <span style="font-size:0.6rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted)">${fmt(d.criado_em)}</span>
+          <button onclick="excluirDevolutiva('${d.id}','${p.id}')" style="font-size:0.6rem;background:none;border:none;cursor:pointer;color:var(--text-muted)" title="Remover">✕</button>
+        </div>
+        <div style="font-size:0.8rem;font-weight:300;color:var(--text);line-height:1.65;white-space:pre-line">${d.texto||''}</div>
+      </div>`
+    })
+  }else{
+    html+=`<p style="font-size:0.75rem;color:var(--text-muted);margin-bottom:0.6rem">Nenhuma devolutiva publicada ainda.</p>`
+  }
+  html+=`<div class="psi-dev-form" style="margin-top:0.6rem">
+    <label style="display:block;font-size:0.6rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);margin-bottom:0.3rem">Nova devolutiva</label>
+    <textarea id="dev-texto-${p.id}" placeholder="O que vale devolver sobre o progresso — em linguagem simples, sem escores."></textarea>
+    <button class="btn-save-psi" style="margin-top:0.5rem" onclick="salvarDevolutiva('${p.id}')">Publicar para o paciente</button>
+  </div>`
 
   det.innerHTML=html;det.classList.add('open')
 }
@@ -3601,6 +3749,132 @@ function renderPsiTabela(resultados){
   tbody.innerHTML=[...resultados].reverse().map(r=>`<tr><td>${r.pacientes?.nome||'—'}</td><td>${r.teste.split('—')[0]}</td><td>${r.pontuacao}</td><td>${badgeHtml(r.classificacao)}</td><td>${fmt(r.criado_em)}</td></tr>`).join('')
 }
 
+// ══════════════════════════════════════════
+// CHECK-IN DIÁRIO · DEVOLUTIVAS
+// ══════════════════════════════════════════
+function ehPsi(){return !!(user&&user.email===EMAIL_PSI)}
+
+const CI_EMOCOES=['medo','tristeza','ansiedade','raiva','nojo','culpa','vergonha','inveja','surpresa']
+const CI_LABEL={1:'muito mal',2:'mal',3:'neutro',4:'bem',5:'muito bem'}
+let ciHumor=null
+let ciEmocoes=[]
+
+function ciHoje(){const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+
+function ciRenderEmocoes(){
+  const wrap=document.getElementById("ci-emocoes")
+  if(!wrap||wrap.childElementCount)return
+  wrap.innerHTML=CI_EMOCOES.map(function(e){
+    return '<button type="button" class="ci-emo" data-emo="'+e+'" onclick="ciToggleEmocao(\''+e+'\')">'+e+'</button>'
+  }).join("")
+}
+
+function ciSelecionarHumor(v){
+  ciHumor=v
+  for(let i=1;i<=5;i++){
+    const el=document.getElementById("ci-opt-"+i)
+    if(el)el.classList.toggle("sel",i===v)
+  }
+  // Emoções só aparecem de "neutro" para baixo
+  const bloco=document.getElementById("ci-emocoes-bloco")
+  if(v<=3){ciRenderEmocoes();bloco.style.display="block"}
+  else{bloco.style.display="none";ciEmocoes=[];document.querySelectorAll("#ci-emocoes .ci-emo.sel").forEach(function(b){b.classList.remove("sel")})}
+  document.getElementById("ci-nota-bloco").style.display="block"
+  document.getElementById("ci-save").disabled=false
+}
+
+function ciToggleEmocao(emo){
+  const btn=document.querySelector('#ci-emocoes .ci-emo[data-emo="'+emo+'"]')
+  const i=ciEmocoes.indexOf(emo)
+  if(i>=0)ciEmocoes.splice(i,1);else ciEmocoes.push(emo)
+  if(btn)btn.classList.toggle("sel",i<0)
+}
+
+async function salvarCheckin(){
+  if(!ciHumor||!user)return
+  const btn=document.getElementById("ci-save")
+  btn.disabled=true;btn.textContent="Salvando…"
+  const nota=(document.getElementById("ci-nota").value||"").trim()
+  const {error}=await sb.from("checkins").upsert({
+    paciente_id:user.id,
+    data:ciHoje(),
+    humor:ciHumor,
+    emocoes:ciHumor<=3?ciEmocoes:[],
+    nota:nota||null
+  },{onConflict:"paciente_id,data"})
+  if(error){btn.disabled=false;btn.textContent="Salvar check-in";alert("Não foi possível salvar agora. Tente novamente.");return}
+  btn.textContent="Salvar check-in"
+  ciMostrarFeito({humor:ciHumor,emocoes:ciEmocoes,nota:nota})
+}
+
+function ciMostrarFeito(ck){
+  const form=document.getElementById("ci-form")
+  const feito=document.getElementById("ci-feito")
+  const txt=document.getElementById("ci-feito-txt")
+  if(!form||!feito)return
+  form.style.display="none"
+  feito.style.display="block"
+  let t="Você registrou "+(CI_LABEL[ck.humor]||"")+" hoje."
+  if(ck.emocoes&&ck.emocoes.length)t+=" Emoções: "+ck.emocoes.join(", ")+"."
+  t+=" Amanhã tem um novo check-in."
+  txt.textContent=t
+}
+
+async function carregarCheckinHoje(){
+  const card=document.getElementById("ci-card")
+  if(!card||!user)return
+  if(ehPsi()){card.style.display="none";return}
+  card.style.display="block"
+  const {data}=await sb.from("checkins").select("*").eq("paciente_id",user.id).eq("data",ciHoje()).limit(1)
+  if(data&&data.length)ciMostrarFeito(data[0])
+  else{
+    document.getElementById("ci-form").style.display="block"
+    document.getElementById("ci-feito").style.display="none"
+  }
+}
+
+function devFmtData(iso){
+  const meses=["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"]
+  const d=new Date(iso)
+  return d.getDate()+" de "+meses[d.getMonth()]
+}
+
+async function carregarDevolutivas(){
+  const lista=document.getElementById("devolutivas-lista")
+  if(!lista||!user)return
+  if(ehPsi()){lista.innerHTML='<div class="dev-card"><div class="dev-texto">As devolutivas são escritas no painel de pacientes, dentro da ficha de cada paciente.</div></div>';return}
+  const {data}=await sb.from("devolutivas").select("*").eq("paciente_id",user.id).eq("publicado",true).order("criado_em",{ascending:false})
+  if(!data||!data.length){
+    lista.innerHTML='<div class="dev-card"><div class="dev-texto">Ainda não há devolutivas por aqui. Quando o Matheus tiver algo a compartilhar sobre o seu processo, aparece nesta tela.</div></div>'
+    return
+  }
+  lista.innerHTML=data.map(function(d,i){
+    return '<div class="dev-card'+(i===0?" destaque":"")+'">'+
+      '<div class="dev-top"><span class="dev-av">M</span><span class="dev-meta">Matheus · '+devFmtData(d.criado_em)+'</span></div>'+
+      '<div class="dev-texto">'+(d.texto||"").replace(/</g,"&lt;").replace(/\n/g,"<br>")+'</div>'+
+    '</div>'
+  }).join("")
+}
+
+async function salvarDevolutiva(pacienteId){
+  const campo=document.getElementById("dev-texto-"+pacienteId)
+  const texto=(campo.value||"").trim()
+  if(!texto){alert("Escreva a devolutiva antes de publicar.");return}
+  const {error}=await sb.from("devolutivas").insert({paciente_id:pacienteId,texto,publicado:true})
+  if(error){alert("Não foi possível publicar agora.");return}
+  campo.value=""
+  const p=(window.__psiPacs||{})[pacienteId]
+  const det=document.getElementById("det-"+pacienteId)
+  if(p&&det){det.classList.remove("open");await verPaciente(p)}
+}
+
+async function excluirDevolutiva(id,pacienteId){
+  if(!confirm("Remover esta devolutiva? O paciente deixa de vê-la."))return
+  await sb.from("devolutivas").delete().eq("id",id)
+  const p=(window.__psiPacs||{})[pacienteId]
+  const det=document.getElementById("det-"+pacienteId)
+  if(p&&det){det.classList.remove("open");await verPaciente(p)}
+}
 </script>
 </body>
 </html>
