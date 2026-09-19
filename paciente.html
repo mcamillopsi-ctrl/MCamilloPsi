@@ -3724,12 +3724,20 @@ function renderPsiGraficos(pacList,resultados,filtroId){
     const canvas=document.getElementById(cfg.id)
     if(!canvas)return
     const annotations=makeAnno(cfg)
+    // Limpa avisos de "sem dados" de filtragens anteriores
+    canvas.parentElement.querySelectorAll('.psi-sem-dados').forEach(el=>el.remove())
     if(filtroId){
-      const pts=resultados.filter(r=>(r.teste.split('—')[0].trim()).replace('PSQI-BR','MSQ-BR')===teste).map(r=>({x:fmt(r.criado_em),y:r.pontuacao}))
-      if(pts.length){
-        psiGraficos[teste]=new Chart(canvas,{type:'line',data:{datasets:[{label:teste,data:pts,borderColor:cfg.cor,backgroundColor:'transparent',tension:0.3,pointRadius:4,borderWidth:2}]},options:{responsive:true,interaction:{mode:'nearest',intersect:false},plugins:{legend:{display:false},annotation:{annotations}},scales:scaleOpts(cfg)}})
+      const linhas=resultados
+        .filter(r=>(r.teste.split('—')[0].trim()).replace('PSQI-BR','MSQ-BR')===teste)
+        .slice()
+        .sort((a,b)=>new Date(a.criado_em)-new Date(b.criado_em))
+      if(linhas.length){
+        // labels explícitos: o eixo x é categórico, não aceita datas soltas em {x:...}
+        const labels=linhas.map(r=>fmt(r.criado_em))
+        const valores=linhas.map(r=>r.pontuacao)
+        psiGraficos[teste]=new Chart(canvas,{type:'line',data:{labels,datasets:[{label:teste,data:valores,borderColor:cfg.cor,backgroundColor:'transparent',tension:0.3,pointRadius:4,borderWidth:2,spanGaps:true}]},options:{responsive:true,interaction:{mode:'nearest',intersect:false},plugins:{legend:{display:false},annotation:{annotations},tooltip:{callbacks:{label:i=>`${teste}: ${i.parsed.y}`}}},scales:scaleOpts(cfg)}})
       }else{
-        canvas.parentElement.insertAdjacentHTML('beforeend','<div style="font-size:0.72rem;color:var(--text-muted);padding:0.75rem 0">Sem dados.</div>')
+        canvas.parentElement.insertAdjacentHTML('beforeend','<div class="psi-sem-dados" style="font-size:0.72rem;color:var(--text-muted);padding:0.75rem 0">Sem dados para este paciente.</div>')
       }
     }else{
       const ultPac={}
