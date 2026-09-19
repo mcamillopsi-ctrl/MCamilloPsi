@@ -2235,6 +2235,10 @@ function entrarNoApp(data){
   document.getElementById('nav-nome').textContent=data.nome||data.email
   if(data.email!==EMAIL_PSI)document.getElementById('dash-nome').textContent=(data.nome||data.email).split(' ')[0]
   if(data.email===EMAIL_PSI)document.getElementById('sidebar-psi').style.display='block'
+  // Devolutivas são escritas na ficha do paciente, no painel — o psi não precisa da aba
+  if(data.email===EMAIL_PSI){
+    ;['nav-devolutivas','mnav-devolutivas'].forEach(id=>{const el=document.getElementById(id);if(el)el.style.display='none'})
+  }
   if(data.email===EMAIL_PSI)carregarDashboardPsi();else carregarDashboard()
 }
 
@@ -3702,8 +3706,8 @@ function aplicarFiltroPsi(){
   if(!pacList||!resultados)return
   const filtroEl=document.getElementById('psi-filtro')
   const filtroId=filtroEl?filtroEl.value:''
-  const rFiltrado=filtroId?resultados.filter(r=>r.paciente_id===filtroId):resultados
-  const pacFiltrado=filtroId?pacList.filter(p=>p.id===filtroId):pacList
+  const rFiltrado=filtroId?resultados.filter(r=>String(r.paciente_id)===String(filtroId)):resultados
+  const pacFiltrado=filtroId?pacList.filter(p=>String(p.id)===String(filtroId)):pacList
   renderPsiGraficos(pacFiltrado,rFiltrado,filtroId)
   renderPsiTabela(rFiltrado)
 }
@@ -3721,8 +3725,11 @@ function renderPsiGraficos(pacList,resultados,filtroId){
   const makeAnno=cfg=>{const a={};cfg.cortes.forEach((c,i)=>{a['c'+i]={type:'line',yMin:c.y,yMax:c.y,borderColor:'rgba(155,59,50,0.5)',borderWidth:1.5,borderDash:[5,4],label:{display:true,content:c.label,position:c.p,font:{family:'Instrument Sans',size:9,weight:'600'},color:'#1c1a17',backgroundColor:'rgba(255,255,255,0.92)',padding:{x:5,y:3},borderRadius:3}}});return a}
   const scaleOpts=cfg=>({x:{ticks:{font:{family:'Instrument Sans',size:10}}},y:{min:cfg.min,max:cfg.max,ticks:{font:{family:'Instrument Sans',size:10}},grid:{color:'rgba(207,199,189,0.35)'}}})
   Object.entries(CONFIGS).forEach(([teste,cfg])=>{
+   try{
     const canvas=document.getElementById(cfg.id)
     if(!canvas)return
+    // Chart.js recusa reusar um canvas ocupado: derruba a instância anterior pelo próprio canvas
+    try{const anterior=(window.Chart&&Chart.getChart)?Chart.getChart(canvas):null;if(anterior)anterior.destroy()}catch(e){}
     const annotations=makeAnno(cfg)
     // Limpa avisos de "sem dados" de filtragens anteriores
     canvas.parentElement.querySelectorAll('.psi-sem-dados').forEach(el=>el.remove())
@@ -3746,6 +3753,7 @@ function renderPsiGraficos(pacList,resultados,filtroId){
       const colors=vals.map(v=>v===null?'rgba(207,206,211,0.4)':cfg.cor+'cc')
       psiGraficos[teste]=new Chart(canvas,{type:'bar',data:{labels:pacList.map(nomeCurto),datasets:[{label:teste,data:vals,backgroundColor:colors,borderWidth:0,borderRadius:4}]},options:{responsive:true,plugins:{legend:{display:false},annotation:{annotations},tooltip:{callbacks:{label:i=>i.parsed.y===null?'Sem dados':`${teste}: ${i.parsed.y}`}}},scales:scaleOpts(cfg)}})
     }
+   }catch(e){console.error('Falha ao montar gráfico '+teste,e)}
   })
 }
 function renderPsiTabela(resultados){
