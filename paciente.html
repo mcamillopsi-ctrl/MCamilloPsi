@@ -447,9 +447,10 @@
     @media(max-width:768px){
       .mobile-nav{display:block}
       .content{padding-bottom:5rem}
+      .ci-card,.dev-card,.dev-nota{max-width:100%}
     }
     /* ══ CHECK-IN DIÁRIO ══ */
-    .ci-card{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:1.1rem 1.15rem;margin-bottom:1.25rem}
+    .ci-card{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:1.1rem 1.15rem;margin-bottom:1.25rem;max-width:620px}
     .ci-title{font-size:16px;font-weight:600;color:var(--navy);margin-bottom:2px}
     .ci-sub{font-size:13px;color:var(--text-muted);margin-bottom:14px;line-height:1.5}
     .ci-humor{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
@@ -472,7 +473,7 @@
     .ci-feito{display:flex;gap:12px;align-items:flex-start;padding:2px 0}
     .ci-feito-ok{width:24px;height:24px;border-radius:50%;background:var(--green);color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
     /* ══ DEVOLUTIVAS ══ */
-    .dev-card{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:1.1rem 1.15rem;margin-bottom:0.85rem}
+    .dev-card{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:1.1rem 1.15rem;margin-bottom:0.85rem;max-width:680px}
     .dev-card.destaque{background:var(--navy);border-color:var(--navy)}
     .dev-top{display:flex;align-items:center;gap:10px;margin-bottom:12px}
     .dev-av{width:30px;height:30px;border-radius:50%;background:var(--gold-pale);color:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Newsreader',serif;font-size:15px;flex-shrink:0}
@@ -481,7 +482,7 @@
     .dev-card.destaque .dev-meta{color:var(--slate-light)}
     .dev-texto{font-size:15px;line-height:1.7;color:var(--text)}
     .dev-card.destaque .dev-texto{font-family:'Newsreader',serif;font-size:18px;line-height:1.6;color:#faf7f2}
-    .dev-nota{margin-top:1rem;padding:13px 15px;background:var(--gold-pale);border-radius:12px;font-size:13.5px;line-height:1.65;color:var(--navy-light)}
+    .dev-nota{max-width:680px;margin-top:1rem;padding:13px 15px;background:var(--gold-pale);border-radius:12px;font-size:13.5px;line-height:1.65;color:var(--navy-light)}
     .psi-dev-form textarea{width:100%;min-height:80px;padding:0.6rem 0.75rem;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:0.82rem;line-height:1.6;color:var(--text);resize:vertical;outline:none}
     .psi-dev-item{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:0.8rem 0.9rem;margin-bottom:0.5rem}
   </style>
